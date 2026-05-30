@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects & Portfolio | APEX R&M GROUP Ltd</title>
+  <meta name="description" content="Apex R&M Group project portfolio — land use mapping, environmental impact assessments, urban growth modelling across Africa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A1628'/><text y='.9em' font-size='80' fill='%23C9A84C'>◆</text></svg>">
+  <style>
+    #projects-map { height: 480px; border-radius: var(--radius-lg); }
+    .project-full-card { background:white; border:1px solid rgba(10,22,40,0.08); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition); }
+    .project-full-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .impact-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin:3rem 0; }
+    .impact-box { text-align:center; padding:1.5rem; background:var(--navy); border-radius:var(--radius-md); }
+    .impact-num { font-family:var(--font-heading); font-size:2.2rem; font-weight:900; color:var(--gold); }
+    .impact-label { font-family:var(--font-ui); font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-top:0.3rem; }
+    .case-study-meta { display:flex; flex-wrap:wrap; gap:0.8rem; margin:1rem 0; }
+    .case-meta-item { display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; color:var(--gray); }
+    .case-meta-item i { color:var(--gold); }
+    @media(max-width:768px){ .impact-row{grid-template-columns:repeat(2,1fr);} }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+    <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="sectors.html">Sectors</a><a href="insights.html">Insights</a><a href="resources.html">Resources</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="contact.html" class="mobile-cta">Contact</a></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Projects</span></div>
+      <h1>Our Work Speaks for Itself</h1>
+      <div class="page-hero-line"></div>
+      <p>Projects that made a measurable difference — across governments, landscapes, and communities throughout Africa.</p>
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT STATS -->
+<section style="background:var(--navy);padding:3rem 0;">
+  <div class="container">
+    <div class="impact-row">
+      <div class="impact-box reveal"><div class="impact-num"><span data-count="10">0</span>+</div><div class="impact-label">Countries</div></div>
+      <div class="impact-box reveal" data-delay="100"><div class="impact-num"><span data-count="280">0</span>K+</div><div class="impact-label">Hectares Mapped</div></div>
+      <div class="impact-box reveal" data-delay="200"><div class="impact-num"><span data-count="50">0</span>+</div><div class="impact-label">Reports Produced</div></div>
+      <div class="impact-box reveal" data-delay="300"><div class="impact-num"><span data-count="25">0</span>+</div><div class="impact-label">Clients Served</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS + PORTFOLIO -->
+<section style="background:var(--white);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Portfolio</span>
+      <h2 class="section-title">Project Case Studies</h2>
+      <p class="section-subtitle">Filter by sector, country, or service type to explore our work.</p>
+    </div>
+
+    <div class="projects-grid">
+      <!-- PROJECT 1 -->
+      <div class="project-full-card reveal" data-delay="100" data-category="gis">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&auto=format&fit=crop" alt="National Land Use Mapping Rwanda" loading="lazy">
+          <div class="project-tag">GIS + Remote Sensing</div>
+        </div>
+        <div class="project-body">
+          <div class="project-meta"><span>Rwanda</span> &bull; <span>2024</span></div>
+          <h3>National Land Use Mapping — Rwanda</h3>
+          <div class="case-study-meta">
+            <div class="case-meta-item"><i class="fa-solid fa-building-columns"></i> Ministry of Lands</div>
+            <div class="case-meta-item"><i class="fa-solid fa-clock"></i> 6 months</div>
+            <div class="case-meta-item"><i class="fa-solid fa-map"></i> 14,000 km²</div>
+          </div>
+          <p>Comprehensive land use/land cover classification for Rwanda's national spatial planning framework. Delivered using Sentinel-2 satellite imagery with ground-truth validation.</p>
+          <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(10,22,40,0.08);">
+            <div style="font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Impact</div>
+            <p style="font-size:0.82rem;color:var(--gray);">National spatial database delivered. 14,000 km² classified into 12 LULC categories. Adopted for Rwanda's national land use masterplan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-full-card reveal" data-delay="200" data-category="environment">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=600&auto=format&fit=crop" alt="Mining Corridor EIA DRC" loading="lazy">
+          <div class="project-tag">EIA + Biodiversity</div>
+        </div>
+        <div class="project-body">
+          <div class="project-meta"><span>DR Congo</span> &bull; <span>2024</span></div>
+          <h3>Mining Corridor Environmental Impact Assessment</h3>
+          <div class="case-study-meta">
+            <div class="case-meta-item"><i class="fa-solid fa-industry"></i> Private Mining Co.</div>
+            <div class="case-meta-item"><i class="fa-solid fa-clock"></i> 9 months</div>
+            <div class="case-meta-item"><i class="fa-solid fa-file-lines"></i> 3 reports</div>
+          </div>
+          <p>Full Environmental Impact Assessment and biodiversity baseline study for a major mining corridor in eastern DRC, meeting IFC Performance Standards and Equator Principles.</p>
+          <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(10,22,40,0.08);">
+            <div style="font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Impact</div>
+            <p style="font-size:0.82rem;color:var(--gray);">3 internationally compliant reports. Biodiversity database established. Project received environmental clearance.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="project-full-card reveal" data-delay="300" data-category="urban">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format&fit=crop" alt="Urban Growth Modelling Kigali" loading="lazy">
+          <div class="project-tag">Urban Planning GIS</div>
+        </div>
+        <div class="project-body">
+          <div class="project-meta"><span>Rwanda (Kigali)</span> &bull; <span>2025</span></div>
+          <h3>Urban Growth Modelling — Kigali City</h3>
+          <div class="case-study-meta">
+            <div class="case-meta-item"><i class="fa-solid fa-city"></i> Kigali City Council</div>
+            <div class="case-meta-item"><i class="fa-solid fa-clock"></i> 4 months</div>
+            <div class="case-meta-item"><i class="fa-solid fa-chart-line"></i> 2050 projections</div>
+          </div>
+          <p>Spatial urban growth modelling providing master plan inputs for Kigali's 2050 urban development framework. Included cellular automata modelling and scenario analysis.</p>
+          <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(10,22,40,0.08);">
+            <div style="font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Impact</div>
+            <p style="font-size:0.82rem;color:var(--gray);">3 growth scenarios modelled to 2050. Master plan inputs delivered. Adopted by City Council planning department.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container">
+    <div class="cta-strip-inner">
+      <div class="reveal-left"><h2>Have a project in mind?<br><em>Let's scope it together.</em></h2><p>Free consultation — no obligation.</p></div>
+      <div class="cta-strip-actions reveal-right">
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Start a Conversation</a>
+        <a href="resources.html" class="btn-secondary"><i class="fa-solid fa-download"></i> Download Capability Statement</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm — empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/rugema33" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Kigali, Rwanda (HQ)</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

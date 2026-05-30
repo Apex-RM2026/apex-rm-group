@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | APEX R&M GROUP Ltd</title>
+  <meta name="description" content="Comprehensive spatial consulting services: GIS & Spatial Analysis, Remote Sensing, Land Administration, Environmental Consulting, Infrastructure Planning, Capacity Building.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A1628'/><text y='.9em' font-size='80' fill='%23C9A84C'>◆</text></svg>">
+  <style>
+    .service-detail { padding: 5rem 0; }
+    .service-detail:nth-child(even) { background: var(--warm-white); }
+    .service-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .service-detail-grid.reverse .service-detail-img { order: 2; }
+    .service-detail-grid.reverse .service-detail-content { order: 1; }
+    .service-detail-img img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .deliverables-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1.5rem 0; }
+    .deliverable-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-body); }
+    .deliverable-item i { color: var(--gold); font-size: 0.7rem; }
+    .industries-served { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 1.5rem; }
+    .industry-tag { font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(26,107,138,0.1); color: var(--teal); padding: 0.25rem 0.6rem; border-radius: 50px; }
+    @media (max-width:768px) { .service-detail-grid { grid-template-columns: 1fr; } .service-detail-grid.reverse .service-detail-img { order: 0; } .deliverables-list { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">TEAM</a></li><li></li><li></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="sectors.html">Sectors</a><a href="insights.html">Insights</a><a href="resources.html">Resources</a><a href="careers.html">Careers</a><a href="contact.html" class="mobile-cta">Contact</a></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Services</span></div>
+      <h1>Comprehensive Spatial &<br>Resource Management Solutions</h1>
+      <div class="page-hero-line"></div>
+      <p>From raw satellite data to actionable land governance frameworks Apex R&M Group delivers the full spectrum of spatial consulting services your project demands.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE OVERVIEW GRID -->
+<section style="background:white;">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="section-label">Six Strategic Pillars</span>
+      <h2 class="section-title">Our Service Lines</h2>
+    </div>
+    <div class="services-grid">
+      <a href="#data-collection" class="service-card reveal" data-delay="100" style="text-decoration:none;">
+        <div class="service-icon">🛰️📋</div><div class="service-num">01</div>
+        <h3>Data Collection</h3><p>Precision GPS/DGPS surveys, mixed-method statistical data (qual/quan), field validation workflows, multi-sensor integration, and stratified spatial sampling for robust modeling and analytics.</p>
+      </a>
+      <a href="#gis" class="service-card reveal" data-delay="100" style="text-decoration:none;">
+        <div class="service-icon">🗺️</div><div class="service-num">01</div>
+        <h3>GIS & Spatial Analysis</h3><p>Custom maps, geodatabases, WebGIS, multi-criteria analysis.</p>
+      </a>
+      <a href="#remote-sensing" class="service-card reveal" data-delay="200" style="text-decoration:none;">
+        <div class="service-icon">🛰️</div><div class="service-num">02</div>
+        <h3>Remote Sensing & EO</h3><p>Satellite imagery, UAV surveys, LULC mapping, change detection.</p>
+      </a>
+      <a href="#land-admin" class="service-card reveal" data-delay="300" style="text-decoration:none;">
+        <div class="service-icon">📋</div><div class="service-num">03</div>
+        <h3>Land Administration</h3><p>Cadastral surveys, tenure security, land conflict resolution.</p>
+      </a>
+      <a href="#environment" class="service-card reveal" data-delay="100" style="text-decoration:none;">
+        <div class="service-icon">🌿</div><div class="service-num">04</div>
+        <h3>Environmental Consulting</h3><p>EIA, SEA, biodiversity, climate risk mapping, REDD+.</p>
+      </a>
+      <a href="#infrastructure" class="service-card reveal" data-delay="200" style="text-decoration:none;">
+        <div class="service-icon">🏗️</div><div class="service-num">05</div>
+        <h3>Infrastructure Planning</h3><p>Site suitability, utilities, transport corridors, master plans.</p>
+      </a>
+      <a href="#capacity" class="service-card reveal" data-delay="300" style="text-decoration:none;">
+        <div class="service-icon">🎓</div><div class="service-num">06</div>
+        <h3>Capacity Building</h3><p>GIS training, QGIS/ArcGIS workshops, curriculum design.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Service 01: Data Collection -->
+<section class="service-detail" id="data-collection">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-detail-content reveal-left">
+        <span class="section-label">Service 01</span>
+        <h2 class="section-title">Data Collection</h2>
+        <div class="gold-line"></div>
+        <p>We deliver High-precision GPS and DGPS surveys, statistical data acquisition (quantitative & qualitative), field data validation, sensor integration, and spatial sampling design for modeling and analytics.</p>
+        <h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.8rem;">Key Deliverables</h4>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Raw & Processed Datasets</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Statistical & Survey Outputs</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Field Documentation</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Quality Assurance Reports</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Cartographic & Visual Outputs</div>
+        </div>
+        <!--div class="industries-served"><span class="industry-tag">Agriculture</span><span class="industry-tag">Environment</span><span class="industry-tag">Humanitarian</span><span class="industry-tag">Energy</span></div-->
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+      <div class="service-detail-img reveal-left">
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <img src="/Images/Services/1.png" alt="GIS Image 1">
+        </div>
+        <div class="slide fade">
+            <img src="/Images/Services/1a.png" alt="GIS Image 2">
+        </div>
+        <div class="slide fade">
+            <img src="/Images/Services/1b.png" alt="GIS Image 3">
+        </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 2: GIS -->
+<section class="service-detail" id="gis">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-detail-img reveal-left">
+    <div class="slideshow-container">
+        <div class="service-detail-img reveal-right">
+            <img src="/Images/Services/2.png" alt="GIS Image 1">
+        </div>
+    </div>
+</div>
+      <div class="service-detail-content reveal-right">
+        <span class="section-label">Service 02</span>
+        <h2 class="section-title">GIS & Spatial Analysis</h2>
+        <div class="gold-line"></div>
+        <p>We design and execute bespoke GIS solutions from custom map production and geodatabase architecture to interactive WebGIS platforms and multi-criteria spatial decision support systems for planning, investment, and policy.</p>
+        <h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.8rem;">Key Deliverables</h4>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Custom thematic maps</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Geodatabase design</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> WebGIS portals</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Terrain & DEM analysis</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Multi-criteria analysis</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Spatial dashboards</div>
+        </div>
+        <h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:0.6rem;">Industries Served</h4>
+        <div class="industries-served">
+          <span class="industry-tag">Government</span><span class="industry-tag">Urban Planning</span>
+          <span class="industry-tag">Agriculture</span><span class="industry-tag">Mining</span>
+          <span class="industry-tag">Conservation</span><span class="industry-tag">Finance</span>
+        </div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 3: REMOTE SENSING -->
+<section class="service-detail" id="remote-sensing">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-detail-content reveal-left">
+        <span class="section-label">Service 03</span>
+        <h2 class="section-title">Remote Sensing & Earth Observation</h2>
+        <div class="gold-line"></div>
+        <p>We harness the power of satellite imagery and UAV technology to provide accurate, up-to-date intelligence on land cover, vegetation, water bodies, infrastructure, and environmental conditions across any scale of geography.</p>
+        <h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.8rem;">Key Deliverables</h4>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> LULC classification maps</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Change detection reports</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> NDVI & crop monitoring</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Flood extent mapping</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> UAV survey datasets</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Urban sprawl analysis</div>
+        </div>
+        <div class="industries-served"><span class="industry-tag">Agriculture</span><span class="industry-tag">Environment</span><span class="industry-tag">Humanitarian</span><span class="industry-tag">Energy</span></div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+      <div class="service-detail-img reveal-right">
+        <img src="Images/Services/3.png" alt="Remote Sensing satellite imagery Africa">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 4: LAND ADMIN -->
+<section class="service-detail" id="land-admin">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-detail-img reveal-left">
+        <img src="Images/Services/4.png" alt="Land Administration Africa">
+      </div>
+      <div class="service-detail-content reveal-right">
+        <span class="section-label">Service 04</span>
+        <h2 class="section-title">Land Administration</h2>
+        <div class="gold-line"></div>
+        <p>Secure land tenure is the foundation of stable communities and productive economies. We provide end-to-end land administration services from cadastral surveys to national land registration systems and community tenure programme design.</p>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Cadastral surveys</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Land registration support</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Tenure security programmes</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Land conflict mediation</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Land governance policy</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Community land mapping</div>
+        </div>
+        <div class="industries-served"><span class="industry-tag">Government</span><span class="industry-tag">International Development</span><span class="industry-tag">Communities</span></div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 5: ENVIRONMENT -->
+<section class="service-detail" id="environment">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-detail-content reveal-left">
+        <span class="section-label">Service 05</span>
+        <h2 class="section-title">Environmental Consulting</h2>
+        <div class="gold-line"></div>
+        <p>We deliver rigorous environmental assessments, biodiversity surveys, and climate risk analyses that meet international lender standards and regulatory requirements ensuring projects are both compliant and genuinely sustainable.</p>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Environmental Impact Assessment (EIA)</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Strategic Environmental Assessment (SEA)</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Biodiversity baseline studies</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Climate vulnerability mapping</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> REDD+ carbon advisory</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Ecosystem services mapping</div>
+        </div>
+        <div class="industries-served"><span class="industry-tag">Mining</span><span class="industry-tag">Energy</span><span class="industry-tag">Conservation</span><span class="industry-tag">Finance</span></div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+      <div class="service-detail-img reveal-right">
+        <img src="Images/Services/5.png" alt="Environmental Consulting Africa">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 6: INFRASTRUCTURE -->
+<section class="service-detail" id="infrastructure">
+  <div class="container">
+    <div class="service-detail-grid">
+      <div class="service-detail-img reveal-left">
+    <div class="slideshow-container">
+        <div class="slide fade">
+            <img src="/Images/Services/6.png" alt="GIS Image 6">
+        </div>
+        <div class="slide fade">
+            <img src="/Images/Services/6a.png" alt="GIS Image 2">
+        </div>
+        <div class="slide fade">
+            <img src="/Images/Services/6b.png" alt="Infrastructure Planning">
+        
+        </div>
+    </div>
+
+    </div>
+      <div class="service-detail-content reveal-right">
+        <span class="section-label">Service 06</span>
+        <h2 class="section-title">Infrastructure Planning</h2>
+        <div class="gold-line"></div>
+        <p>We provide the spatial intelligence that underpins Africa's infrastructure investments from site suitability analysis and utility corridor design to transport network GIS and comprehensive spatial master plans for urban and rural development.</p>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Site suitability analysis</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Utility corridor mapping</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Transport network GIS</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Urban growth modelling</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Spatial master plans</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Smart city planning support</div>
+        </div>
+        <div class="industries-served"><span class="industry-tag">Urban Development</span><span class="industry-tag">Energy</span><span class="industry-tag">Government</span><span class="industry-tag">Private Sector</span></div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE 7: CAPACITY -->
+<section class="service-detail" id="capacity">
+  <div class="container">
+    <div class="service-detail-grid reverse">
+      <div class="service-detail-content reveal-left">
+        <span class="section-label">Service 07</span>
+        <h2 class="section-title">Capacity Building</h2>
+        <div class="gold-line"></div>
+        <p>We invest in Africa's spatial workforce. Our capacity building programmes are tailored to institutional needs from hands-on QGIS workshops to multi-month embedded technical advisory and university curriculum development.</p>
+        <div class="deliverables-list">
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> QGIS & ArcGIS training</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Institutional GIS setup</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Remote sensing workshops</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> University curriculum design</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> Mentorship programmes</div>
+          <div class="deliverable-item"><i class="fa-solid fa-diamond"></i> E-learning module development</div>
+        </div>
+        <div class="industries-served"><span class="industry-tag">Government</span><span class="industry-tag">Universities</span><span class="industry-tag">NGOs</span><span class="industry-tag">International Development</span></div>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>
+      </div>
+      <div class="service-detail-img reveal-right">
+        <img src="Images/Services/7.png" alt="GIS Capacity Building Training">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOT SURE CTA -->
+<section style="background:var(--navy);padding:5rem 0;">
+  <div class="container" style="text-align:center;">
+    <div class="reveal">
+      <span class="section-label" style="color:var(--gold);">Need Guidance?</span>
+      <h2 class="section-title light" style="margin:0.8rem 0;">Not sure which service fits your project?</h2>
+      <div class="gold-line center"></div>
+      <p style="color:rgba(255,255,255,0.65);max-width:550px;margin:1.5rem auto 2.5rem;">Talk to one of our senior consultants free of charge. We'll help you identify the right approach and scope for your challenge.</p>
+      <a href="contact.html" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Schedule a Free Call</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/rugema33" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>(HQ) Nyagacaca Village, Ruyenzi Cell, Runda, Kamonyi District, Rwanda</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

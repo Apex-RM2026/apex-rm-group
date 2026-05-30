@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | APEX R&M GROUP Ltd</title>
+  <meta name="description" content="Contact Apex R&M Group — GIS and spatial consulting firm based in Kamonyi District, Rwanda. info.apexrmgroup@gmail.com | +250 787 523 890">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A1628'/><text y='.9em' font-size='80' fill='%23C9A84C'>◆</text></svg>">
+  <style>
+    #contact-map { height: 420px; border-radius: var(--radius-lg); }
+    .response-promise {
+      display: flex; align-items: center; gap: 0.8rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      margin-top: 2rem;
+    }
+    .response-promise i { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; }
+    .response-promise p { font-size: 0.84rem; color: var(--text-body); line-height: 1.5; margin: 0; }
+    .social-contact-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.8rem; margin-top: 1.5rem; }
+    .social-contact-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      padding: 0.8rem 0.5rem; border-radius: var(--radius-md);
+      font-family: var(--font-ui); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid rgba(10,22,40,0.12);
+      color: var(--navy); transition: var(--transition);
+    }
+    .social-contact-btn i { font-size: 1.2rem; }
+    .social-contact-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .social-contact-btn.linkedin:hover { background: #0077B5; color: white; border-color: #0077B5; }
+    .social-contact-btn.twitter:hover { background: #000; color: white; border-color: #000; }
+    .social-contact-btn.facebook:hover { background: #1877F2; color: white; border-color: #1877F2; }
+    .social-contact-btn.instagram:hover { background: #E4405F; color: white; border-color: #E4405F; }
+    .social-contact-btn.whatsapp:hover { background: #25D366; color: white; border-color: #25D366; }
+    .faq-contact { max-width: 760px; margin: 0 auto; }
+    @media(max-width:768px){ .social-contact-grid{grid-template-columns:repeat(3,1fr);} }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="insights.html">Insights</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="sectors.html">Sectors</a><a href="insights.html">Insights</a><a href="resources.html">Resources</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="contact.html" class="mobile-cta">Get a Quote</a></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+      <h1>Get In Touch — Let's Start Mapping Your Success</h1>
+      <div class="page-hero-line"></div>
+      <p>We respond to all enquiries within 24 business hours. Whether you have a project in mind or just want to explore how we can help - reach out.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section style="background:white;">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- LEFT: INFO -->
+      <div class="reveal-left">
+        <span class="section-label">Reach Us</span>
+        <h2 class="section-title" style="font-size:1.8rem;">Contact Information</h2>
+        <div class="gold-line"></div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h4>Headquarters</h4>
+            <p>Kamonyi District, Rwanda<br><span style="font-size:0.82rem;color:var(--gray);">KG 123 St, Kimihurura, Gasabo District</span></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <h4>General Enquiries</h4>
+            <p><a href="mailto:info.apexrmgroup@gmail.com" style="color:var(--teal);">info.apexrmgroup@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div>
+            <h4>Business Development</h4>
+            <p><a href="mailto:bd.apexrmgroup@gmail.com" style="color:var(--teal);">bd.apexrmgroup@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:+250787523890" style="color:var(--teal);">+250 787 523 890</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon" style="background:#25D366;"><i class="fa-brands fa-whatsapp" style="color:white;"></i></div>
+          <div>
+            <h4>WhatsApp Business</h4>
+            <p><a href="https://wa.me/250787523890" target="_blank" style="color:#25D366;">Chat on WhatsApp</a><br>
+            <span style="font-size:0.8rem;color:var(--gray);">Mon–Fri, 8am–6pm EAT</span></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item" style="border:none;">
+          <div class="contact-info-icon"><i class="fa-solid fa-language"></i></div>
+          <div>
+            <h4>Languages</h4>
+            <p>English &bull; Français &bull; Ikinyarwanda</p>
+          </div>
+        </div>
+
+        <div class="response-promise">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <p><strong>Response Commitment:</strong> We respond to all project enquiries within 24 business hours. For urgent matters, WhatsApp or call us directly.</p>
+        </div>
+
+        <!-- Social Links -->
+        <div style="margin-top:2rem;">
+          <div style="font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-bottom:0.8rem;">Follow Us</div>
+          <div class="social-contact-grid">
+            <a href="https://www.linkedin.com/company/116016508" class="social-contact-btn linkedin"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+            <a href="https://x.com/ApexRMGroup" class="social-contact-btn twitter"><i class="fa-brands fa-x-twitter"></i>Twitter/X</a>
+            <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-contact-btn facebook"><i class="fa-brands fa-facebook-f"></i>Facebook</a>
+            <a href="https://www.instagram.com/apexrmgroup/" class="social-contact-btn instagram"><i class="fa-brands fa-instagram"></i>Instagram</a>
+            <a href="https://wa.me/250787523890" class="social-contact-btn whatsapp"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="reveal-right">
+        <div style="background:var(--warm-white);border-radius:var(--radius-lg);padding:2.5rem;">
+          <h3 style="font-family:var(--font-heading);font-size:1.4rem;color:var(--navy);margin-bottom:0.5rem;">Send Us a Message</h3>
+          <p style="font-size:0.84rem;color:var(--gray);margin-bottom:2rem;">Tell us about your project or challenge the more detail the better.</p>
+
+          <form class="contact-form" id="apex-contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="full-name">Full Name *</label>
+                <input type="text" id="full-name" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="organisation">Organisation *</label>
+                <input type="text" id="organisation" placeholder="Your organisation" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+250 78...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country">
+                  <option value="">Select your country...</option>
+                  <option>Rwanda</option>
+                  <option>Kenya</option>
+                  <option>Uganda</option>
+                  <option>Tanzania</option>
+                  <option>DR Congo</option>
+                  <option>Ethiopia</option>
+                  <option>South Africa</option>
+                  <option>Nigeria</option>
+                  <option>Ghana</option>
+                  <option>Other African Country</option>
+                  <option>Outside Africa</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="service">Service of Interest</label>
+                <select id="service">
+                  <option value="">Select a service...</option>
+                  <option>Data Collection</option>
+                  <option>Data Analysis</option>
+                  <option>GIS Spatial Analysis, Remote Sensing & EO</option>
+                  <option>Urban Planning & related services</option>
+                  <option>Land Administration</option>
+                  <option>Environmental Consulting</option>
+                  <option>Infrastructure Planning</option>
+                  <option>Capacity Building</option>
+                  <option>Multiple Services</option>
+                  <option>Not Sure Yet</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <!--div class="form-group">
+              <label for="budget">Estimated Project Budget</label>
+              <select id="budget">
+                <option value="">Select a range...</option>
+                <option>Under $10,000</option>
+                <option>$10,000 – $50,000</option>
+                <option>$50,000 – $150,000</option>
+                <option>$150,000 – $500,000</option>
+                <option>$500,000+</option>
+                <option>To be determined</option>
+              </select-->
+            </div>
+            <div class="form-group">
+              <label for="brief">Project Brief *</label>
+              <textarea id="brief" placeholder="Describe your project, challenge, or enquiry. Include location, timeline, and any specific requirements..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:1rem;">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section style="background:var(--warm-white);">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">Our Location — Kamonyi District, Rwanda</h2>
+      <p class="section-subtitle">Headquarters is in Rwanda — Africa's fastest-growing smart Country.</p>
+    </div>
+    <div class="reveal" style="box-shadow:var(--shadow-md);border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(10,22,40,0.1);">
+      <div id="contact-map"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:white;">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-contact faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">How quickly can Apex R&M Group mobilise for a project? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">For most projects, we can mobilise within 2–4 weeks of contract signature. For urgent assessments or crisis GIS support, we can deploy within days. We always align mobilisation timelines with client needs during the scoping phase.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you work outside of East Africa? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">Yes. While our core market is East and Central Africa, we have completed projects across West and Southern Africa and have capacity to work anywhere on the continent. We also work with international clients on Africa-focused projects regardless of where they are based.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What GIS software and platforms do you work with? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">Our team is proficient in QGIS, ArcGIS Pro, ArcGIS Online, ERDAS Imagine, Google Earth Engine, and a range of remote sensing tools. We recommend and deploy platforms based on client institutional context — including free and open-source options where appropriate.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do you price your services? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">Our pricing is project-based and depends on scope, duration, team size, and geographic complexity. We provide detailed proposals and cost breakdowns following an initial scoping conversation. We work across budget ranges — from targeted technical studies to multi-year framework contracts.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you help with proposals and ToR responses? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">Yes. We regularly support clients in developing Terms of Reference for GIS and environmental components of larger projects, and we prepare comprehensive technical and financial proposals for competitive tenders.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer pro-bono or reduced-cost services? <i class="fa-solid fa-plus"></i></button>
+        <div class="faq-answer">We reserve limited pro-bono capacity for community land mapping initiatives and registered NGOs working on tenure security in vulnerable communities. Contact us to discuss eligibility and availability.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/ApexRMGroup" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Kamonyi DistrictS, Rwanda (HQ)</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kamonyi District, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Supabase SDK (persistent message storage) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- EmailJS SDK (email notification on form submit) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/cms.js"></script>
+<!-- APEX Message Integration: Supabase + EmailJS — LOAD AFTER cms.js -->
+<script src="js/messages.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

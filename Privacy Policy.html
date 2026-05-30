@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Apex R&M Group | Privacy Policy</title>
+  <meta name="description" content="Privacy Policy of Apex R&M Group Ltd. Learn how we collect, use, and protect your personal data when you engage with our spatial consulting services.">
+  <meta name="keywords" content="privacy policy, data protection, GDPR, Apex R&M Group, spatial consulting privacy">
+  <link href="css/google fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link href="css/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --navy: #0A1628;
+      --gold: #C9A84C;
+      --teal: #1A6B8A;
+      --slate: #2C3E50;
+      --warm-white: #F8F4EA;
+      --white: #ffffff;
+      --gray-light: #f5f7fa;
+      --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.08);
+      --shadow-md: 0 20px 40px -15px rgba(0,0,0,0.1);
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--slate);
+      background-color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .logo-font {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    .btn, .nav-links a, .tagline {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10,22,40,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .navbar.scrolled {
+      background: var(--navy);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.5px;
+      color: var(--gold);
+    }
+    .logo span {
+      font-size: 0.8rem;
+      display: block;
+      color: var(--warm-white);
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+    .logo a {
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--warm-white);
+      font-weight: 500;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--gold);
+      cursor: pointer;
+    }
+    @media (max-width: 1024px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background: var(--navy);
+        flex-direction: column;
+        padding: 2rem;
+        transition: 0.3s;
+        gap: 1.5rem;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+      }
+      .nav-links.active { left: 0; }
+      .menu-btn { display: block; }
+    }
+    /* Inner Hero */
+    .inner-hero {
+      background: linear-gradient(135deg, rgba(10,22,40,0.92), rgba(26,107,138,0.8)), url('Images/Home/H\ Line\ 191\ word.avif') center/cover no-repeat;
+      padding: 160px 0 80px;
+      text-align: center;
+      color: white;
+    }
+    .inner-hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+    }
+    .privacy-content {
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 32px;
+      box-shadow: var(--shadow-md);
+      margin: -60px auto 3rem;
+      position: relative;
+      z-index: 2;
+    }
+    .privacy-content h2 {
+      color: var(--navy);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .privacy-content h2:first-of-type {
+      margin-top: 0;
+    }
+    .privacy-content h3 {
+      color: var(--teal);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+    .privacy-content p {
+      margin-bottom: 1rem;
+      color: var(--slate);
+    }
+    .privacy-content ul {
+      margin: 1rem 0 1rem 2rem;
+    }
+    .privacy-content li {
+      margin-bottom: 0.5rem;
+    }
+    .last-updated {
+      background: var(--warm-white);
+      padding: 1rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 2rem;
+      font-style: italic;
+    }
+    footer {
+      background: var(--navy);
+      color: var(--warm-white);
+      padding: 3rem 0 1rem;
+      margin-top: 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 2rem;
+    }
+    .footer-grid a {
+      color: var(--warm-white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-grid a:hover {
+      color: var(--gold);
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 99;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      background: var(--gold);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      .inner-hero h1 { font-size: 2rem; }
+      .privacy-content { padding: 1.5rem; }
+      .container { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html"><h1>APEX R&M<span>Spatial Intelligence. Strategic Growth.</span></h1></a></div>
+    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="inner-hero">
+  <div class="container" data-aos="fade-up">
+    <h1>Privacy Policy</h1>
+    <p>Your data protection and privacy are fundamental to how we operate.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="privacy-content" data-aos="fade-up">
+    <h2>1. Introduction</h2>
+    <p>Apex R&M Group Ltd (“we,” “our,” “us”) is committed to protecting your personal information and respecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>www.apexrmgroup.com</strong>, engage our spatial consulting services, or communicate with us. We comply with applicable data protection laws, including the Rwanda Data Protection Act and, where relevant, the General Data Protection Regulation (GDPR).</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>We may collect the following categories of personal data:</p>
+    <ul>
+      <li><strong>Identity Data:</strong> Name, job title, organization, professional credentials.</li>
+      <li><strong>Contact Data:</strong> Email address, phone number, postal address, country.</li>
+      <li><strong>Technical Data:</strong> IP address, browser type, device information, cookies, and usage analytics when you interact with our website.</li>
+      <li><strong>Project & Enquiry Data:</strong> Information you provide in contact forms, consultation requests, project briefs, or during service delivery (including spatial data related to your projects).</li>
+      <li><strong>Marketing Data:</strong> Your preferences in receiving communications from us.</li>
+    </ul>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We process your personal data for legitimate business purposes, including:</p>
+    <ul>
+      <li>To respond to your enquiries, proposals, and consultation requests.</li>
+      <li>To deliver GIS, remote sensing, land administration, environmental consulting, and infrastructure planning services.</li>
+      <li>To manage our contractual obligations with government entities, NGOs, private clients, and development partners.</li>
+      <li>To improve our website, services, and client experience through analytics.</li>
+      <li>To send you newsletters, spatial insights, technical resources, and event invitations (only where you have opted in or as permitted by law).</li>
+      <li>To comply with legal and regulatory obligations in Rwanda and other jurisdictions where we operate.</li>
+    </ul>
+
+    <h2>4. Legal Basis for Processing (GDPR & African Privacy Frameworks)</h2>
+    <p>We rely on one or more of the following legal bases:</p>
+    <ul>
+      <li><strong>Contractual necessity:</strong> To perform a contract with you or your organization.</li>
+      <li><strong>Legitimate interests:</strong> To improve our consulting services, secure our systems, and market our expertise responsibly.</li>
+      <li><strong>Consent:</strong> Where you have explicitly agreed to receive marketing communications.</li>
+      <li><strong>Legal obligation:</strong> To comply with applicable laws.</li>
+    </ul>
+
+    <h2>5. Data Sharing and Disclosure</h2>
+    <p>We do not sell or rent your personal information. We may share data only in the following limited circumstances:</p>
+    <ul>
+      <li>With your explicit consent or at your direction.</li>
+      <li>With trusted third-party service providers (e.g., cloud hosting, analytics, email platforms) who assist us in operating our website and delivering services, under strict confidentiality agreements.</li>
+      <li>Where required by law, court order, or governmental regulation (e.g., to comply with Rwandan authorities or international development partners' audit requirements).</li>
+      <li>In connection with a merger, acquisition, or sale of assets — we will notify you of any change in control.</li>
+    </ul>
+    <p>Any spatial or project data you share for consulting purposes remains strictly confidential and is used solely for the agreed scope of work.</p>
+
+    <h2>6. International Data Transfers</h2>
+    <p>As a pan-African firm with global clients, your data may be transferred to and processed in countries outside your home jurisdiction. We ensure appropriate safeguards (such as Standard Contractual Clauses or equivalent legal mechanisms) are in place to protect your information in line with this Privacy Policy.</p>
+
+    <h2>7. Data Retention</h2>
+    <p>We retain personal data only as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention period is required by law (e.g., for tax, legal, or project audit purposes). Typically, project-related data is retained for 7 years following project completion. Enquiry data is kept for up to 24 months unless it leads to a client relationship.</p>
+
+    <h2>8. Data Security</h2>
+    <p>We implement industry-standard technical and organizational measures to protect your personal information against unauthorized access, loss, or alteration. These include encryption, secure servers, access controls, and regular security reviews. However, no internet transmission is 100% secure — you share data at your own risk.</p>
+
+    <h2>9. Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li><strong>Rectification:</strong> Correct inaccurate or incomplete information.</li>
+      <li><strong>Erasure:</strong> Request deletion of your data, subject to legal obligations.</li>
+      <li><strong>Restriction:</strong> Limit how we use your data.</li>
+      <li><strong>Portability:</strong> Receive your data in a structured, machine-readable format.</li>
+      <li><strong>Objection:</strong> Object to direct marketing or processing based on legitimate interests.</li>
+      <li><strong>Withdraw Consent:</strong> Where we rely on consent, you may withdraw it at any time.</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at <strong>privacy@apexrmgroup.com</strong> or using the details in Section 13. We will respond within 30 days.</p>
+
+    <h2>10. Cookies and Tracking Technologies</h2>
+    <p>Our website uses cookies and similar technologies to enhance user experience, analyze traffic, and personalize content. You can manage cookie preferences through your browser settings. Essential cookies cannot be disabled as they are necessary for site functionality. For more details, see our <a href="cookies.html" style="color:var(--gold);">Cookie Policy</a> (available on request).</p>
+
+    <h2>11. Children's Privacy</h2>
+    <p>Our services are directed to professional organizations, government entities, and adult consultants. We do not knowingly collect personal information from individuals under the age of 16. If you believe we have inadvertently collected such data, please contact us immediately.</p>
+
+    <h2>12. Third-Party Links</h2>
+    <p>Our website may contain links to external sites (e.g., development partners, open data portals, client websites). We are not responsible for the privacy practices or content of those third parties. We encourage you to read their privacy policies.</p>
+
+    <h2>13. Contact Us & Data Protection Officer</h2>
+    <p>If you have any questions about this Privacy Policy or wish to exercise your rights, please contact our Data Protection Officer:</p>
+    <p><strong>Apex R&M Group Ltd</strong><br>
+    Headquarters: Kigali, Rwanda<br>
+    Email: <a href="info.apexrmgroup@gmail.com" style="color:var(--gold);">info.apexrmgroup@gmail.com</a><br>
+    Phone: +250 787 523 890</p>
+
+    <h2>14. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. The revised version will be posted on this page with an updated “Last Updated” date. Significant changes will be notified via email or a prominent notice on our website.</p>
+
+    <div class="last-updated">
+      <i class="fas fa-gavel"></i> Last Updated: 19 May 2026 | Version 1.0
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>APEX R&M GROUP</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+      <p><i class="fas fa-envelope"></i> info.apexrmgroup@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +250 787 523 890</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul style="list-style:none;">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>🔷Social Media</h4>
+      <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+        <a href="https://www.linkedin.com/company/116016508"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/rugema33"><i class="fab fa-twitter"></i></a>
+        <a href="https://web.facebook.com/profile.php?id=61589665884720"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/apexrmgroup/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@ApexRMGroup"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <input type="email" placeholder="Your email" id="newsEmail" style="padding:8px; border-radius:30px; border:none; width:100%;">
+      <button class="btn-primary" style="margin-top:8px;" onclick="alert('Thank you for subscribing!')">Subscribe</button>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:2rem; font-size:0.8rem;">
+    © 2025 Apex R&M Group Ltd. All rights reserved. || <a href="Terms of Service.html" style="color:var(--gold);">Terms of Service</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/250787523890" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></div>
+
+<script src="js/Privacy Policy.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { if(window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.onclick = () => navLinks.classList.toggle('active');
+
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => { scrollTopBtn.style.opacity = window.scrollY > 500 ? '1' : '0'; });
+  scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('active'));
+  });
+</script>
+</body>
+</html>

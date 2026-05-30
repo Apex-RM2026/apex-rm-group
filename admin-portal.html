@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX R&M GROUP | Admin Portal</title>
+<link href="css/admin Fonts.css" rel="stylesheet">
+<link rel="stylesheet" href="css/all.min.css">
+<style>
+:root{
+  --navy:#0A1628;--navy-l:#112240;--navy-m:#1a2f4a;
+  --gold:#C9A84C;--gold-d:#a8852e;--teal:#1A6B8A;
+  --slate:#2C3E50;--ww:#F8F4EA;--gray:#8892A4;
+  --gl:#e8edf5;--success:#27ae60;--danger:#e74c3c;--warn:#f39c12;
+  --sw:260px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--ww);min-height:100vh;}
+
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;
+  background:var(--navy);background-image:radial-gradient(ellipse at 20% 50%,rgba(26,107,138,.15) 0%,transparent 60%);}
+.lcard{width:420px;max-width:95vw;background:var(--navy-l);border:1px solid rgba(201,168,76,.3);
+  border-radius:12px;padding:2.5rem;box-shadow:0 25px 60px rgba(0,0,0,.5);}
+.llogo{text-align:center;margin-bottom:1.5rem;}
+.llogo .ld{color:var(--gold);font-size:2.2rem;}
+.llogo h1{font-family:'Playfair Display',serif;font-size:1.3rem;margin:.4rem 0 .2rem;}
+.llogo p{font-size:.72rem;color:var(--gray);letter-spacing:.06em;}
+.ldiv{height:1px;background:rgba(201,168,76,.25);margin:1.25rem 0;}
+.fg{margin-bottom:1rem;}
+.fg label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:.4rem;}
+.fg input{width:100%;padding:.7rem 1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:6px;color:var(--ww);font-family:'Montserrat',sans-serif;font-size:.88rem;transition:.2s;}
+.fg input:focus{outline:none;border-color:var(--gold);}
+.rem{display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;}
+.rem input[type=checkbox]{accent-color:var(--gold);width:15px;height:15px;}
+.rem label{font-size:.78rem;color:var(--gray);cursor:pointer;}
+.btn-login{width:100%;padding:.82rem;background:var(--gold);color:var(--navy);border:none;
+  border-radius:6px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem;
+  letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:.2s;}
+.btn-login:hover{background:var(--gold-d);}
+#lerr{display:none;color:var(--danger);font-size:.78rem;text-align:center;margin-top:.75rem;
+  padding:.5rem;background:rgba(231,76,60,.1);border-radius:4px;border:1px solid rgba(231,76,60,.3);}
+
+/* DASHBOARD */
+#dashboard{display:none;}
+.layout{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:var(--sw);background:var(--navy-l);border-right:1px solid rgba(201,168,76,.12);
+  display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;
+  overflow-y:auto;z-index:100;transition:transform .3s;}
+.shead{padding:1.3rem 1.4rem;border-bottom:1px solid rgba(201,168,76,.12);}
+.shead .sl{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--ww);}
+.shead .sl span{color:var(--gold);}
+.shead .st{font-size:.6rem;color:var(--gray);letter-spacing:.08em;margin-top:.15rem;}
+.snav{flex:1;padding:.75rem 0;}
+.snl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);padding:.6rem 1.4rem .2rem;}
+.ni{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.4rem;cursor:pointer;
+  font-size:.8rem;color:var(--gray);transition:.2s;border-left:3px solid transparent;}
+.ni:hover{color:var(--ww);background:rgba(255,255,255,.04);}
+.ni.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08);}
+.ni .nic{font-size:.95rem;width:18px;text-align:center;}
+.nbadge{margin-left:auto;background:var(--danger);color:#fff;font-size:.6rem;font-weight:700;
+  padding:.08rem .35rem;border-radius:10px;}
+.sfooter{padding:.9rem 1.4rem;border-top:1px solid rgba(201,168,76,.12);}
+.btn-logout{width:100%;padding:.55rem;background:transparent;border:1px solid rgba(231,76,60,.4);
+  color:var(--danger);border-radius:5px;cursor:pointer;font-family:'Montserrat',sans-serif;
+  font-size:.78rem;transition:.2s;}
+.btn-logout:hover{background:rgba(231,76,60,.1);}
+
+/* MAIN */
+.main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;background:#f0f2f5;}
+.topbar{background:#fff;padding:.75rem 1.75rem;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid #e1e5ec;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.topbar-l{display:flex;align-items:center;gap:.85rem;}
+.ham{display:none;background:none;border:none;cursor:pointer;font-size:1.15rem;color:var(--slate);}
+.ptitle{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);}
+.topbar-r{display:flex;align-items:center;gap:.75rem;}
+.tusr{font-size:.75rem;color:var(--slate);}
+.tusr strong{color:var(--navy);}
+.ba{padding:.4rem .9rem;border-radius:5px;font-family:'Montserrat',sans-serif;font-size:.72rem;
+  font-weight:600;cursor:pointer;border:none;transition:.2s;}
+.bgold{background:var(--gold);color:var(--navy);}
+.bgold:hover{background:var(--gold-d);}
+.bout{background:transparent;border:1px solid var(--navy);color:var(--navy);}
+.bout:hover{background:var(--navy);color:#fff;}
+.bsave{background:var(--success);color:#fff;}
+.bsave:hover{background:#219a52;}
+.bdl{background:var(--navy);color:#fff;}
+
+.ca{flex:1;padding:1.75rem;overflow-y:auto;}
+.ps{display:none;}
+.ps.active{display:block;}
+
+/* CARDS */
+.og{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1.75rem;}
+.scard{background:#fff;border-radius:10px;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,.06);
+  border-left:4px solid var(--gold);transition:.2s;}
+.scard:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.scard.bl{border-left-color:var(--teal);}
+.scard.gn{border-left-color:var(--success);}
+.scard.rd{border-left-color:var(--danger);}
+.snum{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--navy);}
+.slbl{font-size:.73rem;color:var(--gray);margin-top:.2rem;}
+.sico{font-size:1.6rem;float:right;opacity:.25;}
+
+/* EDITOR */
+.ec{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+@media(max-width:1100px){.ec{grid-template-columns:1fr;}}
+.ep{background:#fff;border-radius:10px;padding:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.ep h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin-bottom:1rem;
+  padding-bottom:.65rem;border-bottom:2px solid var(--gold);}
+.fsec{margin-bottom:1.25rem;}
+.fst{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);
+  margin-bottom:.65rem;background:rgba(26,107,138,.08);padding:.35rem .55rem;border-radius:4px;}
+.ff{margin-bottom:.85rem;}
+.ff label{display:block;font-size:.72rem;font-weight:600;color:var(--slate);margin-bottom:.3rem;}
+.ff input[type=text],.ff input[type=email],.ff input[type=tel],.ff input[type=url],
+.ff input[type=number],.ff select,.ff textarea{
+  width:100%;padding:.5rem .7rem;border:1px solid #dde2ec;border-radius:5px;
+  font-family:'Montserrat',sans-serif;font-size:.8rem;color:var(--slate);background:#fafbfc;transition:.2s;}
+.ff input:focus,.ff select:focus,.ff textarea:focus{outline:none;border-color:var(--gold);background:#fff;}
+.ff textarea{resize:vertical;min-height:72px;}
+.tc2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.tc3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;}
+.tc4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.7rem;}
+
+/* REPEATER */
+.ri{background:#f8f9fc;border:1px solid #e1e5ec;border-radius:8px;padding:.9rem;margin-bottom:.65rem;}
+.rih{display:flex;justify-content:space-between;align-items:center;margin-bottom:.65rem;}
+.rit{font-size:.78rem;font-weight:700;color:var(--navy);}
+.brm{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:var(--danger);
+  padding:.2rem .45rem;border-radius:4px;font-size:.68rem;cursor:pointer;}
+.badd{background:var(--navy);color:#fff;border:none;padding:.45rem .9rem;border-radius:5px;
+  font-family:'Montserrat',sans-serif;font-size:.74rem;cursor:pointer;margin-top:.4rem;}
+.badd:hover{background:var(--teal);}
+
+/* ACTION BAR */
+.abar{background:#fff;border-radius:10px;padding:.9rem 1.4rem;display:flex;gap:.65rem;
+  flex-wrap:wrap;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-top:1.25rem;}
+.abar span{font-size:.74rem;color:var(--gray);margin-right:auto;}
+
+/* MESSAGES */
+.ibar{display:flex;gap:.8rem;align-items:center;margin-bottom:1.1rem;flex-wrap:wrap;}
+.si{padding:.48rem .7rem;border:1px solid #dde2ec;border-radius:5px;
+  font-family:'Montserrat',sans-serif;font-size:.8rem;color:var(--slate);width:240px;}
+.si:focus{outline:none;border-color:var(--gold);}
+.fs{padding:.48rem .7rem;border:1px solid #dde2ec;border-radius:5px;
+  font-family:'Montserrat',sans-serif;font-size:.8rem;color:var(--slate);}
+.ml{display:flex;flex-direction:column;gap:.65rem;}
+.mi{background:#fff;border-radius:8px;padding:.9rem 1.1rem;box-shadow:0 1px 6px rgba(0,0,0,.06);
+  cursor:pointer;transition:.2s;border-left:4px solid transparent;display:flex;gap:.85rem;align-items:flex-start;}
+.mi:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);}
+.mi.unread{border-left-color:var(--gold);}
+.mav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal));
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;
+  font-size:.78rem;flex-shrink:0;}
+.mb{flex:1;min-width:0;}
+.mhdr{display:flex;justify-content:space-between;align-items:flex-start;gap:.4rem;}
+.msnd{font-size:.82rem;color:var(--navy);font-weight:600;}
+.mtm{font-size:.68rem;color:var(--gray);white-space:nowrap;}
+.msbj{font-size:.76rem;color:var(--slate);margin:.1rem 0;}
+.mprev{font-size:.72rem;color:var(--gray);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.mtags{display:flex;gap:.35rem;margin-top:.35rem;flex-wrap:wrap;}
+.mtag{font-size:.62rem;padding:.08rem .38rem;border-radius:10px;background:rgba(26,107,138,.1);color:var(--teal);}
+.mtag.u{background:rgba(231,76,60,.1);color:var(--danger);}
+.mact{display:flex;gap:.35rem;}
+.bi{background:none;border:1px solid #dde2ec;padding:.25rem .45rem;border-radius:4px;
+  cursor:pointer;font-size:.75rem;color:var(--slate);transition:.2s;}
+.bi:hover{background:#f0f2f5;}
+.bi.del:hover{background:rgba(231,76,60,.1);color:var(--danger);border-color:rgba(231,76,60,.3);}
+
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;
+  align-items:center;justify-content:center;}
+.mo.open{display:flex;}
+.mbox{background:#fff;border-radius:12px;width:580px;max-width:95vw;max-height:90vh;
+  overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.3);}
+.mhd{padding:1.25rem 1.5rem;border-bottom:1px solid #e1e5ec;display:flex;
+  justify-content:space-between;align-items:center;background:var(--navy);border-radius:12px 12px 0 0;}
+.mhd h3{font-family:'Playfair Display',serif;color:var(--ww);font-size:1.05rem;}
+.mcl{background:none;border:none;color:var(--gray);font-size:1.1rem;cursor:pointer;}
+.mcl:hover{color:var(--ww);}
+.mbd{padding:1.4rem;color:var(--slate);}
+.mdr{font-size:.82rem;margin-bottom:.6rem;}
+.mdr strong{color:var(--navy);display:inline-block;min-width:90px;}
+.mdc{margin-top:.85rem;padding:.9rem;background:#f8f9fc;border-radius:5px;line-height:1.7;font-size:.83rem;}
+.mft{padding:.9rem 1.4rem;border-top:1px solid #e1e5ec;display:flex;gap:.65rem;}
+
+/* SETTINGS */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;}
+.sc{background:#fff;border-radius:10px;padding:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.sc h3{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--navy);
+  margin-bottom:.9rem;padding-bottom:.45rem;border-bottom:2px solid var(--gold);}
+.sof{display:flex;align-items:center;gap:.65rem;margin-bottom:.65rem;}
+.sof .si2{font-size:1.1rem;width:26px;text-align:center;}
+.sof input{flex:1;padding:.45rem .65rem;border:1px solid #dde2ec;border-radius:5px;
+  font-size:.78rem;font-family:'Montserrat',sans-serif;color:var(--slate);}
+.sof input:focus{outline:none;border-color:var(--gold);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.75rem;right:1.75rem;background:var(--navy);color:var(--ww);
+  padding:.75rem 1.35rem;border-radius:8px;border-left:4px solid var(--gold);font-size:.82rem;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:.3s;z-index:9999;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.ok{border-left-color:var(--success);}
+.toast.err{border-left-color:var(--danger);}
+
+/* COLLAPSE */
+.cbtn{background:none;border:1px solid #dde2ec;color:var(--slate);padding:.2rem .55rem;
+  border-radius:4px;font-size:.68rem;cursor:pointer;margin-bottom:.65rem;}
+.cc{display:block;}
+.cc.collapsed{display:none;}
+
+/* PAGE HEADER */
+.ph{margin-bottom:1.25rem;}
+.ph h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);}
+.ph p{font-size:.78rem;color:var(--gray);margin-top:.2rem;}
+.bc{font-size:.7rem;color:var(--gray);margin-bottom:.4rem;}
+.bc span{color:var(--gold);}
+.pill{display:inline-block;padding:.12rem .55rem;border-radius:20px;font-size:.65rem;font-weight:600;}
+.pa{background:rgba(39,174,96,.12);color:var(--success);}
+
+/* Live preview */
+.pvp{background:#fff;border-radius:10px;padding:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.pvp h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);margin-bottom:.9rem;
+  padding-bottom:.65rem;border-bottom:2px solid var(--teal);}
+.pvw{border:2px solid #e1e5ec;border-radius:8px;overflow:hidden;min-height:260px;max-height:560px;overflow-y:auto;background:var(--navy);}
+.pvh{background:linear-gradient(135deg,var(--navy) 0%,#1a3a5c 100%);padding:1.5rem;text-align:center;}
+.pvb{display:inline-block;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);
+  color:var(--gold);font-size:.62rem;padding:.2rem .65rem;border-radius:20px;margin-bottom:.65rem;letter-spacing:.08em;}
+.pvh h1{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--ww);margin-bottom:.4rem;}
+.pvh h1 span{color:var(--gold);}
+.pvh p{font-size:.76rem;color:rgba(248,244,234,.7);max-width:380px;margin:0 auto .9rem;line-height:1.6;}
+.pvbtns{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;}
+.pvbtns a{padding:.45rem 1.1rem;border-radius:4px;font-size:.72rem;font-weight:600;text-decoration:none;}
+.pvbtns a.pr{background:var(--gold);color:var(--navy);}
+.pvbtns a.sc2{border:1px solid rgba(255,255,255,.3);color:#fff;}
+.pvst{display:flex;justify-content:center;gap:1.25rem;background:rgba(201,168,76,.1);padding:.9rem;flex-wrap:wrap;}
+.pvst .ps2{text-align:center;}
+.pvst .ps2 strong{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);}
+.pvst .ps2 span{font-size:.62rem;color:var(--gray);}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .ham{display:block;}
+  .og{grid-template-columns:1fr 1fr;}
+  .ec{grid-template-columns:1fr;}
+  .topbar-r .ba{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="lcard">
+    <div class="llogo">
+      <div class="ld">◆</div>
+      <h1>APEX R&M GROUP</h1>
+      <p>Management Portal — Admin Access</p>
+    </div>
+    <div class="ldiv"></div>
+    <p style="font-size:.74rem;color:var(--gray);text-align:center;margin-bottom:1.25rem;">Enter your credentials to access the CMS</p>
+    <div class="fg"><label>Username</label><input type="text" id="lu" placeholder="apex" autocomplete="username"></div>
+    <div class="fg"><label>Password</label><input type="password" id="lp" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="rem"><input type="checkbox" id="rem"><label for="rem">Remember my username</label></div>
+    <button class="btn-login" onclick="doLogin()">Access Dashboard</button>
+    <div id="lerr">Invalid username or password. Please try again.</div>
+    <div style="margin-top:1.25rem;text-align:center;">
+      <a href="index.html" style="font-size:.72rem;color:var(--gray);text-decoration:none;">← Back to Website</a>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="shead">
+    <div class="sl">◆ APEX <span>R&M</span> GROUP</div>
+    <div class="st">Content Management System</div>
+  </div>
+  <div class="snav">
+    <div class="snl">Overview</div>
+    <div class="ni active" onclick="showP('overview',this)"><span class="nic">📊</span> Dashboard</div>
+    <div class="snl">Page Editors</div>
+    <div class="ni" onclick="showP('home',this)"><span class="nic">🏠</span> Home Page</div>
+    <div class="ni" onclick="showP('about',this)"><span class="nic">📖</span> About Page</div>
+    <div class="ni" onclick="showP('services',this)"><span class="nic">🛰️</span> Services</div>
+    <div class="ni" onclick="showP('projects',this)"><span class="nic">📁</span> Projects</div>
+    <div class="ni" onclick="showP('sectors',this)"><span class="nic">🏭</span> Sectors</div>
+    <div class="ni" onclick="showP('contact',this)"><span class="nic">📞</span> Contact</div>
+    <div class="snl">System</div>
+    <div class="ni" onclick="showP('messages',this)"><span class="nic">✉️</span> Messages Inbox <span class="nbadge" id="mbadge">0</span></div>
+    <div class="ni" onclick="showP('global',this)"><span class="nic">⚙️</span> Global Settings</div>
+  </div>
+  <div class="sfooter">
+    <button class="btn-logout" onclick="doLogout()"><i class="fa-solid fa-power-off"></i> Logout</button>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-l">
+      <button class="ham" onclick="toggleSB()">☰</button>
+      <div class="ptitle" id="ptxt">Dashboard</div>
+    </div>
+    <div class="topbar-r">
+      <div class="tusr">Welcome, <strong id="tuname">apex</strong></div>
+      <button class="ba bout" onclick="window.open('index.html','_blank')">🌐 View Site</button>
+      <button class="ba bgold" onclick="saveAll()">💾 Save All</button>
+    </div>
+  </div>
+
+  <div class="ca">
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div id="ps-overview" class="ps active">
+      <div class="ph">
+        <div class="bc">APEX R&M · <span>Dashboard</span></div>
+        <h2>Dashboard Overview</h2>
+        <p>Welcome to the APEX R&M GROUP Content Management System. All changes save directly to the website.</p>
+      </div>
+      <div class="og">
+        <div class="scard"><span class="sico">📄</span><div class="snum">8</div><div class="slbl">Editable Pages</div></div>
+        <div class="scard bl"><span class="sico">✏️</span><div class="snum">200+</div><div class="slbl">Editable Fields</div></div>
+        <div class="scard rd"><span class="sico">✉️</span><div class="snum" id="ov-msgs">0</div><div class="slbl">Unread Messages</div></div>
+        <div class="scard gn"><span class="sico">✅</span><div class="snum" id="ov-saves">0</div><div class="slbl">Changes Saved</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+        <div class="ep">
+          <h3>Quick Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:.6rem;">
+            <button class="ba bgold" style="text-align:left;padding:.7rem 1rem;font-size:.8rem;" onclick="showP('home',document.querySelectorAll('.ni')[2])">🏠 Edit Home Page</button>
+            <button class="ba bout" style="text-align:left;padding:.7rem 1rem;font-size:.8rem;color:var(--navy);" onclick="showP('contact',document.querySelectorAll('.ni')[8])">📞 Edit Contact Info</button>
+            <button class="ba bout" style="text-align:left;padding:.7rem 1rem;font-size:.8rem;color:var(--navy);" onclick="showP('messages',document.querySelectorAll('.ni')[10])">✉️ View Inbox</button>
+            <button class="ba bout" style="text-align:left;padding:.7rem 1rem;font-size:.8rem;color:var(--navy);" onclick="showP('global',document.querySelectorAll('.ni')[11])">⚙️ Global Settings</button>
+            <button class="ba bout" style="text-align:left;padding:.7rem 1rem;font-size:.8rem;color:var(--navy);" onclick="window.open('index.html','_blank')">🌐 Preview Website</button>
+          </div>
+        </div>
+        <div class="ep">
+          <h3>Website Pages</h3>
+          <div style="font-size:.8rem;color:var(--slate);display:flex;flex-direction:column;gap:.5rem;">
+            <div style="display:flex;justify-content:space-between;"><span>Home Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>About Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>Services Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>Projects Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>Sectors Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>Contact Page</span><span class="pill pa">Live</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>Insights Page</span><span class="pill pa">Live</span></div>
+          </div>
+          <div style="margin-top:1rem;padding:.75rem;background:rgba(39,174,96,.08);border-radius:6px;border:1px solid rgba(39,174,96,.2);">
+            <p style="font-size:.74rem;color:var(--success);font-weight:600;">✅ CMS Connected</p>
+            <p style="font-size:.7rem;color:var(--gray);margin-top:.2rem;">Changes save instantly — open any page to see updates live.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ HOME ═══ -->
+    <div id="ps-home" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>Home (index.html)</span></div>
+        <h2>Home Page Editor</h2><p>Edit hero section, stats, services overview, testimonials, and CTA strip.</p></div>
+      <div class="ec">
+        <div>
+          <div class="ep">
+            <h3>🦸 Hero Section</h3>
+            <div class="ff"><label>Badge Text</label><input type="text" id="h_hero_badge"></div>
+            <div class="tc2">
+              <div class="ff"><label>Heading Line 1</label><input type="text" id="h_hero_t1"></div>
+              <div class="ff"><label>Gold Highlight Word</label><input type="text" id="h_hero_hl"></div>
+            </div>
+            <div class="ff"><label>Heading Line 2</label><input type="text" id="h_hero_t2"></div>
+            <div class="ff"><label>Hero Subtitle</label><textarea id="h_hero_sub" rows="3" oninput="updatePV()"></textarea></div>
+            <div class="tc2">
+              <div class="ff"><label>Button 1 Text</label><input type="text" id="h_btn1t" oninput="updatePV()"></div>
+              <div class="ff"><label>Button 1 Link</label><input type="text" id="h_btn1l"></div>
+            </div>
+            <div class="tc2">
+              <div class="ff"><label>Button 2 Text</label><input type="text" id="h_btn2t"></div>
+              <div class="ff"><label>Button 2 Link</label><input type="text" id="h_btn2l"></div>
+            </div>
+            <div class="ff"><label>Hero Background Image (relative path or URL)</label><input type="text" id="h_hero_img"></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>📊 Statistics (4 counters)</h3>
+            <div class="tc4">
+              <div class="ff"><label>Stat 1 #</label><input type="text" id="h_s1n" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 1 Label</label><input type="text" id="h_s1l" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 2 #</label><input type="text" id="h_s2n" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 2 Label</label><input type="text" id="h_s2l" oninput="updatePV()"></div>
+            </div>
+            <div class="tc4">
+              <div class="ff"><label>Stat 3 #</label><input type="text" id="h_s3n" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 3 Label</label><input type="text" id="h_s3l" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 4 #</label><input type="text" id="h_s4n" oninput="updatePV()"></div>
+              <div class="ff"><label>Stat 4 Label</label><input type="text" id="h_s4l" oninput="updatePV()"></div>
+            </div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>🛰️ Services Overview (6 Cards)</h3>
+            <div id="svc-cards-ed"></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>💬 Why Choose Us</h3>
+            <div class="tc2">
+              <div class="ff"><label>Section Label</label><input type="text" id="h_wl"></div>
+              <div class="ff"><label>Title Line 1</label><input type="text" id="h_wt1"></div>
+            </div>
+            <div class="tc2">
+              <div class="ff"><label>Title Line 2</label><input type="text" id="h_wt2"></div>
+              <div class="ff"><label>Section Image Path</label><input type="text" id="h_wi"></div>
+            </div>
+            <div class="ff"><label>Subtitle Paragraph</label><textarea id="h_wsub" rows="2"></textarea></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>💬 Testimonials (3)</h3>
+            <div id="test-ed"></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>📰 Blog Previews (3)</h3>
+            <div id="blog-ed"></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>📣 CTA Strip</h3>
+            <div class="tc2">
+              <div class="ff"><label>Title Line 1</label><input type="text" id="h_ct1"></div>
+              <div class="ff"><label>Title Line 2 (italic)</label><input type="text" id="h_ct2"></div>
+            </div>
+            <div class="ff"><label>Subtitle</label><input type="text" id="h_csub"></div>
+            <div class="tc2">
+              <div class="ff"><label>Button 1 Text</label><input type="text" id="h_cb1t"></div>
+              <div class="ff"><label>Button 1 Link</label><input type="text" id="h_cb1l"></div>
+            </div>
+            <div class="tc2">
+              <div class="ff"><label>Button 2 Text (Phone)</label><input type="tel" id="h_cb2t"></div>
+              <div class="ff"><label>Button 2 Link</label><input type="text" id="h_cb2l"></div>
+            </div>
+          </div>
+          <div class="ep" style="margin-top:1rem;">
+            <h3>🏢 Client Logos (7)</h3>
+            <div id="clients-ed"></div>
+          </div>
+        </div>
+        <!-- PREVIEW -->
+        <div>
+          <div class="pvp" style="position:sticky;top:5rem;">
+            <h3>Live Preview</h3>
+            <div class="pvw">
+              <div class="pvh">
+                <div class="pvb" id="pv-badge">Kigali, Rwanda • African • Global</div>
+                <h1 id="pv-h1">Where <span id="pv-hl">Spatial Intelligence</span><br><span id="pv-h2">Meets Strategic Growth.</span></h1>
+                <p id="pv-sub">Precision consulting in GIS, land management, environmental advisory.</p>
+                <div class="pvbtns">
+                  <a href="#" class="pr" id="pv-b1">Explore Services</a>
+                  <a href="#" class="sc2" id="pv-b2">Request Consultation</a>
+                </div>
+              </div>
+              <div class="pvst">
+                <div class="ps2"><strong id="pvs1">50+</strong><span id="pvsl1">Projects</span></div>
+                <div class="ps2"><strong id="pvs2">10+</strong><span id="pvsl2">Countries</span></div>
+                <div class="ps2"><strong id="pvs3">30+</strong><span id="pvsl3">Consultants</span></div>
+                <div class="ps2"><strong id="pvs4">15+</strong><span id="pvsl4">Experience</span></div>
+              </div>
+            </div>
+            <p style="font-size:.68rem;color:var(--gray);margin-top:.65rem;text-align:center;">Preview updates as you type. Save to apply to website.</p>
+          </div>
+        </div>
+      </div>
+      <div class="abar">
+        <span>Home Page (index.html)</span>
+        <button class="ba bsave" onclick="saveSec('home')">💾 Save Changes</button>
+        <button class="ba" style="background:var(--warn);color:#fff;" onclick="resetSec('home')">🔄 Reset</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('index.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <div id="ps-about" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>About (about.html)</span></div>
+        <h2>About Page Editor</h2><p>Edit company story, mission, vision, and core values.</p></div>
+      <div class="ep">
+        <h3>🦸 Page Hero</h3>
+        <div class="tc2">
+          <div class="ff"><label>Page Title</label><input type="text" id="ab_ht"></div>
+          <div class="ff"><label>Hero Subtitle</label><input type="text" id="ab_hs"></div>
+        </div>
+      </div>
+      <div class="ep" style="margin-top:1rem;">
+        <h3>📖 Our Story</h3>
+        <div class="ff"><label>Story Title (Section Heading)</label><input type="text" id="ab_st"></div>
+        <div class="ff"><label>Paragraph 1</label><textarea id="ab_p1" rows="3"></textarea></div>
+        <div class="ff"><label>Paragraph 2</label><textarea id="ab_p2" rows="3"></textarea></div>
+        <div class="ff"><label>Paragraph 3</label><textarea id="ab_p3" rows="3"></textarea></div>
+        <div class="ff"><label>Story Image Path</label><input type="text" id="ab_si"></div>
+      </div>
+      <div class="ep" style="margin-top:1rem;">
+        <h3>🎯 Mission & Vision</h3>
+        <div class="ff"><label>Mission Statement</label><textarea id="ab_ms" rows="4"></textarea></div>
+        <div class="ff"><label>Vision Statement</label><textarea id="ab_vs" rows="4"></textarea></div>
+      </div>
+      <div class="ep" style="margin-top:1rem;">
+        <h3>⭐ Core Values (6)</h3>
+        <div id="vals-ed"></div>
+      </div>
+      <div class="ep" style="margin-top:1rem;">
+        <h3>🤝 CSR Stats</h3>
+        <div class="tc3">
+          <div class="ff"><label>Stat 1 Number</label><input type="text" id="ab_cs1n"></div>
+          <div class="ff"><label>Stat 1 Label</label><input type="text" id="ab_cs1l"></div>
+        </div>
+        <div class="tc3">
+          <div class="ff"><label>Stat 2 Number</label><input type="text" id="ab_cs2n"></div>
+          <div class="ff"><label>Stat 2 Label</label><input type="text" id="ab_cs2l"></div>
+          <div class="ff"><label>Stat 3 Number</label><input type="text" id="ab_cs3n"></div>
+        </div>
+        <div class="ff"><label>Stat 3 Label</label><input type="text" id="ab_cs3l"></div>
+      </div>
+      <div class="abar"><span>About Page (about.html)</span>
+        <button class="ba bsave" onclick="saveSec('about')">💾 Save Changes</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('about.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ SERVICES ═══ -->
+    <div id="ps-services" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>Services (services.html)</span></div>
+        <h2>Services Page Editor</h2><p>Edit all 6 service lines — titles, descriptions, deliverables, and industry tags.</p></div>
+      <div id="svc-full-ed"></div>
+      <div class="abar"><span>Services Page (services.html)</span>
+        <button class="ba bsave" onclick="saveSec('services')">💾 Save Changes</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('services.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ PROJECTS ═══ -->
+    <div id="ps-projects" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>Projects (projects.html)</span></div>
+        <h2>Projects Page Editor</h2><p>Manage all project case studies. Changes appear instantly on the projects page.</p></div>
+      <div id="proj-ed"></div>
+      <button class="badd" onclick="addProject()" style="margin-top:.5rem;">+ Add New Project</button>
+      <div class="abar"><span>Projects Page (projects.html)</span>
+        <button class="ba bsave" onclick="saveSec('projects')">💾 Save Changes</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('projects.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ SECTORS ═══ -->
+    <div id="ps-sectors" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>Sectors (sectors.html)</span></div>
+        <h2>Sectors Page Editor</h2><p>Edit all 8 industry sector entries — icons, titles, descriptions, and use cases.</p></div>
+      <div id="sec-ed"></div>
+      <div class="abar"><span>Sectors Page (sectors.html)</span>
+        <button class="ba bsave" onclick="saveSec('sectors')">💾 Save Changes</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('sectors.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ CONTACT ═══ -->
+    <div id="ps-contact" class="ps">
+      <div class="ph"><div class="bc">Pages · <span>Contact (contact.html)</span></div>
+        <h2>Contact Page Editor</h2><p>Edit all contact information, social links, map coordinates, and FAQ items.</p></div>
+      <div class="ec">
+        <div>
+          <div class="ep"><h3>📞 Contact Info</h3>
+            <div class="ff"><label>Page Title</label><input type="text" id="ct_ht"></div>
+            <div class="ff"><label>Address Line 1</label><input type="text" id="ct_a1"></div>
+            <div class="ff"><label>Address Line 2</label><input type="text" id="ct_a2"></div>
+            <div class="ff"><label>General Email</label><input type="email" id="ct_em"></div>
+            <div class="ff"><label>Business Dev Email</label><input type="email" id="ct_bd"></div>
+            <div class="ff"><label>Phone Number</label><input type="tel" id="ct_ph"></div>
+            <div class="ff"><label>WhatsApp Number (digits only, no +)</label><input type="tel" id="ct_wa"></div>
+            <div class="ff"><label>Languages</label><input type="text" id="ct_ln"></div>
+          </div>
+          <div class="ep" style="margin-top:1rem;"><h3>🗺️ Map Coordinates</h3>
+            <div class="tc3">
+              <div class="ff"><label>Latitude</label><input type="number" id="ct_lat" step="0.0001"></div>
+              <div class="ff"><label>Longitude</label><input type="number" id="ct_lng" step="0.0001"></div>
+              <div class="ff"><label>Zoom Level</label><input type="number" id="ct_zm" min="1" max="20"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ep"><h3>❓ FAQ Items (6)</h3><div id="faq-ed"></div></div>
+        </div>
+      </div>
+      <div class="abar"><span>Contact Page (contact.html)</span>
+        <button class="ba bsave" onclick="saveSec('contact')">💾 Save Changes</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="window.open('contact.html','_blank')">🌐 Preview Page</button>
+      </div>
+    </div>
+
+    <!-- ═══ MESSAGES ═══ -->
+    <div id="ps-messages" class="ps">
+      <div class="ph"><div class="bc">System · <span>Messages Inbox</span></div>
+        <h2>Messages Inbox</h2><p>All enquiries submitted via the website contact form appear here.</p></div>
+      <div class="ibar">
+        <input type="text" class="si" id="msearch" placeholder="🔍 Search messages..." oninput="renderMsgs()">
+        <select class="fs" id="mfilt" onchange="renderMsgs()">
+          <option value="all">All Messages</option>
+          <option value="unread">Unread Only</option>
+          <option value="read">Read</option>
+        </select>
+        <button class="ba bgold" onclick="exportCSV()">📤 Export CSV</button>
+        <button class="ba bout" style="color:var(--navy);" onclick="markAllRead()">✓ Mark All Read</button>
+      </div>
+      <div class="ml" id="msg-list"></div>
+    </div>
+
+    <!-- ═══ GLOBAL SETTINGS ═══ -->
+    <div id="ps-global" class="ps">
+      <div class="ph"><div class="bc">System · <span>Global Settings</span></div>
+        <h2>Global Settings</h2><p>Site-wide footer, company info, social links, and copyright. Applied to all pages.</p></div>
+      <div class="sg">
+        <div class="sc"><h3>🏢 Company Info</h3>
+          <div class="ff"><label>Company Name</label><input type="text" id="gl_cn"></div>
+          <div class="ff"><label>Tagline</label><input type="text" id="gl_tg"></div>
+          <div class="ff"><label>Footer Description</label><textarea id="gl_fd" rows="3"></textarea></div>
+          <div class="ff"><label>Copyright Text</label><input type="text" id="gl_cp"></div>
+        </div>
+        <div class="sc"><h3>📞 Footer Contact</h3>
+          <div class="ff"><label>Address</label><input type="text" id="gl_ad"></div>
+          <div class="ff"><label>Email</label><input type="email" id="gl_em"></div>
+          <div class="ff"><label>Phone</label><input type="tel" id="gl_ph"></div>
+          <div class="ff"><label>WhatsApp (digits only)</label><input type="tel" id="gl_wa"></div>
+        </div>
+        <div class="sc"><h3>🌐 Social Media Links</h3>
+          <div class="sof"><span class="si2">💼</span><input type="url" id="gl_li" placeholder="LinkedIn URL"></div>
+          <div class="sof"><span class="si2">🐦</span><input type="url" id="gl_tw" placeholder="Twitter/X URL"></div>
+          <div class="sof"><span class="si2">📘</span><input type="url" id="gl_fb" placeholder="Facebook URL"></div>
+          <div class="sof"><span class="si2">📸</span><input type="url" id="gl_ig" placeholder="Instagram URL"></div>
+          <div class="sof"><span class="si2">📺</span><input type="url" id="gl_yt" placeholder="YouTube URL"></div>
+        </div>
+      </div>
+      <div class="abar"><span>Global Settings (all pages)</span>
+        <button class="ba bsave" onclick="saveSec('global')">💾 Save All Settings</button>
+      </div>
+    </div>
+
+  </div><!-- ca -->
+</div><!-- main -->
+</div><!-- layout -->
+</div><!-- dashboard -->
+
+<!-- MESSAGE MODAL -->
+<div class="mo" id="msgModal">
+  <div class="mbox">
+    <div class="mhd"><h3 id="modal-title">Message</h3><button class="mcl" onclick="closeModal()">✕</button></div>
+    <div class="mbd" id="modal-body"></div>
+    <div class="mft">
+      <button class="ba bgold" onclick="replyMsg()">↩ Reply via Email</button>
+      <button class="ba bout" style="color:var(--slate);" onclick="closeModal()">Close</button>
+      <button class="ba" style="background:rgba(231,76,60,.1);color:var(--danger);border:1px solid rgba(231,76,60,.3);" onclick="delMsg()">🗑 Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Include cms.js for data layer -->
+<!-- Supabase SDK (persistent message storage) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- EmailJS SDK (email notification on form submit) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/cms.js"></script>
+<!-- APEX Message Integration: Supabase + EmailJS — LOAD AFTER cms.js -->
+<script src="js/messages.js"></script>
+<script>
+/* ── ADMIN PORTAL SCRIPT ── */
+let saveCount=0, currentMsgId=null;
+const D = APEX_DEFAULTS; // reference to defaults from cms.js
+
+/* ── AUTH ── */
+function doLogin(){
+  const u=document.getElementById('lu').value.trim();
+  const p=document.getElementById('lp').value;
+  if(u==='apex'&&p==='APEX'){ // hardcoded credentials for demo
+    sessionStorage.setItem('apex','1');
+    if(document.getElementById('rem').checked) localStorage.setItem('apex_rem_u',u);
+    const last=localStorage.getItem('apex_last_login')||'First login';
+    localStorage.setItem('apex_last_login',new Date().toLocaleString());
+    document.getElementById('tuname').textContent=u;
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    initDash();
+  } else {
+    document.getElementById('lerr').style.display='block';
+  }
+}
+document.getElementById('lp').addEventListener('keypress',e=>{ if(e.key==='Enter') doLogin(); });
+window.addEventListener('load',()=>{
+  const rem=localStorage.getItem('apex_rem_u');
+  if(rem){ document.getElementById('lu').value=rem; document.getElementById('rem').checked=true; }
+  // Check if already logged in
+  if(sessionStorage.getItem('apex_admin')==='1'){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    initDash();
+  }
+});
+function doLogout(){
+  sessionStorage.removeItem('apex_admin');
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('lp').value='';
+}
+
+/* ── SIDEBAR ── */
+function showP(id,el){
+  document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById('ps-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  const titles={overview:'Dashboard',home:'Home Page Editor',about:'About Page Editor',
+    services:'Services Editor',projects:'Projects Editor',sectors:'Sectors Editor',
+    contact:'Contact Editor',messages:'Messages Inbox',global:'Global Settings'};
+  document.getElementById('ptxt').textContent=titles[id]||id;
+  if(window.innerWidth<768) document.getElementById('sidebar').classList.remove('open');
+}
+function toggleSB(){ document.getElementById('sidebar').classList.toggle('open'); }
+
+/* ── INIT ── */
+function initDash(){
+  const data=APEX_CMS.load();
+  loadHomeFields(data.home);
+  loadAboutFields(data.about);
+  buildSvcCards(data.home.services);
+  buildTestEd(data.home.testimonials);
+  buildBlogEd(data.home.blog);
+  buildClientsEd(data.home.clients);
+  buildSvcFull(data.services);
+  buildProjEd(data.projects);
+  buildSecEd(data.sectors);
+  buildTeamEd(data.team);
+  buildAdvEd(data.advisors);
+  loadContactFields(data.contact);
+  buildFAQEd(data.contact.faqs);
+  buildValsEd(data.about.values);
+  loadGlobalFields(data.global);
+  renderMsgs();
+  updateMsgBadge();
+  updatePV();
+  // Load fresh messages from Supabase (async, updates inbox after local render)
+  if (typeof apexLoadMessages === 'function') apexLoadMessages();
+}
+
+/* ── FIELD LOADERS ── */
+function v(id){ const e=document.getElementById(id); return e?e.value:null; }
+function sv(id,val){ const e=document.getElementById(id); if(e&&val!=null) e.value=val; }
+
+function loadHomeFields(h){
+  sv('h_hero_badge',h.hero_badge); sv('h_hero_t1',h.hero_title1); sv('h_hero_hl',h.hero_highlight);
+  sv('h_hero_t2',h.hero_title2); sv('h_hero_sub',h.hero_sub); sv('h_hero_img',h.hero_image);
+  sv('h_btn1t',h.hero_btn1_text); sv('h_btn1l',h.hero_btn1_link);
+  sv('h_btn2t',h.hero_btn2_text); sv('h_btn2l',h.hero_btn2_link);
+  sv('h_s1n',h.stat1_num); sv('h_s1l',h.stat1_label);
+  sv('h_s2n',h.stat2_num); sv('h_s2l',h.stat2_label);
+  sv('h_s3n',h.stat3_num); sv('h_s3l',h.stat3_label);
+  sv('h_s4n',h.stat4_num); sv('h_s4l',h.stat4_label);
+  sv('h_wl',h.why_label); sv('h_wt1',h.why_title1); sv('h_wt2',h.why_title2);
+  sv('h_wsub',h.why_subtitle); sv('h_wi',h.why_image);
+  sv('h_ct1',h.cta_title1); sv('h_ct2',h.cta_title2); sv('h_csub',h.cta_sub);
+  sv('h_cb1t',h.cta_btn1_text); sv('h_cb1l',h.cta_btn1_link);
+  sv('h_cb2t',h.cta_btn2_text); sv('h_cb2l',h.cta_btn2_link);
+}
+function loadAboutFields(a){
+  sv('ab_ht',a.hero_title); sv('ab_hs',a.hero_sub);
+  sv('ab_st',a.story_title); sv('ab_p1',a.story_p1); sv('ab_p2',a.story_p2); sv('ab_p3',a.story_p3);
+  sv('ab_si',a.story_image); sv('ab_ms',a.mission); sv('ab_vs',a.vision);
+  sv('ab_cs1n',a.csr_stat1_num); sv('ab_cs1l',a.csr_stat1_label);
+  sv('ab_cs2n',a.csr_stat2_num); sv('ab_cs2l',a.csr_stat2_label);
+  sv('ab_cs3n',a.csr_stat3_num); sv('ab_cs3l',a.csr_stat3_label);
+}
+function loadContactFields(c){
+  sv('ct_ht',c.hero_title); sv('ct_a1',c.address1); sv('ct_a2',c.address2);
+  sv('ct_em',c.email_general); sv('ct_bd',c.email_bd); sv('ct_ph',c.phone);
+  sv('ct_wa',c.whatsapp); sv('ct_ln',c.languages);
+  sv('ct_lat',c.map_lat); sv('ct_lng',c.map_lng); sv('ct_zm',c.map_zoom);
+}
+function loadGlobalFields(g){
+  sv('gl_cn',g.company_name); sv('gl_tg',g.tagline); sv('gl_fd',g.footer_desc);
+  sv('gl_cp',g.copyright); sv('gl_ad',g.address); sv('gl_em',g.email);
+  sv('gl_ph',g.phone); sv('gl_wa',g.whatsapp);
+  sv('gl_li',g.social_linkedin); sv('gl_tw',g.social_twitter);
+  sv('gl_fb',g.social_facebook); sv('gl_ig',g.social_instagram); sv('gl_yt',g.social_youtube);
+}
+
+/* ── BUILDER FUNCTIONS ── */
+function buildSvcCards(svcs){
+  const c=document.getElementById('svc-cards-ed'); if(!c) return;
+  c.innerHTML=(svcs||D.home.services).map((s,i)=>`
+    <div class="ri">
+      <div class="rih"><div class="rit">${s.icon} Service ${s.num}: ${s.title}</div></div>
+      <div class="tc2">
+        <div class="ff"><label>Icon (emoji)</label><input type="text" id="sc_${i}_icon" value="${s.icon}"></div>
+        <div class="ff"><label>Title</label><input type="text" id="sc_${i}_title" value="${s.title}" oninput="updatePV()"></div>
+      </div>
+      <div class="ff"><label>Description</label><textarea id="sc_${i}_desc" rows="2">${s.desc}</textarea></div>
+      <div class="ff"><label>Link</label><input type="text" id="sc_${i}_link" value="${s.link}"></div>
+    </div>`).join('');
+}
+
+function buildSvcFull(svcs){
+  const c=document.getElementById('svc-full-ed'); if(!c) return;
+  c.innerHTML=(svcs||D.services).map((s,i)=>`
+    <div class="ep" style="margin-bottom:1rem;">
+      <h3>${s.icon} Service ${s.num}: ${s.title}</h3>
+      <button class="cbtn" onclick="toggleCC(this)">Collapse ▲</button>
+      <div class="cc">
+        <div class="tc2">
+          <div class="ff"><label>Icon</label><input type="text" id="sf_${i}_icon" value="${s.icon}"></div>
+          <div class="ff"><label>Title</label><input type="text" id="sf_${i}_title" value="${s.title}"></div>
+        </div>
+        <div class="ff"><label>Subtitle</label><input type="text" id="sf_${i}_sub" value="${s.subtitle||''}"></div>
+        <div class="ff"><label>Description</label><textarea id="sf_${i}_desc" rows="3">${s.desc}</textarea></div>
+        <div class="ff"><label>Image Path</label><input type="text" id="sf_${i}_img" value="${s.image||''}"></div>
+        <div class="fst">Deliverables (6)</div>
+        ${s.deliverables.map((d,j)=>`<div class="ff"><label>Deliverable ${j+1}</label><input type="text" id="sf_${i}_d${j}" value="${d}"></div>`).join('')}
+        <div class="fst">Industry Tags (4)</div>
+        <div class="tc2">${s.tags.map((t,j)=>`<div class="ff"><label>Tag ${j+1}</label><input type="text" id="sf_${i}_t${j}" value="${t}"></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+function buildProjEd(projs){
+  const c=document.getElementById('proj-ed'); if(!c) return;
+  c.innerHTML=(projs||D.projects).map((p,i)=>`
+    <div class="ep" style="margin-bottom:1rem;">
+      <h3>📁 Project ${i+1}: ${p.title}</h3>
+      <button class="cbtn" onclick="toggleCC(this)">Collapse ▲</button>
+      <div class="cc">
+        <div class="tc2">
+          <div class="ff"><label>Title</label><input type="text" id="pj_${i}_title" value="${p.title}"></div>
+          <div class="ff"><label>Tag/Type</label><input type="text" id="pj_${i}_tag" value="${p.tag}"></div>
+        </div>
+        <div class="tc4">
+          <div class="ff"><label>Location</label><input type="text" id="pj_${i}_loc" value="${p.location}"></div>
+          <div class="ff"><label>Year</label><input type="text" id="pj_${i}_yr" value="${p.year}"></div>
+          <div class="ff"><label>Duration</label><input type="text" id="pj_${i}_dur" value="${p.duration}"></div>
+          <div class="ff"><label>Scale</label><input type="text" id="pj_${i}_sc" value="${p.scale}"></div>
+        </div>
+        <div class="tc2">
+          <div class="ff"><label>Client</label><input type="text" id="pj_${i}_cli" value="${p.client}"></div>
+          <div class="ff"><label>Category</label>
+            <select id="pj_${i}_cat">
+              ${['gis','environment','land','urban','capacity'].map(c=>`<option value="${c}" ${p.category===c?'selected':''}>${c}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="ff"><label>Description</label><textarea id="pj_${i}_desc" rows="3">${p.desc}</textarea></div>
+        <div class="ff"><label>Impact / Results</label><textarea id="pj_${i}_imp" rows="2">${p.impact}</textarea></div>
+        <div class="ff"><label>Image Path</label><input type="text" id="pj_${i}_img" value="${p.image||''}"></div>
+        <button class="brm" onclick="removeProject(${i})">Remove Project</button>
+      </div>
+    </div>`).join('');
+}
+
+function buildSecEd(sectors){
+  const c=document.getElementById('sec-ed'); if(!c) return;
+  c.innerHTML=(sectors||D.sectors).map((s,i)=>`
+    <div class="ep" style="margin-bottom:1rem;">
+      <h3>${s.icon} ${s.title}</h3>
+      <button class="cbtn" onclick="toggleCC(this)">Collapse ▲</button>
+      <div class="cc">
+        <div class="tc2">
+          <div class="ff"><label>Icon</label><input type="text" id="se_${i}_icon" value="${s.icon}"></div>
+          <div class="ff"><label>Title</label><input type="text" id="se_${i}_title" value="${s.title}"></div>
+        </div>
+        <div class="ff"><label>Description</label><textarea id="se_${i}_desc" rows="2">${s.desc}</textarea></div>
+        <div class="fst">Use Cases (5)</div>
+        ${s.use_cases.map((uc,j)=>`<div class="ff"><label>Use Case ${j+1}</label><input type="text" id="se_${i}_uc${j}" value="${uc}"></div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function buildTeamEd(team){
+  const c=document.getElementById('team-ed'); if(!c) return;
+  c.innerHTML=(team||D.team).map((m,i)=>`
+    <div class="ri">
+      <div class="rih">
+        <div class="rit">${m.initials} — ${m.name}</div>
+        <button class="brm" onclick="removeMember(${i})">Remove</button>
+      </div>
+      <div class="tc2">
+        <div class="ff"><label>Initials (2 chars)</label><input type="text" id="tm_${i}_ini" value="${m.initials}" maxlength="2"></div>
+        <div class="ff"><label>Full Name</label><input type="text" id="tm_${i}_nm" value="${m.name}"></div>
+      </div>
+      <div class="ff"><label>Job Title</label><input type="text" id="tm_${i}_tt" value="${m.title}"></div>
+      <div class="ff"><label>Bio</label><textarea id="tm_${i}_bio" rows="3">${m.bio}</textarea></div>
+      <div class="tc2">
+        ${(m.tags||[]).map((t,j)=>`<div class="ff"><label>Tag ${j+1}</label><input type="text" id="tm_${i}_tg${j}" value="${t}"></div>`).join('')}
+      </div>
+      <div class="ff"><label>LinkedIn URL</label><input type="url" id="tm_${i}_li" value="${m.linkedin||'#'}"></div>
+    </div>`).join('');
+}
+
+function buildAdvEd(advisors){
+  const c=document.getElementById('adv-ed'); if(!c) return;
+  c.innerHTML=(advisors||D.advisors).map((a,i)=>`
+    <div class="ri">
+      <div class="rih">
+        <div class="rit">${a.initials} — ${a.name}</div>
+        <button class="brm" onclick="removeAdvisor(${i})">Remove</button>
+      </div>
+      <div class="tc2">
+        <div class="ff"><label>Initials</label><input type="text" id="ad_${i}_ini" value="${a.initials}" maxlength="2"></div>
+        <div class="ff"><label>Full Name</label><input type="text" id="ad_${i}_nm" value="${a.name}"></div>
+      </div>
+      <div class="ff"><label>Advisory Title</label><input type="text" id="ad_${i}_tt" value="${a.title}"></div>
+      <div class="ff"><label>Bio</label><textarea id="ad_${i}_bio" rows="2">${a.bio}</textarea></div>
+    </div>`).join('');
+}
+
+function buildFAQEd(faqs){
+  const c=document.getElementById('faq-ed'); if(!c) return;
+  c.innerHTML=(faqs||D.contact.faqs).map((f,i)=>`
+    <div class="ri">
+      <div class="rih"><div class="rit">FAQ ${i+1}</div></div>
+      <div class="ff"><label>Question</label><input type="text" id="fq_${i}_q" value="${f.q.replace(/"/g,'&quot;')}"></div>
+      <div class="ff"><label>Answer</label><textarea id="fq_${i}_a" rows="3">${f.a}</textarea></div>
+    </div>`).join('');
+}
+
+function buildValsEd(vals){
+  const c=document.getElementById('vals-ed'); if(!c) return;
+  c.innerHTML=(vals||D.about.values).map((v,i)=>`
+    <div class="ri">
+      <div class="tc2">
+        <div class="ff"><label>Icon</label><input type="text" id="vl_${i}_ic" value="${v.icon}"></div>
+        <div class="ff"><label>Title</label><input type="text" id="vl_${i}_tt" value="${v.title}"></div>
+      </div>
+      <div class="ff"><label>Description</label><textarea id="vl_${i}_dc" rows="2">${v.desc}</textarea></div>
+    </div>`).join('');
+}
+
+function buildTestEd(tests){
+  const c=document.getElementById('test-ed'); if(!c) return;
+  c.innerHTML=(tests||D.home.testimonials).map((t,i)=>`
+    <div class="ri">
+      <div class="rih"><div class="rit">Testimonial ${i+1}</div></div>
+      <div class="ff"><label>Quote</label><textarea id="ts_${i}_q" rows="3">${t.quote}</textarea></div>
+      <div class="tc2">
+        <div class="ff"><label>Name</label><input type="text" id="ts_${i}_nm" value="${t.name}"></div>
+        <div class="ff"><label>Role / Org</label><input type="text" id="ts_${i}_rl" value="${t.role}"></div>
+      </div>
+      <div class="tc2">
+        <div class="ff"><label>Avatar Initials</label><input type="text" id="ts_${i}_ini" value="${t.initials}" maxlength="2"></div>
+        <div class="ff"><label>Stars (1-5)</label><input type="number" id="ts_${i}_st" value="${t.stars}" min="1" max="5"></div>
+      </div>
+    </div>`).join('');
+}
+
+function buildBlogEd(blog){
+  const c=document.getElementById('blog-ed'); if(!c) return;
+  c.innerHTML=(blog||D.home.blog).map((b,i)=>`
+    <div class="ri">
+      <div class="rih"><div class="rit">Blog Post ${i+1}</div></div>
+      <div class="tc2">
+        <div class="ff"><label>Category</label><input type="text" id="bl_${i}_cat" value="${b.cat}"></div>
+        <div class="ff"><label>Date</label><input type="text" id="bl_${i}_dt" value="${b.date}"></div>
+      </div>
+      <div class="ff"><label>Title</label><input type="text" id="bl_${i}_ttl" value="${b.title}"></div>
+      <div class="ff"><label>Excerpt</label><textarea id="bl_${i}_ex" rows="2">${b.excerpt}</textarea></div>
+      <div class="tc2">
+        <div class="ff"><label>Image Path</label><input type="text" id="bl_${i}_img" value="${b.img}"></div>
+        <div class="ff"><label>Link</label><input type="text" id="bl_${i}_lnk" value="${b.link}"></div>
+      </div>
+    </div>`).join('');
+}
+
+function buildClientsEd(clients){
+  const c=document.getElementById('clients-ed'); if(!c) return;
+  c.innerHTML=(clients||D.home.clients).map((cl,i)=>`
+    <div class="ff"><label>Client ${i+1}</label><input type="text" id="cl_${i}" value="${cl}"></div>`).join('');
+}
+
+/* ── COLLECT & SAVE ── */
+function readSvcCards(n){
+  return Array.from({length:n},(_,i)=>({
+    icon:v(`sc_${i}_icon`)||'🗺️', num:String(i+1).padStart(2,'0'),
+    title:v(`sc_${i}_title`)||'', desc:v(`sc_${i}_desc`)||'',
+    link:v(`sc_${i}_link`)||'#'
+  }));
+}
+function readSvcFull(n){
+  return Array.from({length:n},(_,i)=>{
+    const def=D.services[i]||{};
+    return {
+      id:def.id||`svc-${i}`, icon:v(`sf_${i}_icon`)||def.icon,
+      num:def.num||String(i+1).padStart(2,'0'),
+      title:v(`sf_${i}_title`)||def.title, subtitle:v(`sf_${i}_sub`)||'',
+      desc:v(`sf_${i}_desc`)||def.desc, image:v(`sf_${i}_img`)||def.image||'',
+      deliverables:(def.deliverables||[]).map((_,j)=>v(`sf_${i}_d${j}`)||_),
+      tags:(def.tags||[]).map((_,j)=>v(`sf_${i}_t${j}`)||_)
+    };
+  });
+}
+function readProjs(){
+  const n=document.querySelectorAll('#proj-ed .ep').length;
+  return Array.from({length:n},(_,i)=>({
+    id:i+1, title:v(`pj_${i}_title`)||'', tag:v(`pj_${i}_tag`)||'',
+    location:v(`pj_${i}_loc`)||'', year:v(`pj_${i}_yr`)||'',
+    duration:v(`pj_${i}_dur`)||'', scale:v(`pj_${i}_sc`)||'',
+    client:v(`pj_${i}_cli`)||'', category:v(`pj_${i}_cat`)||'gis',
+    desc:v(`pj_${i}_desc`)||'', impact:v(`pj_${i}_imp`)||'',
+    image:v(`pj_${i}_img`)||''
+  }));
+}
+function readSectors(){
+  const n=8;
+  return Array.from({length:n},(_,i)=>{
+    const def=D.sectors[i]||{};
+    return {
+      id:def.id||`sec-${i}`, icon:v(`se_${i}_icon`)||def.icon||'',
+      title:v(`se_${i}_title`)||def.title||'', desc:v(`se_${i}_desc`)||def.desc||'',
+      use_cases:(def.use_cases||[]).map((_,j)=>v(`se_${i}_uc${j}`)||_)
+    };
+  });
+}
+function readTeam(){
+  const n=document.querySelectorAll('#team-ed .ri').length;
+  return Array.from({length:n},(_,i)=>{
+    const def=D.team[i]||{};
+    return {
+      initials:v(`tm_${i}_ini`)||'', name:v(`tm_${i}_nm`)||'',
+      title:v(`tm_${i}_tt`)||'', bio:v(`tm_${i}_bio`)||'',
+      tags:(def.tags||['','','','']).map((_,j)=>v(`tm_${i}_tg${j}`)||_),
+      linkedin:v(`tm_${i}_li`)||'#', gradient:def.gradient||''
+    };
+  });
+}
+function readAdvisors(){
+  const n=document.querySelectorAll('#adv-ed .ri').length;
+  return Array.from({length:n},(_,i)=>({
+    initials:v(`ad_${i}_ini`)||'', name:v(`ad_${i}_nm`)||'',
+    title:v(`ad_${i}_tt`)||'', bio:v(`ad_${i}_bio`)||''
+  }));
+}
+function readFAQs(){
+  const n=6;
+  return Array.from({length:n},(_,i)=>({q:v(`fq_${i}_q`)||'',a:v(`fq_${i}_a`)||''}));
+}
+function readVals(){
+  const n=6;
+  return Array.from({length:n},(_,i)=>({icon:v(`vl_${i}_ic`)||'',title:v(`vl_${i}_tt`)||'',desc:v(`vl_${i}_dc`)||''}));
+}
+function readTests(){
+  const n=3;
+  return Array.from({length:n},(_,i)=>({
+    quote:v(`ts_${i}_q`)||'', name:v(`ts_${i}_nm`)||'',
+    role:v(`ts_${i}_rl`)||'', initials:v(`ts_${i}_ini`)||'',
+    stars:parseInt(v(`ts_${i}_st`)||5)
+  }));
+}
+function readBlog(){
+  const n=3;
+  return Array.from({length:n},(_,i)=>({
+    cat:v(`bl_${i}_cat`)||'', date:v(`bl_${i}_dt`)||'',
+    title:v(`bl_${i}_ttl`)||'', excerpt:v(`bl_${i}_ex`)||'',
+    img:v(`bl_${i}_img`)||'', link:v(`bl_${i}_lnk`)||'#'
+  }));
+}
+function readClients(){
+  const n=7;
+  return Array.from({length:n},(_,i)=>v(`cl_${i}`)||'');
+}
+
+function saveSec(sec){
+  const data=APEX_CMS.load();
+  if(sec==='home'){
+    const n=D.home.services.length;
+    data.home={
+      hero_badge:v('h_hero_badge'), hero_title1:v('h_hero_t1'), hero_highlight:v('h_hero_hl'),
+      hero_title2:v('h_hero_t2'), hero_sub:v('h_hero_sub'), hero_image:v('h_hero_img'),
+      hero_btn1_text:v('h_btn1t'), hero_btn1_link:v('h_btn1l'),
+      hero_btn2_text:v('h_btn2t'), hero_btn2_link:v('h_btn2l'),
+      stat1_num:v('h_s1n'), stat1_label:v('h_s1l'),
+      stat2_num:v('h_s2n'), stat2_label:v('h_s2l'),
+      stat3_num:v('h_s3n'), stat3_label:v('h_s3l'),
+      stat4_num:v('h_s4n'), stat4_label:v('h_s4l'),
+      why_label:v('h_wl'), why_title1:v('h_wt1'), why_title2:v('h_wt2'),
+      why_subtitle:v('h_wsub'), why_image:v('h_wi'),
+      cta_title1:v('h_ct1'), cta_title2:v('h_ct2'), cta_sub:v('h_csub'),
+      cta_btn1_text:v('h_cb1t'), cta_btn1_link:v('h_cb1l'),
+      cta_btn2_text:v('h_cb2t'), cta_btn2_link:v('h_cb2l'),
+      services:readSvcCards(n), testimonials:readTests(), blog:readBlog(), clients:readClients()
+    };
+  } else if(sec==='about'){
+    data.about={
+      hero_title:v('ab_ht'), hero_sub:v('ab_hs'),
+      story_title:v('ab_st'), story_p1:v('ab_p1'), story_p2:v('ab_p2'), story_p3:v('ab_p3'),
+      story_image:v('ab_si'), mission:v('ab_ms'), vision:v('ab_vs'),
+      values:readVals(),
+      csr_stat1_num:v('ab_cs1n'), csr_stat1_label:v('ab_cs1l'),
+      csr_stat2_num:v('ab_cs2n'), csr_stat2_label:v('ab_cs2l'),
+      csr_stat3_num:v('ab_cs3n'), csr_stat3_label:v('ab_cs3l')
+    };
+  } else if(sec==='services'){
+    data.services=readSvcFull(D.services.length);
+  } else if(sec==='projects'){
+    data.projects=readProjs();
+  } else if(sec==='sectors'){
+    data.sectors=readSectors();
+  } else if(sec==='team'){
+    data.team=readTeam(); data.advisors=readAdvisors();
+  } else if(sec==='contact'){
+    data.contact={
+      hero_title:v('ct_ht'), address1:v('ct_a1'), address2:v('ct_a2'),
+      email_general:v('ct_em'), email_bd:v('ct_bd'), phone:v('ct_ph'),
+      whatsapp:v('ct_wa'), languages:v('ct_ln'),
+      map_lat:parseFloat(v('ct_lat')), map_lng:parseFloat(v('ct_lng')), map_zoom:parseInt(v('ct_zm')),
+      faqs:readFAQs()
+    };
+  } else if(sec==='global'){
+    data.global={
+      company_name:v('gl_cn'), tagline:v('gl_tg'), footer_desc:v('gl_fd'),
+      copyright:v('gl_cp'), address:v('gl_ad'), email:v('gl_em'),
+      phone:v('gl_ph'), whatsapp:v('gl_wa'),
+      social_linkedin:v('gl_li'), social_twitter:v('gl_tw'),
+      social_facebook:v('gl_fb'), social_instagram:v('gl_ig'), social_youtube:v('gl_yt')
+    };
+  }
+  APEX_CMS.save(data);
+  saveCount++; document.getElementById('ov-saves').textContent=saveCount;
+  showToast('✅ Changes saved! Open '+sec+'.html to see updates.','ok');
+}
+
+function saveAll(){
+  ['home','about','services','projects','sectors','team','contact','global'].forEach(s=>{ try{saveSec(s);}catch(e){} });
+  showToast('✅ All sections saved!','ok');
+}
+
+function resetSec(sec){
+  if(!confirm('Reset '+sec+' to default content? This cannot be undone.')) return;
+  const data=APEX_CMS.load();
+  delete data[sec];
+  APEX_CMS.save(data);
+  location.reload();
+}
+
+/* ── DYNAMIC ADD/REMOVE ── */
+function addProject(){
+  const data=APEX_CMS.load();
+  const projs=data.projects||[...D.projects];
+  projs.push({id:Date.now(),title:'New Project',tag:'GIS',location:'Rwanda',year:'2025',
+    duration:'3 months',scale:'',client:'',category:'gis',desc:'',impact:'',image:''});
+  data.projects=projs; APEX_CMS.save(data);
+  buildProjEd(projs); showToast('New project added','ok');
+}
+function removeProject(i){
+  const data=APEX_CMS.load(); const projs=data.projects||[...D.projects];
+  projs.splice(i,1); data.projects=projs; APEX_CMS.save(data);
+  buildProjEd(projs); showToast('Project removed','');
+}
+function addMember(){
+  const data=APEX_CMS.load(); const team=data.team||[...D.team];
+  team.push({initials:'??',name:'New Team Member',title:'Consultant',bio:'',tags:['','','',''],linkedin:'#',gradient:''});
+  data.team=team; APEX_CMS.save(data); buildTeamEd(team); showToast('Member added','ok');
+}
+function removeMember(i){
+  const data=APEX_CMS.load(); const team=data.team||[...D.team];
+  team.splice(i,1); data.team=team; APEX_CMS.save(data); buildTeamEd(team);
+}
+function addAdvisor(){
+  const data=APEX_CMS.load(); const adv=data.advisors||[...D.advisors];
+  adv.push({initials:'??',name:'New Advisor',title:'Advisor',bio:''});
+  data.advisors=adv; APEX_CMS.save(data); buildAdvEd(adv); showToast('Advisor added','ok');
+}
+function removeAdvisor(i){
+  const data=APEX_CMS.load(); const adv=data.advisors||[...D.advisors];
+  adv.splice(i,1); data.advisors=adv; APEX_CMS.save(data); buildAdvEd(adv);
+}
+
+/* ── MESSAGES ── */
+function renderMsgs(){
+  const msgs=APEX_CMS.getMessages();
+  const search=(document.getElementById('msearch')||{}).value||'';
+  const filt=(document.getElementById('mfilt')||{}).value||'all';
+  const fl=msgs.filter(m=>{
+    const ms=!search||m.name.toLowerCase().includes(search.toLowerCase())||
+      (m.subject||'').toLowerCase().includes(search.toLowerCase())||
+      (m.message||'').toLowerCase().includes(search.toLowerCase());
+    const mf=filt==='all'||(filt==='unread'&&!m.read)||(filt==='read'&&m.read);
+    return ms&&mf;
+  });
+  const list=document.getElementById('msg-list');
+  if(!list) return;
+  if(!fl.length){list.innerHTML='<div style="text-align:center;padding:2.5rem;color:var(--gray);font-size:.83rem;">No messages found.</div>';return;}
+  list.innerHTML=fl.map(m=>`
+    <div class="mi ${m.read?'':'unread'}" onclick="openMsg(${m.id})">
+      <div class="mav">${(m.name||'?').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase()}</div>
+      <div class="mb">
+        <div class="mhdr">
+          <div class="msnd">${m.name||'Unknown'} <span style="color:var(--gray);font-weight:400;font-size:.73rem;">— ${m.org||''}</span></div>
+          <div class="mtm">${m.time||''}</div>
+        </div>
+        <div class="msbj">${m.subject||'Website Enquiry'}</div>
+        <div class="mprev">${(m.message||'').substring(0,90)}…</div>
+        <div class="mtags">
+          ${m.service?`<span class="mtag">${m.service}</span>`:''}
+          ${m.country?`<span class="mtag">${m.country}</span>`:''}
+          ${!m.read?'<span class="mtag u">UNREAD</span>':''}
+        </div>
+      </div>
+      <div class="mact" onclick="event.stopPropagation()">
+        <button class="bi" onclick="markRead(${m.id})">✓</button>
+        <button class="bi del" onclick="deleteMsg(${m.id})">🗑</button>
+      </div>
+    </div>`).join('');
+  updateMsgBadge();
+}
+function updateMsgBadge(){
+  const msgs=APEX_CMS.getMessages();
+  const u=msgs.filter(m=>!m.read).length;
+  document.getElementById('mbadge').textContent=u;
+  document.getElementById('ov-msgs').textContent=u;
+}
+function openMsg(id){
+  const data=APEX_CMS.load();
+  const m=data.messages.find(m=>m.id===id); if(!m) return;
+  m.read=true; APEX_CMS.save(data); currentMsgId=id; renderMsgs();
+  document.getElementById('modal-title').textContent=m.subject||'Enquiry';
+  document.getElementById('modal-body').innerHTML=`
+    <div class="mdr"><strong>From:</strong> ${m.name||'—'}</div>
+    <div class="mdr"><strong>Organisation:</strong> ${m.org||'—'}</div>
+    <div class="mdr"><strong>Email:</strong> <a href="mailto:${m.email||''}" style="color:var(--teal);">${m.email||'—'}</a></div>
+    <div class="mdr"><strong>Phone:</strong> ${m.phone||'—'}</div>
+    <div class="mdr"><strong>Country:</strong> ${m.country||'—'}</div>
+    <div class="mdr"><strong>Service:</strong> ${m.service||'—'}</div>
+    <div class="mdr"><strong>Budget:</strong> ${m.budget||'—'}</div>
+    <div class="mdr"><strong>Received:</strong> ${m.time||'—'}</div>
+    <div class="mdc">${(m.message||'').replace(/\n/g,'<br>')}</div>`;
+  document.getElementById('msgModal').classList.add('open');
+}
+function closeModal(){ document.getElementById('msgModal').classList.remove('open'); currentMsgId=null; }
+function replyMsg(){
+  const msgs=APEX_CMS.getMessages(); const m=msgs.find(m=>m.id===currentMsgId);
+  if(m) window.open(`mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject||'Enquiry')}`, '_blank');
+}
+function markRead(id){
+  const data=APEX_CMS.load(); const m=data.messages.find(m=>m.id===id);
+  if(m){m.read=true; APEX_CMS.save(data); renderMsgs();}
+  // Sync to Supabase
+  if(typeof apexMarkReadSupabase==='function') apexMarkReadSupabase(id);
+}
+function deleteMsg(id){
+  // Sync to Supabase first
+  if(typeof apexDeleteSupabase==='function') apexDeleteSupabase(id);
+  const data=APEX_CMS.load();
+  data.messages=data.messages.filter(m=>m.id!==id);
+  APEX_CMS.save(data); renderMsgs(); showToast('Message deleted','');
+}
+function delMsg(){
+  if(currentMsgId){deleteMsg(currentMsgId);closeModal();}
+}
+function markAllRead(){
+  const data=APEX_CMS.load();
+  (data.messages||[]).forEach(m=>m.read=true);
+  APEX_CMS.save(data); renderMsgs(); showToast('All marked as read','ok');
+  // Sync to Supabase
+  if(typeof apexMarkAllReadSupabase==='function') apexMarkAllReadSupabase();
+}
+function exportCSV(){
+  const msgs=APEX_CMS.getMessages();
+  const hdr='ID,Name,Organisation,Email,Phone,Country,Service,Budget,Subject,Message,Time,Read\n';
+  const rows=msgs.map(m=>[m.id,m.name||'',m.org||'',m.email||'',m.phone||'',
+    m.country||'',m.service||'',m.budget||'',
+    '"'+(m.subject||'').replace(/"/g,'""')+'"',
+    '"'+(m.message||'').replace(/"/g,'""')+'"',
+    m.time||'',m.read?'Yes':'No'].join(',')).join('\n');
+  const blob=new Blob([hdr+rows],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='apex_messages.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Messages exported!','ok');
+}
+
+/* ── LIVE PREVIEW ── */
+function updatePV(){
+  const sv=(id,el)=>{const e=document.getElementById(id); if(e&&el){const t=document.getElementById(el);if(t) t.textContent=e.value;}};
+  const gv=id=>{const e=document.getElementById(id); return e?e.value:'';};
+  const pb=document.getElementById('pv-badge'); if(pb) pb.textContent=gv('h_hero_badge');
+  const ph=document.getElementById('pv-h1');
+  if(ph) ph.innerHTML=`${gv('h_hero_t1')} <span id="pv-hl" style="color:var(--gold)">${gv('h_hero_hl')}</span><br><span id="pv-h2">${gv('h_hero_t2')}</span>`;
+  const ps=document.getElementById('pv-sub'); if(ps) ps.textContent=gv('h_hero_sub');
+  const pb1=document.getElementById('pv-b1'); if(pb1) pb1.textContent=gv('h_btn1t');
+  const pb2=document.getElementById('pv-b2'); if(pb2) pb2.textContent=gv('h_btn2t');
+  ['1','2','3','4'].forEach(n=>{
+    const sn=document.getElementById(`pvs${n}`); const sl=document.getElementById(`pvsl${n}`);
+    if(sn) sn.textContent=gv(`h_s${n}n`);
+    if(sl) sl.textContent=(gv(`h_s${n}l`)||'').split(' ').slice(0,2).join(' ');
+  });
+}
+
+/* ── UTILITY ── */
+function toggleCC(btn){
+  const cc=btn.nextElementSibling;
+  if(cc.classList.contains('collapsed')){cc.classList.remove('collapsed');btn.textContent='Collapse ▲';}
+  else{cc.classList.add('collapsed');btn.textContent='Expand ▼';}
+}
+function showToast(msg,type){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast show '+(type||'');
+  setTimeout(()=>{t.className='toast';},3000);
+}
+
+// Close modal on outside click
+document.getElementById('msgModal').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
+</script>
+</body>
+</html>

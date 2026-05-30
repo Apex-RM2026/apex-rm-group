@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | APEX R&M GROUP Ltd</title>
+  <meta name="description" content="Build your career at Apex R&M Group — Africa's premier spatial consulting firm. Open positions in GIS, remote sensing, environmental consulting, and land administration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A1628'/><text y='.9em' font-size='80' fill='%23C9A84C'>◆</text></svg>">
+  <style>
+    .culture-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .culture-card {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+    .culture-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .culture-card h3 { font-family:var(--font-heading); font-size:1rem; color:white; margin-bottom:0.6rem; }
+    .culture-card p { font-size:0.82rem; color:rgba(255,255,255,0.6); line-height:1.7; }
+    .graduate-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .graduate-box::before {
+      content: '◆'; position:absolute; right:-1rem; top:50%;
+      transform:translateY(-50%); font-size:14rem;
+      color:rgba(201,168,76,0.05); line-height:1;
+    }
+    .apply-modal { display:none; position:fixed; inset:0; background:rgba(10,22,40,0.85); z-index:9000; align-items:center; justify-content:center; padding:1.5rem; }
+    .apply-modal.open { display:flex; }
+    .apply-box { background:white; border-radius:var(--radius-lg); max-width:600px; width:100%; padding:2.5rem; max-height:90vh; overflow-y:auto; position:relative; }
+    .apply-close { position:absolute; top:1.2rem; right:1.2rem; background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--gray); }
+    .apply-close:hover { color:var(--navy); }
+    @media(max-width:768px){ .culture-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+     <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="sectors.html">Sectors</a><a href="insights.html">Insights</a><a href="resources.html">Resources</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="contact.html" class="mobile-cta">Get a Quote</a></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="background-image:none;">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Careers</span></div>
+      <h1>Build Your Career at the Forefront of African Spatial Consulting</h1>
+      <div class="page-hero-line"></div>
+      <p>We believe great people build great outcomes. At Apex R&M Group, you will work on meaningful projects, alongside brilliant colleagues, across some of Africa's most dynamic landscapes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPANY CULTURE -->
+<section style="background:var(--navy);">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="section-label" style="color:var(--gold);">Life at Apex R&M</span>
+      <h2 class="section-title light">Our Culture</h2>
+      <p class="section-subtitle light" style="margin:0 auto;">We are a team of curious, driven spatial professionals committed to meaningful work, continuous learning, and positive impact across Africa.</p>
+    </div>
+    <div class="culture-grid">
+      <div class="culture-card reveal" data-delay="100">
+        <div class="culture-icon">🌍</div>
+        <h3>Meaningful Projects</h3>
+        <p>Every project we undertake contributes to sustainable development — from securing land rights for vulnerable communities to guiding major infrastructure investments.</p>
+      </div>
+      <div class="culture-card reveal" data-delay="200">
+        <div class="culture-icon">🚀</div>
+        <h3>Fast Growth</h3>
+        <p>We are a fast-growing firm in a fast-growing sector. Team members progress quickly — taking on project leadership and client management responsibility early in their careers.</p>
+      </div>
+      <div class="culture-card reveal" data-delay="300">
+        <div class="culture-icon">🎓</div>
+        <h3>Continuous Learning</h3>
+        <p>CPD budget, conference attendance, technical training, and mentorship from senior advisors — we invest in your professional development as a core business priority.</p>
+      </div>
+      <div class="culture-card reveal" data-delay="100">
+        <div class="culture-icon">🌐</div>
+        <h3>International Exposure</h3>
+        <p>Field projects across multiple African countries, collaboration with international development organisations, and client engagement at the highest levels of government.</p>
+      </div>
+      <div class="culture-card reveal" data-delay="200">
+        <div class="culture-icon">🤝</div>
+        <h3>Collaborative Team</h3>
+        <p>Multidisciplinary collaboration across GIS, environment, land law, and engineering — a genuinely supportive team that shares knowledge openly.</p>
+      </div>
+      <div class="culture-card reveal" data-delay="300">
+        <div class="culture-icon">⚖️</div>
+        <h3>Inclusive Workplace</h3>
+        <p>Gender equality is a priority. 40%+ of our team identifies as women. We are committed to equal opportunity, pay equity, and building a truly diverse spatial profession.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section style="background:white;">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <span class="section-label">Why Join Us</span>
+      <h2 class="section-title">Employee Benefits</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item reveal" data-delay="100">
+        <div class="benefit-icon">💰</div>
+        <h4>Competitive Compensation</h4>
+        <p>Market-competitive salaries benchmarked against East African consulting sector standards, with performance bonuses.</p>
+      </div>
+      <div class="benefit-item reveal" data-delay="200">
+        <div class="benefit-icon">🏠</div>
+        <h4>Flexible Working</h4>
+        <p>Hybrid and remote work options available. We focus on outcomes, not hours in the office.</p>
+      </div>
+      <div class="benefit-item reveal" data-delay="300">
+        <div class="benefit-icon">📈</div>
+        <h4>Professional Development</h4>
+        <p>Annual CPD budget, conference attendance, ESRI/QGIS certification support, and access to online learning platforms.</p>
+      </div>
+      <div class="benefit-item reveal" data-delay="100">
+        <div class="benefit-icon">✈️</div>
+        <h4>International Projects</h4>
+        <p>Field deployment opportunities across Africa — from government GIS labs to remote conservation areas.</p>
+      </div>
+      <div class="benefit-item reveal" data-delay="200">
+        <div class="benefit-icon">🏥</div>
+        <h4>Health Insurance</h4>
+        <p>Comprehensive health insurance coverage for all permanent staff, including dependents.</p>
+      </div>
+      <div class="benefit-item reveal" data-delay="300">
+        <div class="benefit-icon">🌱</div>
+        <h4>Meaningful Impact</h4>
+        <p>Work that matters — projects that directly improve land governance, environmental protection, and community wellbeing across Africa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN POSITIONS --
+<section style="background:var(--warm-white);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Open Roles</span>
+      <h2 class="section-title">Current Vacancies</h2>
+      <p class="section-subtitle">We are growing — join us at an exciting moment in our journey.</p>
+    </div>
+    <div class="jobs-list">
+      <div class="job-card reveal" data-delay="100">
+        <div class="job-info">
+          <div class="job-title">Senior GIS Analyst</div>
+          <div class="job-meta">
+            <span class="job-tag type">Full-time</span>
+            <span class="job-tag location">📍 Kigali, Rwanda</span>
+            <span class="job-tag deadline">⏳ Deadline: 30 June 2025</span>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
+      </div>
+      <div class="job-card reveal" data-delay="150">
+        <div class="job-info">
+          <div class="job-title">Environmental Consultant (EIA Specialist)</div>
+          <div class="job-meta">
+            <span class="job-tag type">Full-time</span>
+            <span class="job-tag location">📍 Kigali, Rwanda / Remote</span>
+            <span class="job-tag deadline">⏳ Deadline: 15 July 2025</span>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
+      </div>
+      <div class="job-card reveal" data-delay="200">
+        <div class="job-info">
+          <div class="job-title">Remote Sensing & Earth Observation Specialist</div>
+          <div class="job-meta">
+            <span class="job-tag type">Contract / Project</span>
+            <span class="job-tag location">📍 East Africa (Field)</span>
+            <span class="job-tag deadline">⏳ Deadline: 31 July 2025</span>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
+      </div>
+      <div class="job-card reveal" data-delay="250">
+        <div class="job-info">
+          <div class="job-title">Land Administration Consultant</div>
+          <div class="job-meta">
+            <span class="job-tag type">Full-time</span>
+            <span class="job-tag location">📍 Kigali / Rwanda</span>
+            <span class="job-tag deadline">⏳ Deadline: 15 August 2025</span>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
+      </div>
+      <div class="job-card reveal" data-delay="300">
+        <div class="job-info">
+          <div class="job-title">Business Development Manager — East Africa</div>
+          <div class="job-meta">
+            <span class="job-tag type">Full-time</span>
+            <span class="job-tag location">📍 Kigali / Nairobi</span>
+            <span class="job-tag deadline">⏳ Deadline: 31 August 2025</span>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADUATE PROGRAMME --
+<section style="background:white;">
+  <div class="container">
+    <div class="graduate-box reveal">
+      <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+        <div>
+          <span class="section-label" style="color:var(--gold);">Graduate & Internship Programme</span>
+          <h2 style="font-family:var(--font-heading);font-size:2rem;color:white;margin:0.8rem 0 1rem;line-height:1.3;">Apex R&M Graduate & Internship Programme</h2>
+          <p style="color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:1.5rem;">Are you a recent graduate in GIS, geography, environmental science, or a related field? Our 12-month graduate programme offers hands-on project experience, mentorship from senior consultants, and a pathway to a permanent role.</p>
+          <p style="color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:2rem;">Applications open annually in September. Internship placements (3–6 months) are available year-round.</p>
+          <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');">Apply to the Programme</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:var(--font-ui);font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Duration</div>
+            <div style="color:white;font-size:0.9rem;">12 months (Graduate) &bull; 3–6 months (Intern)</div>
+          </div>
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:var(--font-ui);font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Eligibility</div>
+            <div style="color:white;font-size:0.9rem;">BSc/MSc in GIS, Geography, Environmental Science, Land Administration, or related field</div>
+          </div>
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:var(--font-ui);font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Applications Open</div>
+            <div style="color:white;font-size:0.9rem;">September annually &bull; Rolling for internships</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA --
+<section class="cta-strip">
+  <div class="container">
+    <div class="cta-strip-inner">
+      <div class="reveal-left"><h2>Don't see a role that fits?<br><em>Send us your CV anyway.</em></h2><p>We keep great CVs on file and reach out when the right opportunity arises.</p></div>
+      <div class="cta-strip-actions reveal-right">
+        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');"><i class="fa-solid fa-paper-plane"></i> Submit Your CV</button>
+        <a href="team.html" class="btn-secondary"><i class="fa-solid fa-users"></i> Meet the Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!---- APPLICATION MODAL --
+<div id="apply-modal" class="apply-modal">
+  <div class="apply-box">
+    <button class="apply-close" onclick="document.getElementById('apply-modal').classList.remove('open');">✕</button>
+    <span class="section-label">Apply Now</span>
+    <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:var(--navy);margin:0.6rem 0 1.5rem;">Submit Your Application</h2>
+    <form class="apply-form" onsubmit="return false;">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Your full name" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+250 780 000 000">
+      </div>
+      <div class="form-group">
+        <label>Position of Interest *</label>
+        <select required>
+          <option value="">Select a position...</option>
+          <option>Senior GIS Analyst</option>
+          <option>Environmental Consultant (EIA Specialist)</option>
+          <option>Remote Sensing & EO Specialist</option>
+          <option>Land Administration Consultant</option>
+          <option>Business Development Manager</option>
+          <option>Graduate Programme</option>
+          <option>Internship</option>
+          <option>General Application</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>LinkedIn Profile URL</label>
+        <input type="url" placeholder="https://linkedin.com/in/yourprofile">
+      </div>
+      <div class="form-group">
+        <label>Cover Letter / Why Apex R&M Group? *</label>
+        <textarea placeholder="Tell us why you want to join our team and what you'll bring..." required style="min-height:120px;"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Upload CV</label>
+        <input type="file" accept=".pdf,.doc,.docx" style="padding:0.5rem;border:1.5px solid rgba(10,22,40,0.15);border-radius:var(--radius);width:100%;">
+        <small style="font-size:0.75rem;color:var(--gray);margin-top:0.3rem;display:block;">PDF or Word document. Max 5MB.</small>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+        <i class="fa-solid fa-paper-plane"></i> Submit Application
+      </button>
+    </form>
+  </div>
+</div>---------->
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm — empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/rugema33" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Kigali, Rwanda (HQ)</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
+<script>
+  // Close modal on backdrop click
+  document.getElementById('apply-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+  // Escape key closes modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('apply-modal').classList.remove('open');
+  });
+</script>
+</body>
+</html>

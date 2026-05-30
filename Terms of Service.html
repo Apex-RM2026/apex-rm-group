@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Apex R&M Group | Terms of Service</title>
+  <meta name="description" content="Terms of Service for Apex R&M Group Ltd. Legal terms governing use of our website, consulting services, spatial data, and professional engagements across Africa.">
+  <meta name="keywords" content="terms of service, legal, consulting agreement, GIS terms, Apex R&M Group, spatial consulting terms">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,40 75,85 25,85 10,40' fill='%23C9A84C'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --navy: #0A1628;
+      --gold: #C9A84C;
+      --teal: #1A6B8A;
+      --slate: #2C3E50;
+      --warm-white: #F8F4EA;
+      --white: #ffffff;
+      --gray-light: #f5f7fa;
+      --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.08);
+      --shadow-md: 0 20px 40px -15px rgba(0,0,0,0.1);
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--slate);
+      background-color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .logo-font {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    .btn, .nav-links a, .tagline {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10,22,40,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .navbar.scrolled {
+      background: var(--navy);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      letter-spacing: -0.5px;
+      color: var(--gold);
+    }
+    .logo span {
+      font-size: 0.8rem;
+      display: block;
+      color: var(--warm-white);
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+    .logo a {
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--warm-white);
+      font-weight: 500;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--gold);
+      cursor: pointer;
+    }
+    @media (max-width: 1024px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 70px);
+        background: var(--navy);
+        flex-direction: column;
+        padding: 2rem;
+        transition: 0.3s;
+        gap: 1.5rem;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+      }
+      .nav-links.active { left: 0; }
+      .menu-btn { display: block; }
+    }
+    /* Inner Hero */
+    .inner-hero {
+      background: linear-gradient(135deg, rgba(10,22,40,0.92), rgba(26,107,138,0.8)), url('Images/Home/H\ Line\ 191\ word.avif') center/cover no-repeat;
+      padding: 160px 0 80px;
+      text-align: center;
+      color: white;
+    }
+    .inner-hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1rem;
+    }
+    .terms-content {
+      background: var(--white);
+      padding: 3rem;
+      border-radius: 32px;
+      box-shadow: var(--shadow-md);
+      margin: -60px auto 3rem;
+      position: relative;
+      z-index: 2;
+    }
+    .terms-content h2 {
+      color: var(--navy);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .terms-content h2:first-of-type {
+      margin-top: 0;
+    }
+    .terms-content h3 {
+      color: var(--teal);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+    .terms-content p {
+      margin-bottom: 1rem;
+      color: var(--slate);
+    }
+    .terms-content ul {
+      margin: 1rem 0 1rem 2rem;
+    }
+    .terms-content li {
+      margin-bottom: 0.5rem;
+    }
+    .highlight-box {
+      background: var(--warm-white);
+      padding: 1.5rem;
+      border-radius: 20px;
+      border-left: 4px solid var(--gold);
+      margin: 1.5rem 0;
+    }
+    .last-updated {
+      background: var(--warm-white);
+      padding: 1rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 2rem;
+      font-style: italic;
+    }
+    footer {
+      background: var(--navy);
+      color: var(--warm-white);
+      padding: 3rem 0 1rem;
+      margin-top: 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 2rem;
+    }
+    .footer-grid a {
+      color: var(--warm-white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-grid a:hover {
+      color: var(--gold);
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 99;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      background: var(--gold);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      .inner-hero h1 { font-size: 2rem; }
+      .terms-content { padding: 1.5rem; }
+      .container { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html"><h1>APEX R&M<span>Spatial Intelligence. Strategic Growth.</span></h1></a></div>
+    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="sectors.html">Sectors</a></li>
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="inner-hero">
+  <div class="container" data-aos="fade-up">
+    <h1>Terms of Service</h1>
+    <p>Legal framework governing your use of our website, consulting services, and spatial intelligence solutions.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="terms-content" data-aos="fade-up">
+    <h2>1. Acceptance of Terms</h2>
+    <p>Welcome to Apex R&M Group Ltd ("Apex R&M", "we", "us", "our"). By accessing or using our website <strong>www.apexrmgroup.com</strong>, any subdomains, or engaging our spatial consulting, GIS, remote sensing, land administration, environmental, infrastructure planning, or capacity building services (collectively, the "Services"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use our website or services.</p>
+    <p>These Terms apply to all visitors, users, clients, partners, and others who access or use our Services. For individual consulting engagements, a separate Master Services Agreement (MSA) or project-specific contract may supersede or supplement these Terms.</p>
+
+    <h2>2. About Apex R&M Group</h2>
+    <p>Apex R&M Group Ltd is a private spatial consulting firm headquartered in Kigali, Rwanda. We provide data-driven solutions to governments, private enterprises, NGOs, and international development organizations across Africa and globally. Our expertise includes Geographic Information Systems (GIS), remote sensing, land management, environmental consultancy, and infrastructure planning.</p>
+
+    <h2>3. Eligibility</h2>
+    <p>By using our Services, you represent that you are at least 18 years old and have the legal capacity to enter into binding contracts. If you are using our Services on behalf of an organization, you warrant that you have the authority to bind that organization to these Terms.</p>
+
+    <h2>4. Our Services & Professional Engagement</h2>
+    <p>We offer six core service pillars:</p>
+    <ul>
+      <li><strong>GIS & Spatial Analysis:</strong> Custom mapping, spatial databases, terrain analysis, geodatabase design, multi-criteria decision analysis.</li>
+      <li><strong>Remote Sensing & EO:</strong> Satellite imagery processing, UAV surveys, land cover mapping, change detection, vegetation monitoring.</li>
+      <li><strong>Land Administration:</strong> Cadastral surveys, land registration support, land governance policy advisory, conflict resolution.</li>
+      <li><strong>Environmental Consulting:</strong> Environmental Impact Assessments (EIA), Strategic Environmental Assessments (SEA), biodiversity surveys, climate risk mapping.</li>
+      <li><strong>Infrastructure Planning:</strong> Site suitability analysis, utility network planning, transport corridor mapping, urban growth modelling.</li>
+      <li><strong>Capacity Building:</strong> GIS training, software workshops, curriculum design, embedded technical advisory.</li>
+    </ul>
+    <p>All professional services are delivered under separate written agreements specifying scope, deliverables, timelines, fees, and intellectual property rights. These Terms complement but do not replace those agreements.</p>
+
+    <div class="highlight-box">
+      <i class="fas fa-gavel" style="color: var(--gold); margin-right: 10px;"></i> <strong>Important:</strong> For project-based consulting, a formal proposal and signed agreement will govern the relationship. In case of conflict between these Terms and a project agreement, the project agreement prevails.
+    </div>
+
+    <h2>5. Website Use & Acceptable Conduct</h2>
+    <p>You agree to use our website only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use of the website. Prohibited conduct includes:</p>
+    <ul>
+      <li>Attempting to gain unauthorized access to our systems, data, or other users' information.</li>
+      <li>Uploading malicious code, viruses, or any material that could damage our infrastructure.</li>
+      <li>Scraping, data mining, or extracting content without our prior written consent.</li>
+      <li>Impersonating Apex R&M Group or any of our employees.</li>
+      <li>Interfering with the proper functioning of the website or associated services.</li>
+    </ul>
+
+    <h2>6. Intellectual Property Rights</h2>
+    <p>All content on our website — including text, graphics, logos, icons, images, maps, spatial data visualizations, videos, white papers, case studies, and software — is the property of Apex R&M Group Ltd or its licensors and is protected by Rwandan and international copyright, trademark, and intellectual property laws.</p>
+    <p><strong>Trademarks:</strong> "Apex R&M Group", the diamond apex mark, "Spatial Intelligence. Strategic Growth.", and associated logos are registered and unregistered trademarks of Apex R&M Group Ltd. You may not use these without our express written permission.</p>
+    <p><strong>Limited License:</strong> We grant you a limited, non-exclusive, non-transferable license to access and view our website content for your personal or internal business use. You may not reproduce, distribute, modify, create derivative works of, or publicly display any content without our prior written consent, except as permitted by mandatory law.</p>
+
+    <h2>7. Client Data & Confidentiality</h2>
+    <p>When you engage our consulting services, you may share proprietary, spatial, or personal data with us. We will:</p>
+    <ul>
+      <li>Use such data solely for the purposes defined in our service agreement.</li>
+      <li>Maintain strict confidentiality and not disclose your data to third parties except as required to deliver the Services or by law.</li>
+      <li>Implement appropriate security measures to protect against unauthorized access or loss.</li>
+      <li>Return or destroy all client data upon project completion, unless a longer retention period is agreed or legally required.</li>
+    </ul>
+    <p>You retain ownership of your original data. Any derived spatial insights, models, or methodologies developed by Apex R&M during the engagement may be owned by us unless otherwise specified in your agreement.</p>
+
+    <h2>8. Third-Party Links & Resources</h2>
+    <p>Our website may contain links to third-party websites, open data portals, or resources. These links are provided for convenience only. We do not endorse, control, or assume responsibility for the content, privacy practices, or terms of any third-party sites. You access them at your own risk.</p>
+
+    <h2>9. Disclaimer of Warranties</h2>
+    <p>TO THE FULLEST EXTENT PERMITTED BY LAW, APEX R&M GROUP PROVIDES ITS WEBSITE AND SERVICES "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED. WE DISCLAIM ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+    <p>We do not warrant that:</p>
+    <ul>
+      <li>The website will be uninterrupted, secure, or error-free.</li>
+      <li>Any defects or errors will be corrected.</li>
+      <li>The results obtained from using our Services will meet your specific requirements.</li>
+    </ul>
+    <p>Professional consulting deliverables are provided with professional diligence, but we do not guarantee that any particular outcome will be achieved.</p>
+
+    <h2>10. Limitation of Liability</h2>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, APEX R&M GROUP LTD, ITS DIRECTORS, OFFICERS, EMPLOYEES, AND AFFILIATES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR BUSINESS OPPORTUNITY, ARISING OUT OF OR RELATED TO YOUR USE OF OUR WEBSITE OR SERVICES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p>Our total aggregate liability arising from these Terms or any service engagement shall not exceed the total fees paid by you to us in the twelve (12) months preceding the event giving rise to the claim, or USD 5,000 (whichever is lower). Some jurisdictions do not allow certain liability limitations, so this may not apply to you.</p>
+
+    <div class="highlight-box">
+      <i class="fas fa-shield-alt" style="color: var(--gold); margin-right: 10px;"></i> <strong>Professional Indemnity:</strong> For specific consulting engagements, liability terms may be governed by a separate professional services agreement, which may include indemnity provisions tailored to the project scope and jurisdiction.
+    </div>
+
+    <h2>11. Indemnification</h2>
+    <p>You agree to indemnify, defend, and hold harmless Apex R&M Group Ltd and its employees, directors, and agents from any claims, damages, losses, liabilities, costs, or expenses (including reasonable legal fees) arising from:</p>
+    <ul>
+      <li>Your violation of these Terms.</li>
+      <li>Your misuse of our website or Services.</li>
+      <li>Your violation of any applicable laws or third-party rights.</li>
+    </ul>
+
+    <h2>12. Fees & Payment Terms</h2>
+    <p>Fees for consulting services are specified in individual proposals or contracts. Unless otherwise agreed:</p>
+    <ul>
+      <li>Invoices are payable within 30 days of receipt.</li>
+      <li>Late payments may accrue interest at 1.5% per month or the maximum legal rate.</li>
+      <li>All fees exclude applicable taxes (e.g., VAT in Rwanda), which are your responsibility.</li>
+      <li>We reserve the right to suspend services for overdue accounts.</li>
+    </ul>
+
+    <h2>13. Termination</h2>
+    <p>We may suspend or terminate your access to our website or Services at any time, with or without cause, effective immediately, including if you breach these Terms. For ongoing consulting engagements, termination is governed by the specific project agreement. Upon termination, all rights granted to you cease immediately.</p>
+
+    <h2>14. Governing Law & Dispute Resolution</h2>
+    <p>These Terms and any disputes arising from them shall be governed by and construed in accordance with the laws of the Republic of Rwanda, without regard to conflict of law principles. Any legal action or proceeding shall be brought exclusively in the courts of Kigali, Rwanda. For international clients, we may agree to arbitration under the Kigali International Arbitration Centre (KIAC) rules.</p>
+
+    <h2>15. Modifications to Terms</h2>
+    <p>We reserve the right to update or modify these Terms at any time. Changes will be posted on this page with an updated "Last Updated" date. Material changes will be notified via our website or email. Your continued use of our website or Services after any changes constitutes acceptance of the revised Terms.</p>
+
+    <h2>16. Severability & Waiver</h2>
+    <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect. Our failure to enforce any right or provision does not constitute a waiver of that right or provision.</p>
+
+    <h2>17. Entire Agreement</h2>
+    <p>These Terms, together with our Privacy Policy and any executed project agreements, constitute the entire agreement between you and Apex R&M Group Ltd regarding your use of our website and Services, superseding any prior agreements or understandings.</p>
+
+    <h2>18. Contact Information</h2>
+    <p>If you have any questions about these Terms of Service, please contact us:</p>
+    <p><strong>Apex R&M Group Ltd</strong><br>
+    Headquarters: KG 541 St, Kigali, Rwanda<br>
+    Email: <a href="mailto:legal@apexrmgroup.com" style="color:var(--gold);">legal@apexrmgroup.com</a><br>
+    Phone: +250 788 123 456</p>
+
+    <div class="last-updated">
+      <i class="fas fa-file-contract"></i> Last Updated: 19 May 2026 | Version 2.0 | Effective Date: 19 May 2026
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>APEX R&M GROUP</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
+      <p><i class="fas fa-envelope"></i> info.apexrmgroup@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +250 787 523 890</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul style="list-style:none;">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>🔷</h4>
+      <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+        <a href="https://www.linkedin.com/company/116016508"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/rugema33"><i class="fab fa-twitter"></i></a>
+        <a href="https://web.facebook.com/profile.php?id=61589665884720"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/apexrmgroup/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/apexrmgroup/"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <input type="email" id="newsEmail" placeholder="Your email" style="padding:8px; border-radius:30px; border:none; width:100%;">
+      <button class="btn-primary" style="margin-top:8px; background: var(--gold); color: var(--navy); border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer;" onclick="alert('Thank you for subscribing to spatial insights!')">Subscribe</button>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:2rem; font-size:0.8rem;">
+    © 2025 Apex R&M Group Ltd. All rights reserved. || <a href="Privacy Policy.html" style="color:var(--gold);">Privacy Policy</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/250787523890" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></div>
+
+<script src="js/Terms of Service.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { if(window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.onclick = () => navLinks.classList.toggle('active');
+
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => { scrollTopBtn.style.opacity = window.scrollY > 500 ? '1' : '0'; });
+  scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('active'));
+  });
+</script>
+</body>
+</html>

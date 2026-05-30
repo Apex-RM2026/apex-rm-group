@@ -1,0 +1,68 @@
+============================================================
+APEX R&M GROUP — Dynamic Website + Admin Portal
+Setup & Usage Guide
+============================================================
+
+HOW IT WORKS
+────────────
+The website and admin portal share data through your browser's
+localStorage. When you edit content in the admin portal and
+click Save, the changes are stored locally — and every time
+any website page loads, it reads those saved values and
+updates the content automatically. No server or database needed.
+
+CREDENTIALS
+────────────
+Admin Portal URL : admin-portal.html
+Username         : apex-admin
+Password         : Spatial2025!
+
+HOW TO ACCESS THE ADMIN PORTAL
+────────────────────────────────
+1. Open team.html → scroll to bottom → click "Admin Portal" button
+   OR
+2. Open admin-portal.html directly
+
+EDITING CONTENT
+────────────────
+1. Log in to admin-portal.html
+2. Click any page section in the sidebar (Home, About, Services, etc.)
+3. Edit the fields — the live preview updates as you type
+4. Click "💾 Save Changes" at the bottom
+5. Open the corresponding website page — changes appear instantly
+
+RECEIVING CONTACT FORM MESSAGES
+─────────────────────────────────
+When a visitor fills out the contact form on contact.html and clicks
+Send Message, their message is stored automatically. Go to the
+admin portal → Messages Inbox to view, reply to, and manage all enquiries.
+
+IMPORTANT NOTES
+────────────────
+• The system works in the SAME BROWSER. If you share the website
+  (e.g. upload to hosting), you need to export/share the localStorage
+  data, OR use the "Download Page" feature to export updated HTML files.
+
+• For production hosting: after making all edits in the admin,
+  use the admin portal's export or copy the content into your
+  HTML files, then upload to your web host.
+
+• All original styling, animations, fonts, and layouts are preserved.
+  Only the text content and images update dynamically.
+
+FILES MODIFIED
+────────────────
+• js/cms.js          ← NEW: shared data layer (the bridge)
+• admin-portal.html  ← REBUILT: full CMS connected to cms.js
+• index.html         ← cms.js injected
+• about.html         ← cms.js injected
+• services.html      ← cms.js injected
+• projects.html      ← cms.js injected
+• sectors.html       ← cms.js injected
+• team.html          ← cms.js injected + Admin Portal button added
+• contact.html       ← cms.js injected + form wired to inbox
+
+DEFAULT CREDENTIALS (change inside admin-portal.html line ~310)
+Username: apex-admin  |  Password: Spatial2025!
+
+============================================================
