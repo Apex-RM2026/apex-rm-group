@@ -10,7 +10,7 @@ const APEX_MSG_CONFIG = {
   // EmailJS Configuration (YOUR credentials)
   emailjs: {
     publicKey:  'AjrKDbhnDmViU1AE8',
-    serviceId:  'service_76xrufp',
+    serviceId:  'service_hpantj2',
     templateId: 'template_b3729sx'
   },
   // Supabase disabled (email only mode)
