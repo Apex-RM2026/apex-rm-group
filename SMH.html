@@ -363,6 +363,8 @@ tbody tr:hover td{background:var(--bg-hover)}
 .reuse-btn:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
 .retry-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:var(--radius-sm);font-size:11.5px;font-weight:600;cursor:pointer;border:1px solid rgba(239,68,68,.35);background:var(--danger-bg);color:var(--danger);transition:.15s;font-family:inherit;margin-top:5px;margin-left:4px}
 .retry-btn:hover{background:var(--danger);color:#fff}
+.delete-log-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:var(--radius-sm);font-size:11.5px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-muted);transition:.15s;font-family:inherit;margin-top:5px;margin-left:4px}
+.delete-log-btn:hover{background:var(--danger);border-color:var(--danger);color:#fff}
 /* ANIMATIONS */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
@@ -549,6 +551,10 @@ const DB = {
     if (logs.length > 500) logs.length = 500;
     this.set('logs_'+userId, logs);
   },
+  deleteLog(userId, logId) {
+    this.set('logs_'+userId, this.getLogs(userId).filter(l => l.id !== logId));
+  },
+  clearLogs(userId) { this.set('logs_'+userId, []); },
 
   // Notifications
   getNotifs(userId) { return this.get('notifs_'+userId, []); },
@@ -1687,17 +1693,23 @@ function renderHistory() {
     return;
   }
   setContent(`
-    <div class="page-header"><div><h2>Publishing History</h2><p>${logs.length} entries</p></div><button class="btn btn-primary btn-sm" onclick="Router.go('create')">✏ New Post</button></div>
+    <div class="page-header">
+      <div><h2>Publishing History</h2><p>${logs.length} entr${logs.length===1?'y':'ies'}</p></div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary btn-sm" onclick="Router.go('create')">✏ New Post</button>
+        <button class="btn btn-danger btn-sm" onclick="clearAllHistory()">🗑 Clear All History</button>
+      </div>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Post</th><th>Platform</th><th>Status</th><th>Time</th><th>Actions</th></tr></thead>
         <tbody>
           ${logs.map(log=>{
             const pid = encodePostId(log.post_id||'');
-            const ptitle = escHtml((log.post_title||'Post').replace(/'/g,"&#39;"));
             const isFailed = log.status === 'failed';
+            const lid = log.id||'';
             return `
-            <tr>
+            <tr id="log-row-${lid}">
               <td>
                 <div class="truncate" style="max-width:180px">${escHtml(log.post_title||'Post')}</div>
               </td>
@@ -1707,6 +1719,7 @@ function renderHistory() {
               <td>
                 <button class="reuse-btn" onclick="reusePost('${pid}','${log.platform}')">♻ Reuse</button>
                 ${isFailed?`<button class="retry-btn" onclick="retryPost('${pid}','${log.platform}')">↺ Retry</button>`:''}
+                <button class="delete-log-btn" onclick="deleteHistoryEntry('${lid}')">🗑 Delete</button>
               </td>
             </tr>`;
           }).join('')}
@@ -1714,6 +1727,26 @@ function renderHistory() {
       </table>
     </div>`);
 }
+
+window.deleteHistoryEntry = async function(logId) {
+  if(!await Modal.confirm('Delete Entry','Remove this entry from your publishing history?')) return;
+  DB.deleteLog(State.user.id, logId);
+  const row = document.getElementById('log-row-'+logId);
+  if(row) row.remove();
+  // Update the entry count in the subtitle
+  const remaining = DB.getLogs(State.user.id).length;
+  const sub = document.querySelector('.page-header p');
+  if(sub) sub.textContent = `${remaining} entr${remaining===1?'y':'ies'}`;
+  if(!remaining) renderHistory(); // show empty state when all gone
+  Toast.success('Entry deleted.');
+};
+
+window.clearAllHistory = async function() {
+  if(!await Modal.confirm('Clear All History','Permanently delete all publishing history entries? This cannot be undone.')) return;
+  DB.clearLogs(State.user.id);
+  renderHistory();
+  Toast.success('Publishing history cleared.');
+};
 
 // ══════════════════════════════════════════════════════════════
 // CALENDAR
