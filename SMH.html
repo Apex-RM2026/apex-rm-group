@@ -583,18 +583,20 @@ const DB = {
 
   // Admin helpers
   ensureSuperAdmin() {
-    // Guarantee: the hardcoded SA email always has superadmin role
-    // and NO other account can ever hold that role
     const users = this.getUsers();
-    let changed = false;
-    users.forEach(u => {
-      if(u.email === SUPER_ADMIN_EMAIL && u.role !== 'superadmin') {
-        u.role = 'superadmin'; u.status = 'active'; changed = true;
-      } else if(u.email !== SUPER_ADMIN_EMAIL && u.role === 'superadmin') {
-        u.role = 'admin'; changed = true; // strip superadmin from wrong accounts
-      }
-    });
-    if(changed) this.saveUsers(users);
+    const existing = users.find(u => u.email === SUPER_ADMIN_EMAIL);
+    if (!existing) {
+      // Auto-create the SA account with default password on first load
+      users.push({
+        id: nanoid(), full_name: 'Super Admin', email: SUPER_ADMIN_EMAIL,
+        password: 'apexapex', company_name: '', phone: '',
+        role: 'superadmin', status: 'active', created_at: Date.now()
+      });
+      this.saveUsers(users);
+    } else if (existing.role !== 'superadmin') {
+      existing.role = 'superadmin'; existing.status = 'active';
+      this.saveUsers(users);
+    }
   },
   setUserRole(id, role) {
     return this.updateUser(id, {role});
@@ -677,8 +679,8 @@ const Router = {
     if (State.isAuth() && ['login','register','forgot'].includes(page)) {
       this._current = 'dashboard'; (this.routes['dashboard'] || (()=>{}))('dashboard'); return;
     }
-    // Block non-superadmins from admin page entirely
-    if (page === 'admin' && !State.isSuperAdmin()) {
+    // Block non-admins from admin page
+    if (page === 'admin' && !State.isAdmin()) {
       this._current = 'dashboard'; (this.routes['dashboard'] || (()=>{}))('dashboard'); return;
     }
     const fn = this.routes[page] || this.routes['dashboard'];
@@ -739,10 +741,10 @@ const Shell = {
     document.getElementById('sidebar-avatar').textContent = ini;
     document.getElementById('topbar-avatar').textContent = ini;
     document.getElementById('sidebar-name').textContent = u.full_name||u.email;
-    document.getElementById('sidebar-role').textContent = u.role === 'superadmin' ? '🛡️ Super Admin' : u.role;
-    // Admin Panel nav: only for superadmin
+    document.getElementById('sidebar-role').textContent = u.role === 'superadmin' ? '🛡️ Super Admin' : u.role === 'admin' ? '🔑 Admin' : 'User';
+    // Admin Panel nav: visible to admins and superadmins
     const adminBtn = document.getElementById('admin-nav-btn');
-    if(adminBtn) adminBtn.style.display = State.isSuperAdmin() ? '' : 'none';
+    if(adminBtn) adminBtn.style.display = State.isAdmin() ? '' : 'none';
   },
   showPending(user) {
     // Show a "pending approval" screen without granting app access
@@ -2025,8 +2027,8 @@ function renderAdmin() {
   const totalLogs  = allUsers.reduce((n,u) => n + DB.getLogs(u.id).length, 0);
   const activeCount = allUsers.filter(u => u.status !== 'suspended').length;
 
-  // SA can grant 'admin' or 'user' — never 'superadmin' (that's fixed to one email)
-  const ROLE_OPTIONS = ['user','admin'];
+  // SA can grant any role including superadmin; admin can only promote users to admin
+  const ROLE_OPTIONS = isSA ? ['user','admin','superadmin'] : ['user','admin'];
 
   function rolePill(role, status) {
     if(status === 'suspended') return '<span class="role-pill role-suspended">Suspended</span>';
@@ -2034,11 +2036,15 @@ function renderAdmin() {
     return `<span class="role-pill ${cls}">${role}</span>`;
   }
 
-  const activeUsers = allUsers.filter(u => u.status !== 'pending');
+  // Admin cannot see superadmin accounts; SA sees everyone
+  const activeUsers = allUsers.filter(u => u.status !== 'pending' && (isSA || u.role !== 'superadmin'));
   const rows = activeUsers.map(u => {
     const isMe = u.id === me.id;
-    // SA can manage everyone except themselves; the SA row itself shows (you)
-    const canEdit = !isMe && u.role !== 'superadmin';
+    // SA can edit anyone except themselves and the protected original SA email
+    // Admin can only promote regular users (not touch admins or superadmins)
+    const canEdit = isSA
+      ? (!isMe && u.email !== SUPER_ADMIN_EMAIL)
+      : (!isMe && u.role === 'user');
     const sus = u.status === 'suspended';
 
     const roleSelect = canEdit
@@ -2048,7 +2054,8 @@ function renderAdmin() {
          </select>`
       : rolePill(u.role, u.status);
 
-    const actionBtns = canEdit
+    // Only SA gets suspend/delete buttons; admin sees no action buttons (role dropdown is the only control)
+    const actionBtns = (canEdit && isSA)
       ? `<div style="display:flex;gap:5px;flex-wrap:wrap">
            <button class="btn btn-ghost btn-xs" onclick="adminToggleSuspend('${u.id}','${u.status}')"
              title="${sus ? 'Restore access' : 'Suspend user'}" style="${sus?'color:var(--success)':'color:var(--warning)'}">
@@ -2084,7 +2091,8 @@ function renderAdmin() {
   const pendingUsers = DB.getPendingUsers();
 
   // Build pending applicants section
-  const pendingSection = pendingUsers.length ? `
+  // Only SA can see and act on pending access requests
+  const pendingSection = (isSA && pendingUsers.length) ? `
     <div class="card" style="padding:0;overflow:hidden;margin-bottom:20px;border-color:var(--warning)">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--warning-bg)">
         <span style="font-size:14px;font-weight:700;color:var(--warning)">⏳ Pending Access Requests (${pendingUsers.length})</span>
@@ -2109,7 +2117,7 @@ function renderAdmin() {
 
   setContent(`
     <div class="page-header">
-      <div><h2>Admin Panel</h2><p>Manage all users and their access</p></div>
+      <div><h2>Admin Panel</h2><p>${isSA ? 'Manage all users and their access' : 'View users and promote regular users to admin'}</p></div>
       <span class="role-pill ${isSA?'role-superadmin':'role-admin'}" style="padding:5px 14px;font-size:13px">
         ${isSA ? '🛡️ Super Admin' : '🔑 Admin'}
       </span>
@@ -2142,11 +2150,11 @@ function renderAdmin() {
       <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px">
         <div style="display:flex;align-items:flex-start;gap:10px">
           <span class="role-pill role-superadmin" style="flex-shrink:0;margin-top:2px">superadmin</span>
-          <span style="color:var(--text-secondary)">Permanently assigned to <strong>info.apexrmgroup@gmail.com</strong> only. Full system control — approve/reject access requests, grant admin or user roles, suspend and delete accounts. This role cannot be assigned to anyone else.</span>
+          <span style="color:var(--text-secondary)">By default assigned to <strong>info.apexrmgroup@gmail.com</strong>. Full system control — approve/reject access requests, grant superadmin, admin, or user roles, suspend and delete accounts. Only the current super admin can grant this role to others.</span>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px">
           <span class="role-pill role-admin" style="flex-shrink:0;margin-top:2px">admin</span>
-          <span style="color:var(--text-secondary)">Can view the Admin Panel and promote regular users to admin. Cannot touch the superadmin or delete other admins.</span>
+          <span style="color:var(--text-secondary)">Can view the Admin Panel and promote regular users to admin. Cannot see or touch superadmin accounts. Cannot delete or suspend any users or admins.</span>
         </div>
         <div style="display:flex;align-items:flex-start;gap:10px">
           <span class="role-pill role-user" style="flex-shrink:0;margin-top:2px">user</span>
@@ -2166,8 +2174,11 @@ window.adminApproveUser = async function(userId, displayName) {
     document.getElementById('modal-body').innerHTML = `
       <p style="margin-bottom:16px;color:var(--text-secondary)">Choose the access level to grant <strong>${escHtml(displayName)}</strong>:</p>
       <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-warning btn-block" id="grant-superadmin" style="justify-content:flex-start;gap:10px;color:#1a1a1a">
+          🛡️ <span><strong>Super Admin</strong><br/><span style="font-size:12px;font-weight:400">Full system control — same privileges as you</span></span>
+        </button>
         <button class="btn btn-primary btn-block" id="grant-admin" style="justify-content:flex-start;gap:10px">
-          🔑 <span><strong>Admin</strong><br/><span style="font-size:12px;font-weight:400;color:rgba(255,255,255,.75)">Can view Admin Panel and manage other users</span></span>
+          🔑 <span><strong>Admin</strong><br/><span style="font-size:12px;font-weight:400;color:rgba(255,255,255,.75)">Can view Admin Panel and promote regular users</span></span>
         </button>
         <button class="btn btn-ghost btn-block" id="grant-user" style="justify-content:flex-start;gap:10px">
           👤 <span><strong>User</strong><br/><span style="font-size:12px;font-weight:400">Standard access — posts, history, analytics</span></span>
@@ -2177,6 +2188,7 @@ window.adminApproveUser = async function(userId, displayName) {
     document.getElementById('modal-footer').innerHTML = '';
     const ov = document.getElementById('modal-overlay');
     ov.classList.remove('hidden');
+    document.getElementById('grant-superadmin').onclick = () => { ov.classList.add('hidden'); resolve('superadmin'); };
     document.getElementById('grant-admin').onclick  = () => { ov.classList.add('hidden'); resolve('admin'); };
     document.getElementById('grant-user').onclick   = () => { ov.classList.add('hidden'); resolve('user'); };
     document.getElementById('grant-cancel').onclick = () => { ov.classList.add('hidden'); resolve(null); };
@@ -2194,14 +2206,24 @@ window.adminApproveUser = async function(userId, displayName) {
 };
 
 window.adminChangeRole = async function(userId, newRole) {
-  if(!State.isSuperAdmin()) { Toast.error('Access denied.'); return; }
+  if(!State.isAdmin()) { Toast.error('Access denied.'); return; }
   const u = DB.getUserById(userId);
   if(!u) return;
-  // The superadmin role is permanently tied to one email — cannot be assigned via UI
-  if(newRole === 'superadmin') { Toast.error('The Super Admin role is permanently assigned and cannot be granted via this panel.'); renderAdmin(); return; }
-  if(u.role === 'superadmin')  { Toast.error('The Super Admin role cannot be changed.'); renderAdmin(); return; }
+  // Only SA can grant the superadmin role
+  if(newRole === 'superadmin' && !State.isSuperAdmin()) {
+    Toast.error('Only the super admin can grant the super admin role.'); renderAdmin(); return;
+  }
+  // Admin can only promote regular users (not touch existing admins/superadmins)
+  if(!State.isSuperAdmin() && u.role !== 'user') {
+    Toast.error('Admins can only promote regular users.'); renderAdmin(); return;
+  }
+  // The original SA email is protected — its role cannot be changed
+  if(u.email === SUPER_ADMIN_EMAIL) {
+    Toast.error('Cannot change the role of the original super admin account.'); renderAdmin(); return;
+  }
   DB.setUserRole(userId, newRole);
-  DB.addNotif(userId, 'Role Updated', `Your account role has been changed to "${newRole}" by the Super Admin.`, 'info');
+  const changedBy = State.isSuperAdmin() ? 'the Super Admin' : 'an Admin';
+  DB.addNotif(userId, 'Role Updated', `Your account role has been changed to "${newRole}" by ${changedBy}.`, 'info');
   Toast.success(`${u.full_name} is now ${newRole}.`);
   renderAdmin();
 };
@@ -2209,9 +2231,8 @@ window.adminChangeRole = async function(userId, newRole) {
 window.adminToggleSuspend = async function(userId, currentStatus) {
   const u = DB.getUserById(userId);
   if(!u) return;
-  if(!State.isAdmin()) { Toast.error('Access denied.'); return; }
-  if(u.role === 'superadmin') { Toast.error('Cannot suspend the super admin.'); return; }
-  if(!State.isSuperAdmin() && u.role === 'admin') { Toast.error('Only the super admin can suspend other admins.'); return; }
+  if(!State.isSuperAdmin()) { Toast.error('Only the super admin can suspend accounts.'); return; }
+  if(u.role === 'superadmin') { Toast.error('Cannot suspend a super admin.'); return; }
   const suspend = currentStatus !== 'suspended';
   const confirmed = await Modal.confirm(
     suspend ? 'Suspend User' : 'Restore User',
@@ -2234,7 +2255,7 @@ window.adminDeleteUser = async function(userId, displayName) {
   if(!State.isSuperAdmin()) { Toast.error('Only the super admin can permanently delete users.'); return; }
   const u = DB.getUserById(userId);
   if(!u) { Toast.error('User not found.'); return; }
-  if(u.role === 'superadmin') { Toast.error('Cannot delete the super admin account.'); return; }
+  if(u.role === 'superadmin' || u.email === SUPER_ADMIN_EMAIL) { Toast.error('Cannot delete a super admin account.'); return; }
   const confirmed = await Modal.confirm(
     'Delete User',
     `Permanently delete "${displayName}"? This will remove ALL their posts, history, credentials and data and cannot be undone.`
