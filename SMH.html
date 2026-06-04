@@ -1048,17 +1048,72 @@ function renderDashboard() {
 // ══════════════════════════════════════════════════════════════
 // CONNECT ACCOUNTS
 // ══════════════════════════════════════════════════════════════
+// Each field: [key, label, type, hint]
 const PLATFORM_FIELDS = {
-  facebook:  [['page_id','Page ID'],['access_token','Page Access Token','password']],
-  instagram: [['account_id','Business Account ID'],['access_token','Access Token','password'],['imgbb_key','ImgBB API Key (free — imgbb.com/api)','password']],
-  twitter:   [['api_key','API Key','password'],['api_secret','API Secret','password'],['access_token','Access Token','password'],['access_token_secret','Access Token Secret','password'],['bearer_token','Bearer Token','password']],
-  linkedin:  [['organization_id','Organization ID'],['access_token','Access Token','password']],
-  youtube:   [['channel_id','Channel ID'],['client_id','Client ID'],['client_secret','Client Secret','password'],['refresh_token','Refresh Token','password']],
-  tiktok:    [['client_key','Client Key'],['client_secret','Client Secret','password'],['access_token','Access Token','password']],
-  pinterest: [['app_id','App ID'],['access_token','Access Token','password']],
-  threads:   [['account_id','Account ID'],['access_token','Access Token','password']],
-  telegram:  [['bot_token','Bot Token','password'],['chat_id','Chat ID']],
-  whatsapp:  [['phone_number_id','Phone Number ID'],['access_token','Access Token','password'],['to_number','Recipient Phone (with country code, e.g. +250788...)'],['business_account_id','Business Account ID']],
+  facebook: [
+    ['page_id','Page ID','text','Your Facebook Page numeric ID — Page Settings → About → Page ID'],
+    ['access_token','Page Access Token','password','Long-lived Page token — generate at developers.facebook.com/tools/explorer (needs pages_manage_posts permission)'],
+  ],
+  instagram: [
+    ['account_id','Business Account ID','text','Instagram Business Account ID (numeric) — call /me/accounts via Graph API Explorer to find it'],
+    ['access_token','Access Token','password','Same Page Access Token as Facebook — needs instagram_content_publish + pages_read_engagement permissions'],
+    ['imgbb_key','ImgBB API Key (for images)','password','Free image-hosting key from imgbb.com/api — required for image posts (ImgBB does NOT support video)'],
+    ['video_url','Public Video URL (for videos)','text','Direct public HTTPS URL of your video file — required for Reel/video posts (host on your server or Cloudinary)'],
+  ],
+  twitter: [
+    ['api_key','API Key (Consumer Key)','password','From developer.twitter.com → Projects & Apps → Your App → Keys and Tokens'],
+    ['api_secret','API Secret (Consumer Secret)','password','From developer.twitter.com → Projects & Apps → Your App → Keys and Tokens'],
+    ['access_token','Access Token','password','From developer.twitter.com → Projects & Apps → Your App → Keys and Tokens'],
+    ['access_token_secret','Access Token Secret','password','From developer.twitter.com → Projects & Apps → Your App → Keys and Tokens'],
+    ['bearer_token','Bearer Token','password','From developer.twitter.com → Projects & Apps → Your App → Keys and Tokens'],
+  ],
+  linkedin: [
+    ['organization_id','Organization ID','text','LinkedIn Company Page numeric ID — from URL: linkedin.com/company/XXXXXXXX/admin/'],
+    ['access_token','Access Token','password','LinkedIn OAuth 2.0 token with w_member_social, r_organization_social scopes'],
+  ],
+  youtube: [
+    ['channel_id','Channel ID','text','From YouTube Studio → Customization → Basic info → Channel URL (starts with UC…)'],
+    ['client_id','OAuth Client ID','text','From Google Cloud Console → APIs & Services → Credentials → OAuth 2.0 Client IDs'],
+    ['client_secret','OAuth Client Secret','password','From Google Cloud Console → APIs & Services → Credentials → OAuth 2.0 Client IDs'],
+    ['refresh_token','Refresh Token','password','Long-lived token from OAuth consent — use Google OAuth 2.0 Playground (oauth2.googleapis.com/tokeninfo)'],
+  ],
+  tiktok: [
+    ['client_key','Client Key','text','From TikTok Developer Portal → Manage Apps → Your App → App info'],
+    ['client_secret','Client Secret','password','From TikTok Developer Portal → Manage Apps → Your App → App info'],
+    ['access_token','Access Token','password','User access token from TikTok Login Kit OAuth flow (has expiry — refresh periodically)'],
+  ],
+  pinterest: [
+    ['app_id','App ID','text','From Pinterest Developer Portal → My Apps → App info'],
+    ['access_token','Access Token','password','Pinterest OAuth token with boards:write, pins:write, pins:read scopes'],
+  ],
+  threads: [
+    ['account_id','Threads User ID','text','Your numeric Threads/Instagram User ID — same as Instagram Business Account ID'],
+    ['access_token','Access Token','password','Meta token with threads_basic + threads_content_publish permissions'],
+  ],
+  telegram: [
+    ['bot_token','Bot Token','password','Token from @BotFather on Telegram — bot must be added as Admin to your channel/group'],
+    ['chat_id','Chat / Channel ID','text','Use @channelname for public channels, or numeric ID like -1001234567890 for private channels/groups'],
+  ],
+  whatsapp: [
+    ['phone_number_id','Phone Number ID','text','From Meta Business Suite → WhatsApp → Getting Started → Phone number ID (numeric)'],
+    ['access_token','Access Token','password','Permanent system user access token — Meta Business Manager → System Users → Generate token'],
+    ['to_number','Recipient Phone Number','text','Full phone number with country code, no spaces (e.g. +250788000000)'],
+    ['business_account_id','Business Account ID','text','WhatsApp Business Account ID — Meta Business Suite → WhatsApp → Overview'],
+  ],
+};
+
+// Which platforms can actually publish directly from the browser
+const PLATFORM_BROWSER = {
+  facebook:  {ok:true,  note:'✅ Posts directly from browser via Graph API'},
+  instagram: {ok:true,  note:'✅ Posts from browser (image needs ImgBB key, video needs public URL)'},
+  twitter:   {ok:false, note:'⚠️ Cannot post from browser — Twitter requires server-side OAuth 1.0a'},
+  linkedin:  {ok:false, note:'⚠️ Cannot post from browser — LinkedIn blocks cross-origin requests'},
+  youtube:   {ok:false, note:'⚠️ Cannot post from browser — YouTube requires server-side OAuth 2.0'},
+  tiktok:    {ok:false, note:'⚠️ Cannot post from browser — TikTok requires server-side OAuth 2.0'},
+  pinterest: {ok:false, note:'⚠️ Cannot post from browser — Pinterest requires server-side OAuth 2.0'},
+  threads:   {ok:true,  note:'✅ Posts directly from browser via Meta Graph API'},
+  telegram:  {ok:true,  note:'✅ Posts directly from browser via Telegram Bot API'},
+  whatsapp:  {ok:true,  note:'✅ Posts directly from browser via WhatsApp Cloud API'},
 };
 
 function renderConnect() {
@@ -1068,25 +1123,28 @@ function renderConnect() {
     const acc = accounts[pid]||{};
     const isConnected = acc.status==='connected';
     const creds = acc.credentials||{};
-    const credFields = fields.map(([key,label,type='text']) => {
+    const credFields = fields.map(([key,label,type='text',hint='']) => {
       const val = creds[key]||'';
       const display = val && type==='password' ? '••••••••' : escHtml(val);
       return `<div class="form-group">
         <label class="form-label">${escHtml(label)}</label>
         <input class="form-input" type="${type}" name="${key}" placeholder="${type==='password'?'Enter or update…':escHtml(label)}" value="${display}" autocomplete="off"/>
+        ${hint?`<div class="form-hint" style="font-size:11px;color:var(--text-hint);margin-top:3px">ℹ️ ${escHtml(hint)}</div>`:''}
       </div>`;
     }).join('');
+    const browserInfo = PLATFORM_BROWSER[pid]||{ok:false,note:''};
     return `
       <div class="platform-card">
         <div class="platform-card-header">
           <div class="platform-logo" style="background:${platformColor[pid]||'#64748b'}">${platformEmoji[pid]||'🔗'}</div>
-          <div>
+          <div style="flex:1;min-width:0">
             <div class="platform-card-title">${platformName[pid]||pid}</div>
             <div class="platform-card-status">
               <span class="status-dot ${isConnected?'dot-connected':'dot-disconnected'}"></span>
               ${isConnected?'Connected':'Not Connected'}
               ${acc.account_name?` — ${escHtml(acc.account_name)}`:''}
             </div>
+            <div style="font-size:10.5px;margin-top:3px;color:${browserInfo.ok?'var(--success)':'var(--warning)'}">${browserInfo.note}</div>
           </div>
         </div>
         <div class="platform-card-body">
@@ -1398,14 +1456,17 @@ async function publishToAllPlatforms(platforms, post, accounts, files) {
     let r;
     try {
       switch(pid) {
-        case 'facebook': r = await publishFacebook(creds, text, files); break;
+        case 'facebook':  r = await publishFacebook(creds, text, files);  break;
         case 'instagram': r = await publishInstagram(creds, text, files); break;
-        case 'twitter': r = await publishTwitter(creds, text, files); break;
-        case 'linkedin': r = await publishLinkedIn(creds, text, files); break;
-        case 'telegram': r = await publishTelegram(creds, text, files); break;
-        case 'whatsapp': r = await publishWhatsApp(creds, text, files); break;
-        default:
-          r = {success:false, message:`${platformName[pid]} requires server-side OAuth and is not supported from the browser directly. Post saved as draft.`};
+        case 'twitter':   r = await publishTwitter(creds, text, files);   break;
+        case 'linkedin':  r = await publishLinkedIn(creds, text, files);  break;
+        case 'telegram':  r = await publishTelegram(creds, text, files);  break;
+        case 'whatsapp':  r = await publishWhatsApp(creds, text, files);  break;
+        case 'threads':   r = await publishThreads(creds, text, files);   break;
+        case 'youtube':   r = {success:false, message:'YouTube: Cannot upload videos from a browser — requires server-side OAuth 2.0. Credentials are saved for when you use the server version.'}; break;
+        case 'tiktok':    r = {success:false, message:'TikTok: Cannot post from a browser — requires server-side OAuth 2.0. Credentials are saved for when you use the server version.'}; break;
+        case 'pinterest': r = {success:false, message:'Pinterest: Cannot post from a browser — requires server-side OAuth 2.0. Credentials are saved for when you use the server version.'}; break;
+        default:          r = {success:false, message:`${platformName[pid]}: Not supported from browser directly. Credentials saved for server-side use.`};
       }
     } catch(e) {
       r = {success:false, message:e.message||'Unknown error'};
@@ -1417,24 +1478,32 @@ async function publishToAllPlatforms(platforms, post, accounts, files) {
 
 async function publishFacebook(creds, text, files) {
   const {page_id, access_token} = creds;
-  if(!page_id||!access_token) return {success:false,message:'Missing Page ID or Access Token.'};
-  const GRAPH='https://graph.facebook.com/v18.0';
-  const file = files&&files[0];
-  if(file && file.type.startsWith('image')) {
+  if(!page_id)       return {success:false, message:'Facebook: Missing Page ID — find it in Page Settings → About.'};
+  if(!access_token)  return {success:false, message:'Facebook: Missing Page Access Token — generate at developers.facebook.com/tools/explorer.'};
+  const GRAPH = 'https://graph.facebook.com/v18.0';
+  const file = files && files[0];
+  try {
+    if(file && file.type.startsWith('image')) {
+      const fd = new FormData();
+      fd.append('source', file);
+      fd.append('caption', text.slice(0,63206)||' ');
+      fd.append('access_token', access_token.trim());
+      const r = await fetch(`${GRAPH}/${page_id.trim()}/photos`, {method:'POST', body:fd});
+      const d = await r.json();
+      if(d.error) return {success:false, message:`Facebook: ${d.error.message} (code ${d.error.code})`};
+      return {success:true, message:'Posted to Facebook with image.'};
+    }
+    // Text-only post
     const fd = new FormData();
-    fd.append('source', file);
-    fd.append('caption', text||' ');
-    fd.append('access_token', access_token);
-    const r = await fetch(`${GRAPH}/${page_id}/photos`,{method:'POST',body:fd});
+    fd.append('message', text.slice(0,63206)||' ');
+    fd.append('access_token', access_token.trim());
+    const r = await fetch(`${GRAPH}/${page_id.trim()}/feed`, {method:'POST', body:fd});
     const d = await r.json();
-    if(d.error) return {success:false,message:d.error.message};
-    return {success:true,message:'Posted to Facebook.'};
+    if(d.error) return {success:false, message:`Facebook: ${d.error.message} (code ${d.error.code})`};
+    return {success:true, message:'Posted to Facebook.'};
+  } catch(e) {
+    return {success:false, message:`Facebook network error: ${e.message}. Verify your Page ID and Access Token are correct.`};
   }
-  const params = new URLSearchParams({access_token, message:text||' '});
-  const r = await fetch(`${GRAPH}/${page_id}/feed`,{method:'POST',body:params});
-  const d = await r.json();
-  if(d.error) return {success:false,message:d.error.message};
-  return {success:true,message:'Posted to Facebook.'};
 }
 
 // Helper: read File as base64 data string
@@ -1463,118 +1532,162 @@ async function imgbbUpload(file, apiKey) {
 }
 
 async function publishInstagram(creds, text, files) {
-  const { account_id, access_token, imgbb_key } = creds;
-  if(!account_id || !access_token) return {success:false, message:'Missing Business Account ID or Access Token.'};
+  const { account_id, access_token, imgbb_key, video_url } = creds;
+  if(!account_id)   return {success:false, message:'Instagram: Missing Business Account ID — find it via Graph API Explorer (/me/accounts).'};
+  if(!access_token) return {success:false, message:'Instagram: Missing Access Token — needs instagram_content_publish permission.'};
 
   const file = files && files[0];
-  if(!file) return {success:false, message:'Instagram requires an image or video. Please select a media file in the Media section.'};
+  if(!file) return {success:false, message:'Instagram: Please attach an image or video — Instagram does not support text-only posts.'};
 
   const isVideo = file.type.startsWith('video');
   const GRAPH = 'https://graph.facebook.com/v18.0';
-
-  // Step 1: get a public URL for the file via ImgBB
   let publicUrl = null;
-  if(imgbb_key) {
+
+  if(isVideo) {
+    if(!video_url) return {success:false, message:'Instagram: Video posts require a publicly hosted video URL. Add your video\'s public URL in Connect Accounts → Instagram → "Public Video URL". (ImgBB does not support video uploads.)'};
+    publicUrl = video_url.trim();
+  } else {
+    if(!imgbb_key) return {success:false, message:'Instagram: Missing ImgBB API key — get a free key at imgbb.com/api and add it in Connect Accounts → Instagram.'};
     publicUrl = await imgbbUpload(file, imgbb_key);
-  }
-  if(!publicUrl) {
-    return {
-      success: false,
-      message: !imgbb_key
-        ? 'Add your free ImgBB API key in Connect Accounts → Instagram credentials (imgbb.com/api) so the app can host your photo and post it to Instagram.'
-        : 'ImgBB upload failed — check your ImgBB API key is valid (imgbb.com/api). Image was not posted.'
-    };
+    if(!publicUrl) return {success:false, message:'Instagram: ImgBB upload failed — verify your ImgBB API key is correct at imgbb.com/api.'};
   }
 
   try {
-    // Step 2: Create Instagram media container
+    const caption = text.slice(0, 2200) || '';
     const containerBody = isVideo
-      ? { video_url: publicUrl, media_type:'REELS', caption: text||'', access_token }
-      : { image_url: publicUrl, caption: text||'', access_token };
+      ? { video_url: publicUrl, media_type: 'REELS', caption, access_token }
+      : { image_url: publicUrl, caption, access_token };
 
-    const cRes = await fetch(`${GRAPH}/${account_id}/media`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const cRes = await fetch(`${GRAPH}/${account_id.trim()}/media`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify(containerBody)
     });
     const cData = await cRes.json();
-    if(cData.error) return {success:false, message:'Instagram container error: ' + cData.error.message};
+    if(cData.error) return {success:false, message:`Instagram: ${cData.error.message} (code ${cData.error.code})`};
     const creationId = cData.id;
-    if(!creationId) return {success:false, message:'Instagram did not return a container ID.'};
+    if(!creationId) return {success:false, message:'Instagram: No container ID returned — check your Account ID and Access Token permissions.'};
 
-    // Step 3: Wait for processing (Instagram needs ~2s for images, more for video)
-    await new Promise(r => setTimeout(r, isVideo ? 8000 : 2000));
+    // Wait for Meta to process the media
+    await new Promise(r => setTimeout(r, isVideo ? 10000 : 2500));
 
-    // Step 4: Publish container
-    const pRes = await fetch(`${GRAPH}/${account_id}/media_publish`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const pRes = await fetch(`${GRAPH}/${account_id.trim()}/media_publish`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({ creation_id: creationId, access_token })
     });
     const pData = await pRes.json();
-    if(pData.error) return {success:false, message:'Instagram publish error: ' + pData.error.message};
-    if(pData.id) return {success:true, message:'Published to Instagram successfully!'};
-    return {success:false, message:'Instagram publish failed — no post ID returned.'};
+    if(pData.error) return {success:false, message:`Instagram publish: ${pData.error.message} (code ${pData.error.code})`};
+    if(pData.id) return {success:true, message:'Published to Instagram!'};
+    return {success:false, message:'Instagram: Unexpected response — check credentials and try again.'};
   } catch(e) {
-    return {success:false, message:'Instagram error: ' + (e.message||'Unknown')};
+    return {success:false, message:`Instagram error: ${e.message||'Network failure — check credentials.'}`};
   }
 }
 
 async function publishTwitter(creds, text) {
-  // Twitter v2 API doesn't allow CORS from browsers
-  return {success:false,message:'Twitter/X requires OAuth 1.0a which cannot be done from a browser. Use the server version or a proxy.'};
+  return {success:false, message:'Twitter/X: Cannot post from a browser — OAuth 1.0a requires server-side request signing. Credentials are saved and ready when you use the server version.'};
 }
 
 async function publishLinkedIn(creds, text) {
-  return {success:false,message:'LinkedIn blocks browser CORS requests. Use the server version for LinkedIn posting.'};
+  return {success:false, message:'LinkedIn: Cannot post from a browser — LinkedIn blocks cross-origin API requests. Credentials are saved and ready when you use the server version.'};
+}
+
+async function publishThreads(creds, text, files) {
+  const { account_id, access_token } = creds;
+  if(!account_id)   return {success:false, message:'Threads: Missing User ID — same as your Instagram Business Account ID.'};
+  if(!access_token) return {success:false, message:'Threads: Missing Access Token — needs threads_basic + threads_content_publish permissions.'};
+  const GRAPH = 'https://graph.facebook.com/v18.0';
+  try {
+    // For images, try ImgBB if key available
+    let containerBody;
+    const file = files && files[0];
+    if(file && file.type.startsWith('image') && creds.imgbb_key) {
+      const publicUrl = await imgbbUpload(file, creds.imgbb_key);
+      containerBody = publicUrl
+        ? { media_type:'IMAGE', image_url: publicUrl, text: text.slice(0,500)||'', access_token }
+        : { media_type:'TEXT', text: text.slice(0,500)||'', access_token };
+    } else {
+      containerBody = { media_type:'TEXT', text: text.slice(0,500)||'', access_token };
+    }
+    const cRes = await fetch(`${GRAPH}/${account_id.trim()}/threads`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(containerBody)
+    });
+    const cData = await cRes.json();
+    if(cData.error) return {success:false, message:`Threads: ${cData.error.message} (code ${cData.error.code})`};
+    const creationId = cData.id;
+    if(!creationId) return {success:false, message:'Threads: No container ID returned — check User ID and access token permissions.'};
+    await new Promise(r => setTimeout(r, 1500));
+    const pRes = await fetch(`${GRAPH}/${account_id.trim()}/threads_publish`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ creation_id: creationId, access_token })
+    });
+    const pData = await pRes.json();
+    if(pData.error) return {success:false, message:`Threads publish: ${pData.error.message}`};
+    if(pData.id) return {success:true, message:'Published to Threads!'};
+    return {success:false, message:'Threads: Unexpected response — verify credentials.'};
+  } catch(e) {
+    return {success:false, message:`Threads error: ${e.message||'Network failure'}`};
+  }
 }
 
 async function publishTelegram(creds, text, files) {
   const {bot_token, chat_id} = creds;
-  if(!bot_token||!chat_id) return {success:false,message:'Missing Bot Token or Chat ID.'};
-  const base = `https://api.telegram.org/bot${bot_token}`;
-  const file = files&&files[0];
-  if(file) {
-    const fd = new FormData();
-    fd.append('chat_id', chat_id);
-    fd.append('caption', text||'');
-    const field = file.type.startsWith('video')?'video':'photo';
-    fd.append(field, file);
-    const r = await fetch(`${base}/send${field==='video'?'Video':'Photo'}`,{method:'POST',body:fd});
+  if(!bot_token) return {success:false, message:'Telegram: Missing Bot Token — create a bot via @BotFather and copy the token.'};
+  if(!chat_id)   return {success:false, message:'Telegram: Missing Chat ID — use @channelname or the numeric channel ID (e.g. -1001234567890). Make sure the bot is an Admin in that channel.'};
+  const base = `https://api.telegram.org/bot${bot_token.trim()}`;
+  const cid  = chat_id.trim();
+  const file = files && files[0];
+  try {
+    if(file) {
+      const fd = new FormData();
+      fd.append('chat_id', cid);
+      fd.append('caption', text.slice(0,1024)||''); // Telegram caption limit
+      const isVid = file.type.startsWith('video');
+      fd.append(isVid ? 'video' : 'photo', file);
+      const r = await fetch(`${base}/${isVid?'sendVideo':'sendPhoto'}`, {method:'POST', body:fd});
+      const d = await r.json();
+      if(!d.ok) return {success:false, message:`Telegram: ${d.description||'Failed'} — verify bot is Admin in the channel.`};
+      return {success:true, message:'Sent to Telegram.'};
+    }
+    // Text message — NO parse_mode to avoid errors with special characters like _ * [ ] ( )
+    const r = await fetch(`${base}/sendMessage`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({chat_id: cid, text: text.slice(0,4096)||' '})
+    });
     const d = await r.json();
-    if(!d.ok) return {success:false,message:d.description||'Failed.'};
-    return {success:true,message:'Sent to Telegram.'};
+    if(!d.ok) return {success:false, message:`Telegram: ${d.description||'Failed'} — check Bot Token and Chat ID.`};
+    return {success:true, message:'Sent to Telegram.'};
+  } catch(e) {
+    return {success:false, message:`Telegram network error: ${e.message}. Verify your Bot Token is correct.`};
   }
-  const r = await fetch(`${base}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id,text:text||' ',parse_mode:'Markdown'})});
-  const d = await r.json();
-  if(!d.ok) return {success:false,message:d.description||'Failed.'};
-  return {success:true,message:'Sent to Telegram.'};
 }
 
 async function publishWhatsApp(creds, text, files) {
   const { phone_number_id, access_token, to_number } = creds;
-  if(!phone_number_id || !access_token) return {success:false, message:'Missing Phone Number ID or Access Token.'};
-  if(!to_number) return {success:false, message:'Missing Recipient Phone number. Add it in Connect Accounts → WhatsApp credentials.'};
-  const endpoint = `https://graph.facebook.com/v18.0/${phone_number_id.trim()}/messages`;
+  if(!phone_number_id) return {success:false, message:'WhatsApp: Missing Phone Number ID — find it in Meta Business Suite → WhatsApp → Getting Started.'};
+  if(!access_token)    return {success:false, message:'WhatsApp: Missing Access Token — create a permanent system user token in Meta Business Manager.'};
+  if(!to_number)       return {success:false, message:'WhatsApp: Missing Recipient Phone Number — add it in Connect Accounts → WhatsApp credentials.'};
   const recipient = to_number.replace(/[\s\-()]/g,'');
-  const body = {
-    messaging_product: 'whatsapp',
-    to: recipient,
-    type: 'text',
-    text: { body: text || ' ' }
-  };
+  if(!recipient.startsWith('+')) return {success:false, message:'WhatsApp: Recipient phone number must start with + and country code (e.g. +250788000000).'};
+  const endpoint = `https://graph.facebook.com/v18.0/${phone_number_id.trim()}/messages`;
   try {
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${access_token.trim()}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+      body: JSON.stringify({
+        messaging_product: 'whatsapp',
+        to: recipient,
+        type: 'text',
+        text: { body: text.slice(0,4096) || ' ' }
+      })
     });
     const d = await res.json();
-    if(d.error) return {success:false, message:'WhatsApp error: ' + d.error.message};
-    if(d.messages && d.messages.length) return {success:true, message:'Sent via WhatsApp successfully.'};
-    return {success:false, message:'WhatsApp: unexpected response — ' + JSON.stringify(d).slice(0,120)};
+    if(d.error) return {success:false, message:`WhatsApp: ${d.error.message} (code ${d.error.code})`};
+    if(d.messages && d.messages.length) return {success:true, message:'Sent via WhatsApp.'};
+    return {success:false, message:'WhatsApp: Unexpected response — ' + JSON.stringify(d).slice(0,120)};
   } catch(e) {
-    return {success:false, message:'WhatsApp network error: ' + (e.message||'Unknown')};
+    return {success:false, message:`WhatsApp network error: ${e.message}. Verify your Phone Number ID and Access Token.`};
   }
 }
 
