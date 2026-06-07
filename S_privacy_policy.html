@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Apex R&M Group | Social Media Automation & Digital Services</title>
+  <meta name="description" content="Comprehensive Privacy Policy for Apex R&M Group Ltd covering all digital services, social media automation, LinkedIn Community Management API usage, and data protection practices." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Apex R&M Group Ltd" />
+  <meta property="og:title" content="Privacy Policy — Apex R&M Group" />
+  <meta property="og:description" content="How Apex R&M Group collects, uses, and protects your personal data across all platforms and services." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+    :root {
+      --navy:        #0A1628;
+      --navy-mid:    #0F1F38;
+      --gold:        #C9A84C;
+      --gold-light:  #E8C96A;
+      --gold-pale:   rgba(201,168,76,.12);
+      --teal:        #1A6B8A;
+      --teal-light:  #22849E;
+      --slate:       #2C3E50;
+      --warm-white:  #F8F4EA;
+      --off-white:   #FAF9F6;
+      --white:       #FFFFFF;
+      --gray-100:    #F5F7FA;
+      --gray-200:    #EEF1F6;
+      --gray-400:    #9BA8BB;
+      --gray-600:    #64748B;
+      --border:      rgba(201,168,76,.18);
+      --shadow-sm:   0 2px 12px rgba(10,22,40,.07);
+      --shadow-md:   0 8px 32px rgba(10,22,40,.12);
+      --shadow-lg:   0 24px 64px rgba(10,22,40,.18);
+      --ease:        cubic-bezier(.25,.46,.45,.94);
+      --radius:      16px;
+      --radius-sm:   8px;
+      --radius-lg:   28px;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--slate);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ─── TOPBAR / BREADCRUMB ────────────────────────────────────── */
+    .topbar {
+      background: var(--navy);
+      color: var(--warm-white);
+      font-size: .78rem;
+      letter-spacing: .04em;
+      padding: .55rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .topbar-left { display: flex; align-items: center; gap: .75rem; color: var(--gray-400); }
+    .topbar-left a { color: var(--gold); text-decoration: none; }
+    .topbar-left a:hover { color: var(--gold-light); }
+    .topbar-right { color: var(--gray-400); }
+    .topbar-sep { opacity: .4; }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(10,22,40,.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 1rem 2rem;
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { text-decoration: none; }
+    .logo-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      color: var(--gold);
+      letter-spacing: -.02em;
+      line-height: 1;
+    }
+    .logo-tagline {
+      font-size: .72rem;
+      color: rgba(248,244,234,.55);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: .15rem;
+    }
+    .nav-pill {
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: .35rem 1rem;
+      color: var(--gold);
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .nav-pill i { font-size: .9rem; }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      background:
+        linear-gradient(165deg, rgba(10,22,40,.96) 0%, rgba(26,107,138,.82) 55%, rgba(10,22,40,.9) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%230A1628'/%3E%3Ccircle cx='40' cy='40' r='1' fill='%23C9A84C' opacity='.3'/%3E%3Cpath d='M0 40h80M40 0v80' stroke='%23C9A84C' stroke-width='.3' opacity='.12'/%3E%3C/svg%3E");
+      padding: 80px 2rem 100px;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(201,168,76,.1), transparent);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: rgba(201,168,76,.15);
+      border: 1px solid rgba(201,168,76,.35);
+      border-radius: 30px;
+      padding: .4rem 1.1rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeDown .6s var(--ease) both;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .7s .1s var(--ease) both;
+    }
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+      position: relative;
+    }
+    .hero-sub {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.72);
+      font-weight: 300;
+      animation: fadeUp .7s .2s var(--ease) both;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .3s var(--ease) both;
+    }
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      color: rgba(255,255,255,.55);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .hero-meta-item i { color: var(--gold); font-size: .85rem; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .page-wrap {
+      max-width: 1280px;
+      margin: -52px auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ─── SIDEBAR TOC ────────────────────────────────────────────── */
+    .toc-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 1.75rem;
+      position: sticky;
+      top: 90px;
+      border: 1px solid var(--gray-200);
+    }
+    .toc-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 1.2rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--gold-pale);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .toc-title i { color: var(--gold); }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: .15rem; }
+    .toc-list li a {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      padding: .45rem .6rem;
+      border-radius: var(--radius-sm);
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      transition: all .2s var(--ease);
+      line-height: 1.4;
+    }
+    .toc-list li a .toc-num {
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .74rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: .05rem;
+    }
+    .toc-list li a:hover {
+      background: var(--gold-pale);
+      color: var(--navy);
+    }
+    .toc-list li a.active {
+      background: var(--gold-pale);
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .toc-divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: .75rem 0;
+    }
+    .toc-contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      padding: .65rem;
+      background: var(--navy);
+      color: var(--gold);
+      border-radius: var(--radius-sm);
+      font-size: .82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
+      margin-top: 1rem;
+    }
+    .toc-contact-btn:hover { background: var(--teal); color: var(--white); }
+
+    /* ─── MAIN CONTENT ───────────────────────────────────────────── */
+    .content-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+
+    /* ─── SECTION ────────────────────────────────────────────────── */
+    .policy-section {
+      padding: 3rem 3.5rem;
+      border-bottom: 1px solid var(--gray-200);
+      scroll-margin-top: 100px;
+    }
+    .policy-section:last-child { border-bottom: none; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--navy), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(10,22,40,.2);
+    }
+    .section-title-wrap {}
+    .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--navy);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+
+    /* ─── TEXT ELEMENTS ──────────────────────────────────────────── */
+    .lead {
+      font-size: 1.05rem;
+      color: var(--slate);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--gold);
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+    }
+    p { margin-bottom: 1rem; color: var(--slate); }
+    p:last-child { margin-bottom: 0; }
+
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.18rem;
+      color: var(--teal);
+      margin: 1.75rem 0 .75rem;
+      letter-spacing: -.01em;
+    }
+    h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 1.25rem 0 .5rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    ul, ol {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    ul li, ol li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: .5rem;
+      color: var(--slate);
+      font-size: .95rem;
+    }
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: .35rem;
+      top: .65rem;
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    ol { counter-reset: item; }
+    ol li { counter-increment: item; }
+    ol li::before {
+      content: counter(item) ".";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      font-weight: 700;
+      top: .15rem;
+    }
+
+    /* ─── CALLOUT BOXES ──────────────────────────────────────────── */
+    .callout {
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+    .callout-body { flex: 1; }
+    .callout-body strong { display: block; margin-bottom: .3rem; font-size: .9rem; font-weight: 700; }
+    .callout-body p { font-size: .9rem; margin: 0; }
+    .callout.info    { background: rgba(26,107,138,.08); border: 1px solid rgba(26,107,138,.2); }
+    .callout.info    .callout-icon { color: var(--teal); }
+    .callout.info    .callout-body strong { color: var(--teal); }
+    .callout.warning { background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.25); }
+    .callout.warning .callout-icon { color: var(--gold); }
+    .callout.warning .callout-body strong { color: #8a6800; }
+    .callout.success { background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.2); }
+    .callout.success .callout-icon { color: #059669; }
+    .callout.success .callout-body strong { color: #047857; }
+    .callout.danger  { background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.18); }
+    .callout.danger  .callout-icon { color: #dc2626; }
+    .callout.danger  .callout-body strong { color: #b91c1c; }
+
+    /* ─── DATA TABLES ────────────────────────────────────────────── */
+    .data-table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: var(--radius); border: 1px solid var(--gray-200); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    thead { background: var(--navy); color: var(--warm-white); }
+    thead th { padding: .85rem 1.1rem; text-align: left; font-size: .78rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 600; }
+    thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    thead th:last-child  { border-radius: 0 var(--radius) 0 0; }
+    tbody tr { border-bottom: 1px solid var(--gray-200); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--gold-pale); }
+    tbody td { padding: .85rem 1.1rem; color: var(--slate); vertical-align: top; }
+    tbody td:first-child { font-weight: 600; color: var(--navy); }
+
+    /* ─── SOCIAL MEDIA GRID ──────────────────────────────────────── */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .social-card {
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all .22s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .social-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .22s;
+    }
+    .social-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .social-card:hover::before { opacity: 1; }
+    .social-card.linkedin   { background: rgba(0,119,181,.06);  border-color: rgba(0,119,181,.25);  }
+    .social-card.linkedin:hover { background: rgba(0,119,181,.12); }
+    .social-card.twitter    { background: rgba(0,0,0,.04);        border-color: rgba(0,0,0,.15);      }
+    .social-card.twitter:hover  { background: rgba(0,0,0,.08);   }
+    .social-card.facebook   { background: rgba(24,119,242,.06);  border-color: rgba(24,119,242,.22); }
+    .social-card.facebook:hover { background: rgba(24,119,242,.12);}
+    .social-card.instagram  { background: rgba(193,53,132,.06);  border-color: rgba(193,53,132,.22); }
+    .social-card.instagram:hover{ background: rgba(193,53,132,.1); }
+    .social-card.youtube    { background: rgba(255,0,0,.05);      border-color: rgba(255,0,0,.2);     }
+    .social-card.youtube:hover  { background: rgba(255,0,0,.1);  }
+    .social-card.whatsapp   { background: rgba(37,211,102,.06);  border-color: rgba(37,211,102,.22); }
+    .social-card.whatsapp:hover { background: rgba(37,211,102,.12);}
+    .social-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .social-card.linkedin  .social-icon { background: #0077B5; color: #fff; }
+    .social-card.twitter   .social-icon { background: #000;    color: #fff; }
+    .social-card.facebook  .social-icon { background: #1877F2; color: #fff; }
+    .social-card.instagram .social-icon { background: linear-gradient(45deg,#F58529,#DD2A7B,#8134AF); color: #fff; }
+    .social-card.youtube   .social-icon { background: #FF0000; color: #fff; }
+    .social-card.whatsapp  .social-icon { background: #25D366; color: #fff; }
+    .social-info {}
+    .social-platform { font-size: .78rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+    .social-handle   { font-size: .92rem; font-weight: 700; color: var(--navy); margin-top: .1rem; }
+    .social-purpose  { font-size: .78rem; color: var(--gray-600); margin-top: .2rem; line-height: 1.3; }
+
+    /* ─── RIGHTS GRID ────────────────────────────────────────────── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .right-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      transition: all .2s;
+    }
+    .right-card:hover { border-color: var(--gold); box-shadow: var(--shadow-sm); }
+    .right-card-icon { font-size: 1.4rem; color: var(--gold); margin-bottom: .6rem; }
+    .right-card h4 { font-size: .85rem; font-weight: 700; color: var(--navy); margin: 0 0 .4rem; text-transform: none; letter-spacing: 0; }
+    .right-card p { font-size: .82rem; color: var(--gray-600); margin: 0; }
+
+    /* ─── CONTACT BLOCK ──────────────────────────────────────────── */
+    .contact-block {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      color: var(--warm-white);
+      margin: 1.5rem 0;
+      border: 1px solid var(--border);
+    }
+    .contact-block h3 { color: var(--gold); font-size: 1.3rem; margin: 0 0 1.5rem; font-family: 'DM Serif Display', serif; }
+    .contact-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: .75rem; }
+    .contact-item-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--gold-pale); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: .9rem; flex-shrink: 0;
+    }
+    .contact-item-body {}
+    .contact-item-label { font-size: .72rem; color: rgba(248,244,234,.45); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+    .contact-item-value { font-size: .9rem; color: var(--warm-white); margin-top: .15rem; }
+    .contact-item-value a { color: var(--gold-light); text-decoration: none; }
+    .contact-item-value a:hover { color: var(--white); text-decoration: underline; }
+
+    /* ─── LAST UPDATED ───────────────────────────────────────────── */
+    .last-updated-bar {
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+      padding: 1.25rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .last-updated-bar .version-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      background: var(--navy);
+      color: var(--gold);
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .last-updated-bar .date-info {
+      font-size: .82rem;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .last-updated-bar .date-info i { color: var(--gold); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: var(--warm-white);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 4rem;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(201,168,76,.18);
+    }
+    .footer-brand .logo-name { font-size: 1.4rem; display: block; margin-bottom: .3rem; }
+    .footer-brand .logo-tagline { opacity: .5; font-size: .7rem; display: block; }
+    .footer-brand p { font-size: .85rem; color: rgba(248,244,234,.5); margin-top: 1rem; line-height: 1.65; }
+    .footer-social { display: flex; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .footer-social a {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid rgba(201,168,76,.25);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(248,244,234,.6);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .footer-social a:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .footer-col h5 {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col ul li::before { display: none; }
+    .footer-col ul li a {
+      color: rgba(248,244,234,.55);
+      text-decoration: none;
+      font-size: .85rem;
+      transition: color .15s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 1.5rem;
+    }
+    .footer-bottom p { font-size: .8rem; color: rgba(248,244,234,.35); margin: 0; }
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { font-size: .78rem; color: rgba(248,244,234,.4); text-decoration: none; transition: color .15s; }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    /* ─── PRINT BUTTON ───────────────────────────────────────────── */
+    .print-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--navy);
+      color: var(--gold);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      font-size: 1.1rem;
+      transition: all .2s;
+      z-index: 50;
+    }
+    .print-btn:hover { background: var(--gold); color: var(--navy); }
+
+    /* ─── WHATSAPP FLOAT ─────────────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      text-decoration: none;
+      box-shadow: var(--shadow-lg);
+      transition: all .2s;
+      z-index: 50;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .toc-card { position: static; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .policy-section { padding: 2rem 1.5rem; }
+      .last-updated-bar { padding: 1rem 1.5rem; }
+      .hero { padding: 60px 1.5rem 80px; }
+      .hero h1 { font-size: 2rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .topbar { font-size: .7rem; }
+    }
+
+    /* ─── PRINT STYLES ───────────────────────────────────────────── */
+    @media print {
+      .topbar, .navbar, .toc-card, .print-btn, .wa-float, footer { display: none; }
+      .page-wrap { display: block; margin: 0; padding: 0; }
+      .content-card { box-shadow: none; border: none; }
+      .policy-section { border: none; padding: 1.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <a href="../index.html"><i class="fa fa-arrow-left"></i> apexrmgroup.com</a>
+      <span class="topbar-sep">/</span>
+      <span>Automation</span>
+      <span class="topbar-sep">/</span>
+      <span>Privacy Policy</span>
+    </div>
+    <div class="topbar-right">Document ID: APRM-PP-2025-v3.1</div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo" aria-label="Apex R&M Group Home">
+        <div class="logo-name">APEX R&M GROUP</div>
+        <div class="logo-tagline">Spatial Intelligence. Strategic Growth.</div>
+      </a>
+      <div class="nav-pill">
+        <i class="fa fa-shield-halved"></i>
+        Privacy Policy
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="hero-badge">
+      <i class="fa fa-shield-halved"></i>
+      Official Legal Document — All Projects & Platforms
+    </div>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="hero-sub">
+      This policy governs how Apex R&M Group Ltd collects, uses, discloses, and safeguards your
+      information across all our digital services, social media platforms, and automation systems.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><i class="fa fa-calendar-check"></i> Effective: June 7, 2025</div>
+      <div class="hero-meta-item"><i class="fa fa-rotate"></i> Last Updated: June 7, 2025</div>
+      <div class="hero-meta-item"><i class="fa fa-globe-africa"></i> Jurisdiction: Rwanda / Global</div>
+      <div class="hero-meta-item"><i class="fa fa-file-lines"></i> Version 3.1</div>
+    </div>
+  </header>
+
+  <!-- MAIN PAGE WRAP -->
+  <div class="page-wrap">
+
+    <!-- SIDEBAR: TABLE OF CONTENTS -->
+    <aside aria-label="Table of contents">
+      <div class="toc-card">
+        <div class="toc-title"><i class="fa fa-list-ul"></i> Contents</div>
+        <ul class="toc-list" id="toc-list">
+          <li><a href="#s1"><span class="toc-num">01</span> Introduction</a></li>
+          <li><a href="#s2"><span class="toc-num">02</span> Who We Are</a></li>
+          <li><a href="#s3"><span class="toc-num">03</span> Scope of This Policy</a></li>
+          <li><a href="#s4"><span class="toc-num">04</span> Information We Collect</a></li>
+          <li><a href="#s5"><span class="toc-num">05</span> Social Media & Automation</a></li>
+          <li><a href="#s6"><span class="toc-num">06</span> LinkedIn API Usage</a></li>
+          <li><a href="#s7"><span class="toc-num">07</span> How We Use Your Data</a></li>
+          <li><a href="#s8"><span class="toc-num">08</span> Legal Basis for Processing</a></li>
+          <li><a href="#s9"><span class="toc-num">09</span> Data Sharing & Disclosure</a></li>
+          <li><a href="#s10"><span class="toc-num">10</span> Cookies & Tracking</a></li>
+          <li><a href="#s11"><span class="toc-num">11</span> Data Retention</a></li>
+          <li><a href="#s12"><span class="toc-num">12</span> Data Security</a></li>
+          <li><a href="#s13"><span class="toc-num">13</span> Your Rights</a></li>
+          <li><a href="#s14"><span class="toc-num">14</span> International Transfers</a></li>
+          <li><a href="#s15"><span class="toc-num">15</span> Children's Privacy</a></li>
+          <li><a href="#s16"><span class="toc-num">16</span> Third-Party Links</a></li>
+          <li><a href="#s17"><span class="toc-num">17</span> Policy Changes</a></li>
+          <li><a href="#s18"><span class="toc-num">18</span> Contact & DPO</a></li>
+        </ul>
+        <div class="toc-divider"></div>
+        <a href="#s18" class="toc-contact-btn"><i class="fa fa-envelope"></i> Contact Data Officer</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" aria-label="Privacy Policy content">
+      <article class="content-card" itemscope itemtype="https://schema.org/WebPage">
+
+        <!-- SECTION 1: INTRODUCTION -->
+        <section class="policy-section" id="s1" aria-labelledby="s1-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-file-shield"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 01</div>
+              <h2 class="section-title" id="s1-title">Introduction</h2>
+            </div>
+          </div>
+          <p class="lead">
+            Apex R&M Group Ltd ("we," "us," "our," or "the Company") is committed to protecting your
+            privacy and handling your personal data responsibly, transparently, and in accordance with
+            applicable data protection laws.
+          </p>
+          <p>
+            This Privacy Policy explains what information we collect, why we collect it, how we use and
+            protect it, and what rights you have regarding your data. It applies to all users, visitors,
+            clients, partners, and followers who interact with any of our digital services, websites,
+            social media channels, or automated systems.
+          </p>
+          <p>
+            By accessing our website at <strong>apexrmgroup.com</strong>, using our social media automation
+            tools, engaging with our social media profiles, or communicating with us through any channel,
+            you acknowledge that you have read and understood this Privacy Policy and agree to its terms.
+          </p>
+          <div class="callout info">
+            <div class="callout-icon"><i class="fa fa-circle-info"></i></div>
+            <div class="callout-body">
+              <strong>Quick Summary</strong>
+              <p>We collect only what we need, use it only for legitimate purposes, never sell your data,
+              and always give you control. This policy covers our website, all social media platforms,
+              the Automation system, and any related tools we operate.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: WHO WE ARE -->
+        <section class="policy-section" id="s2" aria-labelledby="s2-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-building"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 02</div>
+              <h2 class="section-title" id="s2-title">Who We Are</h2>
+            </div>
+          </div>
+          <p>
+            <strong>Apex R&M Group Ltd</strong> is a professional spatial intelligence and strategic
+            consulting firm headquartered in Rwanda. We specialize in GIS and geospatial analysis, remote
+            sensing, land administration, environmental consulting, infrastructure planning, and digital
+            automation services for government, corporate, and development organization clients across Africa.
+          </p>
+          <div class="data-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Detail</th>
+                  <th>Information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Company Name</td><td>Apex R&M Group Ltd</td></tr>
+                <tr><td>Data Controller</td><td>Apex R&M Group Ltd</td></tr>
+                <tr><td>Headquarters</td><td>Nyagacaca Village, Ruyenzi Cell, Runda, Kamonyi District, Rwanda</td></tr>
+                <tr><td>Operational Address</td><td>KG 123 St, Kimihurura, Gasabo District, Kigali, Rwanda</td></tr>
+                <tr><td>Phone / WhatsApp</td><td><a href="tel:+250787523890">+250 787 523 890</a></td></tr>
+                <tr><td>Email</td><td><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></td></tr>
+                <tr><td>Privacy Email</td><td><a href="mailto:privacy@apexrmgroup.com">privacy@apexrmgroup.com</a></td></tr>
+                <tr><td>Website</td><td><a href="https://apexrmgroup.com" target="_blank" rel="noopener">apexrmgroup.com</a></td></tr>
+                <tr><td>Jurisdiction</td><td>Republic of Rwanda, with compliance with GDPR, CCPA, and LinkedIn Platform Policies</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION 3: SCOPE -->
+        <section class="policy-section" id="s3" aria-labelledby="s3-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-layer-group"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 03</div>
+              <h2 class="section-title" id="s3-title">Scope of This Policy</h2>
+            </div>
+          </div>
+          <p>This Privacy Policy applies to all digital touchpoints and projects operated by Apex R&M Group Ltd, including:</p>
+          <ul>
+            <li><strong>Main Website</strong> — apexrmgroup.com and all subdirectories and subpages</li>
+            <li><strong>Automation System</strong> — Our social media management and scheduling platform hosted at the <code>/Aut/</code> directory (ApexRM Social Media Automation — SMH)</li>
+            <li><strong>All Social Media Profiles</strong> — LinkedIn, X (Twitter), Facebook, Instagram, YouTube, and WhatsApp Business</li>
+            <li><strong>LinkedIn Community Management API Integration</strong> — automated posting, analytics retrieval, and community engagement functions</li>
+            <li><strong>Contact Forms & Email</strong> — all inquiries submitted through our website or sent directly to our email addresses</li>
+            <li><strong>Client Portals</strong> — the admin portal and any client-facing digital services</li>
+            <li><strong>Newsletter & Subscription Services</strong> — email marketing and updates</li>
+            <li><strong>Spatial & GIS Projects</strong> — any data collected in the course of service delivery</li>
+            <li><strong>Events & Webinars</strong> — online and physical events organized by the Company</li>
+          </ul>
+          <div class="callout warning">
+            <div class="callout-icon"><i class="fa fa-triangle-exclamation"></i></div>
+            <div class="callout-body">
+              <strong>Third-Party Platforms</strong>
+              <p>This policy governs our data practices. When you interact with third-party platforms
+              (LinkedIn, Meta, Google, etc.), those platforms' own privacy policies also apply. We
+              encourage you to review them independently.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: INFORMATION WE COLLECT -->
+        <section class="policy-section" id="s4" aria-labelledby="s4-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-database"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 04</div>
+              <h2 class="section-title" id="s4-title">Information We Collect</h2>
+            </div>
+          </div>
+          <p>We collect information in the following categories, always using the minimum necessary for our stated purposes:</p>
+
+          <h3>4.1 Information You Provide Directly</h3>
+          <ul>
+            <li><strong>Identity Data:</strong> Full name, job title, organization name, professional credentials</li>
+            <li><strong>Contact Data:</strong> Email address, phone number, WhatsApp number, physical address</li>
+            <li><strong>Communication Data:</strong> Messages, inquiries, feedback, and comments submitted through our contact forms, email, or social media</li>
+            <li><strong>Project & Consultation Data:</strong> Spatial data, project briefs, geographic coordinates, land parcel information, or environmental data you share during service delivery</li>
+            <li><strong>Career Data:</strong> CVs, cover letters, education history, and employment records submitted through our careers page</li>
+            <li><strong>Payment Data:</strong> Billing information required to process service payments (processed through secure third-party processors; we do not store raw card data)</li>
+            <li><strong>Newsletter Data:</strong> Email address and preferences for subscription to our updates</li>
+          </ul>
+
+          <h3>4.2 Information We Collect Automatically</h3>
+          <ul>
+            <li><strong>Technical Data:</strong> IP address, browser type and version, operating system, device identifiers, time zone, screen resolution</li>
+            <li><strong>Usage Data:</strong> Pages visited, time spent, click paths, referral sources, search terms used within our site</li>
+            <li><strong>Performance Data:</strong> Page load times, error logs, server response times</li>
+            <li><strong>Cookie Data:</strong> Session identifiers, preference cookies, analytics cookies (see Section 10)</li>
+          </ul>
+
+          <h3>4.3 Information from Third Parties & APIs</h3>
+          <ul>
+            <li><strong>LinkedIn API Data:</strong> Organization page analytics, follower demographics, post engagement metrics, comment data from our Company Page, and data accessible via the LinkedIn Community Management API (see Section 6)</li>
+            <li><strong>Social Media Analytics:</strong> Aggregated, anonymized engagement data from Facebook Insights, X Analytics, Instagram Insights, and YouTube Analytics</li>
+            <li><strong>Partner Referrals:</strong> Contact information shared with us by partners or clients with your knowledge and consent</li>
+            <li><strong>Public Professional Profiles:</strong> Publicly available information from professional directories or social networks relevant to business inquiries</li>
+          </ul>
+
+          <div class="callout success">
+            <div class="callout-icon"><i class="fa fa-circle-check"></i></div>
+            <div class="callout-body">
+              <strong>Data Minimization Principle</strong>
+              <p>We are committed to collecting only the minimum personal data necessary for the specific,
+              legitimate purpose for which it is being processed. We do not collect sensitive personal
+              data (health, race, political opinions, etc.) unless explicitly required and consented to.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: SOCIAL MEDIA -->
+        <section class="policy-section" id="s5" aria-labelledby="s5-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-share-nodes"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 05</div>
+              <h2 class="section-title" id="s5-title">Social Media Profiles & Automation</h2>
+            </div>
+          </div>
+          <p>
+            Apex R&M Group Ltd maintains active presence on the following social media platforms. Our
+            <strong>Automation System</strong> (hosted at <code>/Aut/</code>) manages scheduling, publishing,
+            monitoring, and analytics across these channels:
+          </p>
+
+          <div class="social-grid">
+            <a href="https://www.linkedin.com/company/116016508" target="_blank" rel="noopener noreferrer" class="social-card linkedin" aria-label="LinkedIn Company Page">
+              <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+              <div class="social-info">
+                <div class="social-platform">LinkedIn</div>
+                <div class="social-handle">Apex R&M Group</div>
+                <div class="social-purpose">Company page, B2B content, API integration, community management</div>
+              </div>
+            </a>
+            <a href="https://x.com/rugema33" target="_blank" rel="noopener noreferrer" class="social-card twitter" aria-label="X / Twitter Profile">
+              <div class="social-icon"><i class="fab fa-x-twitter"></i></div>
+              <div class="social-info">
+                <div class="social-platform">X (Twitter)</div>
+                <div class="social-handle">@rugema33</div>
+                <div class="social-purpose">Industry insights, news updates, thought leadership</div>
+              </div>
+            </a>
+            <a href="https://web.facebook.com/profile.php?id=61589665884720" target="_blank" rel="noopener noreferrer" class="social-card facebook" aria-label="Facebook Page">
+              <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+              <div class="social-info">
+                <div class="social-platform">Facebook</div>
+                <div class="social-handle">Apex R&M Group</div>
+                <div class="social-purpose">Community engagement, project showcases, audience building</div>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/apexrmgroup/" target="_blank" rel="noopener noreferrer" class="social-card instagram" aria-label="Instagram Profile">
+              <div class="social-icon"><i class="fab fa-instagram"></i></div>
+              <div class="social-info">
+                <div class="social-platform">Instagram</div>
+                <div class="social-handle">@apexrmgroup</div>
+                <div class="social-purpose">Visual content, GIS maps, project imagery, brand awareness</div>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/@ApexRMGroup" target="_blank" rel="noopener noreferrer" class="social-card youtube" aria-label="YouTube Channel">
+              <div class="social-icon"><i class="fab fa-youtube"></i></div>
+              <div class="social-info">
+                <div class="social-platform">YouTube</div>
+                <div class="social-handle">@ApexRMGroup</div>
+                <div class="social-purpose">Tutorials, webinars, project case studies, training content</div>
+              </div>
+            </a>
+            <a href="https://wa.me/250787523890" target="_blank" rel="noopener noreferrer" class="social-card whatsapp" aria-label="WhatsApp Business">
+              <div class="social-icon"><i class="fab fa-whatsapp"></i></div>
+              <div class="social-info">
+                <div class="social-platform">WhatsApp Business</div>
+                <div class="social-handle">+250 787 523 890</div>
+                <div class="social-purpose">Client communication, service inquiries, project coordination</div>
+              </div>
+            </a>
+          </div>
+
+          <h3>5.1 Data Collected Through Social Media</h3>
+          <p>When you interact with our social media profiles, we may receive:</p>
+          <ul>
+            <li>Your public profile information (name, profile photo, job title, location — as set by you on the platform)</li>
+            <li>Content of comments, messages, mentions, and reactions you direct at our accounts</li>
+            <li>Aggregated demographic and engagement analytics provided by the platforms (non-personally identifiable)</li>
+            <li>Information from direct messages if you initiate contact with us through those channels</li>
+          </ul>
+
+          <h3>5.2 Social Media Automation System</h3>
+          <p>
+            Our internal Automation platform (<strong>ApexRM Social Media Automation / SMH</strong>) is
+            used by authorized Apex R&M staff to:
+          </p>
+          <ul>
+            <li>Schedule and publish content to connected social media accounts</li>
+            <li>Monitor engagement metrics, follower growth, and reach</li>
+            <li>Draft, review, and approve content before publication</li>
+            <li>Manage API connections to LinkedIn, and other platforms</li>
+            <li>Store content calendars, post templates, and analytics reports</li>
+          </ul>
+          <p>
+            Access to the Automation system is restricted to authorized employees via secure authentication.
+            All data processed within this system is subject to the data handling practices described in
+            this policy.
+          </p>
+          <div class="callout info">
+            <div class="callout-icon"><i class="fa fa-circle-info"></i></div>
+            <div class="callout-body">
+              <strong>No Automated Decision-Making</strong>
+              <p>Our automation tools are used only for content scheduling and analytics. No automated
+              decisions with legal or significant effects are made about individuals using these systems.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: LINKEDIN API -->
+        <section class="policy-section" id="s6" aria-labelledby="s6-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 06</div>
+              <h2 class="section-title" id="s6-title">LinkedIn Community Management API</h2>
+            </div>
+          </div>
+          <p class="lead">
+            Apex R&M Group Ltd uses the <strong>LinkedIn Community Management API</strong> to manage
+            our LinkedIn Company Page, engage with our professional community, and publish content
+            in compliance with LinkedIn's Developer Agreement and Privacy Policy.
+          </p>
+
+          <h3>6.1 API Permissions & Scope</h3>
+          <p>Our LinkedIn API integration requests the following permissions, used strictly for the stated purposes:</p>
+          <div class="data-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Permission / Scope</th>
+                  <th>Purpose</th>
+                  <th>Data Accessed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>r_organization_social</td>
+                  <td>Read Company Page posts and analytics</td>
+                  <td>Post performance metrics, engagement rates, impressions</td>
+                </tr>
+                <tr>
+                  <td>w_organization_social</td>
+                  <td>Publish posts to Company Page</td>
+                  <td>Content we publish; no personal member data</td>
+                </tr>
+                <tr>
+                  <td>r_organization_admin</td>
+                  <td>Manage page settings and access</td>
+                  <td>Page configuration, admin roles (internal only)</td>
+                </tr>
+                <tr>
+                  <td>rw_organization_admin</td>
+                  <td>Update Company Page information</td>
+                  <td>Page description, logo, cover image (internal only)</td>
+                </tr>
+                <tr>
+                  <td>r_1st_connections_size</td>
+                  <td>Understand audience size</td>
+                  <td>Aggregate follower count only</td>
+                </tr>
+                <tr>
+                  <td>w_member_social</td>
+                  <td>Manage community interactions on behalf of authorized admins</td>
+                  <td>Comments, reactions made by our page admins</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>6.2 Data Accessed via LinkedIn API</h3>
+          <p>Through the LinkedIn Community Management API, we access and process:</p>
+          <ul>
+            <li><strong>Company Page Analytics:</strong> Impressions, clicks, engagement rates, follower demographics (aggregated by LinkedIn, not individually identifiable)</li>
+            <li><strong>Post Performance Data:</strong> Likes, comments, shares, and reach for content we publish</li>
+            <li><strong>Comment Content:</strong> Text of comments on our Company Page posts, used to respond to community members and monitor engagement</li>
+            <li><strong>Follower Growth Data:</strong> Changes in follower count over time (aggregate only)</li>
+            <li><strong>Visitor Analytics:</strong> Aggregated data on page visitors by industry, function, seniority, and geography — provided by LinkedIn in anonymized form</li>
+          </ul>
+
+          <h3>6.3 Limitations & Commitments</h3>
+          <ul>
+            <li>We do not use the LinkedIn API to scrape or store personal data of individual LinkedIn members without their explicit consent</li>
+            <li>We do not use LinkedIn API data for purposes beyond managing our Company Page and community engagement</li>
+            <li>We do not sell, rent, or transfer LinkedIn-sourced data to any third party</li>
+            <li>All LinkedIn data is processed in accordance with LinkedIn's API Terms of Service and Data Processing Agreement</li>
+            <li>Our API access tokens are stored securely and rotated regularly</li>
+            <li>We respond to LinkedIn API data deletion requests within 30 days</li>
+          </ul>
+
+          <h3>6.4 OAuth & User Authorization</h3>
+          <p>
+            If you authorize our application to access your LinkedIn account (e.g., as a Company Page
+            administrator), we request only the minimum necessary permissions. You may revoke access at
+            any time through LinkedIn's Security Settings at
+            <a href="https://www.linkedin.com/psettings/permitted-services" target="_blank" rel="noopener">linkedin.com/psettings/permitted-services</a>.
+          </p>
+
+          <div class="callout success">
+            <div class="callout-icon"><i class="fa fa-handshake"></i></div>
+            <div class="callout-body">
+              <strong>LinkedIn Developer Compliance</strong>
+              <p>Apex R&M Group Ltd is committed to full compliance with LinkedIn's Developer Agreement,
+              API Terms of Use, and Community Guidelines. Our use of the LinkedIn API is subject to
+              LinkedIn's Privacy Policy available at
+              <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener">linkedin.com/legal/privacy-policy</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7: HOW WE USE DATA -->
+        <section class="policy-section" id="s7" aria-labelledby="s7-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-gears"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 07</div>
+              <h2 class="section-title" id="s7-title">How We Use Your Data</h2>
+            </div>
+          </div>
+          <p>We use your personal information for the following specific, documented purposes:</p>
+
+          <div class="data-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Purpose</th>
+                  <th>Type of Data Used</th>
+                  <th>Legal Basis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Responding to inquiries and providing client services</td>
+                  <td>Identity, Contact, Communication data</td>
+                  <td>Contract performance / Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>Delivering and improving our GIS / consulting services</td>
+                  <td>Project data, Spatial data, Identity data</td>
+                  <td>Contract performance</td>
+                </tr>
+                <tr>
+                  <td>Publishing and managing social media content</td>
+                  <td>Public engagement data, API analytics</td>
+                  <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>LinkedIn Community Management via API</td>
+                  <td>Page analytics, comment content, follower data</td>
+                  <td>Legitimate interests / LinkedIn ToS</td>
+                </tr>
+                <tr>
+                  <td>Sending newsletter and marketing communications</td>
+                  <td>Email address, preferences</td>
+                  <td>Consent</td>
+                </tr>
+                <tr>
+                  <td>Website analytics and performance improvement</td>
+                  <td>Technical data, Usage data, Cookie data</td>
+                  <td>Legitimate interests / Consent</td>
+                </tr>
+                <tr>
+                  <td>Processing job applications</td>
+                  <td>Career data, Identity data, Contact data</td>
+                  <td>Pre-contractual steps</td>
+                </tr>
+                <tr>
+                  <td>Fraud prevention and security</td>
+                  <td>Technical data, Usage data</td>
+                  <td>Legal obligation / Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>Compliance with legal and regulatory obligations</td>
+                  <td>All relevant data</td>
+                  <td>Legal obligation</td>
+                </tr>
+                <tr>
+                  <td>Improving our Automation system performance</td>
+                  <td>Usage logs, API response data</td>
+                  <td>Legitimate interests</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout danger">
+            <div class="callout-icon"><i class="fa fa-ban"></i></div>
+            <div class="callout-body">
+              <strong>We Will Never:</strong>
+              <p>Sell your personal data to third parties · Use your data for purposes beyond those listed
+              above without obtaining fresh consent · Build profiles for targeted advertising on behalf
+              of third parties · Process your data in ways incompatible with the purpose for which it
+              was originally collected.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8: LEGAL BASIS -->
+        <section class="policy-section" id="s8" aria-labelledby="s8-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-scale-balanced"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 08</div>
+              <h2 class="section-title" id="s8-title">Legal Basis for Processing</h2>
+            </div>
+          </div>
+          <p>We process personal data only where we have a valid legal basis. The applicable bases are:</p>
+          <ul>
+            <li><strong>Consent (Art. 6(1)(a) GDPR):</strong> Where you have given freely, specific, informed, and unambiguous consent — for example, newsletter subscription or cookie use. You may withdraw consent at any time.</li>
+            <li><strong>Contract Performance (Art. 6(1)(b) GDPR):</strong> Where processing is necessary to fulfill a contract with you or to take pre-contractual steps at your request — for example, delivering consulting services.</li>
+            <li><strong>Legal Obligation (Art. 6(1)(c) GDPR):</strong> Where we are required to process data to comply with a legal obligation — for example, tax records, audit requirements, or government requests.</li>
+            <li><strong>Legitimate Interests (Art. 6(1)(f) GDPR):</strong> Where processing is necessary for our legitimate business interests, provided these are not overridden by your rights — for example, website analytics, social media management, fraud prevention, and API integrations for our own operations.</li>
+            <li><strong>Rwandan Data Protection Law:</strong> We comply with Rwanda's Law on the Protection of Personal Data and Privacy (Law No. 058/2021 of 13/10/2021) and regulations issued thereunder.</li>
+          </ul>
+        </section>
+
+        <!-- SECTION 9: DATA SHARING -->
+        <section class="policy-section" id="s9" aria-labelledby="s9-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-arrows-split-up-and-left"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 09</div>
+              <h2 class="section-title" id="s9-title">Data Sharing & Disclosure</h2>
+            </div>
+          </div>
+          <p>We may share your personal data in the following limited circumstances:</p>
+
+          <h3>9.1 Service Providers & Processors</h3>
+          <p>We engage trusted third-party service providers who process data on our behalf under strict contractual obligations:</p>
+          <ul>
+            <li><strong>Cloud Hosting:</strong> Cloudflare (Cloudflare Workers / Wrangler) — website hosting and CDN</li>
+            <li><strong>Database Services:</strong> Supabase — structured data storage and real-time database</li>
+            <li><strong>Email Services:</strong> EmailJS — contact form email delivery</li>
+            <li><strong>Analytics:</strong> Privacy-respecting analytics tools for site performance measurement</li>
+            <li><strong>Social Media Platforms:</strong> LinkedIn, Meta (Facebook/Instagram), Google (YouTube), X Corp — content publishing via their APIs</li>
+            <li><strong>Communication:</strong> WhatsApp Business API for client communications</li>
+          </ul>
+
+          <h3>9.2 Professional Advisors</h3>
+          <p>Lawyers, accountants, auditors, and insurers who require access to data in order to provide professional services to us, under confidentiality obligations.</p>
+
+          <h3>9.3 Legal Requirements</h3>
+          <p>We may disclose your data where required by law, court order, regulatory requirement, or to protect the rights, property, or safety of the Company, our clients, or the public.</p>
+
+          <h3>9.4 Business Transfers</h3>
+          <p>In the event of a merger, acquisition, restructuring, or sale of assets, your data may be transferred as part of the business. We will notify you in advance of any such transfer and the new privacy terms that would apply.</p>
+
+          <h3>9.5 With Your Consent</h3>
+          <p>We may share data with other third parties where we have your explicit, informed consent to do so.</p>
+
+          <div class="callout danger">
+            <div class="callout-icon"><i class="fa fa-ban"></i></div>
+            <div class="callout-body">
+              <strong>We Do Not Sell Data</strong>
+              <p>Apex R&M Group Ltd does not sell, rent, lease, or trade personal data to third-party
+              marketers, advertisers, or data brokers — under any circumstances.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 10: COOKIES -->
+        <section class="policy-section" id="s10" aria-labelledby="s10-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-cookie-bite"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 10</div>
+              <h2 class="section-title" id="s10-title">Cookies & Tracking Technologies</h2>
+            </div>
+          </div>
+          <p>Our website and automation tools use cookies and similar technologies. Here is what we use and why:</p>
+          <div class="data-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cookie Type</th>
+                  <th>Purpose</th>
+                  <th>Duration</th>
+                  <th>Can You Opt Out?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Strictly Necessary</td>
+                  <td>Session management, security tokens, authentication for admin portal</td>
+                  <td>Session / 24 hrs</td>
+                  <td>No — required for site function</td>
+                </tr>
+                <tr>
+                  <td>Functional</td>
+                  <td>Remembering language, display preferences, user settings</td>
+                  <td>1 year</td>
+                  <td>Optional</td>
+                </tr>
+                <tr>
+                  <td>Analytics</td>
+                  <td>Understanding site usage, page performance, visitor behavior (aggregated)</td>
+                  <td>Up to 2 years</td>
+                  <td>Yes — via browser settings</td>
+                </tr>
+                <tr>
+                  <td>Social Media Pixels</td>
+                  <td>LinkedIn Insight Tag, Meta Pixel — understanding source of traffic</td>
+                  <td>Up to 180 days</td>
+                  <td>Yes — via consent banner</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>You can manage or disable cookies through your browser settings. Disabling analytics or functional cookies may affect some features of our site but will not prevent you from accessing core content.</p>
+        </section>
+
+        <!-- SECTION 11: RETENTION -->
+        <section class="policy-section" id="s11" aria-labelledby="s11-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-clock-rotate-left"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 11</div>
+              <h2 class="section-title" id="s11-title">Data Retention</h2>
+            </div>
+          </div>
+          <p>We retain personal data only as long as necessary for the purpose for which it was collected, or as required by law:</p>
+          <div class="data-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data Category</th>
+                  <th>Retention Period</th>
+                  <th>Basis</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Client project & contract data</td>
+                  <td>7 years after project completion</td>
+                  <td>Legal / Tax obligation</td>
+                </tr>
+                <tr>
+                  <td>Contact form inquiries (no contract)</td>
+                  <td>2 years from last contact</td>
+                  <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>Newsletter subscribers</td>
+                  <td>Until unsubscription + 1 year</td>
+                  <td>Consent</td>
+                </tr>
+                <tr>
+                  <td>Job applications (unsuccessful)</td>
+                  <td>6 months after decision</td>
+                  <td>Pre-contractual / Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>Job applications (hired)</td>
+                  <td>Duration of employment + 7 years</td>
+                  <td>Legal obligation</td>
+                </tr>
+                <tr>
+                  <td>Website analytics data</td>
+                  <td>26 months (anonymized thereafter)</td>
+                  <td>Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>LinkedIn API data (post analytics)</td>
+                  <td>3 years (aggregated) / 1 year (raw)</td>
+                  <td>Legitimate interests / LinkedIn ToS</td>
+                </tr>
+                <tr>
+                  <td>Automation system logs</td>
+                  <td>90 days rolling</td>
+                  <td>Security / Legitimate interests</td>
+                </tr>
+                <tr>
+                  <td>Security & fraud prevention data</td>
+                  <td>3 years</td>
+                  <td>Legal obligation / Legitimate interests</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>When data is no longer required, we securely delete or anonymize it. Anonymized data may be retained indefinitely for statistical or research purposes.</p>
+        </section>
+
+        <!-- SECTION 12: SECURITY -->
+        <section class="policy-section" id="s12" aria-labelledby="s12-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-lock"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 12</div>
+              <h2 class="section-title" id="s12-title">Data Security</h2>
+            </div>
+          </div>
+          <p>We implement robust technical and organizational security measures to protect your data against unauthorized access, loss, destruction, or alteration:</p>
+
+          <h3>Technical Measures</h3>
+          <ul>
+            <li><strong>Encryption in Transit:</strong> All data transmitted between your browser and our servers is encrypted via TLS 1.3 / HTTPS</li>
+            <li><strong>Encryption at Rest:</strong> Sensitive data stored in our Supabase database is encrypted at rest using AES-256</li>
+            <li><strong>Access Controls:</strong> Role-based access control (RBAC) ensures only authorized personnel access specific data</li>
+            <li><strong>API Key Security:</strong> LinkedIn and other API keys/tokens are stored in environment variables, never in source code, and rotated regularly</li>
+            <li><strong>Authentication:</strong> Our Automation System requires secure login with session management and timeout policies</li>
+            <li><strong>Cloudflare Protection:</strong> DDoS mitigation, WAF (Web Application Firewall), and bot management via Cloudflare</li>
+          </ul>
+
+          <h3>Organizational Measures</h3>
+          <ul>
+            <li>Data processing agreements (DPAs) with all third-party processors</li>
+            <li>Staff training on data protection and privacy practices</li>
+            <li>Internal access limited on a need-to-know basis</li>
+            <li>Regular security reviews of our systems and third-party processors</li>
+            <li>Incident response procedure for data breaches</li>
+          </ul>
+
+          <div class="callout warning">
+            <div class="callout-icon"><i class="fa fa-triangle-exclamation"></i></div>
+            <div class="callout-body">
+              <strong>Data Breach Notification</strong>
+              <p>In the event of a personal data breach that is likely to result in a high risk to your
+              rights and freedoms, we will notify affected individuals without undue delay, and notify
+              the relevant supervisory authority within 72 hours, as required by applicable law.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 13: YOUR RIGHTS -->
+        <section class="policy-section" id="s13" aria-labelledby="s13-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-user-shield"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 13</div>
+              <h2 class="section-title" id="s13-title">Your Rights</h2>
+            </div>
+          </div>
+          <p>Depending on your jurisdiction, you may have the following rights regarding your personal data. We are committed to honoring these rights promptly and without charge:</p>
+
+          <div class="rights-grid">
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-eye"></i></div>
+              <h4>Right of Access</h4>
+              <p>Request a copy of the personal data we hold about you and information about how we use it.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-pen-to-square"></i></div>
+              <h4>Right to Rectification</h4>
+              <p>Request correction of inaccurate or incomplete personal data we hold about you.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-trash"></i></div>
+              <h4>Right to Erasure</h4>
+              <p>Request deletion of your personal data where there is no compelling reason for its continued processing.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-hand"></i></div>
+              <h4>Right to Restrict</h4>
+              <p>Request that we limit how we use your data in certain circumstances while we address a complaint.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-share"></i></div>
+              <h4>Right to Portability</h4>
+              <p>Receive your data in a structured, machine-readable format and transfer it to another controller.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-ban"></i></div>
+              <h4>Right to Object</h4>
+              <p>Object to processing based on legitimate interests, including profiling and direct marketing.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-rotate-left"></i></div>
+              <h4>Withdraw Consent</h4>
+              <p>Withdraw consent at any time where processing is based on consent, without affecting prior lawful processing.</p>
+            </div>
+            <div class="right-card">
+              <div class="right-card-icon"><i class="fa fa-flag"></i></div>
+              <h4>Right to Complain</h4>
+              <p>Lodge a complaint with a supervisory authority if you believe we have not handled your data lawfully.</p>
+            </div>
+          </div>
+
+          <h3>How to Exercise Your Rights</h3>
+          <p>
+            To exercise any of these rights, please contact our Data Protection Officer using the details
+            in Section 18. Please include your full name, contact details, and a clear description of
+            your request. We will respond within <strong>30 days</strong> and may need to verify your
+            identity before processing the request.
+          </p>
+          <p>
+            If you are not satisfied with our response, you have the right to lodge a complaint with
+            Rwanda's National Cyber Security Authority (NCSA) or the relevant data protection authority
+            in your jurisdiction.
+          </p>
+        </section>
+
+        <!-- SECTION 14: INTERNATIONAL TRANSFERS -->
+        <section class="policy-section" id="s14" aria-labelledby="s14-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-globe"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 14</div>
+              <h2 class="section-title" id="s14-title">International Data Transfers</h2>
+            </div>
+          </div>
+          <p>
+            Apex R&M Group Ltd is based in Rwanda. Some of our third-party service providers (including
+            Cloudflare, Supabase, LinkedIn, and Google) may process data in the United States, the
+            European Union, or other jurisdictions. Where we transfer data internationally, we ensure
+            appropriate safeguards are in place:
+          </p>
+          <ul>
+            <li><strong>Standard Contractual Clauses (SCCs):</strong> We use EU-approved SCCs where applicable with processors in countries without an adequacy decision</li>
+            <li><strong>Adequacy Decisions:</strong> We transfer to countries recognized as providing adequate protection where available</li>
+            <li><strong>Processor DPAs:</strong> All processors sign Data Processing Agreements incorporating appropriate transfer mechanisms</li>
+            <li><strong>LinkedIn:</strong> Governed by LinkedIn's Data Processing Agreement and their participation in applicable data transfer frameworks</li>
+          </ul>
+          <p>
+            You may request details of the specific safeguards we rely on for any international transfer
+            by contacting us at <a href="mailto:privacy@apexrmgroup.com">privacy@apexrmgroup.com</a>.
+          </p>
+        </section>
+
+        <!-- SECTION 15: CHILDREN'S PRIVACY -->
+        <section class="policy-section" id="s15" aria-labelledby="s15-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-child"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 15</div>
+              <h2 class="section-title" id="s15-title">Children's Privacy</h2>
+            </div>
+          </div>
+          <p>
+            Our services are directed to professional organizations, government bodies, businesses,
+            and adults aged 18 and above. We do not knowingly collect or solicit personal data from
+            children under the age of 16 (or such higher age as required under local law).
+          </p>
+          <p>
+            If we discover that we have inadvertently collected personal data from a person under
+            the age of 16, we will delete it immediately. If you believe we may have collected such
+            data, please contact us immediately at
+            <a href="mailto:privacy@apexrmgroup.com">privacy@apexrmgroup.com</a>.
+          </p>
+        </section>
+
+        <!-- SECTION 16: THIRD-PARTY LINKS -->
+        <section class="policy-section" id="s16" aria-labelledby="s16-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-arrow-up-right-from-square"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 16</div>
+              <h2 class="section-title" id="s16-title">Third-Party Links & Embedded Content</h2>
+            </div>
+          </div>
+          <p>
+            Our website and social media channels may contain links to third-party websites, embedded
+            maps (Google Maps), videos (YouTube), or other external content. Clicking these links or
+            interacting with embedded content may allow those third parties to collect data about you.
+          </p>
+          <p>
+            We are not responsible for the privacy practices of third-party websites or services.
+            We encourage you to review the privacy policy of any third-party site you visit. The
+            inclusion of a link does not imply endorsement of that site or service by Apex R&M Group Ltd.
+          </p>
+        </section>
+
+        <!-- SECTION 17: CHANGES -->
+        <section class="policy-section" id="s17" aria-labelledby="s17-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-rotate"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 17</div>
+              <h2 class="section-title" id="s17-title">Policy Changes & Updates</h2>
+            </div>
+          </div>
+          <p>
+            We may update this Privacy Policy from time to time to reflect changes in our business
+            practices, legal requirements, or the services we provide. When we make material changes,
+            we will:
+          </p>
+          <ul>
+            <li>Update the "Last Updated" date at the top of this policy and in the document header</li>
+            <li>Post a prominent notice on our website homepage</li>
+            <li>Notify registered newsletter subscribers by email for significant changes</li>
+            <li>Post an update notice across our social media channels</li>
+          </ul>
+          <p>
+            We encourage you to review this Privacy Policy periodically. Your continued use of our
+            services after changes become effective constitutes acceptance of the revised policy.
+          </p>
+          <p>
+            Previous versions of this Privacy Policy are available on request by contacting us at
+            <a href="mailto:privacy@apexrmgroup.com">privacy@apexrmgroup.com</a>.
+          </p>
+        </section>
+
+        <!-- SECTION 18: CONTACT -->
+        <section class="policy-section" id="s18" aria-labelledby="s18-title">
+          <div class="section-header">
+            <div class="section-icon"><i class="fa fa-envelope-open-text"></i></div>
+            <div class="section-title-wrap">
+              <div class="section-number">Section 18</div>
+              <h2 class="section-title" id="s18-title">Contact Us & Data Protection Officer</h2>
+            </div>
+          </div>
+          <p>
+            If you have any questions, concerns, or requests regarding this Privacy Policy or our
+            data processing practices, please contact us through any of the following channels.
+            We aim to respond to all privacy-related queries within <strong>5 business days</strong>.
+          </p>
+
+          <div class="contact-block">
+            <h3><i class="fa fa-id-card" style="margin-right:.5rem;"></i> Data Protection Officer — Apex R&M Group Ltd</h3>
+            <div class="contact-items">
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-envelope"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">Privacy Email</div>
+                  <div class="contact-item-value"><a href="mailto:privacy@apexrmgroup.com">privacy@apexrmgroup.com</a></div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-envelope"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">General Email</div>
+                  <div class="contact-item-value"><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-phone"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">Phone</div>
+                  <div class="contact-item-value"><a href="tel:+250787523890">+250 787 523 890</a></div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">WhatsApp</div>
+                  <div class="contact-item-value"><a href="https://wa.me/250787523890" target="_blank">+250 787 523 890</a></div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-location-dot"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">Headquarters</div>
+                  <div class="contact-item-value">Nyagacaca Village, Ruyenzi Cell, Runda<br>Kamonyi District, Rwanda</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-building"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">Operational Office</div>
+                  <div class="contact-item-value">KG 123 St, Kimihurura<br>Gasabo District, Kigali, Rwanda</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fab fa-linkedin-in"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">LinkedIn</div>
+                  <div class="contact-item-value"><a href="https://www.linkedin.com/company/116016508" target="_blank" rel="noopener">linkedin.com/company/116016508</a></div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon"><i class="fa fa-globe"></i></div>
+                <div class="contact-item-body">
+                  <div class="contact-item-label">Website</div>
+                  <div class="contact-item-value"><a href="https://apexrmgroup.com" target="_blank">apexrmgroup.com</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Regulatory Authorities</h3>
+          <p>If you are not satisfied with our response to a privacy concern, you have the right to contact:</p>
+          <ul>
+            <li><strong>Rwanda:</strong> National Cyber Security Authority (NCSA) — <a href="https://ncsa.gov.rw" target="_blank" rel="noopener">ncsa.gov.rw</a></li>
+            <li><strong>EU residents:</strong> Your local Data Protection Authority (DPA)</li>
+            <li><strong>UK residents:</strong> Information Commissioner's Office (ICO) — <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a></li>
+            <li><strong>LinkedIn API disputes:</strong> LinkedIn Privacy at <a href="https://www.linkedin.com/help/linkedin/ask/TSO-DPO" target="_blank" rel="noopener">linkedin.com/help</a></li>
+          </ul>
+        </section>
+
+        <!-- LAST UPDATED BAR -->
+        <div class="last-updated-bar">
+          <div class="date-info">
+            <i class="fa fa-calendar"></i>
+            Last Updated: <strong>June 7, 2025</strong> &nbsp;|&nbsp; Effective Date: <strong>June 7, 2025</strong>
+          </div>
+          <div class="version-tag">
+            <i class="fa fa-code-branch"></i>
+            v3.1 — APRM-PP-2025
+          </div>
+        </div>
+
+      </article>
+    </main>
+  </div><!-- end .page-wrap -->
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-name" style="font-family:'DM Serif Display',serif; color:var(--gold); font-size:1.4rem;">APEX R&M GROUP</span>
+          <span class="logo-tagline" style="color:rgba(248,244,234,.45); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; font-weight:500;">Spatial Intelligence. Strategic Growth.</span>
+          <p>Africa's premier spatial intelligence and consulting firm. Headquartered in Kigali, Rwanda. Delivering GIS, remote sensing, land administration, and digital automation solutions across the continent.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/company/116016508" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/rugema33" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://web.facebook.com/profile.php?id=61589665884720" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/apexrmgroup/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@ApexRMGroup" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/250787523890" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="../services.html">GIS & Geospatial</a></li>
+            <li><a href="../services.html">Remote Sensing</a></li>
+            <li><a href="../services.html">Land Administration</a></li>
+            <li><a href="../services.html">Environmental Consulting</a></li>
+            <li><a href="../services.html">Infrastructure Planning</a></li>
+            <li><a href="../SMH.html">Social Media Automation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../team.html">Our Team</a></li>
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="../sectors.html">Sectors</a></li>
+            <li><a href="../insights.html">Insights</a></li>
+            <li><a href="../careers.html">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../Terms of Service.html">Terms of Service</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+            <li><a href="mailto:privacy@apexrmgroup.com">Data Requests</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda. — Document ID: APRM-PP-2025-v3.1</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="../Terms of Service.html">Terms of Service</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRINT BUTTON -->
+  <button class="print-btn" onclick="window.print()" title="Print this Privacy Policy" aria-label="Print Privacy Policy">
+    <i class="fa fa-print"></i>
+  </button>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/250787523890" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Active TOC highlighting on scroll
+    const sections = document.querySelectorAll('.policy-section[id]');
+    const tocLinks = document.querySelectorAll('#toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Smooth scroll for TOC links
+    tocLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
