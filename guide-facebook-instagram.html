@@ -200,8 +200,8 @@
         <div class="num fb">1</div>
         <div class="step-content">
           <h4>Find your App ID</h4>
-          <p>On your App Dashboard, look at the top of the page or in the left sidebar. You will see a number labelled <strong>App ID</strong> — it is a long number like <em>1234567890123456</em>. This is your <strong>FACEBOOK_APP_ID</strong>. Copy it and save it somewhere safe.</p>
-          <div class="url-box">Example: FACEBOOK_APP_ID = 1234567890123456</div>
+          <p>On your App Dashboard, look at the top of the page or in the left sidebar. You will see a number labelled <strong>App ID</strong> — it is a long number like <em>1234567....</em>. This is your <strong>FACEBOOK_APP_ID</strong>. Copy it and save it somewhere safe.</p>
+          <div class="url-box">Example: FACEBOOK_APP_ID = 1234567.....</div>
         </div>
       </div>
 
@@ -227,7 +227,7 @@
         <div class="num fb">1</div>
         <div class="step-content">
           <h4>Add the "Facebook Login" product to your app</h4>
-          <p>In the left sidebar of your app dashboard, click <strong>"Add Product"</strong> (or scroll down to the Products section on the dashboard). Find <strong>Facebook Login</strong> in the list and click <strong>"Set Up"</strong> next to it. Choose <strong>Web</strong> as the platform. On the next screen, it will ask for your website URL — enter <strong>https://app.apexrmgroup.com</strong> and click Save. Then click <strong>Continue</strong> until the setup wizard is complete.</p>
+          <p>In the left sidebar of your app dashboard, click <strong>"Add Product"</strong> (or scroll down to the Products section on the dashboard). Find <strong>Facebook Login</strong> in the list and click <strong>"Set Up"</strong> next to it. Choose <strong>Web</strong> as the platform. On the next screen, it will ask for your website URL — enter <strong>https://[Your domain]</strong> and click Save. Then click <strong>Continue</strong> until the setup wizard is complete.</p>
         </div>
       </div>
 
@@ -236,7 +236,7 @@
         <div class="step-content">
           <h4>Configure the OAuth Redirect URIs</h4>
           <p>After adding Facebook Login, it will appear in your left sidebar. Click <strong>Facebook Login</strong> → <strong>Settings</strong> in the sidebar. You will see a field called <strong>"Valid OAuth Redirect URIs"</strong>. This is where you tell Facebook which URLs are allowed to receive the authorization response after a user logs in. Add the following URL exactly as written:</p>
-          <div class="url-box">https://app.apexrmgroup.com/api/social/facebook/callback</div>
+          <div class="url-box">https://[Your domain]/api/social/facebook/callback</div>
           <p>Click <strong>Add</strong> after typing the URL, then click <strong>Save Changes</strong> at the bottom of the page.</p>
           <div class="tip">If you are also running the app locally for development, add a second redirect URI: <strong>http://localhost:3000/api/social/facebook/callback</strong></div>
         </div>
@@ -311,7 +311,7 @@
         <div class="step-content">
           <h4>Set the Instagram OAuth Redirect URI</h4>
           <p>After adding Instagram Graph API, go back to <strong>Facebook Login</strong> → <strong>Settings</strong> in the sidebar. In the <strong>Valid OAuth Redirect URIs</strong> field, also add the Instagram-specific callback URL:</p>
-          <div class="url-box">https://app.apexrmgroup.com/api/social/instagram/callback</div>
+          <div class="url-box">https://[Your domain]/api/social/instagram/callback</div>
           <p>Click <strong>Add</strong> and then <strong>Save Changes</strong>. Both the Facebook and Instagram callback URLs should now be in the list.</p>
         </div>
       </div>
@@ -370,8 +370,8 @@
           <h4>Open your .env.local file</h4>
           <p>In your project folder <strong>C:\Users\Pascal\Desktop\RUGEMA DCS\Apex\WebSite\Autmation</strong>, find and open the file named <strong>.env.local</strong> in a text editor. Find the lines for FACEBOOK_APP_ID and FACEBOOK_APP_SECRET and replace the placeholder values with the real ones you copied from the Facebook Developer portal.</p>
           <div class="env-box">
-            <span class="key">FACEBOOK_APP_ID</span>=<span class="val">1234567890123456</span><br/>
-            <span class="key">FACEBOOK_APP_SECRET</span>=<span class="val">abcdef1234567890abcdef1234567890</span>
+            <span class="key">FACEBOOK_APP_ID</span>=<span class="val">1234567......</span><br/>
+            <span class="key">FACEBOOK_APP_SECRET</span>=<span class="val">abcdef12345678......</span>
           </div>
         </div>
       </div>
@@ -399,7 +399,7 @@
 </div>
 
 <div class="footer">
-  Facebook &amp; Instagram Developer App Setup Guide — Apex R&amp;M Group — https://app.apexrmgroup.com
+  Facebook &amp; Instagram Developer App Setup Guide — Apex R&amp;M Group — https://[your domain name]
 </div>
 </body>
 </html>
