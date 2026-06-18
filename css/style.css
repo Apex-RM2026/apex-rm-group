@@ -375,19 +375,22 @@ ul { list-style: none; }
 
 /* CTA link */
 .nav-mobile .mobile-cta {
-  margin: 0.4rem 1.2rem 0.2rem;
-  padding: 0.72rem 1rem !important;
-  background: var(--gold);
-  color: var(--navy) !important;
-  border-radius: var(--radius);
+  margin: 0.2rem 0;
+  padding: 0.72rem 1.3rem !important;
+  background: rgba(201, 168, 76, 0.14);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--gold) !important;
+  border-radius: 0;
+  border-left: 3px solid transparent;
   font-weight: 700 !important;
-  justify-content: center;
+  justify-content: flex-start;
   letter-spacing: 0.05em;
 }
-.nav-mobile .mobile-cta i { color: var(--navy) !important; }
+.nav-mobile .mobile-cta i { color: var(--gold) !important; }
 .nav-mobile .mobile-cta:hover {
-  background: var(--gold-light) !important;
-  padding-left: 1rem !important;
+  background: rgba(201, 168, 76, 0.22) !important;
+  padding-left: 1.7rem !important;
 }
 
 /* Panel Footer */
