@@ -4,12 +4,18 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>X (Twitter) Developer App Setup Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="Images/favicon.png">
 <style>
-  :root{--navy:#1B2B5E;--tw:#000000;--green:#22c55e;--border:#e5e7eb;--bg:#f9fafb;--text:#1f2937;--muted:#6b7280}
+  :root{--gtw-navy:#1B2B5E;--tw:#000000;--green:#22c55e;--border:#e5e7eb;--bg:#f9fafb;--text:#1f2937;--muted:#6b7280}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:#fff;line-height:1.8;font-size:15px}
   .header{background:#000;color:white;padding:0}
-  .header-inner{max-width:960px;margin:0 auto;padding:48px 28px 36px}
+  .header-inner{max-width:960px;margin:0 auto;padding:150px 28px 36px}
+  @media (max-width:768px){ .header-inner{padding-top:110px} }
   .header h1{font-size:1.9rem;font-weight:800;margin-bottom:8px}
   .header p{opacity:.9;font-size:1rem;max-width:620px}
   .header .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
@@ -18,17 +24,17 @@
   .toc{max-width:960px;margin:0 auto;padding:20px 28px}
   .toc h2{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
   .toc-links{display:flex;flex-wrap:wrap;gap:8px}
-  .toc-links a{background:white;border:1px solid var(--border);color:var(--navy);padding:6px 16px;border-radius:20px;font-size:.83rem;text-decoration:none;font-weight:600}
-  .toc-links a:hover{background:var(--navy);color:white}
+  .toc-links a{background:white;border:1px solid var(--border);color:var(--gtw-navy);padding:6px 16px;border-radius:20px;font-size:.83rem;text-decoration:none;font-weight:600}
+  .toc-links a:hover{background:var(--gtw-navy);color:white}
   .content{max-width:960px;margin:0 auto;padding:44px 28px 80px}
   .section{margin-bottom:60px}
-  h2.section-title{font-size:1.45rem;font-weight:800;color:var(--navy);padding-bottom:12px;border-bottom:3px solid #000;margin-bottom:28px;display:flex;align-items:center;gap:10px}
+  h2.section-title{font-size:1.45rem;font-weight:800;color:var(--gtw-navy);padding-bottom:12px;border-bottom:3px solid #000;margin-bottom:28px;display:flex;align-items:center;gap:10px}
   h3.step-group{font-size:1.05rem;font-weight:800;color:white;padding:13px 20px;border-radius:10px 10px 0 0;margin-top:32px;background:#000}
   .step-body-wrap{border:2px solid var(--border);border-top:none;border-radius:0 0 10px 10px;padding:28px}
   .step{display:flex;gap:18px;margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid var(--border);align-items:flex-start}
   .step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
   .num{width:36px;height:36px;border-radius:50%;background:#000;color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.88rem;flex-shrink:0;margin-top:2px}
-  .step-content h4{font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+  .step-content h4{font-size:.98rem;font-weight:700;color:var(--gtw-navy);margin-bottom:8px}
   .step-content p{margin-bottom:8px;color:var(--text)}
   .step-content p:last-child{margin-bottom:0}
   .step-content ul{padding-left:20px;margin:8px 0}
@@ -38,7 +44,7 @@
   .callout.warn{background:#fffbeb;border-left:4px solid #f59e0b}
   .callout.success{background:#f0fdf4;border-left:4px solid var(--green)}
   .callout.danger{background:#fef2f2;border-left:4px solid #ef4444}
-  .callout strong{display:block;font-weight:700;color:var(--navy);margin-bottom:5px}
+  .callout strong{display:block;font-weight:700;color:var(--gtw-navy);margin-bottom:5px}
   .env-box{background:#1e293b;color:#e2e8f0;border-radius:8px;padding:18px 22px;margin:16px 0;font-family:monospace;font-size:.88rem;line-height:1.9}
   .env-box .comment{color:#64748b}
   .env-box .key{color:#93c5fd}
@@ -48,12 +54,42 @@
   .tip::before{content:'💡 Tip: ';font-weight:700}
   .warn-inline{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.87rem;color:#92400e;margin-top:10px}
   .warn-inline::before{content:'⚠️ Important: ';font-weight:700}
-  .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--navy);text-decoration:none;font-weight:600;font-size:.9rem;margin-bottom:28px;padding:8px 16px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}
-  .back-link:hover{background:var(--navy);color:white}
-  .footer{background:var(--navy);color:white;text-align:center;padding:26px;font-size:.83rem;opacity:.85}
+  .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--gtw-navy);text-decoration:none;font-weight:600;font-size:.9rem;margin-bottom:28px;padding:8px 16px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}
+  .back-link:hover{background:var(--gtw-navy);color:white}
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="sectors.html">Sectors</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-backdrop"></div>
+<div class="nav-mobile">
+  <div class="nav-mobile-body">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="sectors.html">Sectors</a>
+    <a href="team.html">Team</a>
+    <a href="contact.html" class="mobile-cta">Contact</a>
+  </div>
+  <div class="nav-mobile-footer">
+    <i class="fa-solid fa-location-dot"></i>
+    <span>Kigali, Rwanda &bull; Africa</span>
+  </div>
+</div>
 
 <div class="header">
   <div class="header-inner">
@@ -367,8 +403,71 @@
 
 </div>
 
-<div class="footer">
-  X (Twitter) Developer App Setup Guide — Apex R&amp;M Group — https://Your Domain
-</div>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/ApexRMGroup" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>(HQ) Nyagacaca Village, Ruyenzi Cell, Runda, Kamonyi District, Rwanda</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="https://app.apexrmgroup.com/">ApexRM Social App</a>
+        <a href="user-manual.html">ApexRM Social App User Manual</a>
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
