@@ -7,121 +7,11 @@
   <meta name="description" content="Terms of Service for Apex R&M Group Ltd. Legal terms governing use of our website, consulting services, spatial data, and professional engagements across Africa.">
   <meta name="keywords" content="terms of service, legal, consulting agreement, GIS terms, Apex R&M Group, spatial consulting terms">
   <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,40 75,85 25,85 10,40' fill='%23C9A84C'/%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    :root {
-      --navy: #0A1628;
-      --gold: #C9A84C;
-      --teal: #1A6B8A;
-      --slate: #2C3E50;
-      --warm-white: #F8F4EA;
-      --white: #ffffff;
-      --gray-light: #f5f7fa;
-      --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.08);
-      --shadow-md: 0 20px 40px -15px rgba(0,0,0,0.1);
-      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--slate);
-      background-color: var(--white);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    h1, h2, h3, h4, .logo-font {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-    }
-    .btn, .nav-links a, .tagline {
-      font-family: 'Montserrat', sans-serif;
-    }
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10,22,40,0.95);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      transition: var(--transition);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-    }
-    .navbar.scrolled {
-      background: var(--navy);
-      box-shadow: var(--shadow-sm);
-    }
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .logo h1 {
-      font-size: 1.6rem;
-      letter-spacing: -0.5px;
-      color: var(--gold);
-    }
-    .logo span {
-      font-size: 0.8rem;
-      display: block;
-      color: var(--warm-white);
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: 1px;
-    }
-    .logo a {
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--warm-white);
-      font-weight: 500;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--gold);
-    }
-    .menu-btn {
-      display: none;
-      font-size: 1.8rem;
-      color: var(--gold);
-      cursor: pointer;
-    }
-    @media (max-width: 1024px) {
-      .nav-links {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 80%;
-        height: calc(100vh - 70px);
-        background: var(--navy);
-        flex-direction: column;
-        padding: 2rem;
-        transition: 0.3s;
-        gap: 1.5rem;
-        box-shadow: 2px 0 20px rgba(0,0,0,0.2);
-      }
-      .nav-links.active { left: 0; }
-      .menu-btn { display: block; }
-    }
     /* Inner Hero */
     .inner-hero {
       background: linear-gradient(135deg, rgba(10,22,40,0.92), rgba(26,107,138,0.8)), url('Images/Home/H\ Line\ 191\ word.avif') center/cover no-repeat;
@@ -182,89 +72,44 @@
       margin-top: 2rem;
       font-style: italic;
     }
-    footer {
-      background: var(--navy);
-      color: var(--warm-white);
-      padding: 3rem 0 1rem;
-      margin-top: 0;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 2rem;
-    }
-    .footer-grid a {
-      color: var(--warm-white);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .footer-grid a:hover {
-      color: var(--gold);
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25D366;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 99;
-      transition: transform 0.2s;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.08);
-    }
-    .scroll-top {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      background: var(--gold);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      transition: 0.3s;
-      z-index: 99;
-      color: var(--navy);
-      font-size: 1.2rem;
-    }
     @media (max-width: 768px) {
       .inner-hero h1 { font-size: 2rem; }
       .terms-content { padding: 1.5rem; }
-      .container { padding: 0 20px; }
     }
   </style>
 </head>
 <body>
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <div class="logo"><a href="index.html"><h1>APEX R&M<span>Spatial Intelligence. Strategic Growth.</span></h1></a></div>
-    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="sectors.html">Sectors</a></li>
-      <li><a href="insights.html">Insights</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="team.html">Team</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="careers.html">Careers</a></li>
-    </ul>
-  </div>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="sectors.html">Sectors</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-backdrop"></div>
+<div class="nav-mobile">
+  <div class="nav-mobile-body">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="sectors.html">Sectors</a>
+    <a href="team.html">Team</a>
+    <a href="contact.html" class="mobile-cta">Contact</a>
+  </div>
+  <div class="nav-mobile-footer">
+    <i class="fa-solid fa-location-dot"></i>
+    <span>Kigali, Rwanda &bull; Africa</span>
+  </div>
+</div>
 
 <section class="inner-hero">
   <div class="container" data-aos="fade-up">
@@ -393,63 +238,74 @@
 </div>
 
 <footer>
-  <div class="container footer-grid">
-    <div>
-      <h3>APEX R&M GROUP</h3>
-      <p><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda</p>
-      <p><i class="fas fa-envelope"></i> info.apexrmgroup@gmail.com</p>
-      <p><i class="fas fa-phone"></i> +250 787 523 890</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <ul style="list-style:none;">
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>🔷</h4>
-      <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
-        <a href="https://www.linkedin.com/company/116016508"><i class="fab fa-linkedin"></i></a>
-        <a href="https://x.com/ApexRMGroup"><i class="fab fa-twitter"></i></a>
-        <a href="https://web.facebook.com/profile.php?id=61589665884720"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/apexrmgroup/"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.instagram.com/apexrmgroup/"><i class="fab fa-youtube"></i></a>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc">Africa's premier spatial consulting firm empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/ApexRMGroup" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>(HQ) Nyagacaca Village, Ruyenzi Cell, Runda, Kamonyi District, Rwanda</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info.apexrmgroup@gmail.com">info.apexrmgroup@gmail.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
     </div>
-    <div>
-      <h4>Newsletter</h4>
-      <input type="email" id="newsEmail" placeholder="Your email" style="padding:8px; border-radius:30px; border:none; width:100%;">
-      <button class="btn-primary" style="margin-top:8px; background: var(--gold); color: var(--navy); border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer;" onclick="alert('Thank you for subscribing to spatial insights!')">Subscribe</button>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="https://app.apexrmgroup.com/">ApexRM Social App</a>
+        <a href="user-manual.html">ApexRM Social App User Manual</a>
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
     </div>
-  </div>
-  <div style="text-align:center; padding-top:2rem; font-size:0.8rem;">
-    © 2025 Apex R&M Group Ltd. All rights reserved. || <a href="Privacy Policy.html" style="color:var(--gold);">Privacy Policy</a>
   </div>
 </footer>
 
-<a href="https://wa.me/250787523890" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-<div class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></div>
-
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 <script src="js/Terms of Service.js"></script>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
 <script>
   AOS.init({ duration: 800, once: true });
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => { if(window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
-  const menuBtn = document.getElementById('menuBtn');
-  const navLinks = document.getElementById('navLinks');
-  menuBtn.onclick = () => navLinks.classList.toggle('active');
-
-  const scrollTopBtn = document.getElementById('scrollTop');
-  window.addEventListener('scroll', () => { scrollTopBtn.style.opacity = window.scrollY > 500 ? '1' : '0'; });
-  scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Close mobile menu when clicking a link
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('active'));
-  });
 </script>
 </body>
 </html>
