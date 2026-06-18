@@ -336,7 +336,7 @@ ul { list-style: none; }
 }
 
 /* Panel Body */
-.nav-mobile-body { flex: 1; padding: 0.6rem 0; overflow-y: auto; }
+.nav-mobile-body { flex: 1; padding: 5.4rem 0 0.6rem; overflow-y: auto; }
 
 .nav-mobile-label {
   display: block;
@@ -1694,6 +1694,7 @@ footer {
   #navbar        { padding: 0.7rem 1rem; }
   .site-logo     { height: 46px; }
   .nav-logo-name { font-size: 0.85rem; }
+  .nav-mobile-body { padding-top: 4.6rem; }
 
   /* Hero */
   .hero h1    { font-size: 1.65rem; }
