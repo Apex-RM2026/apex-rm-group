@@ -126,11 +126,11 @@
 <section style="background: var(--white);">
   <div class="container">
     <div class="section-header centered reveal">
-      <span class="section-label">Our Expertise</span>
-      <h2 class="section-title">Comprehensive Spatial Solutions</h2>
-      <p class="section-subtitle">From raw satellite data to actionable governance frameworks we deliver the full spectrum of spatial consulting services your project demands.</p>
+      <span class="section-label" id="services-overview-label">Our Expertise</span>
+      <h2 class="section-title" id="services-overview-title">Comprehensive Spatial Solutions</h2>
+      <p class="section-subtitle" id="services-overview-subtitle">From raw satellite data to actionable governance frameworks we deliver the full spectrum of spatial consulting services your project demands.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid" id="services-overview-grid">
       <div class="service-card reveal" data-delay="100">
         <div class="service-icon">🗺️</div>
         <div class="service-num">01</div>
@@ -184,16 +184,16 @@
 <section class="why-section">
   <div class="container">
     <div class="why-grid">
-      <div class="why-image reveal-left">
+      <div class="why-image reveal-left" data-cms-media="why_image">
         <img src="Images/Home/H Line 191 word.avif" alt="Satellite imagery of Africa — Apex R&M Group spatial analysis" loading="lazy">
         <div class="why-image-badge">◆ </div>
       </div>
       <div class="reveal-right">
-        <span class="section-label">Why Choose Us</span>
-        <h2 class="section-title">Built for Africa.<br>Trusted Globally.</h2>
+        <span class="section-label" id="why-choose-label">Why Choose Us</span>
+        <h2 class="section-title" id="why-choose-title">Built for Africa.<br>Trusted Globally.</h2>
         <div class="gold-line"></div>
-        <p class="section-subtitle" style="margin-bottom:2rem;">We combine world-class technical expertise with deep local knowledge delivering spatial solutions that are both rigorous and contextually grounded.</p>
-        <div class="why-points">
+        <p class="section-subtitle" id="why-choose-subtitle" style="margin-bottom:2rem;">We combine world-class technical expertise with deep local knowledge delivering spatial solutions that are both rigorous and contextually grounded.</p>
+        <div class="why-points" id="why-points-grid">
           <div class="why-point">
             <div class="why-point-icon"><i class="fa-solid fa-database"></i></div>
             <div>
@@ -232,8 +232,8 @@
 <!-- ===================== CLIENT LOGOS ===================== -->
 <section class="clients-section">
   <div class="container">
-    <div class="clients-label">Trusted by Governments, NGOs & International Development Organisations</div>
-    <div class="clients-logos">
+    <div class="clients-label" id="client-logos-label">Trusted by Governments, NGOs & International Development Organisations</div>
+    <div class="clients-logos" id="client-logos-grid">
       <div class="client-logo-item">Rwanda MINIRENA</div>
       <div class="client-logo-item">World Bank Group</div>
       <div class="client-logo-item">UNDP Africa</div>
@@ -314,11 +314,11 @@
 <section style="background: var(--warm-white);">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Thought Leadership</span>
-      <h2 class="section-title">Latest Insights</h2>
-      <p class="section-subtitle">Spatial intelligence, African development analysis, and technical perspectives from our expert team.</p>
+      <span class="section-label" id="insights-preview-label">Thought Leadership</span>
+      <h2 class="section-title" id="insights-preview-title">Latest Insights</h2>
+      <p class="section-subtitle" id="insights-preview-subtitle">Spatial intelligence, African development analysis, and technical perspectives from our expert team.</p>
     </div>
-    <div class="blog-grid">
+    <div class="blog-grid" id="insights-preview-grid">
       <div class="blog-card reveal" data-delay="100">
         <div class="blog-image">
           <img src="Images/Home/1 land managimate map.png" alt="GIS Land Administration East Africa" loading="lazy">
@@ -367,12 +367,12 @@
   <div class="container">
     <div class="cta-strip-inner">
       <div class="reveal-left">
-        <h2>Ready to work with us?<br><em>Let's map your future.</em></h2>
-        <p>We respond to all enquiries within 24 business hours.</p>
+        <h2><span id="cta-heading">Ready to work with us?</span><br><em id="cta-emphasis">Let's map your future.</em></h2>
+        <p id="cta-paragraph">We respond to all enquiries within 24 business hours.</p>
       </div>
       <div class="cta-strip-actions reveal-right">
-        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Contact Us Today</a>
-        <a href="tel:+250787523890" class="btn-secondary"><i class="fa-solid fa-phone"></i> +250 787 523 890</a>
+        <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> <span id="cta-button1-text">Contact Us Today</span></a>
+        <a href="tel:+250787523890" class="btn-secondary"><i class="fa-solid fa-phone"></i> <span id="cta-button2-text">+250 787 523 890</span></a>
       </div>
     </div>
   </div>
@@ -450,5 +450,6 @@
 <script src="js/cms.js"></script>
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="index"></script>
+<script src="js/home-cms.js"></script>
 </body>
 </html>
