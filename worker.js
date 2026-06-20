@@ -15,7 +15,10 @@ export default {
     const slug = url.searchParams.get('job');
 
     if (!isCareersPage || !slug) {
-      return env.ASSETS.fetch(request);
+      const res = await env.ASSETS.fetch(request);
+      const passthrough = new Response(res.body, res);
+      passthrough.headers.set('X-Worker-Debug', 'passthrough:' + url.pathname + ':' + (slug || 'no-slug'));
+      return passthrough;
     }
 
     const assetResponse = await env.ASSETS.fetch(request);
@@ -23,29 +26,38 @@ export default {
     if (!contentType.includes('text/html')) return assetResponse;
 
     let job = null;
+    let debugInfo = 'ok';
     try {
       const apiRes = await fetch(ADMIN_API + '/api/public/careers');
+      debugInfo = 'apiStatus:' + apiRes.status;
       if (apiRes.ok) {
         const data = await apiRes.json();
         job = (data.items || []).find((j) => j.slug === slug) || null;
+        debugInfo += ',itemCount:' + (data.items || []).length + ',found:' + !!job;
       }
     } catch (e) {
-      // Admin API unreachable — fall back to the generic careers preview.
+      debugInfo = 'fetchError:' + e.message;
     }
 
-    if (!job) return assetResponse;
+    if (!job) {
+      const fallback = new Response(assetResponse.body, assetResponse);
+      fallback.headers.set('X-Worker-Debug', 'no-job:' + debugInfo);
+      return fallback;
+    }
 
     const title = job.title + ' | Careers at APEX R&M GROUP Ltd';
     const descSource = stripHtml(job.description) || ('Apply for ' + job.title + ' at APEX R&M GROUP Ltd.');
     const description = descSource.length > 200 ? descSource.slice(0, 197) + '...' : descSource;
     const pageUrl = url.toString();
 
-    return new HTMLRewriter()
+    const rewritten = new HTMLRewriter()
       .on('title', { element(el) { el.setInnerContent(title); } })
       .on('meta[name="description"]', { element(el) { el.setAttribute('content', description); } })
       .on('meta[property="og:title"]', { element(el) { el.setAttribute('content', title); } })
       .on('meta[property="og:description"]', { element(el) { el.setAttribute('content', description); } })
       .on('meta[property="og:url"]', { element(el) { el.setAttribute('content', pageUrl); } })
       .transform(assetResponse);
+    rewritten.headers.set('X-Worker-Debug', 'rewritten:' + debugInfo);
+    return rewritten;
   },
 };
