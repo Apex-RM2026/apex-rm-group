@@ -15,18 +15,16 @@
     });
   }
 
-  function renderJobs(jobs) {
-    var list = document.getElementById('jobs-list');
-    var select = document.getElementById('apply-position');
-    if (!list || !select) return;
+  function renderJobsInto(containerId, jobs, emptyMessage) {
+    var list = document.getElementById(containerId);
+    if (!list) return;
 
     if (!jobs.length) {
-      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:2rem 0;">No open positions right now — check back soon, or send us your CV anyway using the button below.</p>';
-      select.innerHTML = '<option value="">No open positions at the moment</option>';
+      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:1.5rem 0;">' + emptyMessage + '</p>';
       return;
     }
 
-    list.innerHTML = jobs.map(function (job) {
+    list.innerHTML = jobs.map(function (job, idx) {
       var meta = [];
       if (job.type) meta.push('<span class="job-tag type">' + escapeHtml(job.type) + '</span>');
       if (job.location) meta.push('<span class="job-tag location">📍 ' + escapeHtml(job.location) + '</span>');
@@ -35,29 +33,63 @@
         var dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
         meta.push('<span class="job-tag deadline">⏳ Deadline: ' + escapeHtml(dateStr) + '</span>');
       }
+      var detailsId = containerId + '-details-' + idx;
+      var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
       return (
-        '<div class="job-card reveal">' +
-          '<div class="job-info">' +
-            '<div class="job-title">' + escapeHtml(job.title) + '</div>' +
-            '<div class="job-meta">' + meta.join('') + '</div>' +
+        '<div class="job-card reveal" style="flex-direction:column;align-items:stretch;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
+            '<div class="job-info">' +
+              '<div class="job-title">' + escapeHtml(job.title) + '</div>' +
+              '<div class="job-meta">' + meta.join('') + '</div>' +
+            '</div>' +
+            '<div style="display:flex;gap:0.6rem;flex-shrink:0;">' +
+              (hasDescription ? '<button class="btn-secondary view-details-btn" type="button" data-target="' + detailsId + '" style="white-space:nowrap;">View Details</button>' : '') +
+              '<button class="btn-primary apply-now-btn" type="button" data-job-id="' + escapeHtml(job.id) + '" style="white-space:nowrap;">Apply Now</button>' +
+            '</div>' +
           '</div>' +
-          '<button class="btn-primary apply-now-btn" type="button" data-job-id="' + escapeHtml(job.id) + '" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>' +
+          (hasDescription ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' + job.description + '</div>' : '') +
         '</div>'
       );
     }).join('');
 
-    select.innerHTML = '<option value="">Select a position...</option>' +
-      jobs.map(function (job) {
-        return '<option value="' + escapeHtml(job.id) + '">' + escapeHtml(job.title) + '</option>';
-      }).join('');
+    list.querySelectorAll('.view-details-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-target'));
+        if (!target) return;
+        var isOpen = target.style.display !== 'none';
+        target.style.display = isOpen ? 'none' : 'block';
+        btn.textContent = isOpen ? 'View Details' : 'Hide Details';
+      });
+    });
 
     list.querySelectorAll('.apply-now-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        select.value = btn.getAttribute('data-job-id');
+        var select = document.getElementById('apply-position');
+        if (select) select.value = btn.getAttribute('data-job-id');
         var modal = document.getElementById('apply-modal');
         if (modal) modal.classList.add('open');
       });
     });
+  }
+
+  function renderJobs(jobs) {
+    var select = document.getElementById('apply-position');
+    var internal = jobs.filter(function (j) { return j.category !== 'EXTERNAL'; });
+    var external = jobs.filter(function (j) { return j.category === 'EXTERNAL'; });
+
+    renderJobsInto('jobs-list-internal', internal, 'No internal positions right now — check back soon, or send us your CV anyway using the button below.');
+    renderJobsInto('jobs-list-external', external, 'No external opportunities published right now — check back soon.');
+
+    if (select) {
+      if (!jobs.length) {
+        select.innerHTML = '<option value="">No open positions at the moment</option>';
+      } else {
+        select.innerHTML = '<option value="">Select a position...</option>' +
+          jobs.map(function (job) {
+            return '<option value="' + escapeHtml(job.id) + '">' + escapeHtml(job.title) + '</option>';
+          }).join('');
+      }
+    }
   }
 
   function setText(id, value) {

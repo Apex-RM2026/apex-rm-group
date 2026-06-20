@@ -169,66 +169,19 @@
 <section style="background:var(--warm-white);">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Open Roles</span>
-      <h2 class="section-title">Current Vacancies</h2>
-      <p class="section-subtitle">We are growing — join us at an exciting moment in our journey.</p>
+      <span class="section-label" data-cms="vacancies_label">Open Roles</span>
+      <h2 class="section-title" data-cms="vacancies_title">Current Vacancies</h2>
+      <p class="section-subtitle" data-cms="vacancies_subtitle">We are growing — join us at an exciting moment in our journey.</p>
     </div>
-    <div class="jobs-list" id="jobs-list">
-      <div class="job-card reveal" data-delay="100">
-        <div class="job-info">
-          <div class="job-title">Senior GIS Analyst</div>
-          <div class="job-meta">
-            <span class="job-tag type">Full-time</span>
-            <span class="job-tag location">📍 Kigali, Rwanda</span>
-            <span class="job-tag deadline">⏳ Deadline: 30 June 2025</span>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
-      </div>
-      <div class="job-card reveal" data-delay="150">
-        <div class="job-info">
-          <div class="job-title">Environmental Consultant (EIA Specialist)</div>
-          <div class="job-meta">
-            <span class="job-tag type">Full-time</span>
-            <span class="job-tag location">📍 Kigali, Rwanda / Remote</span>
-            <span class="job-tag deadline">⏳ Deadline: 15 July 2025</span>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
-      </div>
-      <div class="job-card reveal" data-delay="200">
-        <div class="job-info">
-          <div class="job-title">Remote Sensing & Earth Observation Specialist</div>
-          <div class="job-meta">
-            <span class="job-tag type">Contract / Project</span>
-            <span class="job-tag location">📍 East Africa (Field)</span>
-            <span class="job-tag deadline">⏳ Deadline: 31 July 2025</span>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
-      </div>
-      <div class="job-card reveal" data-delay="250">
-        <div class="job-info">
-          <div class="job-title">Land Administration Consultant</div>
-          <div class="job-meta">
-            <span class="job-tag type">Full-time</span>
-            <span class="job-tag location">📍 Kigali / Rwanda</span>
-            <span class="job-tag deadline">⏳ Deadline: 15 August 2025</span>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
-      </div>
-      <div class="job-card reveal" data-delay="300">
-        <div class="job-info">
-          <div class="job-title">Business Development Manager — East Africa</div>
-          <div class="job-meta">
-            <span class="job-tag type">Full-time</span>
-            <span class="job-tag location">📍 Kigali / Nairobi</span>
-            <span class="job-tag deadline">⏳ Deadline: 31 August 2025</span>
-          </div>
-        </div>
-        <button class="btn-primary" onclick="document.getElementById('apply-modal').classList.add('open');" style="white-space:nowrap;flex-shrink:0;">Apply Now</button>
-      </div>
+
+    <h3 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--navy);margin-bottom:1rem;">Internal Positions <span style="color:var(--gray);font-weight:400;font-size:0.85rem;">— within Apex R&amp;M Group</span></h3>
+    <div class="jobs-list" id="jobs-list-internal" style="margin-bottom:3rem;">
+      <p style="text-align:center;color:var(--gray);padding:1rem 0;">Loading vacancies…</p>
+    </div>
+
+    <h3 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--navy);margin-bottom:1rem;">External Opportunities <span style="color:var(--gray);font-weight:400;font-size:0.85rem;">— published to help job seekers</span></h3>
+    <div class="jobs-list" id="jobs-list-external">
+      <p style="text-align:center;color:var(--gray);padding:1rem 0;">Loading vacancies…</p>
     </div>
   </div>
 </section>
