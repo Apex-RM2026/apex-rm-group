@@ -30,7 +30,11 @@
       var meta = [];
       if (job.type) meta.push('<span class="job-tag type">' + escapeHtml(job.type) + '</span>');
       if (job.location) meta.push('<span class="job-tag location">📍 ' + escapeHtml(job.location) + '</span>');
-      if (job.department) meta.push('<span class="job-tag deadline">' + escapeHtml(job.department) + '</span>');
+      if (job.deadline) {
+        var d = new Date(job.deadline);
+        var dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        meta.push('<span class="job-tag deadline">⏳ Deadline: ' + escapeHtml(dateStr) + '</span>');
+      }
       return (
         '<div class="job-card reveal">' +
           '<div class="job-info">' +
