@@ -86,7 +86,7 @@
       imgs[current].style.opacity = '0';
       current = (current + 1) % imgs.length;
       imgs[current].style.opacity = '1';
-    }, 5000);
+    }, 7000);
   }
 
   function applyMediaSlots(slots) {
