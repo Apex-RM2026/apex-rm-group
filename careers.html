@@ -34,11 +34,9 @@
       transform:translateY(-50%); font-size:14rem;
       color:rgba(201,168,76,0.05); line-height:1;
     }
-    .apply-modal { display:none; position:fixed; inset:0; background:rgba(10,22,40,0.85); z-index:9000; align-items:center; justify-content:center; padding:1.5rem; }
-    .apply-modal.open { display:flex; }
-    .apply-box { background:white; border-radius:var(--radius-lg); max-width:600px; width:100%; padding:2.5rem; max-height:90vh; overflow-y:auto; position:relative; }
-    .apply-close { position:absolute; top:1.2rem; right:1.2rem; background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--gray); }
-    .apply-close:hover { color:var(--navy); }
+    .jobs-tab-btn { font-family:var(--font-ui); font-size:0.82rem; font-weight:600; letter-spacing:0.03em; padding:0.55rem 1.2rem; border-radius:30px; border:1.5px solid rgba(10,22,40,0.15); background:white; color:var(--navy); cursor:pointer; transition:var(--transition); }
+    .jobs-tab-btn:hover { border-color:var(--gold); color:var(--gold-d); }
+    .jobs-tab-btn.active { background:var(--navy); border-color:var(--navy); color:white; }
     @media(max-width:768px){ .culture-grid{grid-template-columns:1fr;} }
   </style>
 </head>
@@ -174,13 +172,13 @@
       <p class="section-subtitle" data-cms="vacancies_subtitle">We are growing — join us at an exciting moment in our journey.</p>
     </div>
 
-    <h3 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--navy);margin-bottom:1rem;">Internal Positions <span style="color:var(--gray);font-weight:400;font-size:0.85rem;">— within Apex R&amp;M Group</span></h3>
-    <div class="jobs-list" id="jobs-list-internal" style="margin-bottom:3rem;">
-      <p style="text-align:center;color:var(--gray);padding:1rem 0;">Loading vacancies…</p>
+    <div id="jobs-tabs" style="display:flex;gap:0.6rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <button type="button" class="jobs-tab-btn active" data-tab="all">All Jobs</button>
+      <button type="button" class="jobs-tab-btn" data-tab="internal">Internal Jobs</button>
+      <button type="button" class="jobs-tab-btn" data-tab="external">External Jobs</button>
     </div>
 
-    <h3 style="font-family:var(--font-heading);font-size:1.1rem;color:var(--navy);margin-bottom:1rem;">External Opportunities <span style="color:var(--gray);font-weight:400;font-size:0.85rem;">— published to help job seekers</span></h3>
-    <div class="jobs-list" id="jobs-list-external">
+    <div class="jobs-list" id="jobs-list">
       <p style="text-align:center;color:var(--gray);padding:1rem 0;">Loading vacancies…</p>
     </div>
   </div>
@@ -196,7 +194,7 @@
           <h2 id="graduate-title" style="font-family:var(--font-heading);font-size:2rem;color:white;margin:0.8rem 0 1rem;line-height:1.3;">Apex R&M Graduate & Internship Programme</h2>
           <p id="graduate-paragraph1" style="color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:1.5rem;">Are you a recent graduate in GIS, geography, environmental science, or a related field? Our 12-month graduate programme offers hands-on project experience, mentorship from senior consultants, and a pathway to a permanent role.</p>
           <p id="graduate-paragraph2" style="color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:2rem;">Applications open annually in September. Internship placements (3–6 months) are available year-round.</p>
-          <button class="btn-primary" id="graduate-button" onclick="document.getElementById('apply-modal').classList.add('open');">Apply to the Programme</button>
+          <a class="btn-primary" id="graduate-button" href="mailto:info.apexrmgroup@gmail.com?subject=Graduate%20%26%20Internship%20Programme%20Application">Apply to the Programme</a>
         </div>
         <div id="graduate-info-boxes" style="display:flex;flex-direction:column;gap:1rem;">
           <div class="glass-card" style="padding:1.2rem;">
@@ -223,58 +221,12 @@
     <div class="cta-strip-inner">
       <div class="reveal-left"><h2><span id="cta-heading">Don't see a role that fits?</span><br><em id="cta-emphasis">Send us your CV anyway.</em></h2><p id="cta-paragraph">We keep great CVs on file and reach out when the right opportunity arises.</p></div>
       <div class="cta-strip-actions reveal-right">
-        <button class="btn-primary" id="cta-button1" onclick="document.getElementById('apply-modal').classList.add('open');"><i class="fa-solid fa-paper-plane"></i> <span id="cta-button1-text">Submit Your CV</span></button>
+        <a class="btn-primary" id="cta-button1" href="mailto:info.apexrmgroup@gmail.com?subject=General%20CV%20Submission"><i class="fa-solid fa-paper-plane"></i> <span id="cta-button1-text">Submit Your CV</span></a>
         <a href="team.html" class="btn-secondary"><i class="fa-solid fa-users"></i> <span id="cta-button2-text">Meet the Team</span></a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- APPLICATION MODAL -->
-<div id="apply-modal" class="apply-modal">
-  <div class="apply-box">
-    <button class="apply-close" onclick="document.getElementById('apply-modal').classList.remove('open');">✕</button>
-    <span class="section-label">Apply Now</span>
-    <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:var(--navy);margin:0.6rem 0 1.5rem;">Submit Your Application</h2>
-    <form class="apply-form" id="apply-form">
-      <div class="form-group">
-        <label>Full Name *</label>
-        <input type="text" id="apply-fullname" placeholder="Your full name" required>
-      </div>
-      <div class="form-group">
-        <label>Email Address *</label>
-        <input type="email" id="apply-email" placeholder="your@email.com" required>
-      </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" id="apply-phone" placeholder="+250 780 000 000">
-      </div>
-      <div class="form-group">
-        <label>Position of Interest *</label>
-        <select id="apply-position" required>
-          <option value="">Select a position...</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>LinkedIn Profile URL</label>
-        <input type="url" id="apply-linkedin" placeholder="https://linkedin.com/in/yourprofile">
-      </div>
-      <div class="form-group">
-        <label>Cover Letter / Why Apex R&M Group? *</label>
-        <textarea id="apply-coverletter" placeholder="Tell us why you want to join our team and what you'll bring..." required style="min-height:120px;"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Upload CV *</label>
-        <input type="file" id="apply-cv" accept=".pdf,.doc,.docx" required style="padding:0.5rem;border:1.5px solid rgba(10,22,40,0.15);border-radius:var(--radius);width:100%;">
-        <small style="font-size:0.75rem;color:var(--gray);margin-top:0.3rem;display:block;">PDF or Word document. Max 10MB.</small>
-      </div>
-      <div id="apply-form-msg" style="font-size:0.85rem;margin-top:0.5rem;display:none;"></div>
-      <button type="submit" class="btn-primary" id="apply-submit-btn" style="width:100%;justify-content:center;">
-        <i class="fa-solid fa-paper-plane"></i> Submit Application
-      </button>
-    </form>
-  </div>
-</div>
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
@@ -345,15 +297,5 @@
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="careers"></script>
 <script src="js/careers-cms.js"></script>
-<script>
-  // Close modal on backdrop click
-  document.getElementById('apply-modal').addEventListener('click', function(e) {
-    if (e.target === this) this.classList.remove('open');
-  });
-  // Escape key closes modal
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') document.getElementById('apply-modal').classList.remove('open');
-  });
-</script>
 </body>
 </html>

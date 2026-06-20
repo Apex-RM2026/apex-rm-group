@@ -1,9 +1,17 @@
 /* ════════════════════════════════════════════════════════════════
-   CAREERS — dynamic job listings + application submission
-   Pulls open vacancies from the Admin Portal and wires the apply form.
+   CAREERS — dynamic job listings (All / Internal / External tabs)
+   Pulls open vacancies from the Admin Portal. Apply Now always links
+   out to the admin-configured URL (or a mailto fallback) and reports
+   the click back to the portal for tracking. Supports deep-linking
+   to a single job via ?job=<slug>.
    Fails silently to the static fallback markup if the API is unreachable.
    ════════════════════════════════════════════════════════════════ */
 (function () {
+  var FALLBACK_MAILTO = 'mailto:info.apexrmgroup@gmail.com?subject=Job%20Application';
+  var allJobs = [];
+  var apiBase = '';
+  var activeTab = 'all';
+
   function getApiBase() {
     var loaderScript = document.querySelector('script[src*="cms-loader.js"]');
     return loaderScript ? (loaderScript.getAttribute('data-api') || '').replace(/\/$/, '') : '';
@@ -15,100 +23,123 @@
     });
   }
 
-  function applyButtonHtml(job) {
-    if (job.category === 'EXTERNAL' && job.externalUrl) {
-      return '<a class="btn-primary" href="' + escapeHtml(job.externalUrl) + '" target="_blank" rel="noopener noreferrer" style="white-space:nowrap;">Apply Now</a>';
-    }
-    return '<button class="btn-primary apply-now-btn" type="button" data-job-id="' + escapeHtml(job.id) + '" style="white-space:nowrap;">Apply Now</button>';
+  function trackApplyClick(jobId) {
+    if (!apiBase || !jobId) return;
+    fetch(apiBase + '/api/public/careers/' + jobId + '/track-apply', { method: 'POST', mode: 'cors' }).catch(function () {});
   }
 
-  function renderJobsInto(containerId, jobs, emptyMessage) {
-    var list = document.getElementById(containerId);
-    if (!list) return;
+  function applyButtonHtml(job) {
+    var href = job.externalUrl || FALLBACK_MAILTO;
+    return '<a class="btn-primary apply-now-btn" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" data-job-id="' + escapeHtml(job.id) + '" style="white-space:nowrap;">Apply Now</a>';
+  }
 
-    if (!jobs.length) {
-      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:1.5rem 0;">' + emptyMessage + '</p>';
-      return;
+  function jobCardHtml(job, idx) {
+    var meta = [];
+    if (job.type) meta.push('<span class="job-tag type">' + escapeHtml(job.type) + '</span>');
+    if (job.location) meta.push('<span class="job-tag location">📍 ' + escapeHtml(job.location) + '</span>');
+    if (job.deadline) {
+      var d = new Date(job.deadline);
+      var dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      meta.push('<span class="job-tag deadline">⏳ Deadline: ' + escapeHtml(dateStr) + '</span>');
     }
+    var detailsId = 'job-details-' + idx;
+    var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
+    var shareUrl = job.slug ? ('?job=' + encodeURIComponent(job.slug)) : '#';
 
-    list.innerHTML = jobs.map(function (job, idx) {
-      var meta = [];
-      if (job.type) meta.push('<span class="job-tag type">' + escapeHtml(job.type) + '</span>');
-      if (job.location) meta.push('<span class="job-tag location">📍 ' + escapeHtml(job.location) + '</span>');
-      if (job.deadline) {
-        var d = new Date(job.deadline);
-        var dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-        meta.push('<span class="job-tag deadline">⏳ Deadline: ' + escapeHtml(dateStr) + '</span>');
-      }
-      var detailsId = containerId + '-details-' + idx;
-      var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
+    var headerAction = hasDescription
+      ? '<a class="btn-dark view-details-btn" href="' + escapeHtml(shareUrl) + '" data-target="' + detailsId + '" style="white-space:nowrap;">View Details</a>'
+      : applyButtonHtml(job);
 
-      // With a description: only "View Details" shows up front; "Apply Now"
-      // appears at the end of the description once expanded. With no
-      // description there's nothing to expand, so Apply Now shows directly.
-      var headerAction = hasDescription
-        ? '<button class="btn-dark view-details-btn" type="button" data-target="' + detailsId + '" style="white-space:nowrap;">View Details</button>'
-        : applyButtonHtml(job);
-
-      var detailsPanel = hasDescription
-        ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' +
-            job.description +
-            '<div style="margin-top:1.2rem;">' + applyButtonHtml(job) + '</div>' +
-          '</div>'
-        : '';
-
-      return (
-        '<div class="job-card reveal" style="flex-direction:column;align-items:stretch;">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
-            '<div class="job-info">' +
-              '<div class="job-title">' + escapeHtml(job.title) + '</div>' +
-              '<div class="job-meta">' + meta.join('') + '</div>' +
-            '</div>' +
-            '<div style="display:flex;gap:0.6rem;flex-shrink:0;">' + headerAction + '</div>' +
-          '</div>' +
-          detailsPanel +
+    var detailsPanel = hasDescription
+      ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' +
+          job.description +
+          '<div style="margin-top:1.2rem;">' + applyButtonHtml(job) + '</div>' +
         '</div>'
-      );
-    }).join('');
+      : '';
 
+    return (
+      '<div class="job-card reveal" id="job-' + escapeHtml(job.slug || '') + '" data-category="' + escapeHtml(job.category || 'INTERNAL') + '" style="flex-direction:column;align-items:stretch;">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
+          '<div class="job-info">' +
+            '<div class="job-title">' + escapeHtml(job.title) + '</div>' +
+            '<div class="job-meta">' + meta.join('') + '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:0.6rem;flex-shrink:0;">' + headerAction + '</div>' +
+        '</div>' +
+        detailsPanel +
+      '</div>'
+    );
+  }
+
+  function wireJobCardEvents(list) {
     list.querySelectorAll('.view-details-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
         var target = document.getElementById(btn.getAttribute('data-target'));
         if (!target) return;
         var isOpen = target.style.display !== 'none';
         target.style.display = isOpen ? 'none' : 'block';
         btn.textContent = isOpen ? 'View Details' : 'Hide Details';
+        if (!isOpen) history.replaceState(null, '', btn.getAttribute('href'));
       });
     });
 
     list.querySelectorAll('.apply-now-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var select = document.getElementById('apply-position');
-        if (select) select.value = btn.getAttribute('data-job-id');
-        var modal = document.getElementById('apply-modal');
-        if (modal) modal.classList.add('open');
+        trackApplyClick(btn.getAttribute('data-job-id'));
       });
     });
   }
 
-  function renderJobs(jobs) {
-    var select = document.getElementById('apply-position');
-    var internal = jobs.filter(function (j) { return j.category !== 'EXTERNAL'; });
-    var external = jobs.filter(function (j) { return j.category === 'EXTERNAL'; });
+  function renderJobsList() {
+    var list = document.getElementById('jobs-list');
+    if (!list) return;
 
-    renderJobsInto('jobs-list-internal', internal, 'No internal positions right now — check back soon, or send us your CV anyway using the button below.');
-    renderJobsInto('jobs-list-external', external, 'No external opportunities published right now — check back soon.');
+    var jobs = allJobs.filter(function (j) {
+      if (activeTab === 'internal') return j.category !== 'EXTERNAL';
+      if (activeTab === 'external') return j.category === 'EXTERNAL';
+      return true;
+    });
 
-    if (select) {
-      if (!jobs.length) {
-        select.innerHTML = '<option value="">No open positions at the moment</option>';
-      } else {
-        select.innerHTML = '<option value="">Select a position...</option>' +
-          jobs.map(function (job) {
-            return '<option value="' + escapeHtml(job.id) + '">' + escapeHtml(job.title) + '</option>';
-          }).join('');
-      }
+    if (!jobs.length) {
+      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:1.5rem 0;">No open positions in this category right now — check back soon.</p>';
+      return;
     }
+
+    list.innerHTML = jobs.map(jobCardHtml).join('');
+    wireJobCardEvents(list);
+    expandDeepLinkedJob(list);
+  }
+
+  function expandDeepLinkedJob(list) {
+    var params = new URLSearchParams(window.location.search);
+    var slug = params.get('job');
+    if (!slug) return;
+    var card = document.getElementById('job-' + slug);
+    if (!card || !list.contains(card)) return;
+
+    var detailsBtn = card.querySelector('.view-details-btn');
+    var details = card.querySelector('.job-description');
+    if (detailsBtn && details) {
+      details.style.display = 'block';
+      detailsBtn.textContent = 'Hide Details';
+    }
+    setTimeout(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
+  }
+
+  function wireTabs() {
+    var tabsEl = document.getElementById('jobs-tabs');
+    if (!tabsEl) return;
+    tabsEl.querySelectorAll('.jobs-tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tabsEl.querySelectorAll('.jobs-tab-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeTab = btn.getAttribute('data-tab') || 'all';
+        renderJobsList();
+      });
+    });
   }
 
   function setText(id, value) {
@@ -186,81 +217,18 @@
     }
   }
 
-  function showFormMessage(text, isError) {
-    var el = document.getElementById('apply-form-msg');
-    if (!el) return;
-    el.textContent = text;
-    el.style.display = text ? 'block' : 'none';
-    el.style.color = isError ? '#c0392b' : '#1a7a3c';
-  }
-
-  function wireApplyForm(apiBase) {
-    var form = document.getElementById('apply-form');
-    if (!form) return;
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var jobId = document.getElementById('apply-position').value;
-      var fullName = document.getElementById('apply-fullname').value.trim();
-      var email = document.getElementById('apply-email').value.trim();
-      var phone = document.getElementById('apply-phone').value.trim();
-      var linkedin = document.getElementById('apply-linkedin').value.trim();
-      var coverLetterText = document.getElementById('apply-coverletter').value.trim();
-      var cvInput = document.getElementById('apply-cv');
-      var cvFile = cvInput.files && cvInput.files[0];
-
-      if (!jobId) { showFormMessage('Please select a position.', true); return; }
-      if (!fullName || !email || !coverLetterText) { showFormMessage('Please fill in all required fields.', true); return; }
-      if (!cvFile) { showFormMessage('Please attach your CV.', true); return; }
-      if (!apiBase) { showFormMessage('Submission is temporarily unavailable. Please email us directly.', true); return; }
-
-      var coverLetter = linkedin ? ('LinkedIn: ' + linkedin + '\n\n' + coverLetterText) : coverLetterText;
-
-      var fd = new FormData();
-      fd.append('jobId', jobId);
-      fd.append('fullName', fullName);
-      fd.append('email', email);
-      if (phone) fd.append('phone', phone);
-      fd.append('coverLetter', coverLetter);
-      fd.append('cv', cvFile);
-
-      var btn = document.getElementById('apply-submit-btn');
-      btn.disabled = true;
-      showFormMessage('Submitting your application...', false);
-
-      fetch(apiBase + '/api/public/careers/apply', { method: 'POST', mode: 'cors', body: fd })
-        .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
-        .then(function (result) {
-          if (result.ok) {
-            showFormMessage('Application submitted — thank you! We will be in touch.', false);
-            form.reset();
-            setTimeout(function () {
-              var modal = document.getElementById('apply-modal');
-              if (modal) modal.classList.remove('open');
-              showFormMessage('', false);
-            }, 2500);
-          } else {
-            showFormMessage(result.json.error || 'Submission failed. Please try again.', true);
-          }
-        })
-        .catch(function () {
-          showFormMessage('Network error — please try again or email us directly.', true);
-        })
-        .finally(function () {
-          btn.disabled = false;
-        });
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
-    var apiBase = getApiBase();
-    wireApplyForm(apiBase);
+    apiBase = getApiBase();
+    wireTabs();
 
     if (!apiBase) return;
 
     fetch(apiBase + '/api/public/careers', { mode: 'cors' })
       .then(function (res) { return res.ok ? res.json() : { items: [] }; })
-      .then(function (data) { renderJobs(data.items || []); })
+      .then(function (data) {
+        allJobs = data.items || [];
+        renderJobsList();
+      })
       .catch(function () { /* keep static fallback markup */ });
 
     fetch(apiBase + '/api/public/content?page=careers', { mode: 'cors' })
