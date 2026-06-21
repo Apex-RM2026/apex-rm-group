@@ -1757,3 +1757,180 @@ footer {
   object-fit: cover;
   transition: opacity 1s ease-in-out;
 }
+
+/* ============== ABOUT PAGE — MILESTONES TIMELINE ============================
+   Moved here from a stray <style> block that was sitting after </html> in
+   about.html (so it only worked by accident, depending on the browser's
+   error-recovery parsing). ============================================== */
+.timeline-v2 {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 0 1rem;
+}
+
+.timeline-v2::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--gold) 8%,
+    var(--gold) 92%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.tl-row {
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tl-card {
+  background: #ffffff;
+  border: 1px solid rgba(10, 22, 40, 0.09);
+  border-radius: 12px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tl-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(10, 22, 40, 0.14);
+}
+
+.tl-card-left { text-align: right; }
+
+.tl-card-left::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #ffffff;
+  filter: drop-shadow(2px 0 1px rgba(10,22,40,0.06));
+}
+
+.tl-card-right { text-align: left; }
+
+.tl-card-right::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #ffffff;
+  filter: drop-shadow(-2px 0 1px rgba(10,22,40,0.06));
+}
+
+.tl-year {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.10);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  margin-bottom: 0.6rem;
+}
+
+.tl-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
+}
+
+.tl-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.865rem;
+  color: #5a6a7a;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.tl-card-left .tl-year { float: right; clear: both; }
+
+.tl-dot-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.tl-dot {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--gold);
+  box-shadow: 0 0 0 5px rgba(201, 168, 76, 0.12), 0 4px 16px rgba(10,22,40,0.25);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.tl-row:hover .tl-dot { transform: scale(1.12); }
+
+@media (max-width: 700px) {
+  .timeline-v2::before { left: 24px; transform: none; }
+
+  .tl-row {
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: auto;
+    gap: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .tl-dot-col    { grid-column: 1; grid-row: 1; }
+  .tl-card-left,
+  .tl-card-right { grid-column: 2; grid-row: 1; text-align: left; }
+  .tl-empty      { display: none; }
+
+  .tl-card-left::after,
+  .tl-card-right::before { display: none; }
+
+  .tl-card-left::before,
+  .tl-card-right::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #ffffff;
+  }
+
+  .tl-card-left::before { display: block; }
+}
