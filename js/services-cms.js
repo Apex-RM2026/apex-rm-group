@@ -62,8 +62,12 @@
   function mediaHtml(slot) {
     if (!slot || !slot.items || !slot.items.length) return '';
     if (slot.mode === 'SLIDER' && slot.items.length > 1) {
+      // .service-detail-img img picks up aspect-ratio:4/3 from the page's CSS
+      // automatically, but that rule only targets a direct <img> child — a
+      // <div class="cms-slider"> doesn't match it and collapses to zero
+      // height, so the same aspect-ratio is set inline here explicitly.
       return (
-        '<div class="cms-slider" style="position:relative; width:100%; height:100%;">' +
+        '<div class="cms-slider" style="position:relative; width:100%; aspect-ratio:4/3; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden;">' +
           '<div class="cms-slider-track">' +
             slot.items.map(function (item, idx) {
               return '<img class="cms-slider-img" src="' + escapeHtml(item.url) + '" alt="' + escapeHtml(item.altText || '') + '" style="opacity:' + (idx === 0 ? 1 : 0) + ';">';
