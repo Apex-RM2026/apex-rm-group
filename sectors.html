@@ -31,7 +31,7 @@
   <a href="index.html" class="nav-logo">
     <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo" data-cms-setting-src="logo_url">
   <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
   <button class="nav-toggle"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-backdrop"></div>
@@ -52,6 +52,8 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
+  <div class="page-hero-bg" data-cms-media="hero_image"></div>
+  <div class="page-hero-overlay"></div>
   <div class="container">
     <div class="page-hero-content">
       <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Sectors</span></div>
@@ -66,10 +68,10 @@
 <section style="background:white;">
   <div class="container">
     <div class="section-header centered reveal">
-      <span class="section-label">Eight Sectors</span>
-      <h2 class="section-title">Sectors We Serve</h2>
+      <span class="section-label" id="overview-label">Eight Sectors</span>
+      <h2 class="section-title" id="overview-title">Sectors We Serve</h2>
     </div>
-    <div class="sectors-grid">
+    <div class="sectors-grid" id="overview-grid">
       <a href="#government" class="sector-card reveal" data-delay="100" style="text-decoration:none;"><div class="sector-icon">🏛️</div><h3>Government</h3><p>Spatial planning, national cadastres, e-governance GIS.</p></a>
       <a href="#agriculture" class="sector-card reveal" data-delay="150" style="text-decoration:none;"><div class="sector-icon">🌾</div><h3>Agriculture</h3><p>Crop monitoring, precision agriculture, food security.</p></a>
       <a href="#mining" class="sector-card reveal" data-delay="200" style="text-decoration:none;"><div class="sector-icon">⛏️</div><h3>Mining & Extractives</h3><p>Concession mapping, environmental compliance GIS.</p></a>
@@ -86,13 +88,17 @@
 <section class="sector-detail" id="government">
   <div class="container">
     <div class="sector-detail-grid">
-      <div class="sector-img reveal-left"><img src="Images/Sectors/1" alt="Government spatial planning Africa"></div>
+      <div class="sector-img reveal-left">
+        <div data-cms-media="sector_government_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="Images/Sectors/1" alt="Government spatial planning Africa" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
       <div class="sector-content reveal-right">
-        <span class="section-label">Sector 01</span>
-        <h2 class="section-title">Government & Public Administration</h2>
+        <span class="section-label" id="sec-government-label">Sector 01</span>
+        <h2 class="section-title" id="sec-government-title">Government & Public Administration</h2>
         <div class="gold-line"></div>
-        <p>We partner with ministries, local authorities, and national agencies to build the spatial data infrastructure that powers evidence-based governance from land reform to national spatial development frameworks.</p>
-        <div class="use-cases">
+        <p id="sec-government-description">We partner with ministries, local authorities, and national agencies to build the spatial data infrastructure that powers evidence-based governance from land reform to national spatial development frameworks.</p>
+        <div class="use-cases" id="sec-government-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> National land use planning & spatial development frameworks</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> National cadastre development & land registration systems</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> E-governance GIS portals & open data platforms</div>
@@ -110,11 +116,11 @@
   <div class="container">
     <div class="sector-detail-grid reverse">
       <div class="sector-content reveal-left">
-        <span class="section-label">Sector 02</span>
-        <h2 class="section-title">Agriculture & Food Security</h2>
+        <span class="section-label" id="sec-agriculture-label">Sector 02</span>
+        <h2 class="section-title" id="sec-agriculture-title">Agriculture & Food Security</h2>
         <div class="gold-line"></div>
-        <p>Spatial intelligence is transforming African agriculture enabling precision farming, optimising irrigation, and providing early warning systems for food security crises. We deliver the spatial tools that make African agriculture more productive and resilient.</p>
-        <div class="use-cases">
+        <p id="sec-agriculture-description">Spatial intelligence is transforming African agriculture enabling precision farming, optimising irrigation, and providing early warning systems for food security crises. We deliver the spatial tools that make African agriculture more productive and resilient.</p>
+        <div class="use-cases" id="sec-agriculture-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Crop type mapping & NDVI vegetation monitoring</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Precision agriculture suitability mapping</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Irrigation network planning & water resource GIS</div>
@@ -123,7 +129,11 @@
         </div>
         <a href="contact.html" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Discuss Your Project</a>
       </div>
-      <div class="sector-img reveal-right"><img src="Images/Sectors/2.png" alt="Agriculture mapping Africa"></div>
+      <div class="sector-img reveal-right">
+        <div data-cms-media="sector_agriculture_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="Images/Sectors/2.png" alt="Agriculture mapping Africa" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -132,23 +142,17 @@
 <section class="sector-detail" id="mining">
   <div class="container">
     <div class="sector-detail-grid">
-     <div class="slideshow-container">
-        <div class="slide fade">
-            <img src="Images/Sectors/3" alt="MINING 3">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/3a.jpg" alt="MINING 3A">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/3b.jpg" alt="MINING 3B">
+      <div class="sector-img reveal-left">
+        <div data-cms-media="sector_mining_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="Images/Sectors/3" alt="Mining & Extractives" style="width:100%; height:100%; object-fit:cover; display:block;">
         </div>
       </div>
       <div class="sector-content reveal-right">
-        <span class="section-label">Sector 03</span>
-        <h2 class="section-title">Mining & Extractives</h2>
+        <span class="section-label" id="sec-mining-label">Sector 03</span>
+        <h2 class="section-title" id="sec-mining-title">Mining & Extractives</h2>
         <div class="gold-line"></div>
-        <p>Africa's extractive industries require robust spatial frameworks for responsible operation from concession management to environmental compliance and community engagement. We provide the spatial intelligence that makes responsible mining possible.</p>
-        <div class="use-cases">
+        <p id="sec-mining-description">Africa's extractive industries require robust spatial frameworks for responsible operation from concession management to environmental compliance and community engagement. We provide the spatial intelligence that makes responsible mining possible.</p>
+        <div class="use-cases" id="sec-mining-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Mining concession mapping & boundary management</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Environmental compliance GIS & monitoring systems</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Artisanal and small-scale mining data management</div>
@@ -166,11 +170,11 @@
   <div class="container">
     <div class="sector-detail-grid reverse">
       <div class="sector-content reveal-left">
-        <span class="section-label">Sector 04</span>
-        <h2 class="section-title">Urban Development & Real Estate</h2>
+        <span class="section-label" id="sec-urban-label">Sector 04</span>
+        <h2 class="section-title" id="sec-urban-title">Urban Development & Real Estate</h2>
         <div class="gold-line"></div>
-        <p>Africa's urban population is projected to double by 2050. We provide the spatial intelligence that city planners, developers, and governments need to manage this growth building smarter, more liveable, and more equitable cities.</p>
-        <div class="use-cases">
+        <p id="sec-urban-description">Africa's urban population is projected to double by 2050. We provide the spatial intelligence that city planners, developers, and governments need to manage this growth building smarter, more liveable, and more equitable cities.</p>
+        <div class="use-cases" id="sec-urban-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Urban growth modelling & future scenario planning</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Smart city GIS infrastructure design</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Informal settlement upgrading & mapping</div>
@@ -179,30 +183,24 @@
         </div>
         <a href="contact.html" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Discuss Your Project</a>
       </div>
-      <div class="slideshow-container">
-        <div class="slide fade">
-            <img src="Images/Sectors/4.png" alt="URBAN 4">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/4a.png" alt="URBAN 4A">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/4b.jpg" alt="URBAN 4B">
+      <div class="sector-img reveal-right">
+        <div data-cms-media="sector_urban_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="Images/Sectors/4.png" alt="Urban Development & Real Estate" style="width:100%; height:100%; object-fit:cover; display:block;">
         </div>
       </div>
     </div>
   </div>
 </section>
 <!-- ENERGY -->
-<section class="sector-detail" id="urban">
+<section class="sector-detail" id="energy">
   <div class="container">
     <div class="sector-detail-grid reverse">
       <div class="sector-content reveal-left">
-        <span class="section-label">Sector 05</span>
-        <h2 class="section-title">Energy & Utilities</h2>
+        <span class="section-label" id="sec-energy-label">Sector 05</span>
+        <h2 class="section-title" id="sec-energy-title">Energy & Utilities</h2>
         <div class="gold-line"></div>
-        <p>Africa's energy transition requires precise spatial data from identifying optimal renewable energy sites to planning grid extension for universal electrification. Our spatial analytics accelerate Africa's clean energy future.</p>
-        <div class="use-cases">
+        <p id="sec-energy-description">Africa's energy transition requires precise spatial data from identifying optimal renewable energy sites to planning grid extension for universal electrification. Our spatial analytics accelerate Africa's clean energy future.</p>
+        <div class="use-cases" id="sec-energy-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Solar & wind resource suitability mapping</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Power grid planning & transmission corridor mapping</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Electrification access mapping & last-mile planning</div>
@@ -211,15 +209,9 @@
         </div>
         <a href="contact.html" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Discuss Your Project</a>
       </div>
-      <div class="slideshow-container">
-        <div class="slide fade">
-            <img src="Images/Sectors/5.png" alt="ENERGY 5">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/5a.jpg" alt="ENERGY 5A">
-        </div>
-        <div class="slide fade">
-            <img src="Images/Sectors/5b.jpg" alt="ENERGY 5B">
+      <div class="sector-img reveal-right">
+        <div data-cms-media="sector_energy_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="Images/Sectors/5.png" alt="Energy & Utilities" style="width:100%; height:100%; object-fit:cover; display:block;">
         </div>
       </div>
     </div>
@@ -231,11 +223,11 @@
   <div class="container">
     <div class="sector-detail-grid reverse">
       <div class="sector-content reveal-left">
-        <span class="section-label">Sector 06</span>
-        <h2 class="section-title">Conservation & Natural Resources</h2>
+        <span class="section-label" id="sec-conservation-label">Sector 06</span>
+        <h2 class="section-title" id="sec-conservation-title">Conservation & Natural Resources</h2>
         <div class="gold-line"></div>
-        <p>Africa's extraordinary biodiversity demands world-class spatial conservation planning. We work with conservation NGOs, government agencies, and international bodies to map, monitor, and protect Africa's natural heritage.</p>
-        <div class="use-cases">
+        <p id="sec-conservation-description">Africa's extraordinary biodiversity demands world-class spatial conservation planning. We work with conservation NGOs, government agencies, and international bodies to map, monitor, and protect Africa's natural heritage.</p>
+        <div class="use-cases" id="sec-conservation-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Protected area management planning & boundary mapping</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Biodiversity hotspot mapping & species habitat modelling</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> REDD+ spatial analysis & carbon project advisory</div>
@@ -244,7 +236,11 @@
         </div>
         <a href="contact.html" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Discuss Your Project</a>
       </div>
-      <div class="sector-img reveal-right"><img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&auto=format&fit=crop" alt="Conservation Africa wildlife"></div>
+      <div class="sector-img reveal-right">
+        <div data-cms-media="sector_conservation_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&auto=format&fit=crop" alt="Conservation Africa wildlife" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -253,13 +249,17 @@
 <section class="sector-detail" id="humanitarian">
   <div class="container">
     <div class="sector-detail-grid">
-      <div class="sector-img reveal-left"><img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=800&auto=format&fit=crop" alt="Humanitarian GIS crisis mapping"></div>
+      <div class="sector-img reveal-left">
+        <div data-cms-media="sector_humanitarian_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=800&auto=format&fit=crop" alt="Humanitarian GIS crisis mapping" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
       <div class="sector-content reveal-right">
-        <span class="section-label">Sector 07</span>
-        <h2 class="section-title">Humanitarian & International Development</h2>
+        <span class="section-label" id="sec-humanitarian-label">Sector 07</span>
+        <h2 class="section-title" id="sec-humanitarian-title">Humanitarian & International Development</h2>
         <div class="gold-line"></div>
-        <p>In crisis and development contexts, spatial data saves lives and accelerates recovery. We provide rapid, reliable GIS support to humanitarian organisations operating in Africa's most challenging environments.</p>
-        <div class="use-cases">
+        <p id="sec-humanitarian-description">In crisis and development contexts, spatial data saves lives and accelerates recovery. We provide rapid, reliable GIS support to humanitarian organisations operating in Africa's most challenging environments.</p>
+        <div class="use-cases" id="sec-humanitarian-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Displacement mapping & population movement analysis</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Rapid needs assessment spatial data collection</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Health facility access & service coverage mapping</div>
@@ -277,11 +277,11 @@
   <div class="container">
     <div class="sector-detail-grid reverse">
       <div class="sector-content reveal-left">
-        <span class="section-label">Sector 08</span>
-        <h2 class="section-title">Finance & Insurance</h2>
+        <span class="section-label" id="sec-finance-label">Sector 08</span>
+        <h2 class="section-title" id="sec-finance-title">Finance & Insurance</h2>
         <div class="gold-line"></div>
-        <p>Spatial data is increasingly central to financial decision-making in Africa from property valuation and agricultural insurance to climate risk assessment and infrastructure investment analysis. We provide the spatial intelligence that de-risks African investment.</p>
-        <div class="use-cases">
+        <p id="sec-finance-description">Spatial data is increasingly central to financial decision-making in Africa from property valuation and agricultural insurance to climate risk assessment and infrastructure investment analysis. We provide the spatial intelligence that de-risks African investment.</p>
+        <div class="use-cases" id="sec-finance-usecases">
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Spatial risk modelling for infrastructure investment</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Property valuation GIS & mass appraisal systems</div>
           <div class="use-case"><i class="fa-solid fa-diamond"></i> Agricultural insurance index mapping</div>
@@ -290,7 +290,11 @@
         </div>
         <a href="contact.html" class="btn-dark"><i class="fa-solid fa-paper-plane"></i> Discuss Your Project</a>
       </div>
-      <div class="sector-img reveal-right"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop" alt="Finance spatial risk Africa"></div>
+      <div class="sector-img reveal-right">
+        <div data-cms-media="sector_finance_image" style="position:relative; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); overflow:hidden; aspect-ratio:4/3;">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop" alt="Finance spatial risk Africa" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -299,7 +303,7 @@
 <section class="cta-strip">
   <div class="container">
     <div class="cta-strip-inner">
-      <div class="reveal-left"><h2>Don't see your sector?<br><em>We can help anyway.</em></h2><p>Our spatial expertise applies across all development contexts.</p></div>
+      <div class="reveal-left"><h2><span id="sectors-cta-heading">Don't see your sector?</span><br><em id="sectors-cta-emphasis">We can help anyway.</em></h2><p id="sectors-cta-paragraph">Our spatial expertise applies across all development contexts.</p></div>
       <div class="cta-strip-actions reveal-right">
         <a href="contact.html" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Schedule a Free Call</a>
         <a href="services.html" class="btn-secondary"><i class="fa-solid fa-layer-group"></i> View All Services</a>
@@ -376,5 +380,6 @@
 <script src="js/cms.js"></script>
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="sectors"></script>
+<script src="js/sectors-cms.js"></script>
 </body>
 </html>
