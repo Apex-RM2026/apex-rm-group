@@ -32,7 +32,7 @@
     <a href="index.html" class="nav-logo">
     <img src="Images/Apex RM Groupe.png" alt="APEX R&M GROUP Logo" class="site-logo" data-cms-setting-src="logo_url">
   <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li></ul>
   <button class="nav-toggle"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-backdrop"></div>
@@ -53,6 +53,8 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
+  <div class="page-hero-bg" data-cms-media="hero_image"></div>
+  <div class="page-hero-overlay"></div>
   <div class="container">
     <div class="page-hero-content">
       <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Projects</span></div>
@@ -66,7 +68,7 @@
 <!-- IMPACT STATS -->
 <section style="background:var(--navy);padding:3rem 0;">
   <div class="container">
-    <div class="impact-row">
+    <div class="impact-row" id="impact-stats-row">
       <div class="impact-box reveal"><div class="impact-num"><span data-count="10">0</span>+</div><div class="impact-label">Countries</div></div>
       <div class="impact-box reveal" data-delay="100"><div class="impact-num"><span data-count="280">0</span>K+</div><div class="impact-label">Hectares Mapped</div></div>
       <div class="impact-box reveal" data-delay="200"><div class="impact-num"><span data-count="50">0</span>+</div><div class="impact-label">Reports Produced</div></div>
@@ -79,12 +81,12 @@
 <section style="background:var(--white);">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-label">Portfolio</span>
-      <h2 class="section-title">Project Case Studies</h2>
-      <p class="section-subtitle">Filter by sector, country, or service type to explore our work.</p>
+      <span class="section-label" id="portfolio-label">Portfolio</span>
+      <h2 class="section-title" id="portfolio-title">Project Case Studies</h2>
+      <p class="section-subtitle" id="portfolio-subtitle">Filter by sector, country, or service type to explore our work.</p>
     </div>
 
-    <div class="projects-grid">
+    <div class="projects-grid" id="portfolio-grid">
       <!-- PROJECT 1 -->
       <div class="project-full-card reveal" data-delay="100" data-category="gis">
         <div class="project-image">
@@ -158,7 +160,7 @@
 <section class="cta-strip">
   <div class="container">
     <div class="cta-strip-inner">
-      <div class="reveal-left"><h2>Have a project in mind?<br><em>Let's scope it together.</em></h2><p>Free consultation — no obligation.</p></div>
+      <div class="reveal-left"><h2><span id="projects-cta-heading">Have a project in mind?</span><br><em id="projects-cta-emphasis">Let's scope it together.</em></h2><p id="projects-cta-paragraph">Free consultation — no obligation.</p></div>
       <div class="cta-strip-actions reveal-right">
         <a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Start a Conversation</a>
         <a href="resources.html" class="btn-secondary"><i class="fa-solid fa-download"></i> Download Capability Statement</a>
@@ -238,5 +240,6 @@
 <script src="js/cms.js"></script>
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="projects"></script>
+<script src="js/projects-cms.js"></script>
 </body>
 </html>
