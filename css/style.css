@@ -1768,6 +1768,10 @@ footer {
   object-fit: cover;
   transition: opacity 1s ease-in-out;
 }
+/* About page's "Our Story" photo shows the full image instead of cropping
+   in to fill the box — scoped to this slot only, so it doesn't change how
+   any other photo slider (e.g. the Home hero) behaves. */
+[data-cms-media="story_image"] img { object-fit: contain; }
 
 /* ============== ABOUT PAGE — MILESTONES TIMELINE ============================
    Moved here from a stray <style> block that was sitting after </html> in
