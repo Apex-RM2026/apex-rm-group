@@ -1,13 +1,14 @@
 /* ════════════════════════════════════════════════════════════════
-   SERVICES PAGE — renders the Admin Portal-managed sections that the
-   generic cms-loader.js can't handle on its own: the overview grid
-   and the seven service detail sections (deliverables + industries
-   lists are repeatable JSON blobs; images are handled generically by
-   cms-loader.js via data-cms-media).
-   Fails silently to the static fallback markup if the API is unreachable.
+   SERVICES PAGE — fully dynamic service list (Admin Portal can add,
+   remove, reorder, and open/close any service, not just the original
+   7). Renders the overview grid cards AND the detail sections itself
+   (rather than relying on the generic cms-loader.js for images),
+   since this list can grow/shrink and each photo slot is keyed by a
+   service's own id. Falls back to the existing static markup — the
+   original 7 services — if the API is unreachable.
    ════════════════════════════════════════════════════════════════ */
 (function () {
-  var SERVICE_KEYS = ['data_collection', 'gis', 'remote_sensing', 'land_admin', 'environment', 'infrastructure', 'capacity'];
+  var LEGACY_KEYS = ['data_collection', 'gis', 'remote_sensing', 'land_admin', 'environment', 'infrastructure', 'capacity'];
 
   function getApiBase() {
     var loaderScript = document.querySelector('script[src*="cms-loader.js"]');
@@ -25,59 +26,143 @@
     if (el && value) el.textContent = value;
   }
 
-  function renderOverviewCards(cards) {
-    var grid = document.getElementById('overview-grid');
-    if (!grid || !cards || !cards.length) return;
-    grid.innerHTML = cards.map(function (c, idx) {
+  // Builds the items list from either the new unified field, or — if an
+  // admin hasn't opened/saved the new Services tab yet — the original 7
+  // separately-keyed fields, so nothing regresses during the transition.
+  function buildItems(content) {
+    if (content.service_items) {
+      try {
+        var parsed = JSON.parse(content.service_items);
+        if (Array.isArray(parsed.items)) return parsed.items;
+      } catch (e) { /* fall through to legacy */ }
+    }
+
+    var overviewIcons = {};
+    if (content.overview) {
+      try {
+        var overview = JSON.parse(content.overview);
+        (overview.cards || []).forEach(function (c) { overviewIcons[c.anchor] = c.icon; });
+      } catch (e) { /* ignore */ }
+    }
+
+    var legacyItems = [];
+    LEGACY_KEYS.forEach(function (key) {
+      var fieldKey = 'service_' + key;
+      if (!content[fieldKey]) return;
+      try {
+        var svc = JSON.parse(content[fieldKey]);
+        svc.icon = overviewIcons[svc.anchor] || '✨';
+        svc.status = svc.status || 'OPEN';
+        legacyItems.push(svc);
+      } catch (e) { /* skip malformed entry */ }
+    });
+    return legacyItems;
+  }
+
+  function mediaHtml(slot) {
+    if (!slot || !slot.items || !slot.items.length) return '';
+    if (slot.mode === 'SLIDER' && slot.items.length > 1) {
       return (
-        '<a href="#' + escapeHtml(c.anchor) + '" class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '" style="text-decoration:none;">' +
-          '<div class="service-icon">' + escapeHtml(c.icon) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
-          '<h3>' + escapeHtml(c.title) + '</h3><p>' + escapeHtml(c.description) + '</p>' +
+        '<div class="cms-slider" style="position:relative; width:100%; height:100%;">' +
+          '<div class="cms-slider-track">' +
+            slot.items.map(function (item, idx) {
+              return '<img class="cms-slider-img" src="' + escapeHtml(item.url) + '" alt="' + escapeHtml(item.altText || '') + '" style="opacity:' + (idx === 0 ? 1 : 0) + ';">';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }
+    return '<img src="' + escapeHtml(slot.items[0].url) + '" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">';
+  }
+
+  function startSliders(container) {
+    container.querySelectorAll('.cms-slider').forEach(function (slider) {
+      var imgs = slider.querySelectorAll('.cms-slider-img');
+      if (imgs.length <= 1) return;
+      var current = 0;
+      setInterval(function () {
+        imgs[current].style.opacity = '0';
+        current = (current + 1) % imgs.length;
+        imgs[current].style.opacity = '1';
+      }, 7000);
+    });
+  }
+
+  function renderOverviewCards(items) {
+    var grid = document.getElementById('overview-grid');
+    if (!grid || !items.length) return;
+    grid.innerHTML = items.map(function (item, idx) {
+      return (
+        '<a href="#' + escapeHtml(item.anchor) + '" class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '" style="text-decoration:none;">' +
+          '<div class="service-icon">' + escapeHtml(item.icon) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
+          '<h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
         '</a>'
       );
     }).join('');
   }
 
-  function renderDeliverables(key, deliverables) {
-    var container = document.getElementById('svc-' + key + '-deliverables');
-    if (!container || !deliverables || !deliverables.length) return;
-    container.innerHTML = deliverables.map(function (d) {
-      return '<div class="deliverable-item"><i class="fa-solid fa-diamond"></i> ' + escapeHtml(d.text) + '</div>';
+  function renderDetailSections(items, mediaSlots) {
+    var container = document.getElementById('services-detail-list');
+    if (!container || !items.length) return;
+
+    container.innerHTML = items.map(function (item, idx) {
+      var deliverables = (item.deliverables || []).map(function (d) {
+        return '<div class="deliverable-item"><i class="fa-solid fa-diamond"></i> ' + escapeHtml(d.text) + '</div>';
+      }).join('');
+      var industries = (item.industries || []).map(function (i) {
+        return '<span class="industry-tag">' + escapeHtml(i.text) + '</span>';
+      }).join('');
+      var slot = mediaSlots['service_' + item.key + '_image'];
+      var photo = mediaHtml(slot);
+
+      var content = (
+        '<div class="service-detail-content reveal-left">' +
+          '<span class="section-label">Service ' + String(idx + 1).padStart(2, '0') + '</span>' +
+          '<h2 class="section-title">' + escapeHtml(item.title) + '</h2>' +
+          '<div class="gold-line"></div>' +
+          '<p>' + escapeHtml(item.description) + '</p>' +
+          (deliverables ? (
+            '<h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.8rem;">Key Deliverables</h4>' +
+            '<div class="deliverables-list">' + deliverables + '</div>'
+          ) : '') +
+          (industries ? (
+            '<h4 style="font-family:var(--font-ui);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:0.6rem;">Industries Served</h4>' +
+            '<div class="industries-served">' + industries + '</div>'
+          ) : '') +
+          '<a href="contact.html" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Request This Service</a>' +
+        '</div>'
+      );
+      var img = '<div class="service-detail-img reveal-right">' + photo + '</div>';
+
+      return (
+        '<section class="service-detail" id="' + escapeHtml(item.anchor) + '">' +
+          '<div class="container">' +
+            '<div class="service-detail-grid' + (idx % 2 === 1 ? ' reverse' : '') + '">' +
+              (idx % 2 === 1 ? content + img : img + content) +
+            '</div>' +
+          '</div>' +
+        '</section>'
+      );
     }).join('');
+
+    startSliders(container);
   }
 
-  function renderIndustries(key, industries) {
-    var container = document.getElementById('svc-' + key + '-industries');
-    if (!container || !industries || !industries.length) return;
-    container.innerHTML = industries.map(function (i) {
-      return '<span class="industry-tag">' + escapeHtml(i.text) + '</span>';
-    }).join('');
-  }
-
-  function renderContent(content) {
+  function renderContent(content, mediaSlots) {
     if (!content) return;
+
+    var allItems = buildItems(content);
+    var visibleItems = allItems.filter(function (i) { return (i.status || 'OPEN') !== 'CLOSED'; });
 
     if (content.overview) {
       try {
         var overview = JSON.parse(content.overview);
         setText('overview-label', overview.sectionLabel);
         setText('overview-title', overview.title);
-        renderOverviewCards(overview.cards);
       } catch (e) { /* keep static fallback markup */ }
     }
-
-    SERVICE_KEYS.forEach(function (key) {
-      var fieldKey = 'service_' + key;
-      if (!content[fieldKey]) return;
-      try {
-        var svc = JSON.parse(content[fieldKey]);
-        setText('svc-' + key + '-label', svc.label);
-        setText('svc-' + key + '-title', svc.title);
-        setText('svc-' + key + '-description', svc.description);
-        renderDeliverables(key, svc.deliverables);
-        renderIndustries(key, svc.industries);
-      } catch (e) { /* keep static fallback markup */ }
-    });
+    renderOverviewCards(visibleItems);
+    renderDetailSections(visibleItems, mediaSlots || {});
 
     if (content.cta) {
       try {
@@ -93,9 +178,11 @@
     var apiBase = getApiBase();
     if (!apiBase) return;
 
-    fetch(apiBase + '/api/public/content?page=services', { mode: 'cors' })
-      .then(function (res) { return res.ok ? res.json() : null; })
-      .then(function (data) { renderContent(data && data.content); })
-      .catch(function () { /* keep static fallback markup */ });
+    Promise.all([
+      fetch(apiBase + '/api/public/content?page=services', { mode: 'cors' }).then(function (res) { return res.ok ? res.json() : null; }).catch(function () { return null; }),
+      fetch(apiBase + '/api/public/media-slots?page=services', { mode: 'cors' }).then(function (res) { return res.ok ? res.json() : null; }).catch(function () { return null; }),
+    ]).then(function (results) {
+      renderContent(results[0] && results[0].content, results[1] && results[1].slots);
+    });
   });
 })();
