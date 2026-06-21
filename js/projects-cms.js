@@ -80,13 +80,19 @@
       } catch (e) { /* keep static fallback markup */ }
     }
 
-    if (content.portfolio) {
+    if (content.portfolio_header) {
       try {
-        var portfolio = JSON.parse(content.portfolio);
-        setText('portfolio-label', portfolio.sectionLabel);
-        setText('portfolio-title', portfolio.title);
-        setText('portfolio-subtitle', portfolio.subtitle);
-        renderProjectCards(portfolio.cards);
+        var header = JSON.parse(content.portfolio_header);
+        setText('portfolio-label', header.sectionLabel);
+        setText('portfolio-title', header.title);
+        setText('portfolio-subtitle', header.subtitle);
+      } catch (e) { /* keep static fallback markup */ }
+    }
+
+    if (content.portfolio_cards) {
+      try {
+        var cardsData = JSON.parse(content.portfolio_cards);
+        renderProjectCards(cardsData.cards);
       } catch (e) { /* keep static fallback markup */ }
     }
 
