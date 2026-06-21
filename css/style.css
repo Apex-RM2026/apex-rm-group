@@ -1742,8 +1742,14 @@ footer {
   .page-hero      { padding: 5rem 0 2.5rem; }
 }
 
-/* ── CMS-driven image slider (Admin Portal media slots) ── */
-.cms-slider { position: relative; overflow: hidden; }
+/* ── CMS-driven image slider (Admin Portal media slots) ──
+   Deliberately does NOT set position here — the slider can be applied to
+   containers that already rely on their own position (e.g. .hero-bg's
+   position:absolute for full-bleed sizing). Forcing position:relative here
+   previously won the cascade (same specificity, declared later) and
+   collapsed .hero-bg to zero height. .cms-slider-track below already
+   establishes the positioning context the slider images need. */
+.cms-slider { overflow: hidden; }
 .cms-slider-track { position: relative; width: 100%; height: 100%; }
 .cms-slider-img {
   position: absolute; top: 0; left: 0;
