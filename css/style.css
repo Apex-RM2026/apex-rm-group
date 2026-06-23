@@ -260,24 +260,23 @@ ul { list-style: none; }
 .nav-admin-link {
   display: inline-flex !important;
   align-items: center;
-  gap: 0.4rem;
   margin-left: 0.3rem;
   margin-top: -2px;
   padding: 0.45rem 0.9rem !important;
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(201,168,76,0.5);
+  border: 1px solid rgba(201,168,76,0.5);
   border-radius: var(--radius) !important;
-  color: rgba(255,255,255,0.6) !important;
+  color: var(--navy) !important;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
 }
 .nav-admin-link::after { display: none !important; }
 .nav-admin-link:hover {
-  color: var(--gold) !important;
+  background: rgba(201,168,76,0.8);
   border-color: var(--gold);
-  background: rgba(201,168,76,0.08);
 }
 
 .nav-mobile .nav-admin-link-mobile {
