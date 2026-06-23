@@ -482,7 +482,6 @@ const ApexRenderer = {
         phone:       get('phone'),
         country:     get('country'),
         service:     get('service'),
-        budget:      get('budget'),
         message:     get('brief'),
         subject:     `Website enquiry — ${get('service')||'General'}`
       };

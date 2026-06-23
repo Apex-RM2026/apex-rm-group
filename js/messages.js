@@ -52,7 +52,7 @@ async function apexSaveToSupabase(msg) {
     const { error } = await sb.from(TBL_MESSAGES).insert({
       name: msg.name || '', org: msg.org || '', email: msg.email || '',
       phone: msg.phone || '', country: msg.country || '',
-      service: msg.service || '', budget: msg.budget || '',
+      service: msg.service || '',
       message: msg.message || '', subject: msg.subject || '', read: false
     });
     if (error) { console.error('[APEX] Supabase insert:', error.message); return false; }
@@ -94,7 +94,7 @@ window.apexLoadMessages = async function() {
         id:      m.id,
         name:    m.name,    org:     m.org,     email:   m.email,
         phone:   m.phone,   country: m.country, service: m.service,
-        budget:  m.budget,  message: m.message, subject: m.subject,
+        message: m.message, subject: m.subject,
         read:    m.read,
         time: new Date(m.created_at).toLocaleString('en-GB', {
           day:'2-digit', month:'short', year:'numeric',
@@ -229,7 +229,6 @@ async function apexSendEmail(params) {
       phone:      params.phone      || '—',
       country:    params.country    || '—',
       service:    params.service    || '—',
-      budget:     params.budget     || '—',
       message:    params.message    || '',
       sent_time: new Date().toLocaleString('en-GB', {
         day:'2-digit', month:'short', year:'numeric',
@@ -298,7 +297,7 @@ function apexSaveToAdminPortal(msg) {
         email: msg.email,
         phone: msg.phone,
         subject: msg.subject,
-        message: `Organisation: ${msg.org}\nCountry: ${msg.country}\nBudget: ${msg.budget}\n\n${msg.message}`,
+        message: `Organisation: ${msg.org}\nCountry: ${msg.country}\nService: ${msg.service}\n\n${msg.message}`,
         category: 'project-inquiry',
       }),
     }).catch(() => {});
@@ -321,7 +320,6 @@ function apexWireContactForm() {
       phone:   get('phone'),
       country: get('country'),
       service: get('service'),
-      budget:  get('budget'),
       message: get('brief'),
       subject: `Website enquiry — ${get('service') || 'General'}`
     };
@@ -346,7 +344,7 @@ function apexWireContactForm() {
       const emailOk = await apexSendEmail({
         from_name: msg.name, from_email: msg.email, from_org: msg.org,
         phone: msg.phone, country: msg.country, service: msg.service,
-        budget: msg.budget, message: msg.message
+        message: msg.message
       });
       /* Also record in the Admin Portal inbox so it shows up in the CMS dashboard */
       apexSaveToAdminPortal(msg);
