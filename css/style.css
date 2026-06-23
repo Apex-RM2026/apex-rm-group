@@ -257,6 +257,37 @@ ul { list-style: none; }
   box-shadow: var(--shadow-gold) !important;
 }
 
+.nav-admin-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 0.3rem;
+  margin-top: -2px;
+  padding: 0.45rem 0.9rem !important;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: var(--radius) !important;
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.nav-admin-link::after { display: none !important; }
+.nav-admin-link:hover {
+  color: var(--gold) !important;
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+.nav-mobile .nav-admin-link-mobile {
+  margin: 0.2rem 0;
+  color: rgba(255,255,255,0.5) !important;
+}
+.nav-mobile .nav-admin-link-mobile i { margin-right: 0.5rem; }
+.nav-mobile .nav-admin-link-mobile:hover { color: var(--gold) !important; }
+
 /* Hamburger */
 .nav-toggle {
   display: none;
