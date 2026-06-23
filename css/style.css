@@ -261,24 +261,19 @@ ul { list-style: none; }
   display: inline-flex !important;
   align-items: center;
   margin-left: 0.3rem;
-  margin-top: -2px;
-  padding: 0.45rem 0.9rem !important;
-  background: rgba(201,168,76,0.5);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius) !important;
-  color: #ffffff !important;
+  padding: 0.4rem 0.75rem !important;
+  background: transparent;
+  border: none;
+  color: var(--gold) !important;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  transition: background var(--transition), border-color var(--transition);
+  transition: color var(--transition);
 }
 .nav-admin-link::after { display: none !important; }
 .nav-admin-link:hover {
-  background: rgba(201,168,76,0.85);
-  color: var(--navy) !important;
-  text-shadow: none;
+  color: var(--gold-light) !important;
 }
 
 .nav-mobile .nav-admin-link-mobile {
