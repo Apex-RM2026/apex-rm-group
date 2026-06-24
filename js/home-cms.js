@@ -60,6 +60,35 @@
     }).join('');
   }
 
+  function mediaHtml(slot) {
+    if (!slot || !slot.items || !slot.items.length) return '';
+    if (slot.mode === 'SLIDER' && slot.items.length > 1) {
+      return (
+        '<div class="cms-slider" style="position:relative; width:100%; height:100%; overflow:hidden;">' +
+          '<div class="cms-slider-track">' +
+            slot.items.map(function (item, idx) {
+              return '<img class="cms-slider-img" src="' + escapeHtml(item.url) + '" alt="' + escapeHtml(item.altText || '') + '" loading="lazy" style="opacity:' + (idx === 0 ? 1 : 0) + ';">';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }
+    return '<img src="' + escapeHtml(slot.items[0].url) + '" alt="" loading="lazy">';
+  }
+
+  function startSliders(container) {
+    container.querySelectorAll('.cms-slider').forEach(function (slider) {
+      var imgs = slider.querySelectorAll('.cms-slider-img');
+      if (imgs.length <= 1) return;
+      var current = 0;
+      setInterval(function () {
+        imgs[current].style.opacity = '0';
+        current = (current + 1) % imgs.length;
+        imgs[current].style.opacity = '1';
+      }, 7000);
+    });
+  }
+
   function renderClientLogos(items) {
     var grid = document.getElementById('client-logos-grid');
     if (!grid || !items || !items.length) return;
@@ -112,15 +141,17 @@
     if (window.apexInitTestimonialCarousel) window.apexInitTestimonialCarousel(carousel);
   }
 
-  function renderInsightCards(posts) {
+  function renderInsightCards(posts, mediaSlots) {
     var grid = document.getElementById('insights-preview-grid');
     if (!grid || !posts || !posts.length) return;
     grid.innerHTML = posts.map(function (post, idx) {
+      var slot = post.key && mediaSlots ? mediaSlots['insight_' + post.key + '_image'] : null;
+      // Posts saved before per-post photo slots existed only have a flat
+      // post.image URL — keep showing that until the admin re-saves the photo.
+      var photo = slot ? mediaHtml(slot) : (post.image ? '<img src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title) + '" loading="lazy">' : '');
       return (
         '<div class="blog-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '">' +
-          '<div class="blog-image">' +
-            (post.image ? '<img src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title) + '" loading="lazy">' : '') +
-          '</div>' +
+          '<div class="blog-image">' + photo + '</div>' +
           '<div class="blog-body">' +
             '<span class="blog-category">' + escapeHtml(post.category) + '</span>' +
             '<div class="blog-date">' + escapeHtml(post.date) + '</div>' +
@@ -131,9 +162,11 @@
         '</div>'
       );
     }).join('');
+
+    startSliders(grid);
   }
 
-  function renderContent(content) {
+  function renderContent(content, mediaSlots) {
     if (!content) return;
 
     if (content.stats) {
@@ -186,7 +219,7 @@
         setText('insights-preview-label', insights.sectionLabel);
         setText('insights-preview-title', insights.title);
         setText('insights-preview-subtitle', insights.subtitle);
-        renderInsightCards(insights.posts);
+        renderInsightCards(insights.posts, mediaSlots);
       } catch (e) { /* keep static fallback markup */ }
     }
 
@@ -204,9 +237,11 @@
     var apiBase = getApiBase();
     if (!apiBase) return;
 
-    fetch(apiBase + '/api/public/content?page=index', { mode: 'cors' })
-      .then(function (res) { return res.ok ? res.json() : null; })
-      .then(function (data) { renderContent(data && data.content); })
-      .catch(function () { /* keep static fallback markup */ });
+    Promise.all([
+      fetch(apiBase + '/api/public/content?page=index', { mode: 'cors' }).then(function (res) { return res.ok ? res.json() : null; }).catch(function () { return null; }),
+      fetch(apiBase + '/api/public/media-slots?page=index', { mode: 'cors' }).then(function (res) { return res.ok ? res.json() : null; }).catch(function () { return null; }),
+    ]).then(function (results) {
+      renderContent(results[0] && results[0].content, results[1] && results[1].slots);
+    });
   });
 })();
