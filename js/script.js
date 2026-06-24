@@ -156,6 +156,11 @@ function initCarousel(carouselEl) {
 
 document.querySelectorAll('.testimonials-carousel').forEach(initCarousel);
 
+/* Exposed so home-cms.js can re-bind the carousel after it rebuilds the
+   slides/dots from CMS data — the querySelectorAll snapshots above would
+   otherwise still point at the original static markup. */
+window.apexInitTestimonialCarousel = initCarousel;
+
 /* --- FAQ Accordion --- */
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {

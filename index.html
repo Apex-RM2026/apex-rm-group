@@ -100,24 +100,24 @@
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item reveal" data-delay="100">
-        <div class="stat-number"><span data-count="25">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span data-count="25" id="stat-1-num">0</span><span class="stat-suffix" id="stat-1-suffix">+</span></div>
         <div class="stat-divider"></div>
-        <div class="stat-label">Projects Completed</div>
+        <div class="stat-label" id="stat-1-label">Projects Completed</div>
       </div>
       <div class="stat-item reveal" data-delay="200">
-        <div class="stat-number"><span data-count="10">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span data-count="10" id="stat-2-num">0</span><span class="stat-suffix" id="stat-2-suffix">+</span></div>
         <div class="stat-divider"></div>
-        <div class="stat-label">Countries Served</div>
+        <div class="stat-label" id="stat-2-label">Countries Served</div>
       </div>
       <div class="stat-item reveal" data-delay="300">
-        <div class="stat-number"><span data-count="30">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span data-count="30" id="stat-3-num">0</span><span class="stat-suffix" id="stat-3-suffix">+</span></div>
         <div class="stat-divider"></div>
-        <div class="stat-label">Expert Consultants</div>
+        <div class="stat-label" id="stat-3-label">Expert Consultants</div>
       </div>
       <div class="stat-item reveal" data-delay="400">
-        <div class="stat-number"><span data-count="15">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span data-count="15" id="stat-4-num">0</span><span class="stat-suffix" id="stat-4-suffix">+</span></div>
         <div class="stat-divider"></div>
-        <div class="stat-label">Years Combined Experience</div>
+        <div class="stat-label" id="stat-4-label">Years Combined Experience</div>
       </div>
     </div>
   </div>
@@ -250,11 +250,11 @@
 <section class="testimonials-section">
   <div class="container">
     <div class="section-header centered reveal">
-      <span class="section-label" style="color:var(--gold)">Client Testimonials</span>
-      <h2 class="section-title light">What Our Clients Say</h2>
+      <span class="section-label" id="testimonials-label" style="color:var(--gold)">Client Testimonials</span>
+      <h2 class="section-title light" id="testimonials-title">What Our Clients Say</h2>
       <div class="gold-line center"></div>
     </div>
-    <div class="testimonials-carousel reveal">
+    <div class="testimonials-carousel reveal" id="testimonials-carousel">
       <div class="testimonial-track">
         <div class="testimonials-inner">
           <div class="testimonial-slide">
@@ -357,9 +357,9 @@
         </div>
       </div>
     </div>
-    <!--div style="text-align:center; margin-top:3rem;">
+    <div style="text-align:center; margin-top:3rem;">
       <a href="insights.html" class="btn-outline">View All Insights <i class="fa-solid fa-arrow-right"></i></a>
-    </div-->
+    </div>
   </div>
 </section>
 

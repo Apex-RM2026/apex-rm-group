@@ -1,8 +1,9 @@
 /* ════════════════════════════════════════════════════════════════
    HOME PAGE — renders the Admin Portal-managed sections that the
    generic cms-loader.js can't handle on its own (repeatable card
-   lists stored as JSON blobs: services overview, why-choose-us
-   points, client logos, and the insights preview cards).
+   lists stored as JSON blobs: stats strip, services overview,
+   why-choose-us points, client logos, testimonials carousel, and
+   the insights preview cards).
    Fails silently to the static fallback markup if the API is unreachable.
    ════════════════════════════════════════════════════════════════ */
 (function () {
@@ -67,6 +68,50 @@
     }).join('');
   }
 
+  function renderStats(items) {
+    if (!items || !items.length) return;
+    items.slice(0, 4).forEach(function (s, idx) {
+      var n = idx + 1;
+      var numEl = document.getElementById('stat-' + n + '-num');
+      if (numEl && s.num) { numEl.setAttribute('data-count', s.num); numEl.textContent = '0'; }
+      setText('stat-' + n + '-suffix', s.suffix);
+      setText('stat-' + n + '-label', s.label);
+    });
+  }
+
+  function renderTestimonials(items) {
+    var carousel = document.getElementById('testimonials-carousel');
+    if (!carousel || !items || !items.length) return;
+    var inner = carousel.querySelector('.testimonials-inner');
+    var dots = carousel.querySelector('.carousel-dots');
+    if (!inner || !dots) return;
+
+    inner.innerHTML = items.map(function (t) {
+      var stars = Math.max(1, Math.min(5, parseInt(t.stars, 10) || 5));
+      return (
+        '<div class="testimonial-slide">' +
+          '<div class="testimonial-card">' +
+            '<div class="testimonial-stars">' + '★'.repeat(stars) + '</div>' +
+            '<p class="testimonial-quote">&ldquo;' + escapeHtml(t.quote) + '&rdquo;</p>' +
+            '<div class="testimonial-author">' +
+              '<div class="testimonial-avatar">' + escapeHtml(t.initials) + '</div>' +
+              '<div class="testimonial-info">' +
+                '<div class="name">' + escapeHtml(t.name) + '</div>' +
+                '<div class="role">' + escapeHtml(t.role) + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    dots.innerHTML = items.map(function (_, idx) {
+      return '<button class="carousel-dot' + (idx === 0 ? ' active' : '') + '"></button>';
+    }).join('');
+
+    if (window.apexInitTestimonialCarousel) window.apexInitTestimonialCarousel(carousel);
+  }
+
   function renderInsightCards(posts) {
     var grid = document.getElementById('insights-preview-grid');
     if (!grid || !posts || !posts.length) return;
@@ -90,6 +135,13 @@
 
   function renderContent(content) {
     if (!content) return;
+
+    if (content.stats) {
+      try {
+        var stats = JSON.parse(content.stats);
+        renderStats(stats.items);
+      } catch (e) { /* keep static fallback markup */ }
+    }
 
     if (content.services_overview) {
       try {
@@ -116,6 +168,15 @@
         var logos = JSON.parse(content.client_logos);
         setText('client-logos-label', logos.label);
         renderClientLogos(logos.items);
+      } catch (e) { /* keep static fallback markup */ }
+    }
+
+    if (content.testimonials) {
+      try {
+        var testimonials = JSON.parse(content.testimonials);
+        setText('testimonials-label', testimonials.sectionLabel);
+        setText('testimonials-title', testimonials.title);
+        renderTestimonials(testimonials.items);
       } catch (e) { /* keep static fallback markup */ }
     }
 
