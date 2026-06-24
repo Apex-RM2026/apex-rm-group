@@ -93,7 +93,10 @@
     var grid = document.getElementById('client-logos-grid');
     if (!grid || !items || !items.length) return;
     grid.innerHTML = items.map(function (item) {
-      return '<div class="client-logo-item">' + escapeHtml(item.name) + '</div>';
+      var inner = item.logo
+        ? '<img src="' + escapeHtml(item.logo) + '" alt="' + escapeHtml(item.name) + '" loading="lazy">'
+        : escapeHtml(item.name);
+      return '<div class="client-logo-item' + (item.logo ? ' has-logo' : '') + '">' + inner + '</div>';
     }).join('');
   }
 

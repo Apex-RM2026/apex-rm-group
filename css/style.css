@@ -1060,6 +1060,13 @@ section { padding: 6rem 0; }
   border-radius: var(--radius);
 }
 .client-logo-item:hover { color: var(--navy); border-color: var(--gold); }
+.client-logo-item.has-logo {
+  padding: 0.5rem 1.2rem;
+  filter: grayscale(100%) opacity(0.55);
+  transition: filter var(--transition), border-color var(--transition);
+}
+.client-logo-item.has-logo:hover { filter: grayscale(0%) opacity(1); border-color: var(--gold); }
+.client-logo-item.has-logo img { display: block; height: 28px; width: auto; max-width: 140px; object-fit: contain; }
 
 /* --- Footer --- */
 footer {
