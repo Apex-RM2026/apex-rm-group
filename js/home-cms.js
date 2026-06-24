@@ -102,10 +102,21 @@
     items.slice(0, 4).forEach(function (s, idx) {
       var n = idx + 1;
       var numEl = document.getElementById('stat-' + n + '-num');
-      if (numEl && s.num) { numEl.setAttribute('data-count', s.num); numEl.textContent = '0'; }
+      if (numEl && s.num) {
+        if (/^-?\d+$/.test(String(s.num).trim())) {
+          // Numeric — prime at 0 and let the count-up animation run.
+          numEl.setAttribute('data-count', s.num);
+          numEl.textContent = '0';
+        } else {
+          // Non-numeric (e.g. "TBD") — no animation, just show it as-is.
+          numEl.removeAttribute('data-count');
+          numEl.textContent = s.num;
+        }
+      }
       setText('stat-' + n + '-suffix', s.suffix);
       setText('stat-' + n + '-label', s.label);
     });
+    if (window.apexRestartCounters) window.apexRestartCounters();
   }
 
   function renderTestimonials(items) {

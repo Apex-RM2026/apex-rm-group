@@ -110,8 +110,19 @@ function checkCounters() {
   }
 }
 
+/* Exposed so home-cms.js can force a fresh run once it has updated
+   data-count with the real saved values — otherwise a visitor who
+   scrolls past this section before that fetch resolves would have
+   already animated to the old static defaults and never see the
+   real numbers, since checkCounters() only ever runs once. */
+window.apexRestartCounters = function () {
+  countersStarted = false;
+  checkCounters();
+};
+
 function animateCounter(el) {
-  const target = parseInt(el.dataset.count);
+  const target = parseInt(el.dataset.count, 10);
+  if (Number.isNaN(target)) return; // non-numeric stat (e.g. "Rwanda") — leave the static text alone
   const duration = 2000;
   const start = performance.now();
   function update(time) {
