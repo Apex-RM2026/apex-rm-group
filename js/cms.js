@@ -34,7 +34,7 @@ const APEX_DEFAULTS = {
     hero_btn1_link: 'services.html',
     hero_btn2_text: 'Request Consultation',
     hero_btn2_link: 'contact.html',
-    hero_image:     'Images/Home/Line 80 Spong Kigali.jpg',
+    hero_image:     '',
     stat1_num:'50', stat1_suffix:'+', stat1_label:'Projects Completed',
     stat2_num:'10', stat2_suffix:'+', stat2_label:'Countries Served',
     stat3_num:'30', stat3_suffix:'+', stat3_label:'Expert Consultants',
@@ -43,7 +43,7 @@ const APEX_DEFAULTS = {
     why_title1:   'Built for Africa.',
     why_title2:   'Trusted Globally.',
     why_subtitle: 'We combine world-class technical expertise with deep local knowledge — delivering spatial solutions that are both rigorous and contextually grounded.',
-    why_image:    'Images/Home/H Line 191 word.avif',
+    why_image:    '',
     cta_title1:   'Ready to work with us?',
     cta_title2:   "Let's map your future.",
     cta_sub:      'We respond to all enquiries within 24 business hours.',
@@ -59,13 +59,13 @@ const APEX_DEFAULTS = {
       {icon:'🎓',num:'06',title:'Capacity Building',            desc:'GIS training for institutions, QGIS/ArcGIS workshops, curriculum design, and embedded technical advisory.',                link:'services.html#capacity'}
     ],
     blog:[
-      {img:'Images/Home/1 land managimate map.png', cat:'GIS & Technology', date:'May 2025',
+      {img:'', cat:'GIS & Technology', date:'May 2025',
        title:'How GIS Is Transforming Land Administration in East Africa',
        excerpt:'Digital land registries, satellite cadastres, and open spatial data portals are reshaping tenure security across the region.', link:'insights.html'},
-      {img:'Images/Home/H Environment line 339.png', cat:'Environment', date:'April 2025',
+      {img:'', cat:'Environment', date:'April 2025',
        title:'Remote Sensing for Climate Resilience: Lessons from East Africa',
        excerpt:'How Earth observation data is enabling earlier responses to drought, flood, and deforestation across the continent.', link:'insights.html'},
-      {img:'Images/Home/H Urban Planning Line 351.avif', cat:'Urban Planning', date:'March 2025',
+      {img:'', cat:'Urban Planning', date:'March 2025',
        title:'Smart Cities in Africa: The Role of Spatial Data Infrastructure',
        excerpt:"Building the geospatial foundations that will power Africa's next generation of urban centres.", link:'insights.html'}
     ]
@@ -78,7 +78,7 @@ const APEX_DEFAULTS = {
     story_p1:"Apex R&M Group was founded in 2025 by a team of seasoned spatial analysts and environmental consultants who recognised a critical gap: the need for a truly African spatial consulting firm that could match international technical standards with genuine local expertise.",
     story_p2:"Operating from Kigali, Rwanda — one of Africa's most dynamic innovation hubs — we bring together multidisciplinary expertise in GIS, remote sensing, land management, environmental consulting, and infrastructure planning.",
     story_p3:"Today, Apex R&M Group works with governments, development banks, NGOs, and private sector clients across East, Central, and West Africa. Our commitment: deliver spatial intelligence that drives real, measurable, lasting impact.",
-    story_image:'Images/About/A About image section.jpg',
+    story_image:'',
     mission:"To empower governments, organizations, and communities with cutting-edge spatial intelligence, resource management expertise, and strategic advisory services — driving sustainable planning and development, evidence-based decision-making, and measurable impact across Africa and the world.",
     vision:"To be Africa's most trusted and innovative spatial consulting group — recognized globally for transforming complex geographic and resource challenges into powerful opportunities for growth, governance, and lasting prosperity.",
     values:[
@@ -97,19 +97,19 @@ const APEX_DEFAULTS = {
     {id:1,category:'gis',       tag:'GIS + Remote Sensing', location:'Rwanda',       year:'2024',
      title:'National Land Use Mapping — Rwanda',
      client:'Ministry of Lands',  duration:'6 months', scale:'14,000 km²',
-     image:'Images/Home/1 land managimate map.png',
+     image:'',
      desc:"Comprehensive LULC classification for Rwanda's national spatial planning framework using Sentinel-2 satellite imagery with ground-truth validation.",
      impact:'National spatial database delivered. 14,000 km² classified into 12 LULC categories. Adopted for Rwanda\'s national land use masterplan.'},
     {id:2,category:'environment',tag:'EIA + Biodiversity',   location:'DR Congo',     year:'2024',
      title:'Mining Corridor Environmental Impact Assessment',
      client:'Private Mining Co.', duration:'9 months', scale:'3 international reports',
-     image:'Images/Home/H Environment line 339.png',
+     image:'',
      desc:'Full EIA and biodiversity baseline study for a major mining corridor in eastern DRC, meeting IFC Performance Standards and Equator Principles.',
      impact:'3 internationally compliant reports. Biodiversity database established. Project received environmental clearance.'},
     {id:3,category:'urban',      tag:'Urban Planning GIS',   location:'Rwanda (Kigali)',year:'2025',
      title:'Urban Growth Modelling — Kigali City',
      client:'Kigali City Council',duration:'4 months', scale:'2050 projections',
-     image:'Images/Home/H Urban Planning Line 351.avif',
+     image:'',
      desc:"Spatial urban growth modelling providing master plan inputs for Kigali's 2050 urban development framework including cellular automata modelling and scenario analysis.",
      impact:'3 growth scenarios modelled to 2050. Master plan inputs delivered. Adopted by City Council planning department.'},
   ],
@@ -319,7 +319,7 @@ const ApexRenderer = {
         const ttl=cards[i].querySelector('h3');
         const dsc=cards[i].querySelector('p');
         const lnk=cards[i].querySelector('.blog-read-more');
-        if(img){img.src=b.img;img.alt=b.title;}
+        if(img&&b.img){img.src=b.img;img.alt=b.title;}
         if(cat) cat.textContent=b.cat;
         if(dt)  dt.textContent=b.date;
         if(ttl) ttl.textContent=b.title;
@@ -400,7 +400,7 @@ const ApexRenderer = {
     grid.innerHTML=projects.map((p,i)=>`
       <div class="project-full-card reveal" data-delay="${(i%3+1)*100}" data-category="${p.category}">
         <div class="project-image">
-          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <img src="${p.image || 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='}" alt="${p.title}" loading="lazy">
           <div class="project-tag">${p.tag}</div>
         </div>
         <div class="project-body">

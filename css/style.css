@@ -1166,12 +1166,6 @@ footer {
   padding: 10rem 0 5rem;
   position: relative; overflow: hidden;
 }
-.page-hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: url('/Images/Home/H\ Line\ 191\ word.avif') center/cover;
-  opacity: 0.18;
-}
 /* Real, per-page-controllable hero photo (e.g. about.html) — sits as an
    actual child element so it paints over the shared ::before texture above
    without needing to touch .page-hero itself, which many other pages share. */
