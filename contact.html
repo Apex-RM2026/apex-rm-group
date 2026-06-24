@@ -211,7 +211,8 @@
             </div>
             <div class="form-group">
               <label for="brief">Project Brief *</label>
-              <textarea id="brief" placeholder="Describe your project, challenge, or enquiry. Include location, timeline, and any specific requirements..." required></textarea>
+              <textarea id="brief" maxlength="100000" placeholder="Describe your project, challenge, or enquiry. Include location, timeline, and any specific requirements..." required oninput="document.getElementById('brief-counter').textContent = this.value.length.toLocaleString() + ' / 100,000 characters'"></textarea>
+              <div id="brief-counter" style="text-align:right;font-size:0.72rem;color:var(--gray);margin-top:0.3rem;">0 / 100,000 characters</div>
             </div>
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:1rem;">
               <i class="fa-solid fa-paper-plane"></i> Send Message

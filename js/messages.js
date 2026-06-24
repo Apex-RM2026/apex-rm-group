@@ -29,6 +29,15 @@ const EMAILJS_TEMPLATE_ID = 'template_b3729sx';
 
 const TBL_MESSAGES = 'apex_messages';
 const TBL_ADMINS   = 'apex_admins';
+
+/* EmailJS enforces a hard, non-configurable ~50KB-per-template-variable
+   limit on every account tier — exceeding it makes emailjs.send() throw
+   client-side (a 413) before the request ever reaches EmailJS's servers,
+   so it won't even show up in their dashboard's Email History. Rather than
+   truncate a long enquiry (a truncated business email is misleading), we
+   skip EmailJS entirely above this safety margin and rely on Supabase +
+   the Admin Portal inbox, which have no comparable limit. */
+const EMAILJS_CHAR_LIMIT = 40000;
 /* ─────────────────────────────────────────────────────────────── */
 
 /* ── Supabase client (lazy — created only when credentials exist) ── */
@@ -282,12 +291,23 @@ function apexSaveToLocalStorage(msg) {
   return false;
 }
 
-/* Forward the submission to the Admin Portal CMS inbox (fire-and-forget; never blocks the form). */
+/* Forward the submission to the Admin Portal CMS inbox (fire-and-forget; never blocks the form).
+   The Admin Portal's own cap (see ADMIN_PORTAL_MESSAGE_LIMIT) is independent of EmailJS's —
+   recompute the budget against the COMBINED string (prefix + message), not just the raw
+   message, since the prepended metadata pushes the total higher than msg.message.length alone. */
+const ADMIN_PORTAL_MESSAGE_LIMIT = 100000;
 function apexSaveToAdminPortal(msg) {
   try {
     const loaderScript = document.querySelector('script[src*="cms-loader.js"]');
     const apiBase = loaderScript ? (loaderScript.getAttribute('data-api') || '').replace(/\/$/, '') : '';
     if (!apiBase) return;
+
+    const prefix = `Organisation: ${msg.org}\nCountry: ${msg.country}\nService: ${msg.service}\n\n`;
+    const maxBody = ADMIN_PORTAL_MESSAGE_LIMIT - prefix.length;
+    const body = msg.message.length > maxBody
+      ? msg.message.slice(0, maxBody) + `\n\n[... truncated — ${msg.message.length.toLocaleString()} characters total, full text saved in Supabase ...]`
+      : msg.message;
+
     fetch(apiBase + '/api/public/contact', {
       method: 'POST',
       mode: 'cors',
@@ -297,7 +317,7 @@ function apexSaveToAdminPortal(msg) {
         email: msg.email,
         phone: msg.phone,
         subject: msg.subject,
-        message: `Organisation: ${msg.org}\nCountry: ${msg.country}\nService: ${msg.service}\n\n${msg.message}`,
+        message: prefix + body,
         category: 'project-inquiry',
       }),
     }).catch(() => {});
@@ -336,17 +356,23 @@ function apexWireContactForm() {
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…'; }
 
     try {
-      /* Save to Supabase (cross-device, primary) */
+      /* Save to Supabase (cross-device, primary, source of truth) */
       const sbOk = await apexSaveToSupabase(msg);
       /* Save to localStorage (same-device fallback if Supabase not set up yet) */
       if (!sbOk) apexSaveToLocalStorage(msg);
-      /* Email notification */
-      const emailOk = await apexSendEmail({
+
+      /* EmailJS has a hard ~50KB-per-variable cap on every account tier — route
+         around it instead of fighting it. A message above our safety margin
+         skips EmailJS entirely (never truncated-and-sent, since a truncated
+         business email is misleading) and relies on Supabase + the Admin
+         Portal inbox below, neither of which has a comparable limit. */
+      const tooLargeForEmail = msg.message.length > EMAILJS_CHAR_LIMIT;
+      const emailOk = tooLargeForEmail ? null : await apexSendEmail({
         from_name: msg.name, from_email: msg.email, from_org: msg.org,
         phone: msg.phone, country: msg.country, service: msg.service,
         message: msg.message
       });
-      /* Also record in the Admin Portal inbox so it shows up in the CMS dashboard */
+      /* Also record in the Admin Portal inbox so it shows up in the CMS dashboard — always attempted, regardless of size */
       apexSaveToAdminPortal(msg);
 
       fresh.parentNode.innerHTML = `
@@ -357,7 +383,9 @@ function apexWireContactForm() {
             Thank you, <strong>${_esc(msg.name)}</strong>. We have received your enquiry
             and will respond within <strong>24 business hours</strong>.
           </p>
-          ${!emailOk ? '<p style="color:var(--gray);font-size:0.82rem;margin-top:0.75rem;">⚠️ Email confirmation may be delayed — your message has been recorded.</p>' : ''}
+          ${tooLargeForEmail
+            ? '<p style="color:var(--gray);font-size:0.82rem;margin-top:0.75rem;">ℹ️ Your message was large, so it was delivered straight to our dashboard instead of email — it has been recorded and we will respond soon.</p>'
+            : (!emailOk ? '<p style="color:var(--gray);font-size:0.82rem;margin-top:0.75rem;">⚠️ Email confirmation may be delayed — your message has been recorded.</p>' : '')}
           <div style="margin-top:1.5rem;"><a href="index.html" style="color:var(--teal);font-size:0.85rem;">← Back to Home</a></div>
         </div>`;
     } catch(err) {
