@@ -78,6 +78,18 @@
     );
   }
 
+  // Scrolls so the job's title lands just below the fixed navbar — not
+  // "no scroll" (the title may be off-screen, e.g. via a deep link) and not
+  // scrolled toward the description (which used block:'center' and dragged
+  // the whole card, description included, up the page).
+  function scrollToJobTitle(card) {
+    var titleEl = card.querySelector('.job-title') || card;
+    var navbar = document.getElementById('navbar');
+    var offset = (navbar ? navbar.offsetHeight : 0) + 16;
+    var top = titleEl.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
   function closeAllJobDetails(list) {
     list.querySelectorAll('.job-description').forEach(function (panel) {
       panel.style.display = 'none';
@@ -102,7 +114,7 @@
         if (!isOpen) {
           target.style.display = 'block';
           var card = btn.closest('.job-card');
-          if (card) card.classList.add('details-open');
+          if (card) { card.classList.add('details-open'); scrollToJobTitle(card); }
           history.replaceState(null, '', btn.getAttribute('href'));
         }
       });
@@ -158,8 +170,9 @@
       details.style.display = 'block';
       card.classList.add('details-open');
     }
-    // Intentionally no scrollIntoView here — opening a shared job link
-    // should reveal its description in place, not jerk the page down to it.
+    // Scroll to the job's title (not its description) so a shared link
+    // brings the right opening into view without jumping past it.
+    setTimeout(function () { scrollToJobTitle(card); }, 50);
   }
 
   function wireTabs() {
