@@ -102,7 +102,8 @@
 
   function renderOverviewCards(items) {
     var grid = document.getElementById('overview-grid');
-    if (!grid || !items.length) return;
+    if (!grid) return;
+    if (!items.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = items.map(function (item, idx) {
       return (
         '<a href="#' + escapeHtml(item.anchor) + '" class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '" style="text-decoration:none;">' +
@@ -115,7 +116,8 @@
 
   function renderDetailSections(items, mediaSlots) {
     var container = document.getElementById('services-detail-list');
-    if (!container || !items.length) return;
+    if (!container) return;
+    if (!items.length) { container.innerHTML = ''; return; }
 
     container.innerHTML = items.map(function (item, idx) {
       var deliverables = (item.deliverables || []).map(function (d) {

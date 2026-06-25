@@ -92,7 +92,8 @@
 
   function renderOverviewCards(items) {
     var grid = document.getElementById('overview-grid');
-    if (!grid || !items.length) return;
+    if (!grid) return;
+    if (!items.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = items.map(function (item, idx) {
       return (
         '<a href="#' + escapeHtml(item.anchor) + '" class="sector-card reveal" data-delay="' + ((idx % 4) * 50 + 100) + '" style="text-decoration:none;">' +
@@ -104,7 +105,8 @@
 
   function renderDetailSections(items, mediaSlots) {
     var container = document.getElementById('sectors-detail-list');
-    if (!container || !items.length) return;
+    if (!container) return;
+    if (!items.length) { container.innerHTML = ''; return; }
 
     container.innerHTML = items.map(function (item, idx) {
       var useCases = (item.useCases || []).map(function (u) {

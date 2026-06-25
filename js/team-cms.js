@@ -1,8 +1,10 @@
 /* ════════════════════════════════════════════════════════════════
    TEAM — dynamic team member listing
    Pulls published team members from the Admin Portal and replaces the
-   static grid. Fails silently to the static fallback markup if the
-   API is unreachable or returns no members.
+   static grid. Keeps the static fallback markup only if the API call
+   itself fails/is unreachable — a successful call that legitimately
+   returns zero published members (the admin unpublished everyone)
+   must still clear the grid, not be mistaken for a failed request.
    ════════════════════════════════════════════════════════════════ */
 (function () {
   function escapeHtml(str) {
@@ -12,9 +14,13 @@
   }
 
   function renderTeam(members) {
-    if (!members.length) return; // keep static fallback markup
     var grid = document.querySelector('.team-grid');
     if (!grid) return;
+
+    if (!members.length) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--gray);padding:2rem 0;">Team profiles are being updated — check back shortly.</p>';
+      return;
+    }
 
     grid.innerHTML = members.map(function (m) {
       var initials = (m.fullName || '').split(' ').map(function (p) { return p[0]; }).join('').slice(0, 2).toUpperCase();
@@ -43,8 +49,8 @@
     if (!apiBase) return;
 
     fetch(apiBase + '/api/public/team', { mode: 'cors' })
-      .then(function (res) { return res.ok ? res.json() : { items: [] }; })
-      .then(function (data) { renderTeam(data.items || []); })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) { if (data) renderTeam(data.items || []); /* null = request failed, keep static fallback markup */ })
       .catch(function () { /* keep static fallback markup */ });
   });
 })();

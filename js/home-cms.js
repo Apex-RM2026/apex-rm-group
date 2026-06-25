@@ -30,7 +30,8 @@
 
   function renderServiceCards(cards) {
     var grid = document.getElementById('services-overview-grid');
-    if (!grid || !cards || !cards.length) return;
+    if (!grid || !cards) return;
+    if (!cards.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = cards.map(function (c, idx) {
       return (
         '<div class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '">' +
@@ -46,7 +47,8 @@
 
   function renderWhyPoints(points) {
     var grid = document.getElementById('why-points-grid');
-    if (!grid || !points || !points.length) return;
+    if (!grid || !points) return;
+    if (!points.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = points.map(function (p) {
       return (
         '<div class="why-point">' +
@@ -91,7 +93,8 @@
 
   function renderClientLogos(items) {
     var grid = document.getElementById('client-logos-grid');
-    if (!grid || !items || !items.length) return;
+    if (!grid || !items) return;
+    if (!items.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = items.map(function (item) {
       var inner = item.logo
         ? '<img src="' + escapeHtml(item.logo) + '" alt="' + escapeHtml(item.name) + '" loading="lazy">'
@@ -124,10 +127,12 @@
 
   function renderTestimonials(items) {
     var carousel = document.getElementById('testimonials-carousel');
-    if (!carousel || !items || !items.length) return;
+    if (!carousel || !items) return;
     var inner = carousel.querySelector('.testimonials-inner');
     var dots = carousel.querySelector('.carousel-dots');
     if (!inner || !dots) return;
+
+    if (!items.length) { inner.innerHTML = ''; dots.innerHTML = ''; return; }
 
     inner.innerHTML = items.map(function (t) {
       var stars = Math.max(1, Math.min(5, parseInt(t.stars, 10) || 5));
@@ -157,7 +162,8 @@
 
   function renderInsightCards(posts, mediaSlots) {
     var grid = document.getElementById('insights-preview-grid');
-    if (!grid || !posts || !posts.length) return;
+    if (!grid || !posts) return;
+    if (!posts.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = posts.map(function (post, idx) {
       var slot = post.key && mediaSlots ? mediaSlots['insight_' + post.key + '_image'] : null;
       // Posts saved before per-post photo slots existed only have a flat

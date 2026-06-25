@@ -27,7 +27,8 @@
 
   function renderImpactStats(items) {
     var row = document.getElementById('impact-stats-row');
-    if (!row || !items || !items.length) return;
+    if (!row || !items) return;
+    if (!items.length) { row.innerHTML = ''; return; }
     row.innerHTML = items.map(function (item, idx) {
       return (
         '<div class="impact-box reveal" data-delay="' + (idx * 100) + '">' +
@@ -40,7 +41,8 @@
 
   function renderProjectCards(cards) {
     var grid = document.getElementById('portfolio-grid');
-    if (!grid || !cards || !cards.length) return;
+    if (!grid || !cards) return;
+    if (!cards.length) { grid.innerHTML = ''; return; }
     grid.innerHTML = cards.map(function (card, idx) {
       var metaItems = [
         card.client ? '<div class="case-meta-item"><i class="fa-solid fa-building-columns"></i> ' + escapeHtml(card.client) + '</div>' : '',
