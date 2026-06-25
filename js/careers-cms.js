@@ -101,22 +101,27 @@
   }
 
   function wireJobCardEvents(list) {
-    var detailsButtons = list.querySelectorAll('.view-details-btn');
-    detailsButtons.forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
+    // The whole card is the click target to open a job's description —
+    // not just its title. Clicking inside an already-open card (including
+    // its expanded description text) is a no-op rather than closing it;
+    // only a genuine click outside the card closes it (see the
+    // document-level listener below).
+    list.querySelectorAll('.job-card').forEach(function (card) {
+      var details = card.querySelector('.job-description');
+      if (!details) return; // nothing to expand — no Apply Now-only card
+      var titleLink = card.querySelector('.view-details-btn');
+      card.style.cursor = 'pointer';
+
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('.apply-now-btn')) return; // let Apply Now navigate normally
+        if (card.classList.contains('details-open')) return; // already open — leave it open
         e.preventDefault();
-        var target = document.getElementById(btn.getAttribute('data-target'));
-        if (!target) return;
-        var isOpen = target.style.display !== 'none';
 
         closeAllJobDetails(list);
-
-        if (!isOpen) {
-          target.style.display = 'block';
-          var card = btn.closest('.job-card');
-          if (card) { card.classList.add('details-open'); scrollToJobTitle(card); }
-          history.replaceState(null, '', btn.getAttribute('href'));
-        }
+        details.style.display = 'block';
+        card.classList.add('details-open');
+        scrollToJobTitle(card);
+        if (titleLink) history.replaceState(null, '', titleLink.getAttribute('href'));
       });
     });
 
