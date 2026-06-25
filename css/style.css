@@ -1500,6 +1500,7 @@ footer {
 }
 .job-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
 .job-title { font-family: var(--font-heading); font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem; }
+a.job-title:hover { color: var(--gold); text-decoration: underline; }
 .job-meta { display: flex; flex-wrap: wrap; gap: 1rem; }
 .job-tag {
   font-family: var(--font-ui); font-size: 0.65rem; font-weight: 600;

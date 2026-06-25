@@ -46,9 +46,13 @@
     var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
     var shareUrl = job.slug ? ('?job=' + encodeURIComponent(job.slug)) : '#';
 
-    var headerAction = hasDescription
-      ? '<a class="btn-dark view-details-btn" href="' + escapeHtml(shareUrl) + '" data-target="' + detailsId + '" style="white-space:nowrap;">View Details</a>'
-      : applyButtonHtml(job);
+    // The job title itself is the link to the job opportunity (not a separate
+    // "View Details" button) — clicking it toggles the description below.
+    var titleHtml = hasDescription
+      ? '<a class="job-title view-details-btn" href="' + escapeHtml(shareUrl) + '" data-target="' + detailsId + '" style="display:block;text-decoration:none;color:inherit;cursor:pointer;">' + escapeHtml(job.title) + '</a>'
+      : '<div class="job-title">' + escapeHtml(job.title) + '</div>';
+
+    var headerAction = hasDescription ? '' : applyButtonHtml(job);
 
     var detailsPanel = hasDescription
       ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' +
@@ -63,15 +67,25 @@
       '<div class="job-card reveal" id="job-' + escapeHtml(job.slug || '') + '" data-category="' + escapeHtml(job.category || 'INTERNAL') + '" style="flex-direction:column;align-items:stretch;">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
           '<div class="job-info">' +
-            '<div class="job-title">' + escapeHtml(job.title) + '</div>' +
+            titleHtml +
             (companyName ? '<div class="job-company" style="font-size:0.85rem;color:var(--gold-d,#9c7a1e);font-weight:600;margin:0.15rem 0 0.3rem;">' + escapeHtml(companyName) + '</div>' : '') +
             '<div class="job-meta">' + meta.join('') + '</div>' +
           '</div>' +
-          '<div style="display:flex;gap:0.6rem;flex-shrink:0;">' + headerAction + '</div>' +
+          (headerAction ? '<div style="display:flex;gap:0.6rem;flex-shrink:0;">' + headerAction + '</div>' : '') +
         '</div>' +
         detailsPanel +
       '</div>'
     );
+  }
+
+  function closeAllJobDetails(list) {
+    list.querySelectorAll('.job-description').forEach(function (panel) {
+      panel.style.display = 'none';
+    });
+    list.querySelectorAll('.job-card').forEach(function (card) {
+      card.classList.remove('details-open');
+    });
+    history.replaceState(null, '', window.location.pathname);
   }
 
   function wireJobCardEvents(list) {
@@ -83,18 +97,14 @@
         if (!target) return;
         var isOpen = target.style.display !== 'none';
 
-        detailsButtons.forEach(function (otherBtn) {
-          if (otherBtn === btn) return;
-          var otherTarget = document.getElementById(otherBtn.getAttribute('data-target'));
-          if (otherTarget && otherTarget.style.display !== 'none') {
-            otherTarget.style.display = 'none';
-            otherBtn.textContent = 'View Details';
-          }
-        });
+        closeAllJobDetails(list);
 
-        target.style.display = isOpen ? 'none' : 'block';
-        btn.textContent = isOpen ? 'View Details' : 'Hide Details';
-        if (!isOpen) history.replaceState(null, '', btn.getAttribute('href'));
+        if (!isOpen) {
+          target.style.display = 'block';
+          var card = btn.closest('.job-card');
+          if (card) card.classList.add('details-open');
+          history.replaceState(null, '', btn.getAttribute('href'));
+        }
       });
     });
 
@@ -104,6 +114,17 @@
       });
     });
   }
+
+  // Bound once (not per-render, since renderJobsList() re-runs on every tab
+  // switch) — clicking anywhere outside the currently-open job's card closes
+  // its description, so other opportunities are easy to get back to.
+  document.addEventListener('click', function (e) {
+    var list = document.getElementById('jobs-list');
+    if (!list) return;
+    var openCard = list.querySelector('.job-card.details-open');
+    if (!openCard || openCard.contains(e.target)) return;
+    closeAllJobDetails(list);
+  });
 
   function renderJobsList() {
     var list = document.getElementById('jobs-list');
@@ -132,15 +153,13 @@
     var card = document.getElementById('job-' + slug);
     if (!card || !list.contains(card)) return;
 
-    var detailsBtn = card.querySelector('.view-details-btn');
     var details = card.querySelector('.job-description');
-    if (detailsBtn && details) {
+    if (details) {
       details.style.display = 'block';
-      detailsBtn.textContent = 'Hide Details';
+      card.classList.add('details-open');
     }
-    setTimeout(function () {
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 200);
+    // Intentionally no scrollIntoView here — opening a shared job link
+    // should reveal its description in place, not jerk the page down to it.
   }
 
   function wireTabs() {
