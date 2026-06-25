@@ -7,7 +7,7 @@
    Fails silently to the static fallback markup if the API is unreachable.
    ════════════════════════════════════════════════════════════════ */
 (function () {
-  var FALLBACK_MAILTO = 'mailto:info.apexrmgroup@gmail.com?subject=Job%20Application';
+  var FALLBACK_MAILTO = 'mailto:info@apexrmgroup.com?subject=Job%20Application';
   var allJobs = [];
   var apiBase = '';
   var activeTab = 'all';

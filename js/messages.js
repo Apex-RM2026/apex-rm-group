@@ -391,7 +391,7 @@ function apexWireContactForm() {
     } catch(err) {
       console.error('[APEX] Form error:', err);
       if (btn) { btn.disabled = false; btn.innerHTML = orig; }
-      _showBanner(fresh, 'error', 'Something went wrong. Please email us directly at info.apexrmgroup@gmail.com');
+      _showBanner(fresh, 'error', 'Something went wrong. Please email us directly at info@apexrmgroup.com');
     }
   });
 }

@@ -315,7 +315,7 @@ function initMap(containerId, lat, lng, zoom) {
     iconAnchor: [8, 8]
   });
   L.marker([lat, lng], { icon }).addTo(map)
-    .bindPopup('<b style="font-family:Georgia">APEX R&M GROUP</b><br>Kamonyi District, Runda Sector, Ruyenzi Cell, Nyagacaca Village, Presto Plazza.<br><a href="mailto:info.apexrmgroup@gmail.com" style="color:#1A6B8A">info.apexrmgroup@gmail.com</a>')
+    .bindPopup('<b style="font-family:Georgia">APEX R&M GROUP</b><br>Kamonyi District, Runda Sector, Ruyenzi Cell, Nyagacaca Village, Presto Plazza.<br><a href="mailto:info@apexrmgroup.com" style="color:#1A6B8A">info@apexrmgroup.com</a>')
     .openPopup();
 
   return map;
