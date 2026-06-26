@@ -299,7 +299,40 @@ function highlightNav() {
 }
 highlightNav();
 
-/* --- Leaflet Map Init (Projects / Contact) --- */
+/* --- Leaflet Map Init (Projects / Contact) ---
+   Scroll-wheel zoom requires Ctrl/Cmd (same as Google Maps embeds) so that
+   scrolling the page past the map doesn't accidentally zoom it instead —
+   touch devices are unaffected since pinch-to-zoom is a separate Leaflet
+   option (touchZoom, left on its default). */
+function requireCtrlToScrollZoom(map) {
+  map.scrollWheelZoom.disable();
+  const container = map.getContainer();
+  let hintEl, hintTimer;
+
+  function showHint() {
+    if (!hintEl) {
+      hintEl = document.createElement('div');
+      hintEl.textContent = (navigator.platform.indexOf('Mac') === 0 ? 'Use ⌘ + scroll' : 'Use ctrl + scroll') + ' to zoom the map';
+      hintEl.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;background:rgba(10,22,40,0.45);color:#fff;font-family:var(--font-ui,sans-serif);font-size:0.85rem;font-weight:600;z-index:1000;padding:1rem;pointer-events:none;border-radius:inherit;';
+      container.appendChild(hintEl);
+    }
+    hintEl.style.display = 'flex';
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(() => { if (hintEl) hintEl.style.display = 'none'; }, 1200);
+  }
+
+  container.addEventListener('wheel', function (e) {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      map.scrollWheelZoom.enable();
+      if (hintEl) hintEl.style.display = 'none';
+    } else {
+      map.scrollWheelZoom.disable();
+      showHint();
+    }
+  }, { passive: false });
+}
+
 function initMap(containerId, lat, lng, zoom) {
   if (typeof L === 'undefined' || !document.getElementById(containerId)) return;
   const map = L.map(containerId, { zoomControl: true }).setView([lat, lng], zoom);
@@ -318,6 +351,7 @@ function initMap(containerId, lat, lng, zoom) {
     .bindPopup('<b style="font-family:Georgia">APEX R&M GROUP</b><br>Kamonyi District, Runda Sector, Ruyenzi Cell, Nyagacaca Village, Presto Plazza.<br><a href="mailto:info@apexrmgroup.com" style="color:#1A6B8A">info@apexrmgroup.com</a>')
     .openPopup();
 
+  requireCtrlToScrollZoom(map);
   return map;
 }
 
@@ -325,8 +359,6 @@ function initMap(containerId, lat, lng, zoom) {
 if (document.getElementById('contact-map')) {
   initMap('contact-map', -1.962408, 29.982405, 13);
 }
-
-initProjectsMap();
 
 /* --- Tooltip Init --- */
 document.querySelectorAll('[data-tooltip]').forEach(el => {
