@@ -9,7 +9,9 @@
  *   data-cms-img="field_key"      -> sets the src attribute of an <img> from /api/public/content
  *   data-cms-media="slot_key"     -> replaces children with a fixed image or auto-rotating slider
  *   data-cms-setting="key"        -> sets textContent from /api/public/settings
- *   data-cms-setting-href="key"   -> sets href from /api/public/settings (social links, mailto:, tel:, favicon)
+ *   data-cms-setting-href="key"   -> sets href from /api/public/settings (social links, favicon)
+ *   data-cms-setting-mailto="key" -> sets href to "mailto:"+value (an <a> showing an email setting as its own text)
+ *   data-cms-setting-tel="key"    -> sets href to "tel:"+value (an <a> showing a phone setting as its own text)
  *   data-cms-setting-src="key"    -> sets src from /api/public/settings (logo, favicon <img> fallback)
  *
  * If the API is unreachable, the page keeps whatever static content/markup already exists —
@@ -57,6 +59,14 @@
     document.querySelectorAll('[data-cms-setting-href]').forEach(function (el) {
       var key = el.getAttribute('data-cms-setting-href');
       if (settings[key]) el.setAttribute('href', settings[key]);
+    });
+    document.querySelectorAll('[data-cms-setting-mailto]').forEach(function (el) {
+      var key = el.getAttribute('data-cms-setting-mailto');
+      if (settings[key]) el.setAttribute('href', 'mailto:' + settings[key]);
+    });
+    document.querySelectorAll('[data-cms-setting-tel]').forEach(function (el) {
+      var key = el.getAttribute('data-cms-setting-tel');
+      if (settings[key]) el.setAttribute('href', 'tel:' + settings[key].replace(/\s+/g, ''));
     });
     document.querySelectorAll('[data-cms-setting-src]').forEach(function (el) {
       var key = el.getAttribute('data-cms-setting-src');

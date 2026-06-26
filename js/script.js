@@ -333,7 +333,7 @@ function requireCtrlToScrollZoom(map) {
   }, { passive: false });
 }
 
-function initMap(containerId, lat, lng, zoom) {
+function initMap(containerId, lat, lng, zoom, popupHtml) {
   if (typeof L === 'undefined' || !document.getElementById(containerId)) return;
   const map = L.map(containerId, { zoomControl: true }).setView([lat, lng], zoom);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -348,17 +348,29 @@ function initMap(containerId, lat, lng, zoom) {
     iconAnchor: [8, 8]
   });
   L.marker([lat, lng], { icon }).addTo(map)
-    .bindPopup('<b style="font-family:Georgia">APEX R&M GROUP</b><br>Kamonyi District, Runda Sector, Ruyenzi Cell, Nyagacaca Village, Presto Plazza.<br><a href="mailto:info@apexrmgroup.com" style="color:#1A6B8A">info@apexrmgroup.com</a>')
+    .bindPopup(popupHtml || '<b style="font-family:Georgia">APEX R&M GROUP</b><br>Kamonyi District, Runda Sector, Ruyenzi Cell, Nyagacaca Village, Presto Plazza.<br><a href="mailto:info@apexrmgroup.com" style="color:#1A6B8A">info@apexrmgroup.com</a>')
     .openPopup();
 
   requireCtrlToScrollZoom(map);
   return map;
 }
 
-// Init HQ map on contact page
+// Init HQ map on contact page with the static default location — contact-cms.js
+// re-initialises this same container with the admin-configured coordinates once
+// it loads (see window.apexInitContactMap), so this is just the immediate/no-JS
+// fallback rather than the final state on a normal page load.
+let contactMapInstance;
 if (document.getElementById('contact-map')) {
-  initMap('contact-map', -1.962408, 29.982405, 13);
+  contactMapInstance = initMap('contact-map', -1.962408, 29.982405, 13);
 }
+
+/* Exposed so contact-cms.js can replace the HQ map with admin-configured
+   coordinates/popup once it has fetched them, instead of being stuck with
+   the hardcoded default above. */
+window.apexInitContactMap = function (lat, lng, zoom, popupHtml) {
+  if (contactMapInstance) { contactMapInstance.remove(); contactMapInstance = null; }
+  contactMapInstance = initMap('contact-map', lat, lng, zoom, popupHtml);
+};
 
 /* --- Tooltip Init --- */
 document.querySelectorAll('[data-tooltip]').forEach(el => {
