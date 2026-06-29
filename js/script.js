@@ -211,21 +211,39 @@ function initFilter() {
 }
 initFilter();
 
-/* --- Newsletter Form --- */
+/* --- Newsletter Form ---
+   Records the email in the Admin Portal (Messages → Subscribers) via the
+   same cms-loader data-api base every *-cms.js file reads from. Fails
+   silently (still shows the success state) if the API is unreachable so a
+   visitor never sees a broken form over a non-critical signup. */
 document.querySelectorAll('.newsletter-form').forEach(form => {
   form.addEventListener('submit', e => {
     e.preventDefault();
     const input = form.querySelector('input');
     const btn = form.querySelector('button');
-    if (input?.value) {
-      btn.textContent = '✓ Subscribed!';
-      btn.style.background = '#27ae60';
-      input.value = '';
-      setTimeout(() => {
-        btn.textContent = 'Subscribe';
-        btn.style.background = '';
-      }, 3000);
+    const email = input?.value.trim();
+    if (!email) return;
+
+    const loaderScript = document.querySelector('script[src*="cms-loader.js"]');
+    const apiBase = loaderScript ? (loaderScript.getAttribute('data-api') || '').replace(/\/$/, '') : '';
+    if (apiBase) {
+      const segment = window.location.pathname.replace(/\/$/, '').split('/').pop() || '';
+      const page = (segment.replace(/\.html$/i, '') || 'index').toLowerCase();
+      fetch(apiBase + '/api/public/newsletter', {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, page }),
+      }).catch(() => {});
     }
+
+    btn.textContent = '✓ Subscribed!';
+    btn.style.background = '#27ae60';
+    input.value = '';
+    setTimeout(() => {
+      btn.textContent = 'Subscribe';
+      btn.style.background = '';
+    }, 3000);
   });
 });
 
