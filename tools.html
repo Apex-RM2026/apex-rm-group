@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools | APEX R&M GROUP Ltd</title>
+  <meta name="description" content="Purpose-built spatial intelligence tools developed by Apex R&M Group to support GIS analysis, land management, and data-driven decision-making across Africa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" data-cms-setting-href="favicon_url">
+  <style>
+    .tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; }
+    .tool-card { background:var(--white); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); transition:var(--transition); border:1px solid rgba(0,0,0,0.05); display:flex; flex-direction:column; }
+    .tool-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-md); }
+    .tool-card-img { aspect-ratio:16/9; overflow:hidden; background:linear-gradient(135deg,var(--navy) 0%,#1a3a5c 100%); display:flex; align-items:center; justify-content:center; }
+    .tool-card-img img { width:100%; height:100%; object-fit:cover; }
+    .tool-card-img .tool-icon-placeholder { font-size:3rem; opacity:0.3; color:var(--gold); }
+    .tool-card-body { padding:1.5rem; display:flex; flex-direction:column; flex:1; }
+    .tool-category { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.2rem 0.75rem; border-radius:50px; background:rgba(201,168,76,0.12); color:var(--gold); margin-bottom:0.75rem; }
+    .tool-card h3 { font-family:var(--font-heading); font-size:1.15rem; color:var(--navy); margin-bottom:0.6rem; line-height:1.35; }
+    .tool-card p { color:var(--text-muted); font-size:0.88rem; line-height:1.75; margin-bottom:1.25rem; flex:1; }
+    .tool-launch { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-ui); font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); border:1.5px solid var(--gold); padding:0.55rem 1.2rem; border-radius:50px; transition:var(--transition); text-decoration:none; align-self:flex-start; }
+    .tool-launch:hover { background:var(--gold); color:var(--navy); }
+    #tools-empty { display:none; }
+    @media(max-width:640px){ .tools-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="APEX R&M GROUP Logo" class="site-logo" data-cms-setting-src="logo_url">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX R&M GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="sectors.html">Sectors</a></li><li><a href="team.html">Team</a></li><li><a href="contact.html" class="nav-cta">Contact</a></li><li><a href="https://admin.apexrmgroup.com" class="nav-admin-link" target="_blank" rel="noopener" title="Sign in"><span>Sign in</span></a></li></ul>
+  <button class="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-backdrop"></div>
+<div class="nav-mobile">
+  <div class="nav-mobile-body">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="sectors.html">Sectors</a>
+    <a href="team.html">Team</a>
+    <a href="contact.html" class="mobile-cta">Contact</a>
+    <a href="https://admin.apexrmgroup.com" class="nav-admin-link-mobile" target="_blank" rel="noopener">Sign in</a>
+  </div>
+  <div class="nav-mobile-footer">
+    <i class="fa-solid fa-location-dot"></i>
+    <span>Kigali, Rwanda &bull; Africa</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Tools</span></div>
+      <h1 data-cms-html="hero_title">Our Tools — Spatial Intelligence at Your Fingertips</h1>
+      <div class="page-hero-line"></div>
+      <p data-cms="hero_subtitle">Purpose-built tools developed by the Apex R&amp;M Group team to support spatial analysis, land management, and data-driven decision-making across Africa.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS GRID -->
+<section style="background:var(--warm-white);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label" data-cms="section_label">Developer Tools</span>
+      <h2 class="section-title" data-cms-html="section_title">Tools We've Built</h2>
+    </div>
+    <div class="tools-grid" id="tools-grid">
+      <!-- populated by tools-loader script below -->
+    </div>
+    <div id="tools-empty" style="text-align:center;padding:5rem 0;" class="reveal">
+      <i class="fa-solid fa-screwdriver-wrench" style="font-size:3rem;color:var(--gold);opacity:0.25;margin-bottom:1.5rem;display:block;"></i>
+      <p style="color:var(--text-muted);font-size:1.05rem;" data-cms="empty_message">New tools coming soon. Check back shortly!</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section style="background:var(--navy);padding:5rem 0;">
+  <div class="container">
+    <div style="max-width:600px;margin:0 auto;text-align:center;" class="reveal">
+      <span class="section-label" style="color:var(--gold);">Stay Informed</span>
+      <h2 class="section-title light">Get Notified When New Tools Drop</h2>
+      <div class="gold-line center"></div>
+      <p style="color:rgba(255,255,255,0.65);margin:1.5rem 0;">Be the first to know when we release new spatial tools, tutorials, and resources — straight to your inbox.</p>
+      <form class="newsletter-form" onsubmit="return false;" style="max-width:420px;margin:0 auto;">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p style="color:rgba(255,255,255,0.3);font-size:0.75rem;margin-top:0.8rem;">No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="diamond">◆</span>
+          <span class="footer-logo-name" data-cms-setting="company_name">APEX R&M GROUP Ltd</span>
+        </div>
+        <p class="footer-desc" data-cms-setting="company_description">Africa's premier spatial consulting firm — empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/116016508" data-cms-setting-href="social_linkedin" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://x.com/ApexRMGroup" data-cms-setting-href="social_twitter" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61589665884720" data-cms-setting-href="social_facebook" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/apexrmgroup/" data-cms-setting-href="social_instagram" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ApexRMGroup" data-cms-setting-href="social_youtube" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#gis">GIS &amp; Spatial Analysis</a></li>
+          <li><a href="services.html#remote-sensing">Remote Sensing &amp; EO</a></li>
+          <li><a href="services.html#land-admin">Land Administration</a></li>
+          <li><a href="services.html#environment">Environmental Consulting</a></li>
+          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
+          <li><a href="services.html#capacity">Capacity Building</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="tools.html">Tools</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span data-cms-setting="contact_address">Kigali, Rwanda (HQ)</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@apexrmgroup.com" data-cms-setting="contact_email" data-cms-setting-mailto="contact_email">info@apexrmgroup.com</a></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890" data-cms-setting="contact_phone" data-cms-setting-tel="contact_phone">+250 787 523 890</a></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890" data-cms-setting-href="contact_whatsapp">WhatsApp Us</a></div>
+        <h4 style="margin-top:1.5rem;">Newsletter</h4>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Apex R&M Group Ltd. All rights reserved. Kigali, Rwanda.</p>
+      <div class="footer-legal">
+        <a href="https://app.apexrmgroup.com/">ApexRM Social App</a>
+        <a href="user-manual.html">ApexRM Social App User Manual</a>
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Terms of Service.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top"><i class="fa-solid fa-chevron-up"></i></button>
+<a id="whatsapp-btn" href="https://wa.me/250787523890" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="js/cms.js"></script>
+<script src="js/script.js"></script>
+<script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="tools"></script>
+<script>
+(async () => {
+  const apiScript = document.querySelector('script[data-api][data-page="tools"]');
+  const apiBase = apiScript ? apiScript.getAttribute('data-api') : '';
+  if (!apiBase) return;
+  try {
+    const res = await fetch(apiBase + '/api/public/tools');
+    if (!res.ok) return;
+    const { tools } = await res.json();
+    const grid = document.getElementById('tools-grid');
+    const empty = document.getElementById('tools-empty');
+    if (!tools || !tools.length) { empty.style.display = 'block'; return; }
+    grid.innerHTML = tools.map(function(t) {
+      var imgHtml = t.imageUrl
+        ? '<div class="tool-card-img"><img src="' + t.imageUrl + '" alt="' + t.name + '" loading="lazy"></div>'
+        : '<div class="tool-card-img"><i class="fa-solid fa-screwdriver-wrench tool-icon-placeholder"></i></div>';
+      var catHtml = t.category ? '<span class="tool-category">' + t.category + '</span>' : '';
+      return '<div class="tool-card reveal">'
+        + imgHtml
+        + '<div class="tool-card-body">'
+        + catHtml
+        + '<h3>' + t.name + '</h3>'
+        + '<p>' + t.description + '</p>'
+        + '<a href="' + t.link + '" class="tool-launch" target="_blank" rel="noopener noreferrer">'
+        + '<i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Tool</a>'
+        + '</div></div>';
+    }).join('');
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
