@@ -170,30 +170,37 @@
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="tools"></script>
 <script>
+var _toolsApiBase = '';
+function trackAndOpen(id, url) {
+  try { fetch(_toolsApiBase + '/api/public/tools/' + id + '/track', { method: 'POST' }); } catch(e) {}
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 (async () => {
-  const apiScript = document.querySelector('script[data-api][data-page="tools"]');
-  const apiBase = apiScript ? apiScript.getAttribute('data-api') : '';
-  if (!apiBase) return;
+  var apiScript = document.querySelector('script[data-api][data-page="tools"]');
+  _toolsApiBase = apiScript ? apiScript.getAttribute('data-api') : '';
+  if (!_toolsApiBase) return;
   try {
-    const res = await fetch(apiBase + '/api/public/tools');
+    var res = await fetch(_toolsApiBase + '/api/public/tools');
     if (!res.ok) return;
-    const { tools } = await res.json();
-    const grid = document.getElementById('tools-grid');
-    const empty = document.getElementById('tools-empty');
+    var data = await res.json();
+    var tools = data.tools;
+    var grid = document.getElementById('tools-grid');
+    var empty = document.getElementById('tools-empty');
     if (!tools || !tools.length) { empty.style.display = 'block'; return; }
     grid.innerHTML = tools.map(function(t) {
       var imgHtml = t.imageUrl
         ? '<div class="tool-card-img"><img src="' + t.imageUrl + '" alt="' + t.name + '" loading="lazy"></div>'
         : '<div class="tool-card-img"><i class="fa-solid fa-screwdriver-wrench tool-icon-placeholder"></i></div>';
       var catHtml = t.category ? '<span class="tool-category">' + t.category + '</span>' : '';
+      var safeLink = t.link.replace(/'/g, "\\'");
       return '<div class="tool-card reveal">'
         + imgHtml
         + '<div class="tool-card-body">'
         + catHtml
         + '<h3>' + t.name + '</h3>'
         + '<p>' + t.description + '</p>'
-        + '<a href="' + t.link + '" class="tool-launch" target="_blank" rel="noopener noreferrer">'
-        + '<i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Tool</a>'
+        + '<button onclick="trackAndOpen(\'' + t.id + '\',\'' + safeLink + '\')" class="tool-launch">'
+        + '<i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Tool</button>'
         + '</div></div>';
     }).join('');
   } catch(e) {}
