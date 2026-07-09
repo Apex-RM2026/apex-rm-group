@@ -6,11 +6,9 @@
 'use strict';
 
 /* --- Loading Screen --- */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const loader = document.getElementById('loader');
-    if (loader) loader.classList.add('hidden');
-  }, 1800);
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('hidden');
 });
 
 /* --- Scroll Progress --- */
@@ -86,15 +84,11 @@ mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
 
 /* --- Scroll Reveal --- */
 function revealOnScroll() {
-  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-  reveals.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) {
-      el.classList.add('revealed');
-    }
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    el.classList.add('revealed');
   });
 }
-revealOnScroll(); // Run on load
+revealOnScroll(); // Reveal all sections immediately on load
 
 /* --- Animated Counters --- */
 let countersStarted = false;
@@ -280,7 +274,7 @@ function parallaxHero() {
 window.addEventListener('scroll', parallaxHero, { passive: true });
 
 /* --- Hero BG Image Load --- */
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.hero-bg')?.classList.add('loaded');
 });
 
