@@ -191,7 +191,7 @@ function trackAndOpen(id, url) {
         : '<div class="tool-card-img"><i class="fa-solid fa-screwdriver-wrench tool-icon-placeholder"></i></div>';
       var catHtml = t.category ? '<span class="tool-category">' + t.category + '</span>' : '';
       var safeLink = t.link.replace(/'/g, "\\'");
-      return '<div class="tool-card reveal">'
+      return '<div class="tool-card">'
         + imgHtml
         + '<div class="tool-card-body">'
         + catHtml
