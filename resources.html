@@ -65,10 +65,6 @@
         <span class="section-label" style="color:var(--gold);" data-cms="brochure_label">Featured Download</span>
         <h2 style="font-family:var(--font-heading);font-size:2rem;color:white;margin:0.8rem 0 1rem;line-height:1.3;" data-cms-html="brochure_heading">Apex R&M Group — Corporate Profile & Capabilities Statement 2025</h2>
         <p style="color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:2rem;" data-cms="brochure_description">Our comprehensive capabilities document — covering all service lines, past projects, team profiles, and approach methodology. Essential reading for procurement officers and project managers.</p>
-        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
-          <a href="contact.html" class="btn-primary"><i class="fa-solid fa-download"></i> Download PDF (Free)</a>
-          <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-envelope"></i> Request by Email</a>
-        </div>
       </div>
       <div class="glass-card" style="padding:2rem;">
         <div style="font-family:var(--font-ui);font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Document Contents</div>
@@ -94,49 +90,8 @@
       <h2 class="section-title" data-cms-html="downloads_title">Resource Library</h2>
       <p class="section-subtitle" data-cms="downloads_subtitle">White papers, toolkits, templates, and training materials — all free for spatial professionals.</p>
     </div>
-    <div class="resources-grid">
-      <div class="resource-card reveal" data-delay="100">
-        <div class="resource-type"><i class="fa-solid fa-file-pdf"></i> White Paper</div>
-        <h3>GIS for Land Governance in Sub-Saharan Africa</h3>
-        <p>A comprehensive analysis of how GIS technology is reshaping land tenure security, cadastral systems, and land governance frameworks across Sub-Saharan Africa.</p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> PDF · 1.8 MB · May 2025</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-download"></i> Download Free</a>
-      </div>
-      <div class="resource-card reveal" data-delay="200">
-        <div class="resource-type" style="background:var(--navy);"><i class="fa-solid fa-toolbox"></i> GIS Toolkit</div>
-        <h3>QGIS Starter Kit for African Land Administration Projects</h3>
-        <p>A practical QGIS toolkit with pre-configured styles, templates, and workflows specifically designed for land administration and cadastral projects in African contexts.</p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> ZIP · 45 MB · March 2025</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-download"></i> Download Free</a>
-      </div>
-      <div class="resource-card reveal" data-delay="300">
-        <div class="resource-type" style="background:var(--teal);"><i class="fa-solid fa-graduation-cap"></i> Training Guide</div>
-        <h3>Introduction to Remote Sensing for Environmental Monitoring</h3>
-        <p>A beginner-friendly guide to using freely available satellite imagery (Sentinel, Landsat) for environmental monitoring, deforestation detection, and land cover analysis.</p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> PDF · 3.2 MB · April 2025</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-download"></i> Download Free</a>
-      </div>
-      <div class="resource-card reveal" data-delay="100">
-        <div class="resource-type" style="background:var(--gold-dark);"><i class="fa-solid fa-chart-bar"></i> Data Template</div>
-        <h3>EIA Data Collection Templates & GIS Integration Protocols</h3>
-        <p>Standardised data collection templates for Environmental Impact Assessment fieldwork, with protocols for GIS integration and spatial analysis workflows. <span class="gated-badge" style="display:inline;margin-left:0.3rem;">Email Required</span></p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> XLSX + PDF · 2.1 MB</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-envelope"></i> Request Access</a>
-      </div>
-      <div class="resource-card reveal" data-delay="200">
-        <div class="resource-type"><i class="fa-solid fa-file-pdf"></i> Brochure</div>
-        <h3>Apex R&M Group — Capacity Building Programmes 2025</h3>
-        <p>Overview of all training and capacity building programmes available for institutions, government agencies, and universities — with pricing guidance and customisation options.</p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> PDF · 0.8 MB · May 2025</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-download"></i> Download Free</a>
-      </div>
-      <div class="resource-card reveal" data-delay="300">
-        <div class="resource-type" style="background:var(--navy);"><i class="fa-solid fa-map"></i> GIS Template</div>
-        <h3>Urban Growth Modelling — QGIS Project Template</h3>
-        <p>A complete QGIS project template for urban growth modelling using the FUTURES model — calibrated for African city contexts with sample data and documentation. <span class="gated-badge" style="display:inline;margin-left:0.3rem;">Email Required</span></p>
-        <div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> ZIP · 120 MB</div>
-        <a href="contact.html" class="btn-outline" style="width:100%;justify-content:center;"><i class="fa-solid fa-envelope"></i> Request Access</a>
-      </div>
+    <div class="resources-grid" id="resources-grid">
+      <p id="resources-loading" style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem 0;">Loading resources…</p>
     </div>
   </div>
 </section>
@@ -149,16 +104,8 @@
       <h2 class="section-title" data-cms-html="tools_title">Essential GIS Tools & Data Sources</h2>
       <p class="section-subtitle" data-cms="tools_subtitle">Curated links to free GIS software, open geospatial data portals, and African spatial data sources we recommend.</p>
     </div>
-    <div class="tools-grid reveal">
-      <a href="https://qgis.org" target="_blank" class="tool-link"><i class="fa-solid fa-map"></i> QGIS — Free & Open Source GIS</a>
-      <a href="https://earthexplorer.usgs.gov" target="_blank" class="tool-link"><i class="fa-solid fa-satellite"></i> USGS Earth Explorer — Satellite Data</a>
-      <a href="https://scihub.copernicus.eu" target="_blank" class="tool-link"><i class="fa-solid fa-satellite-dish"></i> Copernicus Hub — Sentinel Imagery</a>
-      <a href="https://www.openstreetmap.org" target="_blank" class="tool-link"><i class="fa-solid fa-map-location-dot"></i> OpenStreetMap — Base Map Data</a>
-      <a href="https://africageoportal.maps.arcgis.com" target="_blank" class="tool-link"><i class="fa-solid fa-globe-africa"></i> Africa GeoPortal — ESRI Africa Data</a>
-      <a href="https://www.geofabrik.de" target="_blank" class="tool-link"><i class="fa-solid fa-database"></i> GeoFabrik — OSM Downloads</a>
-      <a href="https://gadm.org" target="_blank" class="tool-link"><i class="fa-solid fa-border-all"></i> GADM — Administrative Boundaries</a>
-      <a href="https://www.naturalearthdata.com" target="_blank" class="tool-link"><i class="fa-solid fa-earth-africa"></i> Natural Earth — Free Vector Data</a>
-      <a href="https://developers.google.com/earth-engine" target="_blank" class="tool-link"><i class="fa-brands fa-google"></i> Google Earth Engine — Cloud GIS</a>
+    <div class="tools-grid" id="gis-links-grid">
+      <p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:2rem 0;">Loading GIS tools…</p>
     </div>
   </div>
 </section>
@@ -243,5 +190,62 @@
 <script src="js/cms.js"></script>
 <script src="js/script.js"></script>
 <script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="resources"></script>
+<script>
+(async function() {
+  var API = 'https://admin.apexrmgroup.com';
+  var colorMap = { navy: 'background:var(--navy)', teal: 'background:var(--teal)', gold: 'background:var(--gold-dark)' };
+
+  // Load resource library
+  try {
+    var rRes = await fetch(API + '/api/public/resources-library');
+    if (rRes.ok) {
+      var rData = await rRes.json();
+      var grid = document.getElementById('resources-grid');
+      var loadingEl = document.getElementById('resources-loading');
+      if (loadingEl) loadingEl.remove();
+      if (rData.items && rData.items.length) {
+        grid.innerHTML = rData.items.map(function(r) {
+          var bgStyle = r.typeColor && colorMap[r.typeColor] ? ' style="' + colorMap[r.typeColor] + '"' : '';
+          var icon = r.icon || 'fa-solid fa-file';
+          var meta = r.fileMeta ? '<div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> ' + r.fileMeta + '</div>' : '';
+          var btn = (r.previewUrl && r.previewEnabled)
+            ? '<a href="' + r.previewUrl + '" target="_blank" rel="noopener noreferrer" class="btn-outline" style="width:100%;justify-content:center;margin-top:auto;"><i class="fa-solid fa-eye"></i> View Resource</a>'
+            : '';
+          return '<div class="resource-card">'
+            + '<div class="resource-type"' + bgStyle + '><i class="' + icon + '"></i> ' + r.type + '</div>'
+            + '<h3>' + r.title + '</h3>'
+            + '<p>' + r.description + '</p>'
+            + meta + btn
+            + '</div>';
+        }).join('');
+      } else {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem 0;">No resources available yet. Check back soon.</p>';
+      }
+    }
+  } catch(e) {
+    var g = document.getElementById('resources-grid');
+    if (g) g.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem 0;">Resources temporarily unavailable.</p>';
+  }
+
+  // Load GIS tool links
+  try {
+    var lRes = await fetch(API + '/api/public/gis-links');
+    if (lRes.ok) {
+      var lData = await lRes.json();
+      var linksGrid = document.getElementById('gis-links-grid');
+      if (linksGrid) {
+        if (lData.items && lData.items.length) {
+          linksGrid.innerHTML = lData.items.map(function(l) {
+            var ic = l.icon || 'fa-solid fa-link';
+            return '<a href="' + l.url + '" target="_blank" rel="noopener noreferrer" class="tool-link"><i class="' + ic + '"></i> ' + l.name + '</a>';
+          }).join('');
+        } else {
+          linksGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:2rem 0;">No GIS tool links added yet.</p>';
+        }
+      }
+    }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
