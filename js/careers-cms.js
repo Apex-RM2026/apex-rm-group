@@ -45,6 +45,9 @@
     var detailsId = 'job-details-' + idx;
     var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
     var shareUrl = job.slug ? ('?job=' + encodeURIComponent(job.slug)) : '#';
+    var imageHtml = job.imageUrl
+      ? '<div style="aspect-ratio:16/7;overflow:hidden;border-radius:10px;margin-bottom:1rem;background:#0a1628;"><img src="' + escapeHtml(job.imageUrl) + '" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>'
+      : '';
 
     // The job title itself is the link to the job opportunity (not a separate
     // "View Details" button) — clicking it toggles the description below.
@@ -65,6 +68,7 @@
 
     return (
       '<div class="job-card reveal" id="job-' + escapeHtml(job.slug || '') + '" data-category="' + escapeHtml(job.category || 'INTERNAL') + '" style="flex-direction:column;align-items:stretch;">' +
+        imageHtml +
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
           '<div class="job-info">' +
             titleHtml +
