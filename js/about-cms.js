@@ -17,6 +17,14 @@
     });
   }
 
+  function iconHtml(icon) {
+    if (!icon) return '';
+    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
+      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
+    }
+    return escapeHtml(icon);
+  }
+
   function setText(id, value) {
     var el = document.getElementById(id);
     if (el && value) el.textContent = value;
@@ -28,7 +36,7 @@
     grid.innerHTML = cards.map(function (c, idx) {
       return (
         '<div class="value-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '">' +
-          '<div class="value-icon">' + escapeHtml(c.icon) + '</div>' +
+          '<div class="value-icon">' + iconHtml(c.icon) + '</div>' +
           '<h3>' + escapeHtml(c.title) + '</h3>' +
           '<p>' + escapeHtml(c.description) + '</p>' +
         '</div>'

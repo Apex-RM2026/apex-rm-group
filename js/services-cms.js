@@ -25,6 +25,14 @@
     });
   }
 
+  function iconHtml(icon) {
+    if (!icon) return '';
+    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
+      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
+    }
+    return escapeHtml(icon);
+  }
+
   function setText(id, value) {
     var el = document.getElementById(id);
     if (el && value) el.textContent = value;
@@ -107,7 +115,7 @@
     grid.innerHTML = items.map(function (item, idx) {
       return (
         '<a href="#' + escapeHtml(item.anchor) + '" class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '" style="text-decoration:none;">' +
-          '<div class="service-icon">' + escapeHtml(item.icon) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
+          '<div class="service-icon">' + iconHtml(item.icon) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
           '<h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
         '</a>'
       );

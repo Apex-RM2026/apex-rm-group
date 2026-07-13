@@ -23,6 +23,14 @@
     });
   }
 
+  function iconHtml(icon) {
+    if (!icon) return '';
+    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
+      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
+    }
+    return escapeHtml(icon);
+  }
+
   function trackApplyClick(jobId) {
     if (!apiBase || !jobId) return;
     fetch(apiBase + '/api/public/careers/' + jobId + '/track-apply', { method: 'POST', mode: 'cors' }).catch(function () {});
@@ -208,7 +216,7 @@
     container.innerHTML = cards.map(function (c) {
       return (
         '<div class="' + cardClass + ' reveal">' +
-          '<div class="' + iconClass + '">' + escapeHtml(c.icon) + '</div>' +
+          '<div class="' + iconClass + '">' + iconHtml(c.icon) + '</div>' +
           '<' + titleTag + '>' + escapeHtml(c.title) + '</' + titleTag + '>' +
           '<p>' + escapeHtml(c.description) + '</p>' +
         '</div>'
