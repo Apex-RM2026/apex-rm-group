@@ -134,6 +134,26 @@
     });
   }
 
+  // ── Social links — dynamic image icons in footer ────────────────────────────
+  var SOCIAL_CACHE_KEY = 'apex_social_links';
+
+  function renderSocialLinks(links) {
+    var container = document.getElementById('footer-social');
+    if (!container || !links || !links.length) return;
+    container.innerHTML = links.map(function (l) {
+      var icon = l.iconUrl
+        ? '<img src="' + l.iconUrl + '" alt="' + l.name + '" style="width:18px;height:18px;object-fit:contain;display:block;">'
+        : '<span style="font-size:0.7rem;opacity:0.6;">' + l.name.charAt(0) + '</span>';
+      return '<a href="' + l.url + '" class="social-icon" aria-label="' + l.name + '" target="_blank" rel="noopener noreferrer">' + icon + '</a>';
+    }).join('');
+  }
+
+  // Apply cached social links immediately (instant on repeat visits)
+  try {
+    var rawSocial = localStorage.getItem(SOCIAL_CACHE_KEY);
+    if (rawSocial) renderSocialLinks(JSON.parse(rawSocial));
+  } catch (e) {}
+
   // ── Stale-while-revalidate cache ────────────────────────────────────────────
   // Apply the last-known CMS data synchronously from localStorage so background
   // images and text appear instantly on repeat visits — no API round-trip needed
@@ -166,14 +186,17 @@
       safeFetchJson(API_BASE + '/api/public/content?page=' + encodeURIComponent(PAGE)),
       safeFetchJson(API_BASE + '/api/public/media-slots?page=' + encodeURIComponent(PAGE)),
       safeFetchJson(API_BASE + '/api/public/settings'),
+      safeFetchJson(API_BASE + '/api/public/social-links'),
     ]).then(function (results) {
       var content  = results[0] && results[0].content;
       var slots    = results[1] && results[1].slots;
       var settings = results[2] && results[2].settings;
+      var socialLinks = results[3] && results[3].links;
 
       applyContent(content);
       applyMediaSlots(slots);
       applySettings(settings);
+      renderSocialLinks(socialLinks);
 
       // Persist for instant display on the next page load
       try {
@@ -182,6 +205,7 @@
           slots:    slots    || null,
           settings: settings || null,
         }));
+        if (socialLinks) localStorage.setItem(SOCIAL_CACHE_KEY, JSON.stringify(socialLinks));
       } catch (e) { /* storage quota exceeded or private mode — ignore */ }
     });
     trackPageView();

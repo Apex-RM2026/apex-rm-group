@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1741,14 +1741,19 @@
           <span class="logo-name" style="font-family:'DM Serif Display',serif; color:var(--gold); font-size:1.4rem;">APEX R&M GROUP</span>
           <span class="logo-tagline" style="color:rgba(248,244,234,.45); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; font-weight:500;">Spatial Intelligence. Strategic Growth.</span>
           <p>Africa's premier spatial intelligence and consulting firm. Headquartered in Kigali, Rwanda. Delivering GIS, remote sensing, land administration, and digital automation solutions across the continent.</p>
-          <div class="footer-social">
-            <a href="https://www.linkedin.com/company/116016508" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://x.com/ApexRMGroup" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://web.facebook.com/profile.php?id=61589665884720" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/apexrmgroup/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@ApexRMGroup" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/250787523890" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
+          <div class="footer-social" id="footer-social"></div>
+          <script>
+          (function(){
+            fetch("https://admin.apexrmgroup.com/api/public/social-links").then(function(r){return r.json();}).then(function(d){
+              var c=document.getElementById("footer-social");
+              if(!c||!d.links)return;
+              c.innerHTML=d.links.map(function(l){
+                var icon=l.iconUrl?"<img src=\""+l.iconUrl+"\" alt=\""+l.name+"\" style=\"width:18px;height:18px;object-fit:contain;display:block;\">":"<span>"+l.name.charAt(0)+"</span>";
+                return "<a href=\""+l.url+"\" aria-label=\""+l.name+"\" target=\"_blank\" rel=\"noopener noreferrer\">"+icon+"</a>";
+              }).join("");
+            }).catch(function(){});
+          })();
+          </script>
         </div>
         <div class="footer-col">
           <h5>Services</h5>
