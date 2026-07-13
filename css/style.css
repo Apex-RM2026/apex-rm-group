@@ -1111,6 +1111,7 @@ footer {
 /* Image icons inside icon-container divs — cover fills the box with no whitespace gaps */
 .service-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
 .value-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
+.sector-icon img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
 .culture-icon img { width: 48px; height: 48px; object-fit: cover; display: block; margin: 0 auto; border-radius: 8px; }
 .benefit-icon img { width: 44px; height: 44px; object-fit: cover; display: block; margin: 0 auto 0.3rem; border-radius: 8px; }
 

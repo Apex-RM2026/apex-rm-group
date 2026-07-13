@@ -21,6 +21,13 @@
     });
   }
 
+  function iconHtml(icon, iconUrl) {
+    var url = iconUrl && (iconUrl.indexOf('http') === 0 || iconUrl.indexOf('//') === 0) ? iconUrl
+            : (icon && (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) ? icon : '');
+    if (url) return '<img src="' + escapeHtml(url) + '" alt="" loading="lazy">';
+    return icon ? escapeHtml(icon) : '';
+  }
+
   function setText(id, value) {
     var el = document.getElementById(id);
     if (el && value) el.textContent = value;
@@ -97,7 +104,7 @@
     grid.innerHTML = items.map(function (item, idx) {
       return (
         '<a href="#' + escapeHtml(item.anchor) + '" class="sector-card reveal" data-delay="' + ((idx % 4) * 50 + 100) + '" style="text-decoration:none;">' +
-          '<div class="sector-icon">' + escapeHtml(item.icon) + '</div><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
+          '<div class="sector-icon">' + iconHtml(item.icon, item.iconUrl) + '</div><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
         '</a>'
       );
     }).join('');
