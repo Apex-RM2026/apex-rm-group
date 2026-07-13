@@ -17,12 +17,11 @@
     });
   }
 
-  function iconHtml(icon) {
-    if (!icon) return '';
-    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
-      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
-    }
-    return escapeHtml(icon);
+  function iconHtml(icon, iconUrl) {
+    var url = iconUrl && (iconUrl.indexOf('http') === 0 || iconUrl.indexOf('//') === 0) ? iconUrl
+            : (icon && (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) ? icon : '');
+    if (url) return '<img src="' + escapeHtml(url) + '" alt="" loading="lazy">';
+    return icon ? escapeHtml(icon) : '';
   }
 
   function setText(id, value) {
@@ -36,7 +35,7 @@
     grid.innerHTML = cards.map(function (c, idx) {
       return (
         '<div class="value-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '">' +
-          '<div class="value-icon">' + iconHtml(c.icon) + '</div>' +
+          '<div class="value-icon">' + iconHtml(c.icon, c.iconUrl) + '</div>' +
           '<h3>' + escapeHtml(c.title) + '</h3>' +
           '<p>' + escapeHtml(c.description) + '</p>' +
         '</div>'

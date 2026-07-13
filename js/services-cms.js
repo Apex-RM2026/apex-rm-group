@@ -25,12 +25,11 @@
     });
   }
 
-  function iconHtml(icon) {
-    if (!icon) return '';
-    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
-      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
-    }
-    return escapeHtml(icon);
+  function iconHtml(icon, iconUrl) {
+    var url = iconUrl && (iconUrl.indexOf('http') === 0 || iconUrl.indexOf('//') === 0) ? iconUrl
+            : (icon && (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) ? icon : '');
+    if (url) return '<img src="' + escapeHtml(url) + '" alt="" loading="lazy">';
+    return icon ? escapeHtml(icon) : '';
   }
 
   function setText(id, value) {
@@ -115,7 +114,7 @@
     grid.innerHTML = items.map(function (item, idx) {
       return (
         '<a href="#' + escapeHtml(item.anchor) + '" class="service-card reveal" data-delay="' + ((idx % 3) * 100 + 100) + '" style="text-decoration:none;">' +
-          '<div class="service-icon">' + iconHtml(item.icon) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
+          '<div class="service-icon">' + iconHtml(item.icon, item.iconUrl) + '</div><div class="service-num">' + String(idx + 1).padStart(2, '0') + '</div>' +
           '<h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + '</p>' +
         '</a>'
       );

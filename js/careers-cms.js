@@ -23,12 +23,11 @@
     });
   }
 
-  function iconHtml(icon) {
-    if (!icon) return '';
-    if (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) {
-      return '<img src="' + escapeHtml(icon) + '" alt="" loading="lazy">';
-    }
-    return escapeHtml(icon);
+  function iconHtml(icon, iconUrl) {
+    var url = iconUrl && (iconUrl.indexOf('http') === 0 || iconUrl.indexOf('//') === 0) ? iconUrl
+            : (icon && (icon.indexOf('http') === 0 || icon.indexOf('//') === 0) ? icon : '');
+    if (url) return '<img src="' + escapeHtml(url) + '" alt="" loading="lazy">';
+    return icon ? escapeHtml(icon) : '';
   }
 
   function trackApplyClick(jobId) {
@@ -216,7 +215,7 @@
     container.innerHTML = cards.map(function (c) {
       return (
         '<div class="' + cardClass + ' reveal">' +
-          '<div class="' + iconClass + '">' + iconHtml(c.icon) + '</div>' +
+          '<div class="' + iconClass + '">' + iconHtml(c.icon, c.iconUrl) + '</div>' +
           '<' + titleTag + '>' + escapeHtml(c.title) + '</' + titleTag + '>' +
           '<p>' + escapeHtml(c.description) + '</p>' +
         '</div>'
