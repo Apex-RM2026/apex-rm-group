@@ -16,6 +16,9 @@
  *
  * If the API is unreachable, the page keeps whatever static content/markup already exists —
  * nothing is ever blanked out on failure.
+ *
+ * Performance: uses localStorage stale-while-revalidate so background images and CMS
+ * content appear instantly on repeat visits (no API round-trip needed to show content).
  */
 (function () {
   var currentScript = document.currentScript || (function () {
@@ -27,6 +30,17 @@
   var PAGE = currentScript.getAttribute('data-page') || '';
 
   if (!API_BASE || !PAGE) return;
+
+  // Inject preconnect hint immediately so the browser starts the TCP/TLS
+  // handshake to admin.apexrmgroup.com before the API fetch even fires.
+  if (!document.querySelector('link[rel="preconnect"][href="' + API_BASE + '"]')) {
+    var pc = document.createElement('link');
+    pc.rel = 'preconnect';
+    pc.href = API_BASE;
+    document.head.appendChild(pc);
+  }
+
+  var CACHE_KEY = 'apex_cms_' + PAGE;
 
   function safeFetchJson(url) {
     return fetch(url, { mode: 'cors' })
@@ -120,6 +134,22 @@
     });
   }
 
+  // ── Stale-while-revalidate cache ────────────────────────────────────────────
+  // Apply the last-known CMS data synchronously from localStorage so background
+  // images and text appear instantly on repeat visits — no API round-trip needed
+  // to show content. The API call below runs in parallel to keep the cache fresh.
+  try {
+    var raw = localStorage.getItem(CACHE_KEY);
+    if (raw) {
+      var cached = JSON.parse(raw);
+      if (cached) {
+        applyContent(cached.content);
+        applyMediaSlots(cached.slots);
+        applySettings(cached.settings);
+      }
+    }
+  } catch (e) { /* localStorage unavailable or corrupt — ignore */ }
+
   function trackPageView() {
     try {
       fetch(API_BASE + '/api/public/track', {
@@ -137,9 +167,22 @@
       safeFetchJson(API_BASE + '/api/public/media-slots?page=' + encodeURIComponent(PAGE)),
       safeFetchJson(API_BASE + '/api/public/settings'),
     ]).then(function (results) {
-      applyContent(results[0] && results[0].content);
-      applyMediaSlots(results[1] && results[1].slots);
-      applySettings(results[2] && results[2].settings);
+      var content  = results[0] && results[0].content;
+      var slots    = results[1] && results[1].slots;
+      var settings = results[2] && results[2].settings;
+
+      applyContent(content);
+      applyMediaSlots(slots);
+      applySettings(settings);
+
+      // Persist for instant display on the next page load
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          content:  content  || null,
+          slots:    slots    || null,
+          settings: settings || null,
+        }));
+      } catch (e) { /* storage quota exceeded or private mode — ignore */ }
     });
     trackPageView();
   }
