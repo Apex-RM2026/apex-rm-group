@@ -17,8 +17,11 @@
  * If the API is unreachable, the page keeps whatever static content/markup already exists —
  * nothing is ever blanked out on failure.
  *
- * Performance: uses localStorage stale-while-revalidate so background images and CMS
- * content appear instantly on repeat visits (no API round-trip needed to show content).
+ * Performance:
+ *   - localStorage stale-while-revalidate: CMS content applied synchronously from cache on every visit
+ *   - Image preloading: on cached visits, <link rel="preload" as="image"> injected immediately so the
+ *     browser starts downloading hero images before any API call completes
+ *   - Preconnect: TCP/TLS handshake to admin API + Supabase CDN started at script parse time
  */
 (function () {
   var currentScript = document.currentScript || (function () {
@@ -31,16 +34,59 @@
 
   if (!API_BASE || !PAGE) return;
 
-  // Inject preconnect hint immediately so the browser starts the TCP/TLS
-  // handshake to admin.apexrmgroup.com before the API fetch even fires.
-  if (!document.querySelector('link[rel="preconnect"][href="' + API_BASE + '"]')) {
-    var pc = document.createElement('link');
-    pc.rel = 'preconnect';
-    pc.href = API_BASE;
-    document.head.appendChild(pc);
+  // ── Preconnect to admin API immediately ──────────────────────────────────────
+  function addPreconnect(origin, crossOrigin) {
+    if (document.querySelector('link[rel="preconnect"][href="' + origin + '"]')) return;
+    var el = document.createElement('link');
+    el.rel = 'preconnect';
+    el.href = origin;
+    if (crossOrigin) el.crossOrigin = 'anonymous';
+    document.head.appendChild(el);
   }
 
+  addPreconnect(API_BASE, false);
+
   var CACHE_KEY = 'apex_cms_' + PAGE;
+
+  // ── Image preloading ─────────────────────────────────────────────────────────
+  // Called with cached slot/settings data to kick off image downloads immediately,
+  // before applyMediaSlots runs and before any API call completes.
+  var _preconnectedHosts = {};
+  function preloadImagesFromCache(slots, settings) {
+    var urls = [];
+
+    // Collect all image URLs from media slots
+    if (slots) {
+      Object.keys(slots).forEach(function (key) {
+        var slot = slots[key];
+        if (!slot || !slot.items) return;
+        slot.items.forEach(function (item) { if (item.url) urls.push(item.url); });
+      });
+    }
+    // Also preload the logo
+    if (settings && settings.logo_url) urls.push(settings.logo_url);
+
+    urls.forEach(function (url, idx) {
+      try {
+        // Preconnect to image CDN host (e.g. Supabase) — done once per host
+        var host = new URL(url).origin;
+        if (!_preconnectedHosts[host]) {
+          addPreconnect(host, true);
+          _preconnectedHosts[host] = true;
+        }
+
+        // Preload the image — browser starts downloading immediately
+        if (document.querySelector('link[rel="preload"][href="' + url + '"]')) return;
+        var pl = document.createElement('link');
+        pl.rel = 'preload';
+        pl.as = 'image';
+        pl.href = url;
+        // First image (hero) gets high fetch priority
+        if (idx === 0) pl.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(pl);
+      } catch (e) {}
+    });
+  }
 
   function safeFetchJson(url) {
     return fetch(url, { mode: 'cors' })
@@ -99,6 +145,13 @@
       img.alt = item.altText || '';
       img.className = 'cms-slider-img';
       img.style.opacity = idx === 0 ? '1' : '0';
+      // First slide is above-the-fold — eager + high priority; rest are lazy
+      if (idx === 0) {
+        img.loading = 'eager';
+        img.setAttribute('fetchpriority', 'high');
+      } else {
+        img.loading = 'lazy';
+      }
       track.appendChild(img);
     });
     container.appendChild(track);
@@ -126,6 +179,7 @@
         var existingImg = el.querySelector('img');
         if (existingImg) {
           existingImg.src = slot.items[0].url;
+          existingImg.setAttribute('fetchpriority', 'high');
           if (slot.items[0].altText) existingImg.alt = slot.items[0].altText;
         } else if (el.style && 'backgroundImage' in el.style) {
           el.style.backgroundImage = "url('" + slot.items[0].url + "')";
@@ -155,14 +209,17 @@
   } catch (e) {}
 
   // ── Stale-while-revalidate cache ────────────────────────────────────────────
-  // Apply the last-known CMS data synchronously from localStorage so background
-  // images and text appear instantly on repeat visits — no API round-trip needed
-  // to show content. The API call below runs in parallel to keep the cache fresh.
+  // 1. Read last-known data from localStorage synchronously
+  // 2. Preload images BEFORE applying slots — browser starts the download immediately
+  // 3. Apply CMS data so content is visible instantly (no API wait on repeat visits)
+  // 4. Fetch fresh data from API in the background and update cache for next visit
   try {
     var raw = localStorage.getItem(CACHE_KEY);
     if (raw) {
       var cached = JSON.parse(raw);
       if (cached) {
+        // Kick off image downloads FIRST — gives browser maximum head start
+        preloadImagesFromCache(cached.slots, cached.settings);
         applyContent(cached.content);
         applyMediaSlots(cached.slots);
         applySettings(cached.settings);
@@ -188,10 +245,13 @@
       safeFetchJson(API_BASE + '/api/public/settings'),
       safeFetchJson(API_BASE + '/api/public/social-links'),
     ]).then(function (results) {
-      var content  = results[0] && results[0].content;
-      var slots    = results[1] && results[1].slots;
-      var settings = results[2] && results[2].settings;
+      var content     = results[0] && results[0].content;
+      var slots       = results[1] && results[1].slots;
+      var settings    = results[2] && results[2].settings;
       var socialLinks = results[3] && results[3].links;
+
+      // Preload fresh images (handles first visit and any updated images)
+      preloadImagesFromCache(slots, settings);
 
       applyContent(content);
       applyMediaSlots(slots);
