@@ -208,7 +208,11 @@
       if (loadingEl) loadingEl.remove();
       if (rData.items && rData.items.length) {
         grid.innerHTML = rData.items.map(function(r) {
-          var bgStyle = r.typeColor && colorMap[r.typeColor] ? ' style="' + colorMap[r.typeColor] + '"' : '';
+          var bgStyle = '';
+          if (r.typeColor) {
+            if (colorMap[r.typeColor]) bgStyle = ' style="' + colorMap[r.typeColor] + '"';
+            else if (/^#[0-9a-fA-F]{3,8}$/.test(r.typeColor)) bgStyle = ' style="background:' + r.typeColor + '"';
+          }
           var icon = r.icon || 'fa-solid fa-file';
           var meta = r.fileMeta ? '<div class="resource-meta"><i class="fa-solid fa-file" style="margin-right:0.3rem;"></i> ' + r.fileMeta + '</div>' : '';
           var btn = (r.previewUrl && r.previewEnabled)
