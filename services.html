@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="Images/Index/favicon.png" data-cms-setting-href="favicon_url">
+  <link rel="preload" as="image" href="Images/Services/HService.png" fetchpriority="high">
   <style>
     .service-detail { padding: 5rem 0; }
     .service-detail:nth-child(even) { background: var(--warm-white); }
@@ -63,7 +64,9 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-bg" data-cms-media="hero_image"></div>
+  <div class="page-hero-bg" data-cms-media="hero_image">
+    <img src="Images/Services/HService.png" alt="" fetchpriority="high">
+  </div>
   <div class="page-hero-overlay"></div>
   <div class="container">
     <div class="page-hero-content">
