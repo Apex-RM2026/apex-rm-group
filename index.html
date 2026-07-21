@@ -115,7 +115,7 @@
   if (slides.length) bg.classList.add('loaded');
   if (slides.length < 2) return;
   var cur = 0;
-  setInterval(function(){
+  window._heroTimer = setInterval(function(){
     slides[cur].classList.remove('hero-slide-active');
     cur = (cur + 1) % slides.length;
     slides[cur].classList.add('hero-slide-active');
