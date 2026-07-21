@@ -133,37 +133,54 @@ function animateCounter(el) {
 /* --- Testimonials Carousel --- */
 function initCarousel(carouselEl) {
   if (!carouselEl) return;
-  const inner = carouselEl.querySelector('.testimonials-inner');
-  const slides = carouselEl.querySelectorAll('.testimonial-slide');
-  const dots = carouselEl.querySelectorAll('.carousel-dot');
-  const prevBtn = carouselEl.querySelector('.carousel-btn.prev');
-  const nextBtn = carouselEl.querySelector('.carousel-btn.next');
+  const inner    = carouselEl.querySelector('.testimonials-inner');
+  const controls = carouselEl.querySelector('.carousel-controls');
+  const dotsEl   = carouselEl.querySelector('.slider-nav-dots');
+  const btns     = carouselEl.querySelectorAll('.slider-nav-btn');
+  const prevBtn  = btns[0];
+  const nextBtn  = btns[1];
+  const slides   = inner ? inner.querySelectorAll('.testimonial-slide') : [];
+
+  // Hide navigation when 0 or 1 testimonials
+  if (controls) controls.style.display = slides.length > 1 ? '' : 'none';
+  if (slides.length <= 1) return;
+
+  // Build dots fresh each time (CMS may change the count)
+  if (dotsEl) {
+    dotsEl.innerHTML = '';
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => { go(i); resetAuto(); });
+      dotsEl.appendChild(dot);
+    });
+  }
+
   let current = 0;
   let autoplay;
 
   function go(idx) {
-    current = (idx + slides.length) % slides.length;
+    current = ((idx % slides.length) + slides.length) % slides.length;
     if (inner) inner.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    if (dotsEl) dotsEl.querySelectorAll('.slider-nav-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function resetAuto() {
+    clearInterval(autoplay);
+    autoplay = setInterval(() => go(current + 1), 7000);
   }
 
   prevBtn?.addEventListener('click', () => { go(current - 1); resetAuto(); });
   nextBtn?.addEventListener('click', () => { go(current + 1); resetAuto(); });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => { go(i); resetAuto(); }));
 
-  function resetAuto() {
-    clearInterval(autoplay);
-    autoplay = setInterval(() => go(current + 1), 5000);
-  }
-  autoplay = setInterval(() => go(current + 1), 5000);
+  autoplay = setInterval(() => go(current + 1), 7000);
   go(0);
 }
 
 document.querySelectorAll('.testimonials-carousel').forEach(initCarousel);
 
-/* Exposed so home-cms.js can re-bind the carousel after it rebuilds the
-   slides/dots from CMS data — the querySelectorAll snapshots above would
-   otherwise still point at the original static markup. */
+/* Re-exposed so home-cms.js can re-init after populating slides from CMS. */
 window.apexInitTestimonialCarousel = initCarousel;
 
 /* --- FAQ Accordion --- */

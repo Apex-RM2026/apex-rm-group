@@ -129,10 +129,7 @@
     var carousel = document.getElementById('testimonials-carousel');
     if (!carousel || !items) return;
     var inner = carousel.querySelector('.testimonials-inner');
-    var dots = carousel.querySelector('.carousel-dots');
-    if (!inner || !dots) return;
-
-    if (!items.length) { inner.innerHTML = ''; dots.innerHTML = ''; return; }
+    if (!inner) return;
 
     inner.innerHTML = items.map(function (t) {
       var stars = Math.max(1, Math.min(5, parseInt(t.stars, 10) || 5));
@@ -153,10 +150,7 @@
       );
     }).join('');
 
-    dots.innerHTML = items.map(function (_, idx) {
-      return '<button class="carousel-dot' + (idx === 0 ? ' active' : '') + '"></button>';
-    }).join('');
-
+    // initCarousel builds the dots and wires prev/next — also hides nav if only 1 slide
     if (window.apexInitTestimonialCarousel) window.apexInitTestimonialCarousel(carousel);
   }
 
