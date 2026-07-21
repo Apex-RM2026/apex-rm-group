@@ -145,7 +145,7 @@
               '<div class="testimonial-avatar">' + escapeHtml(t.initials) + '</div>' +
               '<div class="testimonial-info">' +
                 '<div class="name">' + escapeHtml(t.name) + '</div>' +
-                '<div class="role">' + escapeHtml(t.role) + '</div>' +
+                '<div class="role">' + escapeHtml(t.role).replace(/\n/g, '<br>') + '</div>' +
               '</div>' +
             '</div>' +
           '</div>' +
