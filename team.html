@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="Images/Index/favicon.png" data-cms-setting-href="favicon_url">
+  <link rel="preload" as="image" href="Images/Team/HTeam.jpg" fetchpriority="high">
   <style>
     .advisory-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
     .advisory-card { background:white; border:1px solid rgba(10,22,40,0.08); border-radius:var(--radius-md); padding:1.8rem; display:flex; gap:1.2rem; align-items:flex-start; transition:var(--transition); }
@@ -58,7 +59,9 @@
 </div>
 
 <div class="page-hero">
-  <div class="page-hero-bg" data-cms-media="hero_image"></div>
+  <div class="page-hero-bg" data-cms-media="hero_image">
+    <img src="Images/Team/HTeam.jpg" alt="" fetchpriority="high">
+  </div>
   <div class="page-hero-overlay"></div>
   <div class="container">
     <div class="page-hero-content">

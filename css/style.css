@@ -1197,6 +1197,12 @@ footer {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
 }
+.page-hero-bg img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
 .page-hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.6) 60%, rgba(26,107,138,0.3) 100%);
