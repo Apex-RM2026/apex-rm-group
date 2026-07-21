@@ -3,6 +3,10 @@
    Main JavaScript — All interactions, animations, UI
    ============================================================ */
 
+// Always start at the top of the page on load/refresh
+if (history.scrollRestoration) history.scrollRestoration = 'manual';
+window.addEventListener('load', function () { window.scrollTo(0, 0); });
+
 'use strict';
 
 /* --- Loading Screen --- */
