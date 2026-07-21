@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="Images/Index/favicon.png" data-cms-setting-href="favicon_url">
+  <link rel="preload" as="image" href="Images/About/Appex Desk.jpg" fetchpriority="high">
   <style>
     /* Slightly smaller body type on this page only — scoped here so it
        doesn't affect any other page that shares these classes. */
@@ -71,7 +72,9 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-bg" data-cms-media="hero_image"></div>
+  <div class="page-hero-bg" data-cms-media="hero_image">
+    <img src="Images/About/Appex Desk.jpg" alt="" fetchpriority="high">
+  </div>
   <div class="page-hero-overlay"></div>
   <div class="container">
     <div class="page-hero-content">
