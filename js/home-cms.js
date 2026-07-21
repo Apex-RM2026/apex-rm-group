@@ -65,12 +65,20 @@
   function mediaHtml(slot) {
     if (!slot || !slot.items || !slot.items.length) return '';
     if (slot.mode === 'SLIDER' && slot.items.length > 1) {
+      var dotsHtml = slot.items.map(function(_, i) {
+        return '<button class="slider-nav-dot' + (i === 0 ? ' active' : '') + '" aria-label="Slide ' + (i + 1) + '"></button>';
+      }).join('');
       return (
         '<div class="cms-slider" style="position:relative; width:100%; height:100%; overflow:hidden;">' +
           '<div class="cms-slider-track">' +
             slot.items.map(function (item, idx) {
               return '<img class="cms-slider-img" src="' + escapeHtml(item.url) + '" alt="' + escapeHtml(item.altText || '') + '" loading="lazy" style="opacity:' + (idx === 0 ? 1 : 0) + ';">';
             }).join('') +
+          '</div>' +
+          '<div class="cms-slider-nav">' +
+            '<button class="slider-nav-btn" aria-label="Previous">&#8249;</button>' +
+            '<div class="slider-nav-dots">' + dotsHtml + '</div>' +
+            '<button class="slider-nav-btn" aria-label="Next">&#8250;</button>' +
           '</div>' +
         '</div>'
       );
@@ -82,12 +90,35 @@
     container.querySelectorAll('.cms-slider').forEach(function (slider) {
       var imgs = slider.querySelectorAll('.cms-slider-img');
       if (imgs.length <= 1) return;
+      var dotsEl  = slider.querySelector('.slider-nav-dots');
+      var allBtns = slider.querySelectorAll('.slider-nav-btn');
+      var prevBtn = allBtns[0];
+      var nextBtn = allBtns[1];
       var current = 0;
-      setInterval(function () {
+      var timer;
+
+      function updateDots() {
+        if (dotsEl) dotsEl.querySelectorAll('.slider-nav-dot').forEach(function(d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      function goTo(idx) {
         imgs[current].style.opacity = '0';
-        current = (current + 1) % imgs.length;
+        current = ((idx % imgs.length) + imgs.length) % imgs.length;
         imgs[current].style.opacity = '1';
-      }, 7000);
+        updateDots();
+        clearInterval(timer);
+        timer = setInterval(function() { goTo(current + 1); }, 7000);
+      }
+
+      if (dotsEl) dotsEl.querySelectorAll('.slider-nav-dot').forEach(function(dot, i) {
+        dot.addEventListener('click', function() { goTo(i); });
+      });
+      if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+      timer = setInterval(function() { goTo(current + 1); }, 7000);
     });
   }
 
