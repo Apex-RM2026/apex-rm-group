@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- Favicon -->
   <link rel="icon" type="image/png" data-cms-setting-href="favicon_url">
+  <!-- Hero images preloaded from GitHub for instant display -->
+  <link rel="preload" as="image" href="Images/Index/City.jpg" fetchpriority="high">
 </head>
 <body>
 
@@ -84,7 +86,10 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <div class="hero-bg" data-cms-media="hero_image"></div>
+  <div class="hero-bg" id="hero-bg">
+    <img src="Images/Index/City.jpg" class="hero-slide hero-slide-active" alt="" fetchpriority="high">
+    <img src="Images/Index/convention_centre.jpg" class="hero-slide" alt="" loading="lazy">
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge">
@@ -103,6 +108,20 @@
     <span>Scroll</span>
   </div>
 </section>
+<script>
+(function(){
+  var bg = document.getElementById('hero-bg');
+  var slides = bg ? bg.querySelectorAll('.hero-slide') : [];
+  if (slides.length) bg.classList.add('loaded');
+  if (slides.length < 2) return;
+  var cur = 0;
+  setInterval(function(){
+    slides[cur].classList.remove('hero-slide-active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('hero-slide-active');
+  }, 7000);
+})();
+</script>
 
 <!-- ===================== STATS counting of Complited projects and others===================== -->
 <section class="stats-section">
