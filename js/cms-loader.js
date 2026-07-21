@@ -145,7 +145,6 @@
       img.alt = item.altText || '';
       img.className = 'cms-slider-img';
       img.style.opacity = idx === 0 ? '1' : '0';
-      // First slide is above-the-fold — eager + high priority; rest are lazy
       if (idx === 0) {
         img.loading = 'eager';
         img.setAttribute('fetchpriority', 'high');
@@ -157,13 +156,59 @@
     container.appendChild(track);
 
     if (items.length <= 1) return;
+
     var current = 0;
     var imgs = track.querySelectorAll('.cms-slider-img');
-    setInterval(function () {
+
+    // Navigation: dots + prev/next buttons
+    var navEl = document.createElement('div');
+    navEl.className = 'cms-slider-nav';
+
+    var prevBtn = document.createElement('button');
+    prevBtn.className = 'slider-nav-btn';
+    prevBtn.setAttribute('aria-label', 'Previous');
+    prevBtn.innerHTML = '&#8249;';
+
+    var dotsEl = document.createElement('div');
+    dotsEl.className = 'slider-nav-dots';
+    items.forEach(function(_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'slider-nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', function() { goTo(i); });
+      dotsEl.appendChild(dot);
+    });
+
+    var nextBtn = document.createElement('button');
+    nextBtn.className = 'slider-nav-btn';
+    nextBtn.setAttribute('aria-label', 'Next');
+    nextBtn.innerHTML = '&#8250;';
+
+    navEl.appendChild(prevBtn);
+    navEl.appendChild(dotsEl);
+    navEl.appendChild(nextBtn);
+    container.appendChild(navEl);
+
+    function updateDots() {
+      dotsEl.querySelectorAll('.slider-nav-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    var timer;
+    function goTo(idx) {
       imgs[current].style.opacity = '0';
-      current = (current + 1) % imgs.length;
+      current = ((idx % imgs.length) + imgs.length) % imgs.length;
       imgs[current].style.opacity = '1';
-    }, 7000);
+      updateDots();
+      clearInterval(timer);
+      timer = setInterval(function() { goTo(current + 1); }, 7000);
+    }
+
+    prevBtn.addEventListener('click', function() { goTo(current - 1); });
+    nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+    timer = setInterval(function() { goTo(current + 1); }, 7000);
   }
 
   function applyMediaSlots(slots) {

@@ -90,6 +90,12 @@
     <img src="Images/Index/City.jpg" class="hero-slide hero-slide-active" alt="" fetchpriority="high">
     <img src="Images/Index/convention_centre.jpg" class="hero-slide" alt="" loading="lazy">
   </div>
+  <!-- Slider navigation — dots + prev/next arrows -->
+  <div class="hero-slider-nav" id="hero-slider-nav">
+    <button class="slider-nav-btn" id="hero-prev" aria-label="Previous photo">&#8249;</button>
+    <div class="slider-nav-dots" id="hero-dots"></div>
+    <button class="slider-nav-btn" id="hero-next" aria-label="Next photo">&#8250;</button>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge">
@@ -109,18 +115,61 @@
   </div>
 </section>
 <script>
-(function(){
-  var bg = document.getElementById('hero-bg');
+window._heroInit = function() {
+  var bg     = document.getElementById('hero-bg');
+  var nav    = document.getElementById('hero-slider-nav');
+  var dotsEl = document.getElementById('hero-dots');
   var slides = bg ? bg.querySelectorAll('.hero-slide') : [];
   if (slides.length) bg.classList.add('loaded');
-  if (slides.length < 2) return;
+
+  // Reset dots
+  if (dotsEl) dotsEl.innerHTML = '';
+
+  if (slides.length < 2) {
+    if (nav) nav.style.display = 'none';
+    return;
+  }
+  if (nav) nav.style.display = '';
+
   var cur = 0;
-  window._heroTimer = setInterval(function(){
+
+  // Build dots
+  slides.forEach(function(_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'slider-nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); });
+    if (dotsEl) dotsEl.appendChild(dot);
+  });
+
+  function updateDots() {
+    if (!dotsEl) return;
+    dotsEl.querySelectorAll('.slider-nav-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === cur);
+    });
+  }
+
+  function goTo(idx) {
     slides[cur].classList.remove('hero-slide-active');
-    cur = (cur + 1) % slides.length;
+    cur = ((idx % slides.length) + slides.length) % slides.length;
     slides[cur].classList.add('hero-slide-active');
-  }, 7000);
-})();
+    updateDots();
+    resetTimer();
+  }
+
+  function resetTimer() {
+    if (window._heroTimer) clearInterval(window._heroTimer);
+    window._heroTimer = setInterval(function() { goTo(cur + 1); }, 7000);
+  }
+
+  var prevBtn = document.getElementById('hero-prev');
+  var nextBtn = document.getElementById('hero-next');
+  if (prevBtn) prevBtn.onclick = function() { goTo(cur - 1); };
+  if (nextBtn) nextBtn.onclick = function() { goTo(cur + 1); };
+
+  resetTimer();
+};
+window._heroInit();
 </script>
 
 <!-- ===================== STATS counting of Complited projects and others===================== -->
