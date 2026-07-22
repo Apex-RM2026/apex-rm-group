@@ -53,7 +53,7 @@
     var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
     var shareUrl = job.slug ? ('?job=' + encodeURIComponent(job.slug)) : '#';
     var imageHtml = job.imageUrl
-      ? '<div style="margin-bottom:1rem;text-align:center;"><img src="' + escapeHtml(job.imageUrl) + '" alt="" loading="lazy" style="max-width:260px;max-height:200px;object-fit:contain;border-radius:8px;display:inline-block;"></div>'
+      ? '<img src="' + escapeHtml(job.imageUrl) + '" alt="" loading="lazy" style="float:right;width:320px;max-width:46%;margin:0 0 1.2rem 1.8rem;border-radius:10px;object-fit:contain;display:block;">'
       : '';
 
     // The job title itself is the link to the job opportunity (not a separate
@@ -65,10 +65,10 @@
     var headerAction = hasDescription ? '' : applyButtonHtml(job);
 
     var detailsPanel = hasDescription
-      ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' +
+      ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;overflow:hidden;">' +
           imageHtml +
           job.description +
-          '<div style="margin-top:1.2rem;">' + applyButtonHtml(job) + '</div>' +
+          '<div style="clear:both;margin-top:1.2rem;">' + applyButtonHtml(job) + '</div>' +
         '</div>'
       : '';
 
