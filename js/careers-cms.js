@@ -66,6 +66,7 @@
 
     var detailsPanel = hasDescription
       ? '<div id="' + detailsId + '" class="job-description" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(10,22,40,0.08);line-height:1.8;">' +
+          imageHtml +
           job.description +
           '<div style="margin-top:1.2rem;">' + applyButtonHtml(job) + '</div>' +
         '</div>'
@@ -75,7 +76,6 @@
 
     return (
       '<div class="job-card reveal" id="job-' + escapeHtml(job.slug || '') + '" data-category="' + escapeHtml(job.category || 'INTERNAL') + '" style="flex-direction:column;align-items:stretch;">' +
-        imageHtml +
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">' +
           '<div class="job-info">' +
             titleHtml +
