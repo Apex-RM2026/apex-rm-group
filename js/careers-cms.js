@@ -53,7 +53,7 @@
     var hasDescription = job.description && job.description.replace(/<[^>]*>/g, '').trim().length > 0;
     var shareUrl = job.slug ? ('?job=' + encodeURIComponent(job.slug)) : '#';
     var imageHtml = job.imageUrl
-      ? '<div style="border-radius:10px;margin-bottom:1rem;background:#0a1628;overflow:hidden;"><img src="' + escapeHtml(job.imageUrl) + '" alt="" loading="lazy" style="width:100%;max-height:420px;object-fit:contain;display:block;"></div>'
+      ? '<div style="margin-bottom:1rem;text-align:center;"><img src="' + escapeHtml(job.imageUrl) + '" alt="" loading="lazy" style="max-width:260px;max-height:200px;object-fit:contain;border-radius:8px;display:inline-block;"></div>'
       : '';
 
     // The job title itself is the link to the job opportunity (not a separate
