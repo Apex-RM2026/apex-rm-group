@@ -43,12 +43,17 @@ export default {
     const description = descSource.length > 200 ? descSource.slice(0, 197) + '...' : descSource;
     const pageUrl = url.toString();
 
-    return new HTMLRewriter()
+    const rewriter = new HTMLRewriter()
       .on('title', { element(el) { el.setInnerContent(title); } })
       .on('meta[name="description"]', { element(el) { el.setAttribute('content', description); } })
       .on('meta[property="og:title"]', { element(el) { el.setAttribute('content', title); } })
       .on('meta[property="og:description"]', { element(el) { el.setAttribute('content', description); } })
-      .on('meta[property="og:url"]', { element(el) { el.setAttribute('content', pageUrl); } })
-      .transform(assetResponse);
+      .on('meta[property="og:url"]', { element(el) { el.setAttribute('content', pageUrl); } });
+
+    if (job.imageUrl) {
+      rewriter.on('meta[property="og:image"]', { element(el) { el.setAttribute('content', job.imageUrl); } });
+    }
+
+    return rewriter.transform(assetResponse);
   },
 };
