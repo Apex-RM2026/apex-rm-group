@@ -1604,6 +1604,13 @@ a.job-title:hover { color: var(--gold); text-decoration: underline; }
 .job-tag.type { background: rgba(26,107,138,0.1); color: var(--teal); }
 .job-tag.location { background: rgba(201,168,76,0.1); color: var(--gold-dark); }
 .job-tag.deadline { background: rgba(44,62,80,0.1); color: var(--slate); }
+/* List formatting inside job descriptions */
+.job-description ul, .job-description ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+.job-description ul { list-style-type: disc; }
+.job-description ol { list-style-type: decimal; }
+.job-description li { margin: 0.2rem 0; }
+.job-description a { color: var(--teal); text-decoration: underline; }
+.job-description a:hover { color: var(--gold); }
 
 /* --- Benefits --- */
 .benefits-grid {
