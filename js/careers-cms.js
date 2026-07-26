@@ -7,7 +7,7 @@
    Fails silently to the static fallback markup if the API is unreachable.
    ════════════════════════════════════════════════════════════════ */
 (function () {
-  var FALLBACK_MAILTO = 'mailto:info@apexrmgroup.com?subject=Job%20Application';
+  var FALLBACK_MAILTO = 'mailto:info@apexrmgroup.com?subject=Opportunity%20Application';
   var allJobs = [];
   var apiBase = '';
   var activeTab = 'all';
@@ -165,7 +165,7 @@
     });
 
     if (!jobs.length) {
-      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:1.5rem 0;">No open positions in this category right now — check back soon.</p>';
+      list.innerHTML = '<p style="text-align:center;color:var(--gray);padding:1.5rem 0;">No open opportunities in this category right now — check back soon.</p>';
       return;
     }
 
