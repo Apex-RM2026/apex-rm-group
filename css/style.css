@@ -1146,7 +1146,7 @@ section { padding: 6rem 0; }
   transition: filter var(--transition);
 }
 .client-logo-item.has-logo:hover { filter: grayscale(0%) opacity(1); }
-.client-logo-item.has-logo img { display: block; height: 64px; width: auto; max-width: 260px; object-fit: contain; }
+.client-logo-item.has-logo img { display: block; height: 74px; width: auto; max-width: 280px; object-fit: contain; }
 
 /* --- Footer --- */
 footer {
