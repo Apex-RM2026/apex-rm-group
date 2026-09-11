@@ -1109,7 +1109,19 @@ section { padding: 6rem 0; }
 .cta-strip-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 
 /* --- Clients Logos --- */
-.clients-section { padding: 3rem 0; border-top: 1px solid rgba(10,22,40,0.06); border-bottom: 1px solid rgba(10,22,40,0.06); }
+.clients-section {
+  position: relative;
+  padding: 3.5rem 0;
+  background: var(--white);
+  border-bottom: 1px solid rgba(10,22,40,0.06);
+}
+.clients-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--teal), var(--gold));
+}
 .clients-label {
   text-align: center;
   font-family: var(--font-ui);
@@ -1117,35 +1129,37 @@ section { padding: 6rem 0; }
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gray);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 .clients-logos {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 3.5rem;
   flex-wrap: wrap;
 }
 .client-logo-item {
   font-family: var(--font-ui);
-  font-size: 0.75rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(10,22,40,0.3);
+  letter-spacing: 0.02em;
+  color: rgba(10,22,40,0.32);
   transition: color var(--transition);
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(10,22,40,0.1);
-  border-radius: var(--radius);
 }
-.client-logo-item:hover { color: var(--navy); border-color: var(--gold); }
-.client-logo-item.has-logo {
-  padding: 0.5rem 1.2rem;
+.client-logo-item:hover { color: var(--navy); }
+.client-logo-item--image {
+  display: flex;
+  align-items: center;
+}
+.client-logo-item--image img {
+  height: 38px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
   filter: grayscale(100%) opacity(0.55);
-  transition: filter var(--transition), border-color var(--transition);
+  transition: filter var(--transition);
 }
-.client-logo-item.has-logo:hover { filter: grayscale(0%) opacity(1); border-color: var(--gold); }
-.client-logo-item.has-logo img { display: block; height: 28px; width: auto; max-width: 140px; object-fit: contain; }
+.client-logo-item--image:hover img { filter: grayscale(0%) opacity(1); }
 
 /* --- Footer --- */
 footer {
