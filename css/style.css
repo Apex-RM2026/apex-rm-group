@@ -1123,7 +1123,7 @@ section { padding: 6rem 0; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 3.5rem;
   flex-wrap: wrap;
 }
 .client-logo-item {
@@ -1140,12 +1140,13 @@ section { padding: 6rem 0; }
 }
 .client-logo-item:hover { color: var(--navy); border-color: var(--gold); }
 .client-logo-item.has-logo {
-  padding: 0.5rem 1.2rem;
-  filter: grayscale(100%) opacity(0.55);
-  transition: filter var(--transition), border-color var(--transition);
+  padding: 0.5rem 0.5rem;
+  border: none;
+  filter: grayscale(100%) opacity(0.6);
+  transition: filter var(--transition);
 }
-.client-logo-item.has-logo:hover { filter: grayscale(0%) opacity(1); border-color: var(--gold); }
-.client-logo-item.has-logo img { display: block; height: 28px; width: auto; max-width: 140px; object-fit: contain; }
+.client-logo-item.has-logo:hover { filter: grayscale(0%) opacity(1); }
+.client-logo-item.has-logo img { display: block; height: 52px; width: auto; max-width: 200px; object-fit: contain; }
 
 
 /* --- Footer --- */
