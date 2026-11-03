@@ -1,21 +1,3 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-15X78E4SV6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-15X78E4SV6');
- /*-- Icons --*/
-  <link rel="stylesheet" href="css/icons.css">
-  <!-- Styles -->
-  /*-- Favicon --*/
-  <link rel="icon" type="image/png" href="Images/Index/favicon.png" data-cms-setting-href="favicon_url">
-   
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1808,63 +1790,25 @@ footer{text-align:center;font-size:.82rem;color:var(--muted);padding:20px 16px 4
   <div class="callout info"><svg class="icon"><use href="#i-info"/></svg><div><p><strong>Google Earth Pro:</strong> the Google Earth steps in Module 2 use the standard menus of Google Earth Pro Desktop (Add Folder, Add Polygon, Add Path, Add Placemark, Save Place As). They are operational instructions only and are not used as GIS technical authority.</p></div></div>
 </section>
 
-/*-------------footer-------------------*/
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="diamond">◆</span>
-          <span class="footer-logo-name" data-cms-setting="company_name">APEX SRM GROUP Ltd</span>
-        </div>
-        <p class="footer-desc" data-cms-setting="company_description">Africa's premier spatial consulting firm empowering governments, organisations, and communities with cutting-edge spatial intelligence and strategic advisory services.</p>
-        <div class="footer-social" id="footer-social"></div>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html#gis">GIS & Spatial Analysis</a></li>
-          <li><a href="services.html#remote-sensing">Remote Sensing & EO</a></li>
-          <li><a href="services.html#land-admin">Land Administration</a></li>
-          <li><a href="services.html#environment">Environmental Consulting</a></li>
-          <li><a href="services.html#infrastructure">Infrastructure Planning</a></li>
-          <li><a href="services.html#capacity">Capacity Building</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="careers.html">Careers</a></li>
-          <li><a href="insights.html">Insights</a></li>
-          <li><a href="tools.html">Tools</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span data-cms-setting="contact_address">(HQ) Nyagacaca Village, Ruyenzi Cell, Runda, Kamonyi District, Rwanda</span></div>
-        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:info@apexrmgroup.com" data-cms-setting="contact_email" data-cms-setting-mailto="contact_email">info@apexrmgroup.com</a></div>
-        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><a href="tel:+250787523890" data-cms-setting="contact_phone" data-cms-setting-tel="contact_phone">+250 787 523 890</a></div>
-        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/250787523890" data-cms-setting-href="contact_whatsapp">WhatsApp Us</a></div>
-        <h4 style="margin-top:1.5rem;">Newsletter</h4>
-        <form class="newsletter-form" onsubmit="return false;">
-          <input type="email" placeholder="Your email address">
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Apex SRM Group Ltd. All rights reserved. Kigali, Rwanda.</p>
-      <div class="footer-legal">
-        <a href="Privacy Policy.html">Privacy Policy</a>
-        <a href="Terms of Service.html">Terms of Service</a>
-      </div>
-    </div>
-  </div>
+  Kigali Urban Asset Mapping · Practical GIS training guide (2 hours). Classroom material: digitised outputs are training samples, not official datasets.<br>
+  ArcGIS, ArcGIS Pro and ModelBuilder are products of Esri. Google Earth is a product of Google. This guide is independent teaching material and is not endorsed by either company.
 </footer>
+</main>
+</div>
 
-  
+<script>
+(function(){
+  "use strict";
+  var KEY = "kigaliGIS.v1.";
+  var store = {
+    get:function(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}},
+    set:function(k,v){try{window.localStorage.setItem(KEY+k,v);return true;}catch(e){return false;}},
+    del:function(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
+  };
+  var $ = function(s,c){return (c||document).querySelector(s);};
+  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
   /* ---------- Progress tracking ---------- */
   var boxes = $$("input[type=checkbox][data-track]");
   function paint(box){
