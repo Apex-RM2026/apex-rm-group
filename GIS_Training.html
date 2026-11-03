@@ -1,3 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-15X78E4SV6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-15X78E4SV6');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX SRM GROUP Ltd | Spatial Intelligence. Strategic Growth.</title>
+  <meta name="description" content="Africa's premier spatial consulting firm — GIS, Remote Sensing, Land Administration, Environmental Consulting, Infrastructure Planning. Headquartered in Kigali, Rwanda.">
+  <meta name="keywords" content="GIS consulting Africa, spatial consulting Rwanda, land administration consulting East Africa, remote sensing Africa, environmental consulting Rwanda">
+  <!-- Open Graph -->
+  <meta property="og:title" content="APEX SRM GROUP Ltd | Spatial Intelligence. Strategic Growth.">
+  <meta property="og:description" content="Precision consulting in GIS, land management, environmental advisory, and infrastructure planning across Africa and beyond.">
+  <meta property="og:url" content="https://www.apexrmgroup.com">
+  <meta property="og:type" content="website">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="js/font.js" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="css/icons.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="Images/Index/favicon.png" data-cms-setting-href="favicon_url">
+  <!-- Hero images preloaded from GitHub for instant display -->
+  <link rel="preload" as="image" href="Images/Index/City.jpg" fetchpriority="high">
+</head>
+<body>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-logo">
+    <span class="loader-diamond">◆</span> APEX SRM GROUP
+  </div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="Images/Index/favicon.png" alt="APEX SRM GROUP Logo" class="site-logo" data-cms-setting-src="logo_url">
+  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX SRM GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="sectors.html">Sectors</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li><li><a href="https://admin.apexrmgroup.com" class="nav-admin-link" target="_blank" rel="noopener" title="Sign in"><span>Sign in</span></a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Nav Backdrop -->
+<div class="nav-backdrop"></div>
+
+<!-- Mobile Side Panel -->
+<div class="nav-mobile">
+  <div class="nav-mobile-body">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="sectors.html">Sectors</a>
+    <a href="careers.html">Careers</a>
+    <a href="tools.html">Tools</a>
+    <a href="team.html">Team</a>
+    <a href="contact.html" class="mobile-cta">Contact</a>
+    <a href="https://admin.apexrmgroup.com" class="nav-admin-link-mobile" target="_blank" rel="noopener">Sign in</a>
+  </div>
+  <div class="nav-mobile-footer">
+    <i class="fa-solid fa-location-dot"></i>
+    <span>Kigali, Rwanda &bull; Africa</span>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg" id="hero-bg">
+    <img src="Images/Index/City.jpg" class="hero-slide hero-slide-active" alt="" fetchpriority="high">
+    <img src="Images/Index/convention_centre.jpg" class="hero-slide" alt="" loading="lazy">
+  </div>
+  <!-- Slider navigation — dots + prev/next arrows -->
+  <div class="hero-slider-nav" id="hero-slider-nav">
+    <button class="slider-nav-btn" id="hero-prev" aria-label="Previous photo">&#8249;</button>
+    <div class="slider-nav-dots" id="hero-dots"></div>
+    <button class="slider-nav-btn" id="hero-next" aria-label="Next photo">&#8250;</button>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fa-solid fa-location-dot"></i>
+      Kigali, Rwanda &bull; Africa
+    </div>
+    <h1 data-cms-html="hero_title">Where <span class="gold">Spatial Intelligence</span><br>Meets Strategic Growth.</h1>
+    <p class="hero-sub" data-cms="hero_subtitle">Precision consulting in GIS, land management, environmental advisory, and infrastructure planning across Africa and beyond.</p>
+    <div class="hero-btns">
+      <a href="services.html" class="btn-primary"><i class="fa-solid fa-layer-group"></i> Explore Services</a>
+      <a href="contact.html" class="btn-secondary"><i class="fa-solid fa-calendar-check"></i> Request Consultation</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-arrow"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+<script>
+window._heroInit = function() {
+  var bg     = document.getElementById('hero-bg');
+  var nav    = document.getElementById('hero-slider-nav');
+  var dotsEl = document.getElementById('hero-dots');
+  var slides = bg ? bg.querySelectorAll('.hero-slide') : [];
+  if (slides.length) bg.classList.add('loaded');
+
+  // Reset dots
+  if (dotsEl) dotsEl.innerHTML = '';
+
+  if (slides.length < 2) {
+    if (nav) nav.style.display = 'none';
+    return;
+  }
+  if (nav) nav.style.display = '';
+
+  var cur = 0;
+
+  // Build dots
+  slides.forEach(function(_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'slider-nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); });
+    if (dotsEl) dotsEl.appendChild(dot);
+  });
+
+  function updateDots() {
+    if (!dotsEl) return;
+    dotsEl.querySelectorAll('.slider-nav-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === cur);
+    });
+  }
+
+  function goTo(idx) {
+    slides[cur].classList.remove('hero-slide-active');
+    cur = ((idx % slides.length) + slides.length) % slides.length;
+    slides[cur].classList.add('hero-slide-active');
+    updateDots();
+    resetTimer();
+  }
+
+  function resetTimer() {
+    if (window._heroTimer) clearInterval(window._heroTimer);
+    window._heroTimer = setInterval(function() { goTo(cur + 1); }, 7000);
+  }
+
+  var prevBtn = document.getElementById('hero-prev');
+  var nextBtn = document.getElementById('hero-next');
+  if (prevBtn) prevBtn.onclick = function() { goTo(cur - 1); };
+  if (nextBtn) nextBtn.onclick = function() { goTo(cur + 1); };
+
+  resetTimer();
+};
+window._heroInit();
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,26 +221,6 @@ kbd{background:#fff;border:1px solid #c9d4df;border-bottom-width:2px;border-radi
 .hero p.lead{color:#d7ecf6;max-width:75ch;font-size:1.05rem}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .chip{display:inline-flex;align-items:center;gap:.4em;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:.3em .65em;font-size:.88rem;color:#fff}
-
-<!-- Navigation -->
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">
-    <img src="Images/Index/favicon.png" alt="APEX SRM GROUP Logo" class="site-logo" data-cms-setting-src="logo_url">
-  <span class="diamond">◆</span><div class="nav-logo-text"><span class="nav-logo-name">APEX SRM GROUP</span><span class="nav-logo-tagline">Spatial Intelligence. Strategic Growth.</span></div></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="sectors.html">Sectors</a></li>
-    <li><a href="careers.html">Careers</a></li>
-    <li><a href="tools.html">Tools</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="contact.html" class="nav-cta">Contact</a></li><li><a href="https://admin.apexrmgroup.com" class="nav-admin-link" target="_blank" rel="noopener" title="Sign in"><span>Sign in</span></a></li>
-  </ul>
-  <button class="nav-toggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
 
 /* ---------- Toolbar & timer ---------- */
 .toolbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(16,40,64,.06)}
