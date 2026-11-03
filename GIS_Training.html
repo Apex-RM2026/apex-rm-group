@@ -1801,7 +1801,7 @@ footer{text-align:center;font-size:.82rem;color:var(--muted);padding:20px 16px 4
   <div class="callout info"><svg class="icon"><use href="#i-info"/></svg><div><p><strong>Google Earth Pro:</strong> the Google Earth steps in Module 2 use the standard menus of Google Earth Pro Desktop (Add Folder, Add Polygon, Add Path, Add Placemark, Save Place As). They are operational instructions only and are not used as GIS technical authority.</p></div></div>
 </section>
 
-
+/*-------------footer-------------------*/
 <footer>
   <div class="container">
     <div class="footer-grid">
@@ -1856,35 +1856,6 @@ footer{text-align:center;font-size:.82rem;color:var(--muted);padding:20px 16px 4
     </div>
   </div>
 </footer>
-
-<!-- Floating Buttons -->
-<button id="scroll-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
-<a id="whatsapp-btn" href="https://wa.me/250787523890" data-cms-setting-href="contact_whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
-
-<script src="js/cms.js"></script>
-<script src="js/script.js"></script>
-<script src="js/cms-loader.js" data-api="https://admin.apexrmgroup.com" data-page="index"></script>
-<script src="js/home-cms.js"></script>
-</body>
-  Kigali Urban Asset Mapping · Practical GIS training guide (2 hours). Classroom material: digitised outputs are training samples, not official datasets.<br>
-  ArcGIS, ArcGIS Pro and ModelBuilder are products of Esri. Google Earth is a product of Google. This guide is independent teaching material and is not endorsed by either company.
-</footer>
-</main>
-</div>
-
-<script>
-(function(){
-  "use strict";
-  var KEY = "kigaliGIS.v1.";
-  var store = {
-    get:function(k){try{return window.localStorage.getItem(KEY+k);}catch(e){return null;}},
-    set:function(k,v){try{window.localStorage.setItem(KEY+k,v);return true;}catch(e){return false;}},
-    del:function(k){try{window.localStorage.removeItem(KEY+k);}catch(e){}}
-  };
-  var $ = function(s,c){return (c||document).querySelector(s);};
-  var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
 
   
   /* ---------- Progress tracking ---------- */
